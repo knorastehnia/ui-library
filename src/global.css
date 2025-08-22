@@ -1,7 +1,7 @@
 :root {
   --background: #111;
   --foreground: #fff;
-  --border: #999;
+  --border: #ccc;
 }
 
 *, *::before, *::after {
