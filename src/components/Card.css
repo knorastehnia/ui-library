@@ -1,0 +1,24 @@
+.card {
+  position: relative;
+  top: 1px;
+  left: 1px;
+  border-radius: 20px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  background-color: var(--background);
+}
+
+.border {
+  /* temp */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* temp */
+
+  border-radius: 20px;
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--border);
+  transition: all 2s;
+}
