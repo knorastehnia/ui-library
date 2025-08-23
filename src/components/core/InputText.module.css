@@ -1,0 +1,41 @@
+.input-default, .input-small, .input-large {
+  position: relative;
+  padding: 10px 15px;
+  border: 1px solid var(--border-static);
+  border-radius: calc(var(--border-radius) * 0.5);
+  margin-bottom: 15px;
+}
+
+.input-default { max-width: 250px; }
+.input-small   { max-width: 150px; }
+.input-large   { max-width: 100%; }
+
+.label {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  transform: translate(15px, 10px);
+  background-color: var(--background);
+  color: var(--border-active);
+  padding: 0 5px;
+  transition: var(--transition);
+}
+
+.label-active {
+  transform: translate(5px, -10px);
+  font-size: 0.9rem;
+}
+
+.input {
+  width: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  border: none;
+  transition: var(--transition);
+
+  &:focus {
+    outline: none;
+    border-color: var(--border-active);
+  }
+}

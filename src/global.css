@@ -4,8 +4,15 @@
   --border-static: #333;
   --border-active: #999;
   --border-dynamic: #ccc;
-  --border-radius: 20px;
-  --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  --border-radius: 25px;
+  --transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+html {
+  font-size: 16px;
+
+  /* pointer-events: none;
+  cursor: none; */
 }
 
 *, *::before, *::after {

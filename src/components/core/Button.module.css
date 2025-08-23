@@ -4,6 +4,7 @@
   border: 1px solid var(--border-static);
   overflow: clip;
   cursor: pointer;
+  margin-bottom: 15px;
   transition: var(--transition);
 
   &:hover, &:focus-visible {
