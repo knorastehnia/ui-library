@@ -19,8 +19,9 @@ const App = () => {
             gap: '20px',
           }}>
             <Button size='large'>Button</Button>
-            <Button size='small' type='outline'>Button</Button>
-            <Button type='fill'>Button</Button>
+            <Button size='small' style='outline'>Button</Button>
+            <Button style='fill'>Button</Button>
+            <Button size='large' style='fill'>Button</Button>
           </div>
         </Card>
       </div>

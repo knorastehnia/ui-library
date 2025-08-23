@@ -1,14 +1,15 @@
+/* prop: style */
+
 .button-outline, .button-fill {
-  width: 10rem;
-  height: 5rem;
-  padding: 10px 15px;
   border: 1px solid var(--border-static);
-  outline: 1px solid transparent;
-  border-radius: calc(var(--border-radius) - 10px);
+  overflow: clip;
+  cursor: pointer;
   transition: var(--transition);
 
   &:hover {
-    border-width: 3px;
+    background-color: var(--background);
+    color: var(--foreground);
+    border-color: var(--border-dynamic);
   }
 }
 
@@ -20,4 +21,25 @@
 .button-fill {
   background-color: var(--foreground);
   color: var(--background);
+}
+
+
+/* prop: size */
+
+.button-default {
+  border-radius: 10px;
+  padding: 10px 15px;
+  width: fit-content;
+}
+
+.button-small {
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: fit-content;
+}
+
+.button-large {
+  border-radius: 10px;
+  padding: 10px 15px;
+  width: 100%;
 }
