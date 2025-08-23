@@ -12,7 +12,10 @@ const Card: React.FC<CardProps> = ({
   width='auto',
   height='auto',
 }) => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  // const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const mousePos = useRef({ x: 0, y: 0})
+  const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 })
+
   const cardRef = useRef<HTMLDivElement>(null)
 
   const updateMousePos = (event: MouseEvent) => {
@@ -20,12 +23,23 @@ const Card: React.FC<CardProps> = ({
     const adjustedX = event.clientX - rect.left
     const adjustedY = event.clientY - rect.top
 
-    setMousePos({ x: adjustedX, y: adjustedY })
+    mousePos.current = { x: adjustedX, y: adjustedY }
   }
 
   useEffect(() => {
+    const interpolate = setInterval(() => {
+      setCurrentPos(prevPos => ({
+        x: prevPos.x + (mousePos.current.x - prevPos.x) * 0.4,
+        y: prevPos.y + (mousePos.current.y - prevPos.y) * 0.4,
+      }))
+    }, 25)
+
     document.addEventListener('mousemove', updateMousePos)
-    return () => document.removeEventListener('mousemove', updateMousePos)
+
+    return () => {
+      clearInterval(interpolate)
+      document.removeEventListener('mousemove', updateMousePos)
+    }
   }, [])
 
   return (
@@ -41,14 +55,14 @@ const Card: React.FC<CardProps> = ({
         <div
           className={styles['border-outer']}
           style={{
-            maskImage: `radial-gradient(75px 75px at ${mousePos.x}px ${mousePos.y}px, #000 0%, transparent)`
+            maskImage: `radial-gradient(75px 75px at ${currentPos.x}px ${currentPos.y}px, #000 0%, transparent)`
           }}
         ></div>
 
         <div
           className={styles['border-inner']}
           style={{
-            maskImage: `radial-gradient(150px 150px at ${mousePos.x}px ${mousePos.y}px, #000 0%, #00000020)`
+            maskImage: `radial-gradient(150px 150px at ${currentPos.x}px ${currentPos.y}px, #000 0%, #00000020)`
           }}
         ></div>
 

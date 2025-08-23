@@ -24,6 +24,10 @@ const App = () => {
             <Button size='large' style='fill'>Button</Button>
           </div>
         </Card>
+
+        <Card>
+          Content
+        </Card>
       </div>
     </>
   )

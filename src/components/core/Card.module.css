@@ -1,6 +1,7 @@
 .card {
   position: relative;
   border-radius: var(--border-radius);
+  margin: 100px;
 }
 
 .border-outer {
