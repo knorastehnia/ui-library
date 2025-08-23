@@ -1,7 +1,10 @@
 :root {
   --background: #111;
-  --foreground: #fff;
-  --border: #ccc;
+  --foreground: #eee;
+  --border-static: #333;
+  --border-dynamic: #ccc;
+  --border-radius: 20px;
+  --transition: all 0.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *, *::before, *::after {
@@ -20,6 +23,8 @@ body {
 }
 
 input, button, textarea, select {
+  background-color: inherit;
+  color: inherit;
   font: inherit;
   font-size: 100%;
 }
