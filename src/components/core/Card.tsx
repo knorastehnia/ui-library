@@ -12,25 +12,22 @@ const Card: React.FC<CardProps> = ({
   width='auto',
   height='auto',
 }) => {
-  // const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const mousePos = useRef({ x: 0, y: 0})
   const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 })
 
   const cardRef = useRef<HTMLDivElement>(null)
 
   const updateMousePos = (event: MouseEvent) => {
-    const rect = cardRef.current!.getBoundingClientRect()
-    const adjustedX = event.clientX - rect.left
-    const adjustedY = event.clientY - rect.top
-
-    mousePos.current = { x: adjustedX, y: adjustedY }
+    mousePos.current = { x: event.clientX, y: event.clientY }
   }
 
   useEffect(() => {
     const interpolate = setInterval(() => {
+      const rect = cardRef.current!.getBoundingClientRect()
+
       setCurrentPos(prevPos => ({
-        x: prevPos.x + (mousePos.current.x - prevPos.x) * 0.4,
-        y: prevPos.y + (mousePos.current.y - prevPos.y) * 0.4,
+        x: prevPos.x + (mousePos.current.x - rect.left - prevPos.x) * 0.4,
+        y: prevPos.y + (mousePos.current.y - rect.top - prevPos.y) * 0.4,
       }))
     }, 25)
 
@@ -38,6 +35,7 @@ const Card: React.FC<CardProps> = ({
 
     return () => {
       clearInterval(interpolate)
+
       document.removeEventListener('mousemove', updateMousePos)
     }
   }, [])
