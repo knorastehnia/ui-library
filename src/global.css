@@ -2,6 +2,7 @@
   --background: #111;
   --foreground: #eee;
   --border-static: #333;
+  --border-active: #999;
   --border-dynamic: #ccc;
   --border-radius: 20px;
   --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
