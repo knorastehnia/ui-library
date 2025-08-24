@@ -1,7 +1,22 @@
 .input-container {
   padding-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
+
+@property --transparency {
+  syntax: '<length> | <percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@keyframes focusInput {
+  100% { --transparency: 100% }
+}
+
+/* @keyframes blurInput {
+  0% { --transparency: 100% }
+  100% { --transparency: 0% }
+} */
 
 .input-field {
   display: flex;
@@ -9,12 +24,17 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  border: 1px solid var(--border-static);
   border-radius: calc(var(--border-radius) * 0.5);
+  transition: var(--transition);
 }
 
 .input-active {
-  border-color: var(--border-active);
+  background: linear-gradient(
+    to left,
+    var(--gray-1) 0%,
+    transparent var(--transparency)
+  );
+  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) focusInput forwards;
 }
 
 .label {
@@ -23,21 +43,19 @@
   position: absolute;
   top: 0; left: 0;
   transform: translate(15px, 10px);
-  background-color: transparent;
-  color: var(--border-active);
+  color: var(--gray-9);
   padding: 0 5px;
   transition: var(--transition);
 }
 
 .label-active {
   transform: translate(5px, -10px);
-  background-color: var(--background);
   font-size: 0.9rem;
 }
 
 .input {
   width: 100%;
-  background-color: var(--background);
+  background-color: transparent;
   color: var(--foreground);
   padding: 10px 15px;
   border: none;
@@ -46,7 +64,6 @@
 
   &:focus {
     outline: none;
-    border-color: var(--border-active);
   }
 }
 
@@ -85,6 +102,8 @@
 }
 
 .eye {
+  box-sizing: content-box;
+  padding: 3px;
   display: flex;
   align-items: center;
   width: 22px; height: 22px;
@@ -101,8 +120,9 @@
   }
 
   &:focus-visible {
-    outline: 1px solid var(--border-active);
-    outline-offset: 3px;
+    /* outline: 1px solid var(--gray-3); */
+    outline: none;
+    background-color: var(--gray-1);
   }
 }
 

@@ -53,7 +53,7 @@ const App = () => {
             <InputText name='input2'>Street Name</InputText>
           </div>
 
-          <InputText type='email' name='email'>Email</InputText>
+          <InputText type='email' name='test'>Email</InputText>
           <InputText type='password' name='password'>Password</InputText>
           <Button
             onClick={() => setSomeState(!someState)}
