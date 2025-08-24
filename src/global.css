@@ -1,10 +1,14 @@
 :root {
   --background: #111;
   --foreground: #eee;
+
+  --error: #ec0000;
+
   --border-static: #333;
   --border-active: #999;
   --border-dynamic: #ccc;
   --border-radius: 25px;
+
   --transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
 }
 

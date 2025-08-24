@@ -3,8 +3,11 @@ import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
 import InputPassword from './components/core/InputPassword'
+import { useState } from 'react'
 
 const App = () => {
+  const [someState, setSomeState] = useState(false)
+
   return (
     <>
       <div
@@ -31,12 +34,23 @@ const App = () => {
         </Card>
 
         <Card>
-          <InputText name='input1'>Input</InputText>
-          <InputText size='small' name='input2'>Input</InputText>
-          <InputText size='large' name='email'>Email</InputText>
+          <InputText
+            validation='number'
+            size='small'
+            name='input1'
+            errors={[
+              {message: 'Error message', failState: someState},
+              {message: 'Error message', failState: someState},
+            ]}
+          >
+            Street No.
+          </InputText>
+
+          <InputText name='input2'>Input</InputText>
+          <InputText validation='email' size='large' name='email'>Email</InputText>
           <InputPassword size='large' name='password'>Password</InputPassword>
           <Button
-            onClick={() => {console.log('submitting...')}}
+            onClick={() => setSomeState(!someState)}
             size='large'
             style='fill'
           >

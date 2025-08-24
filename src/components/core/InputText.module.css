@@ -1,9 +1,11 @@
+.input-container {
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+
 .input-default, .input-small, .input-large {
   position: relative;
-  padding: 10px 15px;
-  border: 1px solid var(--border-static);
   border-radius: calc(var(--border-radius) * 0.5);
-  margin-bottom: 15px;
 }
 
 .input-default { max-width: 250px; }
@@ -31,11 +33,41 @@
   width: 100%;
   background-color: var(--background);
   color: var(--foreground);
-  border: none;
+  padding: 10px 15px;
+  border: 1px solid var(--border-static);
+  border-radius: inherit;
   transition: var(--transition);
 
   &:focus {
     outline: none;
     border-color: var(--border-active);
   }
+}
+
+.error-container {
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  filter: blur(5px);
+  transition: var(--transition);
+}
+
+.error-visible {
+  height: 1rem;
+  margin-top: 5px;
+  opacity: 1;
+  filter: none;
+  overflow: visible;
+}
+
+.error {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--error);
+  font-size: 0.9rem;
 }
