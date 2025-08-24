@@ -1,0 +1,8 @@
+.svg {
+  pointer-events: none;
+  display: block;
+
+  path {
+    fill: var(--error);
+  }
+}

@@ -3,20 +3,53 @@
   margin-bottom: 20px;
 }
 
-@property --transparency {
+@property --gradient-end {
   syntax: '<length> | <percentage>';
   inherits: false;
   initial-value: 0%;
 }
 
-@keyframes focusInput {
-  100% { --transparency: 100% }
+@property --gradient-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: var(--gray-1);
 }
 
-/* @keyframes blurInput {
-  0% { --transparency: 100% }
-  100% { --transparency: 0% }
-} */
+@keyframes hoverInput {
+  0% {
+    --gradient-end: 0%;
+    --gradient-color: var(--gray-1);
+  }
+  
+  100% {
+    --gradient-end: 50%;
+    --gradient-color: var(--gray-1);
+  }
+}
+
+@keyframes focusInput {
+  0% {
+    --gradient-end: 50%;
+    --gradient-color: var(--gray-1);
+  }
+
+  100% {
+    --gradient-end: 100%;
+    --gradient-color: var(--gray-1);
+  }
+}
+
+@keyframes blurInput {
+  0% {
+    --gradient-end: 50%;
+    --gradient-color: var(--gray-1);
+  }
+
+  100% {
+    --gradient-end: 0%;
+    --gradient-color: var(--background);
+  }
+}
 
 .input-field {
   display: flex;
@@ -26,15 +59,22 @@
   position: relative;
   border-radius: calc(var(--border-radius) * 0.5);
   transition: var(--transition);
+
+  background: linear-gradient(
+    to left,
+    var(--gradient-color) 0%,
+    transparent var(--gradient-end)
+  );
+
+  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) blurInput forwards;
+
+  &:hover {
+    animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) hoverInput forwards;
+  }
 }
 
 .input-active {
-  background: linear-gradient(
-    to left,
-    var(--gray-1) 0%,
-    transparent var(--transparency)
-  );
-  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) focusInput forwards;
+  animation: 0.4s cubic-bezier(0.22, 1, 0.36, 1) focusInput forwards !important;
 }
 
 .label {
@@ -89,6 +129,7 @@
 .error {
   display: flex;
   flex-flow: row nowrap;
+  justify-content: left;
   align-items: baseline;
   gap: 5px;
   color: var(--error);
@@ -112,17 +153,16 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-
-  img {
-    pointer-events: none;
-    display: block;
-    width: 100%; height: 100%;
-  }
+  transition: var(--transition);
 
   &:focus-visible {
     /* outline: 1px solid var(--gray-3); */
     outline: none;
     background-color: var(--gray-1);
+  }
+
+  svg {
+    width: 100%; height: 100%;
   }
 }
 

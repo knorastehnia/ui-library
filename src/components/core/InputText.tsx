@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './InputText.module.css'
+import Error from '../icons/Error'
+import Visibility from '../icons/Visibility'
 
 interface ErrorInterface {
   failState: boolean,
@@ -92,11 +94,7 @@ const Input: React.FC<InputTextProps> = ({
             type === 'password' ?
               <div className={styles['eye-container']}>
                 <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
-                  {
-                    showValue
-                    ? <img src='/src/assets/icons/eye-off.svg' alt='hide password' />
-                    : <img src='/src/assets/icons/eye-on.svg' alt='show password' />
-                  }
+                  <Visibility state={showValue} />
                 </button>
               </div>
             : null
@@ -110,7 +108,9 @@ const Input: React.FC<InputTextProps> = ({
           `}
         >
           <div className={styles['error']}>
-            <img src='/src/assets/icons/error.svg' alt='error' />
+            <div className={styles['error-icon']}>
+              <Error />
+            </div>
             <span>
               Please enter a valid number.
             </span>
@@ -124,7 +124,9 @@ const Input: React.FC<InputTextProps> = ({
           `}
         >
           <div className={styles['error']}>
-            <img src='/src/assets/icons/error.svg' alt='error' />
+            <div className={styles['error-icon']}>
+              <Error />
+            </div>
             <span>
               Please enter a valid email.
             </span>
@@ -141,7 +143,9 @@ const Input: React.FC<InputTextProps> = ({
               `}
             >
               <div className={styles['error']}>
-                <img src='/src/assets/icons/error.svg' alt='error' />
+                <div className={styles['error-icon']}>
+                  <Error />
+                </div>
                 <span>
                   {error.message}
                 </span>

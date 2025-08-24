@@ -1,0 +1,38 @@
+.svg {
+  pointer-events: none;
+  display: block;
+
+  path {
+    fill: var(--gray-9);
+  }
+
+  .strike-through {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    stroke: var(--gray-9);
+  }
+
+  .hidden {
+    animation: unstrike var(--curve) 0.4s forwards;
+  }
+
+  .visible {
+    animation: strike var(--curve) 0.4s forwards;
+  }
+}
+
+@keyframes unstrike {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -30;
+  }
+}
+
+@keyframes strike {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
