@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './InputText.module.css'
 
 interface ErrorInterface {
@@ -26,22 +26,25 @@ const Input: React.FC<InputTextProps> = ({
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
 
-  const validateEmail = (element: HTMLInputElement) => {
+  const validateEmail = () => {
     const emailSyntax = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
-    setEmailError(!emailSyntax.test(element.value) && element.value.length !== 0)
+    setEmailError(!emailSyntax.test(value) && value.length !== 0)
   }
 
-  const validateNumber = (element: HTMLInputElement) => {
-    setNumberError(Number.isNaN(Number(element.value)))
+  const validateNumber = () => {
+    setNumberError(Number.isNaN(Number(value)))
   }
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
-
-    if (validation === 'number') validateNumber(event.target)
-    else if (validation === 'email') validateEmail(event.target)
+  const handleInput = () => {
+    if (validation === 'number') validateNumber()
+    else if (validation === 'email') validateEmail()
   }
+
+  useEffect(() => {
+    if (numberError) validateNumber()
+    else if (emailError) validateEmail()
+  }, [value])
 
   return (
     <>
@@ -63,8 +66,11 @@ const Input: React.FC<InputTextProps> = ({
             className={styles['input']}
 
             onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
-            onChange={handleInput}
+            onBlur={() => {
+              setFocus(false)
+              handleInput()
+            }}
+            onChange={(e) => setValue(e.target.value)}
 
             type='text'
             name={name}
