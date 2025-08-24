@@ -2,7 +2,6 @@ import './App.css'
 import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
-import InputPassword from './components/core/InputPassword'
 import { useState } from 'react'
 
 const App = () => {
@@ -12,14 +11,14 @@ const App = () => {
     <>
       <div
         style={{
-          width: 'fit-content',
+          width: '500px',
           margin: '10rem auto',
           display: 'flex',
           flexFlow: 'column',
           gap: '5rem',
         }}
       >
-        <Card width={500}>
+        <Card>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -34,21 +33,28 @@ const App = () => {
         </Card>
 
         <Card>
-          <InputText
-            validation='number'
-            size='small'
-            name='input1'
-            errors={[
-              {message: 'Error message', failState: someState},
-              {message: 'Error message', failState: someState},
-            ]}
-          >
-            Street No.
-          </InputText>
+          <div style={{
+            display: 'flex',
+            gap: '15px',
+            width: '100%',
+          }}>
+            <InputText
+              width={150}
+              type='number'
+              name='input1'
+              errors={[
+                {message: 'Custom error message 1', failState: someState},
+                {message: 'Custom error message 2', failState: someState},
+              ]}
+            >
+              Street No.
+            </InputText>
 
-          <InputText name='input2'>Input</InputText>
-          <InputText validation='email' size='large' name='email'>Email</InputText>
-          <InputPassword size='large' name='password'>Password</InputPassword>
+            <InputText name='input2'>Street Name</InputText>
+          </div>
+
+          <InputText type='email' name='email'>Email</InputText>
+          <InputText type='password' name='password'>Password</InputText>
           <Button
             onClick={() => setSomeState(!someState)}
             size='large'

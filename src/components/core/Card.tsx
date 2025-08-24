@@ -46,8 +46,8 @@ const Card: React.FC<CardProps> = ({
         ref={cardRef}
         className={styles['card']}
         style={{
-          width: width === 'auto' ? 'auto' : `${width}px`,
-          height: height === 'auto' ? 'auto' : `${height}px`,
+          width: width === 'auto' ? '100%' : `${width}px`,
+          height: height === 'auto' ? '100%' : `${height}px`,
         }}
       >
         <div

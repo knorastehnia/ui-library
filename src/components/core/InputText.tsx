@@ -8,21 +8,22 @@ interface ErrorInterface {
 
 interface InputTextProps {
   children: React.ReactNode,
-  validation?: 'none' | 'number' | 'email'
-  size?: 'small' | 'default' | 'large',
+  type?: 'none' | 'number' | 'email' | 'password'
   name: string,
+  width?: number,
   errors?: ErrorInterface[],
 }
 
 const Input: React.FC<InputTextProps> = ({
   children,
-  validation='none',
-  size='default',
+  type='none',
   name,
+  width='auto',
   errors,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
+  const [showValue, setShowValue] = useState(type !== 'password')
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
 
@@ -37,8 +38,8 @@ const Input: React.FC<InputTextProps> = ({
   }
 
   const handleInput = () => {
-    if (validation === 'number') validateNumber()
-    else if (validation === 'email') validateEmail()
+    if (type === 'number') validateNumber()
+    else if (type === 'email') validateEmail()
   }
 
   useEffect(() => {
@@ -48,8 +49,18 @@ const Input: React.FC<InputTextProps> = ({
 
   return (
     <>
-      <div className={styles['input-container']}>
-        <div className={styles[`input-${size}`]}>
+      <div
+        className={styles[`input-container`]}
+        style={{
+          width: width === 'auto' ? '100%' : `${width}px`,
+        }}
+      >
+        <div className={`
+          ${styles['input-field']} 
+          ${
+            focus ? styles['input-active'] : ''
+          }
+        `}>
           <label
             className={`
               ${styles['label']} 
@@ -72,10 +83,24 @@ const Input: React.FC<InputTextProps> = ({
             }}
             onChange={(e) => setValue(e.target.value)}
 
-            type='text'
+            type={showValue ? 'text' : 'password'}
             name={name}
             id={name}
           />
+
+          {
+            type === 'password' ?
+              <div className={styles['eye-container']}>
+                <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
+                  {
+                    showValue
+                    ? <img src='/src/assets/icons/eye-off.svg' alt='hide password' />
+                    : <img src='/src/assets/icons/eye-on.svg' alt='show password' />
+                  }
+                </button>
+              </div>
+            : null
+          }
         </div>
 
         <div
@@ -107,8 +132,9 @@ const Input: React.FC<InputTextProps> = ({
         </div>
 
         {
-          errors?.map((error) => (
+          errors?.map((error, index) => (
             <div
+              key={index}
               className={`
                 ${styles['error-container']} 
                 ${error.failState ? styles['error-visible'] : ''}
@@ -123,7 +149,6 @@ const Input: React.FC<InputTextProps> = ({
             </div>
           ))
         }
-
       </div>
     </>
   )
