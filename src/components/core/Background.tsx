@@ -1,4 +1,4 @@
-import styles from './Backroung.module.css'
+import styles from './Background.module.css'
 
 const Background = () => {
   return (
