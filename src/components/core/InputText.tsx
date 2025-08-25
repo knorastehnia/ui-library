@@ -10,7 +10,11 @@ interface ErrorInterface {
 
 interface InputTextProps {
   children: React.ReactNode,
-  type?: 'none' | 'number' | 'email' | 'password'
+  type?:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'password'
   name: string,
   width?: number,
   errors?: ErrorInterface[],
@@ -18,7 +22,7 @@ interface InputTextProps {
 
 const Input: React.FC<InputTextProps> = ({
   children,
-  type='none',
+  type='text',
   name,
   width='auto',
   errors,

@@ -25,9 +25,10 @@ const App = () => {
             alignItems: 'center',
             gap: '0px 20px',
           }}>
-            <Button onClick={() => null} size='large'>Button</Button>
-            <Button onClick={() => null} size='small' style='outline'>Button</Button>
-            <Button onClick={() => null} style='fill'>Button</Button>
+            <Button onClick={() => null} disabled size='large'>Button</Button>
+            <Button onClick={() => null} size='small'>Button</Button>
+            <Button onClick={() => null} size='small' style='fill'>Button</Button>
+            <Button onClick={() => null} disabled={true} style='fill'>Button</Button>
             <Button onClick={() => null} size='large' style='fill'>Button</Button>
           </div>
         </Card>

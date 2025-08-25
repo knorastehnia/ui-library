@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick: Function,
   style?: 'fill' | 'outline',
   size?: 'small' | 'default' | 'large',
+  disabled?: boolean,
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,12 +13,21 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   style='outline',
   size='default',
+  disabled=false,
 }) => {
   return (
     <>
       <button
-        onClick={(e) => onClick(e)}
-        className={`${styles[`button-${size}`]} ${styles[`button-${style}`]}`}
+        onClick={(e) => !disabled ? onClick(e) : null}
+        className={`
+          ${styles[`button-${size}`]} 
+          ${styles[`button-${style}`]} 
+          ${
+            disabled
+            ? styles['disabled']
+            : null
+          }
+        `}
       >
         {children}
       </button>

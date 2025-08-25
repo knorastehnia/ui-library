@@ -50,3 +50,19 @@
   padding: 10px 15px;
   width: 100%;
 }
+
+/* other */
+
+.disabled {
+  cursor: not-allowed;
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-1);
+  color: var(--gray-9);
+  opacity: 0.8;
+
+  &:hover {
+    background-color: var(--gray-1);
+    border: 1px solid var(--gray-1);
+    color: var(--gray-9);
+  }
+}
