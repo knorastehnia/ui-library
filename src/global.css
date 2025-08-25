@@ -7,7 +7,13 @@
   --gray-1: #1f1f1f;
   --gray-3: #333;
   --gray-9: #999;
-  --border-dynamic: #ccc;
+
+  --border-dynamic: hsl(34, 42%, 86%);
+
+  --shadow-color: #0000004b;
+  --shadow:
+    2px 2px 5px var(--shadow-color),
+    -1px -1px 5px var(--shadow-color);
 
   /* --background: #fff;
   --foreground: #333;
@@ -22,7 +28,12 @@
   --border-radius: 25px;
 
   --curve: cubic-bezier(0.22, 1, 0.36, 1);
-  --transition: all 0.4s var(--curve);
+  --transition: all 0.5s var(--curve);
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: url('./assets/fonts/IBMPlexSans-Variable.ttf');
 }
 
 html {
@@ -44,7 +55,7 @@ html {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBMPlexSans', sans-serif;
 }
 
 input, button, textarea, select {
@@ -52,4 +63,9 @@ input, button, textarea, select {
   color: inherit;
   font: inherit;
   font-size: 100%;
+}
+
+a {
+  color: var(--foreground);
+  text-decoration: underline;
 }

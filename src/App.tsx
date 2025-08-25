@@ -2,6 +2,7 @@ import './App.css'
 import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
+import Dropdown from './components/core/Dropdown'
 import { useState } from 'react'
 
 const App = () => {
@@ -66,12 +67,23 @@ const App = () => {
         </Card>
 
         <Card>
-          <h1>H1 Tag</h1>
-          <h2>H2 Tag</h2>
-          <h3>H3 Tag</h3>
-          <h4>H4 Tag</h4>
-          <h5>H5 Tag</h5>
-          <h6>H6 Tag</h6>
+          <Button onClick={() => {}} size='default'>Dropdown</Button>
+          <Dropdown open>
+            <a href="#">Item</a>
+            <a href="#">Item</a>
+            <a href="#">Item</a>
+          </Dropdown>
+        </Card>
+
+        <Card>
+          <Card>
+            <h1>H1 Tag</h1>
+            <h2>H2 Tag</h2>
+            <h3>H3 Tag</h3>
+            <h4>H4 Tag</h4>
+            <h5>H5 Tag</h5>
+            <h6>H6 Tag</h6>
+          </Card>
         </Card>
       </div>
     </>
