@@ -1,0 +1,61 @@
+import { useEffect, useRef, useState } from 'react'
+import styles from './Header.module.css'
+
+interface HeaderProps {
+  children: React.ReactNode,
+}
+
+const Header: React.FC<HeaderProps> = ({
+  children,
+}) => {
+  const mousePos = useRef({ x: 0, y: 0})
+  const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 })
+
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const updateMousePos = (event: MouseEvent) => {
+    mousePos.current = { x: event.clientX, y: event.clientY }
+  }
+
+  useEffect(() => {
+    const interpolate = setInterval(() => {
+      const rect = containerRef.current!.getBoundingClientRect()
+
+      setCurrentPos(prevPos => ({
+        x: prevPos.x + (mousePos.current.x - rect.left - prevPos.x) * 0.4,
+        y: prevPos.y + (mousePos.current.y - rect.top - prevPos.y) * 0.4,
+      }))
+    }, 25)
+
+    document.addEventListener('mousemove', updateMousePos)
+
+    return () => {
+      clearInterval(interpolate)
+
+      document.removeEventListener('mousemove', updateMousePos)
+    }
+  }, [])
+
+  return (
+    <>
+      <header
+        ref={containerRef}
+        className={styles['header']}
+      >
+
+        <div
+          className={styles['border']}
+          style={{
+            maskImage: `radial-gradient(200px 200px at ${currentPos.x}px ${currentPos.y}px, #00000090 0%, #00000020)`
+          }}
+        ></div>
+
+        <div className={styles['content']}>
+          {children}
+        </div>
+      </header>
+    </>
+  )
+}
+
+export default Header
