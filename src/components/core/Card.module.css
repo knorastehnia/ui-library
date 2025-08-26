@@ -1,26 +1,16 @@
 .card {
   position: relative;
   border-radius: var(--border-radius);
-  padding: 2px;
+  padding: 0.8px;
 }
 
-.border-outer {
+.border {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  border-radius: calc(var(--border-radius) + 1px);
-  background-clip: content-box;
-  background-color: var(--border-dynamic);
-}
-
-.border-inner {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border-radius: calc(var(--border-radius) + 1px);
+  border-radius: calc(var(--border-radius));
   background-color: var(--border-dynamic);
   background-clip: content-box;
-  padding: 1px;
 }
 
 .content {

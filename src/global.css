@@ -8,7 +8,9 @@
   --gray-3: #333;
   --gray-9: #999;
 
-  --border-dynamic: hsl(34, 42%, 86%);
+  --border-dynamic: #ccc;
+  /* --border-dynamic: hsl(34, 42%, 86%); */
+  /* --border-dynamic: hsl(90, 42%, 86%); */
 
   --shadow-color: #0000004b;
   --shadow:
@@ -38,9 +40,11 @@
 
 html {
   font-size: 16px;
-
+  
   /* pointer-events: none;
   cursor: none; */
+  
+  scroll-behavior: smooth;
 }
 
 *, *::before, *::after {
@@ -50,6 +54,7 @@ html {
 * {
   padding: 0;
   margin: 0;
+  font-weight: 400;
 }
 
 body {

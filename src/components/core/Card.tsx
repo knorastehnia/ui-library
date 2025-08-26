@@ -50,17 +50,11 @@ const Card: React.FC<CardProps> = ({
           height: height === 'auto' ? '100%' : `${height}px`,
         }}
       >
-        <div
-          className={styles['border-outer']}
-          style={{
-            maskImage: `radial-gradient(75px 75px at ${currentPos.x}px ${currentPos.y}px, #000 0%, transparent)`
-          }}
-        ></div>
 
         <div
-          className={styles['border-inner']}
+          className={styles['border']}
           style={{
-            maskImage: `radial-gradient(150px 150px at ${currentPos.x}px ${currentPos.y}px, #000 0%, #00000020)`
+            maskImage: `radial-gradient(200px 200px at ${currentPos.x}px ${currentPos.y}px, #00000090 0%, #00000020)`
           }}
         ></div>
 

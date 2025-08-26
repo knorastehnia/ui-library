@@ -3,78 +3,19 @@
   margin-bottom: 20px;
 }
 
-@property --gradient-end {
-  syntax: '<length> | <percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
-
-@property --gradient-color {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: var(--gray-1);
-}
-
-/* @keyframes hoverInput {
-  0% {
-    --gradient-end: 0%;
-    --gradient-color: var(--gray-1);
-  }
-  
-  100% {
-    --gradient-end: 50%;
-    --gradient-color: var(--gray-1);
-  }
-} */
-
-@keyframes focusInput {
-  0% {
-    --gradient-end: 0%;
-    --gradient-color: var(--gray-1);
-  }
-
-  100% {
-    --gradient-end: 100%;
-    --gradient-color: var(--gray-1);
-  }
-}
-
-@keyframes blurInput {
-  0% {
-    --gradient-end: 100%;
-    --gradient-color: var(--gray-1);
-  }
-
-  100% {
-    --gradient-end: 0%;
-    --gradient-color: var(--background);
-  }
-}
-
 .input-field {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  border: 1px solid var(--gray-1);
   border-radius: calc(var(--border-radius) * 0.5);
   transition: var(--transition);
-
-  background: linear-gradient(
-    to left,
-    var(--gradient-color) 0%,
-    transparent var(--gradient-end)
-  );
-
-  animation: 0.6s var(--curve) blurInput forwards;
-
-  /* &:hover {
-    animation: 0.6s var(--curve) hoverInput forwards;
-  } */
 }
 
 .input-active {
-  animation: 0.6s var(--curve) focusInput forwards !important;
+  border-color: var(--gray-3);
 }
 
 .label {
@@ -84,12 +25,13 @@
   top: 0; left: 0;
   transform: translate(15px, 10px);
   color: var(--gray-9);
+  background-color: var(--background);
   padding: 0 5px;
   transition: var(--transition);
 }
 
 .label-active {
-  transform: translate(5px, -10px);
+  transform: translate(10px, -10px);
   font-size: 0.9rem;
 }
 
@@ -100,10 +42,14 @@
   padding: 10px 15px;
   border: none;
   border-radius: inherit;
-  transition: var(--transition);
+  transition: var(--transition), background-color 0s;
 
   &:focus {
     outline: none;
+  }
+
+  &:autofill {
+    z-index: 2;
   }
 }
 

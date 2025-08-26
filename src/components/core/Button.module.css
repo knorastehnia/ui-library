@@ -60,7 +60,7 @@
   color: var(--gray-9);
   opacity: 0.8;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: var(--gray-1);
     border: 1px solid var(--gray-1);
     color: var(--gray-9);
