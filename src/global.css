@@ -1,14 +1,16 @@
 :root {
-  --background: #111;
   --foreground: #eee;
+  --background-solid: #111;
+  --background-blur: #111111e0;
 
   --error: #ec0000;
 
   --gray-1: #1f1f1f;
-  --gray-3: #333;
+  --gray-3: #3f3f3f;
+  --gray-6: #666;
   --gray-9: #999;
 
-  --border-dynamic: #ccc;
+  /* --border-dynamic: #ccc; */
   /* --border-dynamic: hsl(34, 42%, 86%); */
   /* --border-dynamic: hsl(90, 42%, 86%); */
 
@@ -19,6 +21,8 @@
 
   /* --background: #fff;
   --foreground: #333;
+
+  --background-blur: #ffffffe0;
 
   --error: #ec0000;
 
@@ -58,7 +62,7 @@ html {
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--background-solid);
   color: var(--foreground);
   font-family: 'IBMPlexSans', sans-serif;
 }

@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({
   const mousePos = useRef({ x: 0, y: 0})
   const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 })
 
-  const cardRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const updateMousePos = (event: MouseEvent) => {
     mousePos.current = { x: event.clientX, y: event.clientY }
@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
 
   useEffect(() => {
     const interpolate = setInterval(() => {
-      const rect = cardRef.current!.getBoundingClientRect()
+      const rect = containerRef.current!.getBoundingClientRect()
 
       setCurrentPos(prevPos => ({
         x: prevPos.x + (mousePos.current.x - rect.left - prevPos.x) * 0.4,
@@ -43,7 +43,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <>
       <div
-        ref={cardRef}
+        ref={containerRef}
         className={styles['card']}
         style={{
           width: width === 'auto' ? '100%' : `${width}px`,
@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ({
         <div
           className={styles['border']}
           style={{
-            maskImage: `radial-gradient(200px 200px at ${currentPos.x}px ${currentPos.y}px, #00000090 0%, #00000020)`
+            maskImage: `radial-gradient(200px 200px at ${currentPos.x}px ${currentPos.y}px, #00000090 0%, #00000030)`
           }}
         ></div>
 

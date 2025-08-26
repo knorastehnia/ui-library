@@ -3,6 +3,7 @@ import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
 import Dropdown from './components/core/Dropdown'
+import Header from './components/core/Header'
 import { useState } from 'react'
 
 const App = () => {
@@ -10,6 +11,10 @@ const App = () => {
 
   return (
     <>
+      <Header>
+        Content
+      </Header>
+
       <div
         style={{
           width: '500px',
