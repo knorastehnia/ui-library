@@ -1,9 +1,11 @@
 import './App.css'
+
 import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
+
 import { useState } from 'react'
 
 const App = () => {
@@ -16,6 +18,7 @@ const App = () => {
       </Header>
 
       <div
+        className='bg'
         style={{
           width: '500px',
           margin: '10rem auto',
@@ -74,14 +77,16 @@ const App = () => {
           </Button>
         </Card>
 
-        <Card>
-          <Button onClick={() => {}} size='default'>Dropdown</Button>
+        <div style={{zIndex: 10}}>
+          <Card>
+            <Button onClick={() => {}} size='default'>Dropdown</Button>
+          </Card>
           <Dropdown open>
             <a href="#">Item</a>
             <a href="#">Item</a>
             <a href="#">Item</a>
           </Dropdown>
-        </Card>
+        </div>
 
         <Card>
           <h1>H1 Tag</h1>

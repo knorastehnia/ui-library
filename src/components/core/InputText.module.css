@@ -25,7 +25,7 @@
   top: 0; left: 0;
   transform: translate(15px, 10px);
   color: var(--gray-9);
-  background-color: var(--background-solid);
+  background-color: var(--background);
   padding: 0 5px;
   transition: var(--transition);
 }

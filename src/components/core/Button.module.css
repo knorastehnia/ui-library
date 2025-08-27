@@ -9,7 +9,7 @@
 
 .button-outline {
   border: 1px solid var(--gray-3);
-  background-color: var(--background-solid);
+  background-color: var(--background);
   color: var(--foreground);
 
   &:hover, &:focus-visible {
@@ -21,7 +21,7 @@
 .button-fill {
   border: none;
   background-color: var(--foreground);
-  color: var(--background-solid);
+  color: var(--background);
 
   &:hover, &:focus-visible {
     outline: none;

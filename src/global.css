@@ -1,6 +1,6 @@
 :root {
   --foreground: #eee;
-  --background-solid: #111;
+  --background: #111;
   --background-blur: #111111e0;
 
   --error: #ec0000;
@@ -21,8 +21,6 @@
 
   /* --background: #fff;
   --foreground: #333;
-
-  --background-blur: #ffffffe0;
 
   --error: #ec0000;
 
@@ -62,7 +60,7 @@ html {
 }
 
 body {
-  background-color: var(--background-solid);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: 'IBMPlexSans', sans-serif;
 }
