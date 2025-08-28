@@ -5,11 +5,10 @@
   /* overflow: hidden; */
   border-radius: calc(var(--border-radius) * 0.75);
   margin-top: 5px;
-  z-index: 999;
+  z-index: 1000;
 
   display: flex;
-  flex-flow: column nowrap;
-  gap: 2px;
+  flex-flow: row nowrap;
   align-items: baseline;
 
   /* padding: 15px 10px; */
@@ -24,8 +23,9 @@
     border-radius: calc(var(--border-radius) * 0.5);
     cursor: pointer;
     transition: var(--transition);
-
-    &:hover {
+    
+    &:hover, &:focus-visible {
+      outline: none;
       background-color: var(--gray-1);
     }
   }

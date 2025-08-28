@@ -37,12 +37,11 @@
 
 .input {
   width: 100%;
-  background-color: transparent;
   color: var(--foreground);
   padding: 10px 15px;
   border: none;
   border-radius: inherit;
-  transition: var(--transition), background-color 0s;
+  transition: var(--transition);
 
   &:focus {
     outline: none;

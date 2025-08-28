@@ -79,6 +79,8 @@ const App = () => {
 
         <div style={{zIndex: 10}}>
           <Card>
+            <InputText name='dyn' type='static-area'>Static</InputText>
+            <InputText name='sta' type='dynamic-area'>Dynamic</InputText>
             <Button onClick={() => {}} size='default'>Dropdown</Button>
           </Card>
           <Dropdown open>

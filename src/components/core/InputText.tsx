@@ -15,6 +15,8 @@ interface InputTextProps {
     | 'number'
     | 'email'
     | 'password'
+    | 'static-area'
+    | 'dynamic-area'
   name: string,
   width?: number,
   errors?: ErrorInterface[],
@@ -79,20 +81,34 @@ const Input: React.FC<InputTextProps> = ({
             {children}
           </label>
 
-          <input
-            className={styles['input']}
+          {
+            type === 'static-area' || type === 'dynamic-area'
 
-            onFocus={() => setFocus(true)}
-            onBlur={() => {
-              setFocus(false)
-              handleInput()
-            }}
-            onChange={(e) => setValue(e.target.value)}
+            ?
+              <textarea
+                className={styles['input']}
+                style={{
+                  resize: type === 'dynamic-area' ? 'vertical' : 'none',
+                  minHeight: '6rem',
+                }}
+                onFocus={() => setFocus(true)}
+                onBlur={() => { setFocus(false); handleInput(); }}
+                onChange={(e) => setValue(e.target.value)}
+                name={name}
+                id={name}
+              />
 
-            type={showValue ? 'text' : 'password'}
-            name={name}
-            id={name}
-          />
+            :
+              <input
+                className={styles['input']}
+                onFocus={() => setFocus(true)}
+                onBlur={() => { setFocus(false); handleInput(); }}
+                onChange={(e) => setValue(e.target.value)}
+                type={showValue ? 'text' : 'password'}
+                name={name}
+                id={name}
+              />
+          }
 
           {
             type === 'password' ?
