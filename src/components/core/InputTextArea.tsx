@@ -8,23 +8,23 @@ interface ErrorInterface {
   message: string,
 }
 
-interface InputTextProps {
+interface InputTextAreaProps {
   children: React.ReactNode,
   type?:
-    | 'text'
-    | 'number'
-    | 'email'
-    | 'password'
+    | 'static'
+    | 'dynamic'
   name: string,
   width?: number,
+  height?: number,
   errors?: ErrorInterface[],
 }
 
-const InputText: React.FC<InputTextProps> = ({
+const InputTextArea: React.FC<InputTextAreaProps> = ({
   children,
   type='text',
   name,
   width='auto',
+  height='6rem',
   errors,
 }) => {
   const [focus, setFocus] = useState(false)
@@ -79,12 +79,16 @@ const InputText: React.FC<InputTextProps> = ({
             {children}
           </label>
 
-          <input
+          <textarea
             className={styles['input']}
+            style={{
+              resize: type === 'dynamic' ? 'vertical' : 'none',
+              height,
+              minHeight: height,
+            }}
             onFocus={() => setFocus(true)}
             onBlur={() => { setFocus(false); handleInput(); }}
             onChange={(e) => setValue(e.target.value)}
-            type={showValue ? 'text' : 'password'}
             name={name}
             id={name}
           />
@@ -157,4 +161,4 @@ const InputText: React.FC<InputTextProps> = ({
   )
 }
 
-export default InputText
+export default InputTextArea

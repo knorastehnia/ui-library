@@ -3,6 +3,7 @@ import './App.css'
 import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
+import InputTextArea from './components/core/InputTextArea'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
 
@@ -79,8 +80,8 @@ const App = () => {
 
         <div style={{zIndex: 10}}>
           <Card>
-            <InputText name='dyn' type='static-area'>Static</InputText>
-            <InputText name='sta' type='dynamic-area'>Dynamic</InputText>
+            <InputTextArea height={200} name='sta' type='static'>Static</InputTextArea>
+            <InputTextArea name='dyn' type='dynamic'>Dynamic</InputTextArea>
             <Button onClick={() => {}} size='default'>Dropdown</Button>
           </Card>
           <Dropdown open>
