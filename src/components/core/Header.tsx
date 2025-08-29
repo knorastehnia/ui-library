@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <>
       <header className={styles['header']}>
-        <Frost bottom level={1}>
+        <Frost padding='10px 20px' bottom level={1}>
           {children}
         </Frost>
       </header>

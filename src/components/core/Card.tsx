@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({
           height: height === 'auto' ? '100%' : `${height}px`,
         }}
       >
-        <Frost all radius level={2}>
+        <Frost padding='25px 30px' all radius level={2}>
           {children}
         </Frost>
       </div>

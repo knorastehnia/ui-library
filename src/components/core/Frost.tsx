@@ -10,6 +10,7 @@ interface FrostProps {
   bottom?: boolean,
   left?: boolean,
   right?: boolean,
+  padding?: string,
 }
 
 const Frost: React.FC<FrostProps> = ({
@@ -21,6 +22,7 @@ const Frost: React.FC<FrostProps> = ({
   bottom=all,
   left=all,
   right=all,
+  padding='0px 0px',
 }) => {
   const mousePos = useRef({ x: 0, y: 0})
   const [currentPos, setCurrentPos] = useState({ x: 0, y: 0 })
@@ -83,7 +85,10 @@ const Frost: React.FC<FrostProps> = ({
           }}
         ></div>
 
-        <div className={styles['content']}>
+        <div
+          className={styles['content']}
+          style={{ padding }}
+        >
           {children}
         </div>
       </div>
