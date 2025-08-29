@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './InputText.module.css'
 import Error from '../icons/Error'
-import Visibility from '../icons/Visibility'
 
 interface ErrorInterface {
   failState: boolean,

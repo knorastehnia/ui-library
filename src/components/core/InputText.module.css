@@ -41,7 +41,7 @@
   padding: 10px 15px;
   border: none;
   border-radius: inherit;
-  transition: var(--transition);
+  transition: var(--transition), height 0.25s var(--curve);
 
   &:focus {
     outline: none;
