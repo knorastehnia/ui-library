@@ -80,8 +80,8 @@ const App = () => {
 
         <div style={{zIndex: 10}}>
           <Card>
-            <InputTextArea height={200} name='sta' type='static'>Static</InputTextArea>
-            <InputTextArea name='dyn' type='dynamic'>Dynamic</InputTextArea>
+            <InputTextArea limit={200} height={200} name='sta' type='static'>Static</InputTextArea>
+            <InputTextArea limit={10} name='dyn' type='dynamic'>Dynamic</InputTextArea>
             <Button onClick={() => {}} size='default'>Dropdown</Button>
           </Card>
           <Dropdown open>

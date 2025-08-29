@@ -14,6 +14,7 @@ interface InputTextAreaProps {
     | 'static'
     | 'dynamic'
   name: string,
+  limit?: number,
   width?: number,
   height?: number,
   errors?: ErrorInterface[],
@@ -21,37 +22,20 @@ interface InputTextAreaProps {
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({
   children,
-  type='text',
+  type='static',
   name,
+  limit=0,
   width='auto',
   height='6rem',
   errors,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
-  const [showValue, setShowValue] = useState(type !== 'password')
-  const [numberError, setNumberError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
+  const [countError, setCountError] = useState(false)
 
-  const validateEmail = () => {
-    const emailSyntax = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
-
-    setEmailError(!emailSyntax.test(value) && value.length !== 0)
+  const validateCount = (value: string) => {
+    setCountError(value.length > limit && limit > 0)
   }
-
-  const validateNumber = () => {
-    setNumberError(Number.isNaN(Number(value)))
-  }
-
-  const handleInput = () => {
-    if (type === 'number') validateNumber()
-    else if (type === 'email') validateEmail()
-  }
-
-  useEffect(() => {
-    if (numberError) validateNumber()
-    else if (emailError) validateEmail()
-  }, [value])
 
   return (
     <>
@@ -87,18 +71,27 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
               minHeight: height,
             }}
             onFocus={() => setFocus(true)}
-            onBlur={() => { setFocus(false); handleInput(); }}
-            onChange={(e) => setValue(e.target.value)}
+            onBlur={() => setFocus(false)}
+            onChange={(e) => {
+              setValue(e.target.value)
+              validateCount(e.target.value)
+            }}
             name={name}
             id={name}
           />
 
           {
-            type === 'password' ?
-              <div className={styles['eye-container']}>
-                <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
-                  <Visibility state={showValue} />
-                </button>
+            limit > 0 ?
+              <div className={styles['counter']}>
+                <span
+                  className={
+                    value.length > limit
+                    ? styles['excess-count']
+                    : ''
+                  }
+                >{value.length}</span>
+                /
+                <span>{limit}</span>
               </div>
             : null
           }
@@ -107,7 +100,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
         <div
           className={`
             ${styles['error-container']} 
-            ${numberError ? styles['error-visible'] : ''}
+            ${countError ? styles['error-visible'] : ''}
           `}
         >
           <div className={styles['error']}>
@@ -115,23 +108,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
               <Error />
             </div>
             <span>
-              Please enter a valid number.
-            </span>
-          </div>
-        </div>
-
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${emailError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Please enter a valid email.
+              Character count exceeded.
             </span>
           </div>
         </div>

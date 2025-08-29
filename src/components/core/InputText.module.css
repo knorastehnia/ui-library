@@ -104,3 +104,14 @@
     background-color: var(--gray-1);
   }
 }
+
+.counter {
+  position: absolute;
+  color: var(--gray-9);
+  bottom: calc(-0.7rem - 5px); right: 0;
+  font-size: 0.7rem;
+
+  .excess-count {
+    color: var(--error);
+  }
+}
