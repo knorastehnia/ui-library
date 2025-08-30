@@ -75,10 +75,14 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: left;
-  align-items: baseline;
+  align-items: end;
   gap: 5px;
   color: var(--error);
   font-size: 0.9rem;
+
+  span {
+    height: 1rem;
+  }
 }
 
 .eye-container {
