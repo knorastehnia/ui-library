@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <>
       <button
+        disabled={disabled}
         onClick={(e) => !disabled && onClick(e)}
         className={`
           ${styles[`button-${size}`]} 
