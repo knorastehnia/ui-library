@@ -1,6 +1,6 @@
-import styles from './Expand.module.css'
+import styles from './Arrow.module.css'
 
-const Expand = () => {
+const Arrow: React.FC<{state?: boolean}> = ({ state=false }) => {
   return (
     <>
       <svg
@@ -11,8 +11,9 @@ const Expand = () => {
       >
 
         <path
-          stroke-miterlimit="16"
-          stroke-linecap="round"
+          className={`${state && styles['active']}`}
+          strokeMiterlimit="16"
+          strokeLinecap="round"
           d={
             `M1 1L5.16782 4.70473C5.35726 4.87312 
             5.64274 4.87312 5.83218 4.70473L10 1`
@@ -23,4 +24,4 @@ const Expand = () => {
   )
 }
 
-export default Expand
+export default Arrow

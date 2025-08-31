@@ -1,0 +1,15 @@
+.svg {
+  pointer-events: none;
+  display: block;
+  width: 0.8rem;
+  height: 0.8rem;
+
+  path {
+    stroke: var(--foreground);
+    transition: all 0.25s var(--curve);
+  }
+
+  .active {
+    d: path('M1 2.2L5.16782 2.2C5.35726 2.2 5.64274 2.2 5.83218 2.2L10 2.2');
+  }
+}

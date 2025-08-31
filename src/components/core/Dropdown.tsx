@@ -1,8 +1,7 @@
-import Frost from './Frost'
 import styles from './Dropdown.module.css'
-import { createPortal } from 'react-dom'
-import Button from './Button'
+import Arrow from '../icons/Arrow'
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface DropdownProps {
   children: React.ReactNode,
@@ -27,6 +26,17 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   }
 
+  const openDropdown = (e: React.MouseEvent) => {
+    setIsOpen(!isOpen)
+    if (e.target instanceof HTMLButtonElement) {
+      const rect = e.target.getBoundingClientRect()
+      setPos({
+        x: rect.left + window.scrollX,
+        y: rect.top + window.scrollY + rect.height,
+      })
+    }
+  }
+
   useEffect(() => {
     document.addEventListener('click', closeDropdown)
     
@@ -36,18 +46,16 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <>
       <div ref={buttonRef} style={{width: 'fit-content'}}>
-        <Button onClick={(e: React.MouseEvent) => {
-          setIsOpen(!isOpen)
-          if (e.target instanceof HTMLButtonElement) {
-            const rect = e.target.getBoundingClientRect()
-            setPos({
-              x: rect.left + window.scrollX,
-              y: rect.top + window.scrollY + rect.height,
-            })
-          }
-        }}>
+        <button
+          className={`
+            ${styles['button']} 
+            ${isOpen && styles['button-active']}
+          `}
+          onClick={openDropdown}
+        >
           Expand
-        </Button>
+          <Arrow state={isOpen} />
+        </button>
       </div>
 
       {
@@ -68,9 +76,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 ${isOpen && styles['content-visible']}
               `}
             >
-              {/* <Frost padding='15px 10px' all radius level={3}> */}
-                {children}
-              {/* </Frost> */}
+              {children}
             </div>
           </div>,
           document.querySelector('#dropdown-portal')!
