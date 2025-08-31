@@ -21,84 +21,115 @@ const App = () => {
       <div
         className='bg'
         style={{
-          width: '500px',
-          margin: '10rem auto',
+          // width: '500px',
+          margin: 'auto',
           display: 'flex',
-          flexFlow: 'column',
-          gap: '5rem',
+          flexFlow: 'row nowrap',
+          justifyContent: 'space-around',
+          alignItems: 'start',
         }}
       >
-        <Card>
-          <div style={{
+        <div
+          style={{
+            width: '500px',
+            margin: '10rem auto',
             display: 'flex',
-            flexFlow: 'row wrap',
-            alignItems: 'center',
-            gap: '0px 20px',
-          }}>
-            <Button onClick={() => null} disabled size='large'>Button</Button>
-            <Button onClick={() => null} size='small'>Button</Button>
-            <Button onClick={() => null} size='small' style='fill'>Button</Button>
-            <Button onClick={() => null} disabled={true} style='fill'>Button</Button>
-            <Button onClick={() => null} size='large' style='fill'>Button</Button>
-          </div>
-        </Card>
-
-        <Card>
-          <h2 style={{
-            marginBottom: '20px'
-          }}>Some Form</h2>
-
-          <div style={{
-            display: 'flex',
-            gap: '15px',
-            width: '100%',
-          }}>
-            <InputText
-              width={150}
-              type='number'
-              name='input1'
-              errors={[
-                {message: 'This is a custom error message.', failState: someState},
-              ]}
-            >
-              Street No.
-            </InputText>
-
-            <InputText name='input2'>Street Name</InputText>
-          </div>
-
-          <InputText type='email' name='test'>Email</InputText>
-          <InputText type='password' name='password'>Password</InputText>
-          <Button
-            onClick={() => setSomeState(!someState)}
-            size='large'
-            style='fill'
-          >
-            Submit
-          </Button>
-        </Card>
-
-        <div style={{zIndex: 10}}>
-          <Card>
-            <InputTextArea limit={200} height={200} name='sta' type='static'>Static</InputTextArea>
-            <InputTextArea limit={10} name='dyn' type='dynamic'>Dynamic</InputTextArea>
-            <Button onClick={() => {}} size='default'>Dropdown</Button>
+            flexFlow: 'column',
+            gap: '5rem',
+          }}
+        >
+          <Card height={400}>
+            <div style={{
+              display: 'flex',
+              flexFlow: 'row wrap',
+              alignItems: 'center',
+              gap: '0px 20px',
+            }}>
+              <Button onClick={() => null} disabled size='large'>Button</Button>
+              <Button onClick={() => null} size='small'>Button</Button>
+              <Button onClick={() => null} size='small' style='fill'>Button</Button>
+              <Button onClick={() => null} disabled={true} style='fill'>Button</Button>
+              <Button onClick={() => null} size='large' style='fill'>Button</Button>
+            </div>
           </Card>
-          <Dropdown open>
-            <a href="#">Item</a>
-            <a href="#">Item</a>
-            <a href="#">Item</a>
-          </Dropdown>
+
+          <Card>
+            <h2 style={{
+              marginBottom: '20px'
+            }}>Some Form</h2>
+
+            <div style={{
+              display: 'flex',
+              gap: '15px',
+              width: '100%',
+            }}>
+              <InputText
+                width={150}
+                type='number'
+                name='input1'
+                errors={[
+                  {message: 'This is a custom error message.', failState: someState},
+                ]}
+              >
+                Street No.
+              </InputText>
+
+              <InputText name='input2'>Street Name</InputText>
+            </div>
+
+            <InputText type='email' name='test'>Email</InputText>
+            <InputText type='password' name='password'>Password</InputText>
+            <Button
+              onClick={() => setSomeState(!someState)}
+              size='large'
+              style='fill'
+            >
+              Submit
+            </Button>
+          </Card>
         </div>
 
-        <Card>
-          <h1>H1 Tag</h1>
-          <h2>H2 Tag</h2>
-          <h3>H3 Tag</h3>
-          <h4>H4 Tag</h4>
-          <h5>H5 Tag</h5>
-          <h6>H6 Tag</h6>
-        </Card>
+        <div
+          style={{
+            width: '500px',
+            margin: '10rem auto',
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '5rem',
+          }}
+        >
+          <div style={{zIndex: 10}}>
+            <Card>
+              <InputTextArea limit={200} height={200} name='sta' type='static'>Static</InputTextArea>
+              <InputTextArea limit={10} name='dyn' type='dynamic'>Dynamic</InputTextArea>
+              <div style={{
+                display: 'flex',
+                flexFlow: 'row',
+                gap: '15px',
+              }}>
+                <Dropdown>
+                  <a href="#">Item</a>
+                  <hr />
+                  <a href="#">Item</a>
+                  <a href="#">Item</a>
+                </Dropdown>
+
+                <Dropdown>
+                  <a href="#">Item</a>
+                </Dropdown>
+              </div>
+            </Card>
+          </div>
+
+          <Card>
+            <h1>H1 Tag</h1>
+            <h2>H2 Tag</h2>
+            <h3>H3 Tag</h3>
+            <h4>H4 Tag</h4>
+            <h5>H5 Tag</h5>
+            <h6>H6 Tag</h6>
+          </Card>
+        </div>
       </div>
     </>
   )

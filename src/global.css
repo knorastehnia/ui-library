@@ -1,10 +1,6 @@
 :root {
-  --foreground: #eee;
   --background: #111;
-  --background-blur: #111111e0;
-
-  --error: #ec0000;
-
+  --foreground: #eee;
   --gray-1: #1f1f1f;
   --gray-3: #3f3f3f;
   --gray-6: #666;
@@ -14,21 +10,14 @@
   /* --border-dynamic: hsl(34, 42%, 86%); */
   /* --border-dynamic: hsl(90, 42%, 86%); */
 
-  --shadow-color: #0000004b;
-  --shadow:
-    2px 2px 5px var(--shadow-color),
-    -1px -1px 5px var(--shadow-color);
-
   /* --background: #fff;
   --foreground: #333;
-
-  --error: #ec0000;
-
   --gray-1: #ddd;
   --gray-3: #aaa;
-  --gray-9: #999;
-  --border-dynamic: #111; */
-  
+  --gray-6: #a0a0a0;
+  --gray-9: #999; */
+
+  --error: #ec0000;
   --border-radius: 25px;
 
   --curve: cubic-bezier(0.22, 1, 0.36, 1);

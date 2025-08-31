@@ -58,9 +58,7 @@ const Frost: React.FC<FrostProps> = ({
         ref={containerRef}
         className={`
           ${styles['container']} 
-          ${
-            radius ? styles['radius'] : null
-          }
+          ${radius && styles['radius']}
         `}
         style={{
           paddingTop: top ? '0.8px' : '0',

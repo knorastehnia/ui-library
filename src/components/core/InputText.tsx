@@ -90,13 +90,12 @@ const InputText: React.FC<InputTextProps> = ({
           />
 
           {
-            type === 'password' ?
+            type === 'password' &&
               <div className={styles['eye-container']}>
                 <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
                   <Visibility state={showValue} />
                 </button>
               </div>
-            : null
           }
         </div>
 

@@ -80,7 +80,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
           />
 
           {
-            limit > 0 ?
+            limit > 0 &&
               <div className={styles['counter']}>
                 <span
                   className={
@@ -92,7 +92,6 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
                 /
                 <span>{limit}</span>
               </div>
-            : null
           }
         </div>
 
@@ -107,7 +106,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
               <Error />
             </div>
             <span>
-              Character count exceeded.
+              Character count exceeds limit.
             </span>
           </div>
         </div>

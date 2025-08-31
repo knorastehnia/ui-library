@@ -18,15 +18,11 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <>
       <button
-        onClick={(e) => !disabled ? onClick(e) : null}
+        onClick={(e) => !disabled && onClick(e)}
         className={`
           ${styles[`button-${size}`]} 
           ${styles[`button-${style}`]} 
-          ${
-            disabled
-            ? styles['disabled']
-            : null
-          }
+          ${disabled && styles['disabled']}
         `}
       >
         {children}
