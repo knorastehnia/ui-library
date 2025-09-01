@@ -9,9 +9,7 @@ interface ErrorInterface {
 
 interface InputTextAreaProps {
   children: React.ReactNode,
-  type?:
-    | 'static'
-    | 'dynamic'
+  resizable?: boolean,
   name: string,
   limit?: number,
   width?: number,
@@ -22,7 +20,7 @@ interface InputTextAreaProps {
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({
   children,
-  type='static',
+  resizable=false,
   name,
   limit=0,
   width='auto',
@@ -67,7 +65,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
           <textarea
             className={styles['input']}
             style={{
-              resize: type === 'dynamic' ? 'vertical' : 'none',
+              resize: resizable ? 'vertical' : 'none',
               height,
               minHeight: height,
             }}
