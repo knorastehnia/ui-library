@@ -38,8 +38,8 @@ const Frost: React.FC<FrostProps> = ({
       const rect = containerRef.current!.getBoundingClientRect()
 
       setCurrentPos(prevPos => ({
-        x: prevPos.x + (mousePos.current.x - rect.left - prevPos.x) * 0.4,
-        y: prevPos.y + (mousePos.current.y - rect.top - prevPos.y) * 0.4,
+        x: prevPos.x + (mousePos.current.x - rect.left - prevPos.x) * 0.35,
+        y: prevPos.y + (mousePos.current.y - rect.top - prevPos.y) * 0.35,
       }))
     }, 25)
 
@@ -76,7 +76,7 @@ const Frost: React.FC<FrostProps> = ({
           style={{
             maskImage: `radial-gradient(
               200px 200px at ${currentPos.x}px ${currentPos.y}px,
-              #00000090 0%, #000000${(level + 1) * 7}
+              #00000085 0%, #000000${(level + 1) * 10}
             )`
           }}
         ></div>

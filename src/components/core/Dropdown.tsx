@@ -53,7 +53,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             ${isOpen && styles['dropdown-visible']}
           `}
         >
-          <Frost padding='12px 10px' all radius level={3}>
+          <Frost padding='15px 10px' all radius level={3}>
             {children}
           </Frost>
         </div>

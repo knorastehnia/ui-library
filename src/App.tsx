@@ -29,33 +29,24 @@ const App = () => {
       </Header>
 
       <div
-        style={{
-          position: 'absolute',
-          top: '217px',
-          left: '200px',
-          zIndex: '100000',
-        }}
-      >
-      </div>
-
-      <div
         className='bg'
         style={{
           // width: '500px',
-          margin: 'auto',
+          margin: '10rem auto',
           display: 'flex',
           flexFlow: 'row nowrap',
-          justifyContent: 'space-around',
+          gap: '30px',
+          justifyContent: 'center',
           alignItems: 'start',
         }}
       >
         <div
           style={{
             width: '500px',
-            margin: '10rem auto',
+            margin: '0',
             display: 'flex',
             flexFlow: 'column',
-            gap: '5rem',
+            gap: '30px',
           }}
         >
           <Card height={400}>
@@ -119,10 +110,10 @@ const App = () => {
         <div
           style={{
             width: '500px',
-            margin: '10rem auto',
+            margin: '0',
             display: 'flex',
             flexFlow: 'column',
-            gap: '5rem',
+            gap: '30px',
           }}
         >
           <div style={{zIndex: 10}}>
