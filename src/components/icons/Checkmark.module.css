@@ -1,0 +1,37 @@
+.svg {
+  pointer-events: none;
+  overflow: visible;
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+
+  path {
+    stroke-dashoffset: 1;
+    stroke-dasharray: 1;
+    stroke: var(--foreground);
+  }
+
+  .hidden {
+    animation: disappear var(--curve) 0.25s forwards;
+  }
+
+  .visible {
+    animation: appear var(--curve) 0.25s forwards;
+  }
+}
+
+@keyframes disappear {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -1;
+  }
+}
+
+@keyframes appear {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
