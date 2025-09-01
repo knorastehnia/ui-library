@@ -63,13 +63,20 @@ const App = () => {
               display: 'flex',
               flexFlow: 'row wrap',
               alignItems: 'center',
-              gap: '0px 20px',
+              gap: '20px',
             }}>
-              <Button onClick={() => null} disabled size='large'>Button</Button>
-              <Button onClick={() => null} size='small'>Button</Button>
-              <Button onClick={() => null} size='small' style='fill'>Button</Button>
-              <Button onClick={() => null} disabled={true} style='fill'>Button</Button>
-              <Button onClick={() => null} size='large' style='fill'>Button</Button>
+              <Button
+                size='small'
+                style='text'
+                href='#'
+                onClick={() => null}
+                // disabled
+              >Link to homepage</Button>
+              <Button disabled size='large'>Button</Button>
+              <Button href='#' size='small'>Button</Button>
+              <Button size='small' style='fill'>Button</Button>
+              <Button disabled={true} style='fill'>Button</Button>
+              <Button size='large' style='fill'>Button</Button>
             </div>
           </Card>
 
@@ -120,8 +127,8 @@ const App = () => {
         >
           <div style={{zIndex: 10}}>
             <Card>
-              <InputTextArea limit={200} height={200} name='sta' type='static'>Static</InputTextArea>
-              <InputTextArea limit={10} name='dyn' type='dynamic'>Dynamic</InputTextArea>
+              <InputTextArea limit={200} height={200} name='sta'>Static</InputTextArea>
+              <InputTextArea limit={10} name='dyn' resizable>Dynamic</InputTextArea>
               <div style={{
                 display: 'flex',
                 flexFlow: 'row',
