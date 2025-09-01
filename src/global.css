@@ -1,5 +1,6 @@
 :root {
   --background: #111;
+  --overlay: #4a4a4a;
   --foreground: #eee;
   --gray-1: #2a2a2a;
   --gray-3: #3f3f3f;
@@ -12,6 +13,7 @@
 
   --background: #fff;
   --foreground: #363636;
+  --overlay: #000;
   --gray-1: #ddd;
   --gray-3: #aaa;
   --gray-6: #999;
