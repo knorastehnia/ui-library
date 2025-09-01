@@ -4,6 +4,7 @@ import Card from './components/core/Card'
 import Button from './components/core/Button'
 import InputText from './components/core/InputText'
 import InputTextArea from './components/core/InputTextArea'
+import InputCheckbox from './components/core/InputCheckbox'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
 
@@ -15,8 +16,27 @@ const App = () => {
   return (
     <>
       <Header>
-        Content
+        <Dropdown>
+          <a href="#">Item</a>
+        </Dropdown>
+
+        <Dropdown>
+          <a href="#">Item</a>
+          <hr />
+          <a href="#">Item</a>
+          <a href="#">Item</a>
+        </Dropdown>
       </Header>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '217px',
+          left: '200px',
+          zIndex: '100000',
+        }}
+      >
+      </div>
 
       <div
         className='bg'
@@ -120,6 +140,12 @@ const App = () => {
               </div>
             </Card>
           </div>
+
+          <Card>
+            <InputCheckbox name='firstcb'>Checkbox 1</InputCheckbox>
+            <InputCheckbox name='secondcb'>Checkbox 2</InputCheckbox>
+            <InputCheckbox name='thirdcb'>Checkbox 3</InputCheckbox>
+          </Card>
 
           <Card>
             <h1>H1 Tag</h1>

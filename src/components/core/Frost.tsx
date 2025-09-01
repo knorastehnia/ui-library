@@ -68,8 +68,6 @@ const Frost: React.FC<FrostProps> = ({
         }}
       >
 
-        <div className={styles['blur']}></div>
-
         <div
           className={`
             ${styles['border']} 
@@ -78,7 +76,7 @@ const Frost: React.FC<FrostProps> = ({
           style={{
             maskImage: `radial-gradient(
               200px 200px at ${currentPos.x}px ${currentPos.y}px,
-              #00000090 0%, #000000${(level + 1) * 10}
+              #00000090 0%, #000000${(level + 1) * 7}
             )`
           }}
         ></div>
@@ -89,6 +87,16 @@ const Frost: React.FC<FrostProps> = ({
         >
           {children}
         </div>
+
+        <div
+          className={styles['overlay']}
+          style={{
+            maskImage: `radial-gradient(
+              200px 200px at ${currentPos.x}px ${currentPos.y}px,
+              #00000006 0%, #00000000
+            )`
+          }}
+        ></div>
       </div>
     </>
   )

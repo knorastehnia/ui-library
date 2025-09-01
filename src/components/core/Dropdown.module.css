@@ -1,57 +1,33 @@
 .dropdown {
   position: absolute;
   margin-top: 5px;
-
   border-radius: calc(var(--border-radius) * 0.75);
-  border: 1px solid var(--gray-1);
-  user-select: none;
-  
+
   visibility: hidden;
-  pointer-events: none;
-  filter: blur(15px);
+  filter: blur(10px);
   opacity: 0;
-  transform: scale(0.9);
+  transform: translateY(-15px);
   transform-origin: top left;
 
-  transition: all 0.75s var(--curve), top 0s, left 0s;
-  z-index: 1000;
+  transition: all 0.5s var(--curve);
+  z-index: 200;
 
   &.dropdown-visible {
-    transition: all 0.5s var(--curve), top 0s, left 0s;
-    backdrop-filter: blur(5px);
     visibility: visible;
     opacity: 1;
-    pointer-events: all;
     filter: none;
-    transform: scale(1);
+    transform: none;
   }
-}
-
-.content {
-  position: relative;
-  padding: 15px 10px;
-
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: baseline;
-
-  border-radius: inherit;
-  background-color: var(--background);
-  mask-image: radial-gradient(
-    100% 100% at 0px 0px, #111111e0 0%, #111111e0
-  );
-
-  transition: var(--transition);
 
   a, button {
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
     color: var(--foreground);
     text-decoration: none;
     width: 250px;
     border-radius: calc(var(--border-radius) * 0.5);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.5s var(--curve);
     
     &:hover, &:focus-visible {
       outline: none;
@@ -60,7 +36,7 @@
   }
 
   hr {
-    margin: 5px auto;
+    margin: 10px auto;
     height: 0.8px;
     width: calc(100% - 50px);
     border: none;
@@ -73,14 +49,15 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: 10px;
 
+  color: var(--gray-9);
   background-color: var(--background);
   border: none;
   border-radius: calc(var(--border-radius) * 0.5);
-  padding: 10px 15px;
+  padding: 10px;
   width: 150px;
-  transition: var(--transition);
+  transition: all 0.5s var(--curve);
   
   &:hover, &:focus, &.button-active {
     outline: none;

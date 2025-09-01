@@ -39,7 +39,7 @@ const Visibility: React.FC<{state: boolean}> = ({ state }) => {
             }
           `}
           d='M 1 -2 L 18.5 13.5'
-          strokeWidth='1'
+          strokeWidth='0.8'
           strokeLinecap='round'
           pathLength='1'
         />

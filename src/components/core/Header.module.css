@@ -3,16 +3,17 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 70px;
-  z-index: 1000;
+  height: 65px;
+  z-index: 100;
   padding-bottom: 0.8px;
 
-  div:last-child {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   color: var(--gray-9);
+}
+
+.header > div > div:nth-last-of-type(2) {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }

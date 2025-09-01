@@ -18,6 +18,7 @@ interface InputTextProps {
   name: string,
   width?: number,
   errors?: ErrorInterface[],
+  disabled?: boolean,
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -26,6 +27,7 @@ const InputText: React.FC<InputTextProps> = ({
   name,
   width='auto',
   errors,
+  disabled=false,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
@@ -87,6 +89,7 @@ const InputText: React.FC<InputTextProps> = ({
             type={showValue ? 'text' : 'password'}
             name={name}
             id={name}
+            disabled={disabled}
           />
 
           {

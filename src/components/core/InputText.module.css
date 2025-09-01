@@ -1,5 +1,4 @@
 .input-container {
-  padding-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -11,7 +10,7 @@
   position: relative;
   border: 1px solid var(--gray-1);
   border-radius: calc(var(--border-radius) * 0.5);
-  transition: var(--transition);
+  transition: all 0.5s var(--curve);
 }
 
 .input-active {
@@ -23,11 +22,11 @@
   display: block;
   position: absolute;
   top: 0; left: 0;
-  transform: translate(15px, 10px);
+  transform: translate(10px, 10px);
   color: var(--gray-9);
   background-color: var(--background);
   padding: 0 5px;
-  transition: var(--transition);
+  transition: all 0.5s var(--curve);
 }
 
 .label-active {
@@ -38,10 +37,10 @@
 .input {
   width: 100%;
   color: var(--foreground);
-  padding: 10px 15px;
+  padding: 10px;
   border: none;
   border-radius: inherit;
-  transition: var(--transition), height 0.25s var(--curve);
+  transition: all 0.5s var(--curve), height 0.25s var(--curve);
 
   &:focus {
     outline: none;
@@ -60,7 +59,7 @@
   margin: 0;
   opacity: 0;
   filter: blur(5px);
-  transition: var(--transition);
+  transition: all 0.5s var(--curve);
 }
 
 .error-visible {
@@ -101,7 +100,7 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-  transition: var(--transition);
+  transition: all 0.5s var(--curve);
 
   &:focus-visible {
     outline: none;

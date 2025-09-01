@@ -5,7 +5,7 @@
   height: 0.8rem;
 
   path {
-    stroke: var(--foreground);
+    stroke: var(--gray-9);
     transition: all 0.25s var(--curve);
   }
 

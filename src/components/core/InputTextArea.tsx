@@ -17,6 +17,7 @@ interface InputTextAreaProps {
   width?: number,
   height?: number,
   errors?: ErrorInterface[],
+  disabled?: boolean,
 }
 
 const InputTextArea: React.FC<InputTextAreaProps> = ({
@@ -27,6 +28,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
   width='auto',
   height='6rem',
   errors,
+  disabled=false,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
@@ -77,6 +79,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
             }}
             name={name}
             id={name}
+            disabled={disabled}
           />
 
           {
