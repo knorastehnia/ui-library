@@ -16,11 +16,11 @@ const App = () => {
   return (
     <>
       <Header>
-        <Dropdown>
+        <Dropdown label='Products'>
           <a href="#">Item</a>
         </Dropdown>
 
-        <Dropdown>
+        <Dropdown label='Services'>
           <a href="#">Item</a>
           <hr />
           <a href="#">Item</a>
@@ -127,14 +127,14 @@ const App = () => {
                 flexFlow: 'row',
                 gap: '15px',
               }}>
-                <Dropdown>
+                <Dropdown label='Expand'>
                   <a href="#">Item</a>
                   <hr />
                   <a href="#">Item</a>
                   <a href="#">Item</a>
                 </Dropdown>
 
-                <Dropdown>
+                <Dropdown label='Open Menu'>
                   <a href="#">Item</a>
                 </Dropdown>
               </div>
