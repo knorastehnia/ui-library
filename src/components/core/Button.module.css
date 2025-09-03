@@ -54,22 +54,19 @@
 
 /* prop: size */
 
-.button-default {
-  border-radius: calc(var(--border-radius) * 0.5);
-  padding: 10px 15px;
-  width: fit-content;
-}
-
-.button-small {
+.button-s {
   border-radius: calc(var(--border-radius) * 0.35);
   padding: 5px 10px;
-  width: fit-content;
 }
 
-.button-large {
+.button-m {
   border-radius: calc(var(--border-radius) * 0.5);
   padding: 10px 15px;
-  width: 100%;
+}
+
+.button-l {
+  border-radius: calc(var(--border-radius) * 0.65);
+  padding: 12.5px 25px;
 }
 
 /* other */

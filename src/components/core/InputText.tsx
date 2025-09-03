@@ -16,7 +16,8 @@ interface InputTextProps {
     | 'email'
     | 'password'
   name: string,
-  width?: number,
+  limit?: number,
+  width?: string,
   errors?: ErrorInterface[],
   disabled?: boolean,
 }
@@ -24,8 +25,9 @@ interface InputTextProps {
 const InputText: React.FC<InputTextProps> = ({
   children,
   type='text',
+  limit=0,
   name,
-  width='auto',
+  width='100%',
   errors,
   disabled=false,
 }) => {
@@ -34,6 +36,11 @@ const InputText: React.FC<InputTextProps> = ({
   const [showValue, setShowValue] = useState(type !== 'password')
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
+  const [countError, setCountError] = useState(false)
+
+  const validateCount = () => {
+    setCountError(value.length > limit && limit > 0)
+  }
 
   const validateEmail = () => {
     const emailSyntax = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
@@ -45,23 +52,25 @@ const InputText: React.FC<InputTextProps> = ({
     setNumberError(Number.isNaN(Number(value)))
   }
 
+
+  // on blur
   const handleInput = () => {
     if (type === 'number') validateNumber()
     else if (type === 'email') validateEmail()
   }
 
+  // on change
   useEffect(() => {
     if (numberError) validateNumber()
     else if (emailError) validateEmail()
+    validateCount()
   }, [value])
 
   return (
     <>
       <div
         className={styles[`input-container`]}
-        style={{
-          width: width === 'auto' ? '100%' : `${width}px`,
-        }}
+        style={{ width }}
       >
         <div className={`
           ${styles['input-field']} 
@@ -100,6 +109,37 @@ const InputText: React.FC<InputTextProps> = ({
                 </button>
               </div>
           }
+
+          {
+            limit > 0 &&
+              <div className={styles['counter']}>
+                <span
+                  className={
+                    value.length > limit
+                    ? styles['excess-count']
+                    : ''
+                  }
+                >{value.length}</span>
+                /
+                <span>{limit}</span>
+              </div>
+          }
+        </div>
+
+        <div
+          className={`
+            ${styles['error-container']} 
+            ${countError ? styles['error-visible'] : ''}
+          `}
+        >
+          <div className={styles['error']}>
+            <div className={styles['error-icon']}>
+              <Error />
+            </div>
+            <span>
+              Character count exceeds limit.
+            </span>
+          </div>
         </div>
 
         <div

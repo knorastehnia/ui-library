@@ -4,8 +4,9 @@ interface ButtonProps {
   children: React.ReactNode,
   href?: string,
   onClick?: Function,
-  style?: 'fill' | 'outline' | 'text',
-  size?: 'small' | 'default' | 'large',
+  type?: 'fill' | 'outline' | 'text',
+  size?: 's' | 'm' | 'l',
+  width?: string,
   disabled?: boolean,
 }
 
@@ -13,8 +14,9 @@ const Button: React.FC<ButtonProps> = ({
   children,
   href='',
   onClick=(() => null),
-  style='outline',
-  size='default',
+  type='outline',
+  size='m',
+  width='auto',
   disabled=false,
 }) => {
   return (
@@ -25,9 +27,10 @@ const Button: React.FC<ButtonProps> = ({
         <a
           href={href}
           onClick={(e) => !disabled && onClick(e)}
+          style={type !== 'text' ? { width } : {}}
           className={`
-            ${styles[`button-${style}`]} 
-            ${style !== 'text' && styles[`button-${size}`]} 
+            ${styles[`button-${type}`]} 
+            ${type !== 'text' && styles[`button-${size}`]} 
             ${disabled && styles['disabled']}
           `}
         >
@@ -38,8 +41,9 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled}
           onClick={(e) => !disabled && onClick(e)}
+          style={type !== 'text' ? { width } : {}}
           className={`
-            ${styles[`button-${style}`]} 
+            ${styles[`button-${type}`]} 
             ${styles[`button-${size}`]} 
             ${disabled && styles['disabled']}
           `}

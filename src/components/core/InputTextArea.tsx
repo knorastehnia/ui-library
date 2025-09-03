@@ -12,7 +12,6 @@ interface InputTextAreaProps {
   resizable?: boolean,
   name: string,
   limit?: number,
-  width?: number,
   height?: number,
   errors?: ErrorInterface[],
   disabled?: boolean,
@@ -23,7 +22,6 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
   resizable=false,
   name,
   limit=0,
-  width='auto',
   height='6rem',
   errors,
   disabled=false,
@@ -40,9 +38,6 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
     <>
       <div
         className={styles[`input-container`]}
-        style={{
-          width: width === 'auto' ? '100%' : `${width}px`,
-        }}
       >
         <div className={`
           ${styles['input-field']} 

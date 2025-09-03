@@ -3,8 +3,8 @@ import styles from './Card.module.css'
 
 interface CardProps {
   children: React.ReactNode,
-  width?: number,
-  height?: number,
+  width?: string,
+  height?: string,
 }
 
 const Card: React.FC<CardProps> = ({
@@ -16,10 +16,7 @@ const Card: React.FC<CardProps> = ({
     <>
       <div
         className={styles['card']}
-        style={{
-          width: width === 'auto' ? '100%' : `${width}px`,
-          height: height === 'auto' ? '100%' : `${height}px`,
-        }}
+        style={{ width, height }}
       >
         <Frost padding='30px 20px' all radius level={2}>
           {children}
