@@ -20,7 +20,7 @@
   --gray-9: #777; */
 
   --error: #ec0000;
-  --border-radius: 18px;
+  --border-radius: 15px;
 
   --curve: cubic-bezier(0.22, 1, 0.36, 1);
 }
