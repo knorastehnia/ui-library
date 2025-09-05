@@ -14,7 +14,7 @@ interface TypographyProps {
 const Typography: React.FC<TypographyProps> = ({
   children,
   role,
-  size=( role === 'p' ? 'xs' : 'm' ),
+  size='xs',
 }) => {
   return (
     <div className={`

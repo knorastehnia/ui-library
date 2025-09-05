@@ -1,7 +1,7 @@
 :root {
-  --background: #111;
+  --background: #0e0e0e;
   --foreground: #eee;
-  --overlay: #4a4a4a;
+  --overlay: #fff;
   --gray-1: #2a2a2a;
   --gray-3: #3f3f3f;
   --gray-6: #555;
@@ -11,13 +11,13 @@
   /* --border-dynamic: hsl(34, 42%, 86%); */
   /* --border-dynamic: hsl(90, 42%, 86%); */
 
-  /* --background: #fff;
+  --background: #fff;
   --foreground: #363636;
   --overlay: #000;
   --gray-1: #ddd;
   --gray-3: #aaa;
   --gray-6: #999;
-  --gray-9: #777; */
+  --gray-9: #777;
 
   --error: #ec0000;
   --border-radius: 15px;
