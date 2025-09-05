@@ -7,6 +7,7 @@ import InputTextArea from './components/core/InputTextArea'
 import InputCheckbox from './components/core/InputCheckbox'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
+import Typography from './components/core/Typography'
 
 import { useState } from 'react'
 
@@ -49,7 +50,7 @@ const App = () => {
             gap: '30px',
           }}
         >
-          <Card height={400}>
+          <Card>
             <div style={{
               display: 'flex',
               flexFlow: 'row wrap',
@@ -57,24 +58,37 @@ const App = () => {
               gap: '20px',
             }}>
               <Button
-                size='small'
-                style='text'
+                size='l'
+                type='text'
                 href='#'
                 onClick={() => null}
                 // disabled
               >Link to homepage</Button>
-              <Button disabled size='large'>Button</Button>
-              <Button href='#' size='small'>Button</Button>
-              <Button size='small' style='fill'>Button</Button>
-              <Button disabled={true} style='fill'>Button</Button>
-              <Button size='large' style='fill'>Button</Button>
+
+              <Button width='100%' disabled size='m'>Button</Button>
+
+              <Button size='s'>Button</Button>
+              <Button>Button</Button>
+              <Button href='#' size='l'>Button</Button>
+
+              <Button width='100%' size='m'>Button</Button>
+
+              <Button size='s' type='fill'>Button</Button>
+              <Button type='fill'>Button</Button>
+              <Button type='fill' href='#' size='l'>Button</Button>
             </div>
           </Card>
 
           <Card>
-            <h2 style={{
+            <div style={{
+              marginBottom: '20px',
+            }}>
+              <Typography role='h2' size='s'>Some Form</Typography>
+            </div>
+
+            {/* <h2 style={{
               marginBottom: '20px'
-            }}>Some Form</h2>
+            }}>Some Form</h2> */}
 
             <div style={{
               display: 'flex',
@@ -82,9 +96,10 @@ const App = () => {
               width: '100%',
             }}>
               <InputText
-                width={150}
+                width='150px'
                 type='number'
                 name='input1'
+                limit={12}
                 errors={[
                   {message: 'This is a custom error message.', failState: someState},
                 ]}
@@ -99,8 +114,9 @@ const App = () => {
             <InputText type='password' name='password'>Password</InputText>
             <Button
               onClick={() => setSomeState(!someState)}
-              size='large'
-              style='fill'
+              size='m'
+              type='fill'
+              width='100%'
             >
               Submit
             </Button>
@@ -144,16 +160,58 @@ const App = () => {
             <InputCheckbox name='secondcb'>Checkbox 2</InputCheckbox>
             <InputCheckbox name='thirdcb'>Checkbox 3</InputCheckbox>
           </Card>
-
-          <Card>
-            <h1>H1 Tag</h1>
-            <h2>H2 Tag</h2>
-            <h3>H3 Tag</h3>
-            <h4>H4 Tag</h4>
-            <h5>H5 Tag</h5>
-            <h6>H6 Tag</h6>
-          </Card>
         </div>
+      </div>
+
+      <div style={{
+        margin: '1rem 15rem',
+      }}>
+        <Typography role='h2'>Header H2</Typography>
+        <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+        <Typography size='s' role='h2'>Header H2 S</Typography>
+        <Typography size='m' role='h2'>Header H2 M</Typography>
+        <Typography size='l' role='h2'>Header H2 L</Typography>
+        <Typography size='xl' role='h2'>Header H2 XL</Typography>
+
+        <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+
+        <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+
+        <Typography role='p' size='s'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+
+        <Typography role='p' size='m'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+
+        <Typography role='p' size='l'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
+
+        <Typography role='p' size='xl'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
+          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
+          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+        <hr style={{margin: '1rem 0', opacity: '0'}} />
       </div>
     </>
   )
