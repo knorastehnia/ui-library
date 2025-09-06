@@ -111,6 +111,8 @@
 
 .counter {
   position: absolute;
+  pointer-events: none;
+  user-select: none;
   background-color: var(--background);
   color: var(--gray-9);
   padding: 0 5px;
