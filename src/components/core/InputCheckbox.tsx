@@ -35,7 +35,10 @@ const InputCheckbox: React.FC<InputCheckboxProps> = ({
             onChange={(e) => setChecked(e.target.checked)}
           />
 
-          <div className={styles['fakebox']}>
+          <div className={`
+            ${styles['display-checkbox']} 
+            ${checked && styles['checked']}
+          `}>
             <Checkmark state={checked} />
           </div>
           <span>

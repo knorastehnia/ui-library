@@ -5,6 +5,7 @@ import Button from './components/core/Button'
 import InputText from './components/core/InputText'
 import InputTextArea from './components/core/InputTextArea'
 import InputCheckbox from './components/core/InputCheckbox'
+import InputRadio from './components/core/InputRadio'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
 import Typography from './components/core/Typography'
@@ -183,6 +184,15 @@ const App = () => {
             <InputCheckbox name='firstcb'>Checkbox 1</InputCheckbox>
             <InputCheckbox name='secondcb'>Checkbox 2</InputCheckbox>
             <InputCheckbox name='thirdcb'>Checkbox 3</InputCheckbox>
+            <InputRadio type='vertical' name='rgroup1'>
+              <InputRadio.Option value='r1' name='r1'>Radio 1.1</InputRadio.Option>
+              <InputRadio.Option value='r2' name='r2'>Radio 1.2</InputRadio.Option>
+              <InputRadio.Option value='r3' name='r3'>Radio 1.3</InputRadio.Option>
+            </InputRadio>
+            <InputRadio name='rgroup2'>
+              <InputRadio.Option value='r1' name='r1'>A</InputRadio.Option>
+              <InputRadio.Option value='r2' name='r2'>B</InputRadio.Option>
+            </InputRadio>
           </Card>
         </div>
       </div>

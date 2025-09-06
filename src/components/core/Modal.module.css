@@ -9,6 +9,8 @@
   z-index: 1000;
   transition: all 0.5s var(--curve);
   
+  visibility: hidden;
+  user-select: none;
   pointer-events: none;
 
   .modal-bg {
@@ -26,6 +28,8 @@
   }
 
   &.open {
+    visibility: visible;
+    user-select: auto;
     pointer-events: all;
     backdrop-filter: blur(15px);
     background-color: #00000056;

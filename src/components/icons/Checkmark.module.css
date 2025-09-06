@@ -8,7 +8,7 @@
   path {
     stroke-dashoffset: 1;
     stroke-dasharray: 1;
-    stroke: var(--gray-9);
+    stroke: var(--gray-1);
   }
 
   .hidden {
@@ -16,7 +16,7 @@
   }
 
   .visible {
-    animation: appear var(--curve) 0.25s forwards;
+    animation: appear var(--curve) 0.25s 0.1s forwards;
   }
 }
 
