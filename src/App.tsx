@@ -20,14 +20,14 @@ const App = () => {
     <>
       <Header>
         <Dropdown label='Products'>
-          <a href="#">Item</a>
+          <Dropdown.Item>Dropdown Item</Dropdown.Item>
         </Dropdown>
 
         <Dropdown label='Services'>
-          <a href="#">Item</a>
+          <Dropdown.Item>Dropdown Item</Dropdown.Item>
           <hr />
-          <a href="#">Item</a>
-          <a href="#">Item</a>
+          <Dropdown.Item href='#'>Dropdown Item</Dropdown.Item>
+          <Dropdown.Item>Dropdown Item</Dropdown.Item>
         </Dropdown>
       </Header>
 
@@ -144,14 +144,14 @@ const App = () => {
                 gap: '15px',
               }}>
                 <Dropdown label='Expand'>
-                  <a href="#">Item</a>
+                  <Dropdown.Item>Dropdown Item</Dropdown.Item>
                   <hr />
-                  <a href="#">Item</a>
-                  <a href="#">Item</a>
+                  <Dropdown.Item>Dropdown Item</Dropdown.Item>
+                  <Dropdown.Item>Dropdown Item</Dropdown.Item>
                 </Dropdown>
 
                 <Dropdown label='Open Menu'>
-                  <a href="#">Item</a>
+                  <Dropdown.Item>Dropdown Item</Dropdown.Item>
                 </Dropdown>
               </div>
             </Card>

@@ -19,12 +19,14 @@
     transform: none;
   }
 
-  a, button {
+  .item {
     display: block;
     padding: 10px;
     color: var(--foreground);
     text-decoration: none;
+    text-align: left;
     width: 250px;
+    border: none;
     border-radius: calc(var(--border-radius) * 0.5);
     cursor: pointer;
     transition: all 0.5s var(--curve);

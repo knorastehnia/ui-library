@@ -8,7 +8,18 @@ interface DropdownProps {
   label: string,
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+interface DropdownItemProps {
+  children: React.ReactNode,
+  href?: string,
+  onClick?: Function,
+  disabled?: boolean,
+}
+
+type DropdownComponent = React.FC<DropdownProps> & {
+  Item: React.FC<DropdownItemProps>
+}
+
+const Dropdown: DropdownComponent = ({
   children,
   label,
 }) => {
@@ -62,5 +73,44 @@ const Dropdown: React.FC<DropdownProps> = ({
   )
 }
 
-export default Dropdown
+const DropdownItem: React.FC<DropdownItemProps> = ({
+  children,
+  href='',
+  onClick=(() => null),
+  disabled=false,
+}) => {
+  return (
+    <>
+      {href.length > 0
 
+      ?
+        <a
+          href={href}
+          onClick={(e) => !disabled && onClick(e)}
+          className={`
+            ${styles['item']} 
+            ${disabled && styles['disabled']}
+          `}
+        >
+          {children}
+        </a>
+      
+      :
+        <button
+          disabled={disabled}
+          onClick={(e) => !disabled && onClick(e)}
+          className={`
+            ${styles['item']} 
+            ${disabled && styles['disabled']}
+          `}
+        >
+          {children}
+        </button>
+      }
+    </>
+  )
+}
+
+Dropdown.Item = DropdownItem
+
+export default Dropdown
