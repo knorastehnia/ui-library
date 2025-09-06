@@ -8,11 +8,13 @@ import InputCheckbox from './components/core/InputCheckbox'
 import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
 import Typography from './components/core/Typography'
+import Modal from './components/core/Modal'
 
 import { useState } from 'react'
 
 const App = () => {
   const [someState, setSomeState] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <>
@@ -71,7 +73,7 @@ const App = () => {
               <Button>Button</Button>
               <Button href='#' size='l'>Button</Button>
 
-              <Button width='100%' size='m'>Button</Button>
+              <Button onClick={() => setShowModal(true)} width='100%' size='m'>Button</Button>
 
               <Button size='s' type='fill'>Button</Button>
               <Button type='fill'>Button</Button>
@@ -153,6 +155,28 @@ const App = () => {
                 </Dropdown>
               </div>
             </Card>
+
+            <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
+              <Typography role='h3' size='xs'>Modal component</Typography>
+
+              <Typography role='p'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
+                Facilis quaerat similique maxime atque consequatur alias est, autem 
+                obcaecati laboriosam mollitia harum, ad quia officia tempore 
+                doloremque saepe explicabo!
+              </Typography>
+
+              <div style={{
+                // width: '200px',
+                marginTop: '2rem',
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'space-between',
+              }}>
+                <Button onClick={() => setShowModal(false)} width='49%' type='fill'>Confirm</Button>
+                <Button onClick={() => setShowModal(false)} width='49%'>Cancel</Button>
+              </div>
+            </Modal>
           </div>
 
           <Card>
