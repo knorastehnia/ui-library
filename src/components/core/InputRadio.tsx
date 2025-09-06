@@ -72,12 +72,6 @@ const InputRadioOption: React.FC<InputRadioOptionProps> = ({
           onChange={() => setSelected!(name)}
         />
 
-        {/* <div className={`
-          ${styles['display-radio']} 
-          ${selected === name && styles['checked']}
-        `}>
-          <Checkmark state={selected === name} />
-        </div> */}
         <span>
           {children}
         </span>

@@ -168,7 +168,8 @@ const App = () => {
               </Typography>
 
               <div style={{
-                // width: '200px',
+                width: '200px',
+                marginLeft: 'auto',
                 marginTop: '2rem',
                 display: 'flex',
                 flexFlow: 'row nowrap',

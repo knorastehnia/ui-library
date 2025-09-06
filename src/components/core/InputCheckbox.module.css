@@ -37,11 +37,10 @@
 }
 
 .input:focus-visible + .checked {
-  outline: none;
   background-color: var(--gray-9) !important;
 }
 
 .input:hover + .checked {
   outline: none;
-  background-color: var(--foreground) !important;
+  background-color: var(--foreground);
 }
