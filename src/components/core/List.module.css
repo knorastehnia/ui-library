@@ -1,0 +1,26 @@
+.list-s, .list-m, .list-l {
+  border-radius: var(--border-radius);
+  overflow: clip;
+}
+
+.list-s {
+  .item { padding: 10px }
+}
+
+.list-m {
+  .item { padding: 15px }
+}
+
+.list-l {
+  .item { padding: 20px }
+}
+
+.divider {
+  width: 100%;
+  height: 0.8px;
+  background-color: var(--gray-1);
+
+  &:last-of-type {
+    background-color: transparent;
+  }
+}
