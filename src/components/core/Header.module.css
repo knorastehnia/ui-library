@@ -10,7 +10,7 @@
   color: var(--gray-9);
 }
 
-.header > div > div:nth-last-of-type(2) {
+.header > div > div:last-of-type {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;

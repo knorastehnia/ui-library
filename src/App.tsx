@@ -10,6 +10,7 @@ import Dropdown from './components/core/Dropdown'
 import Header from './components/core/Header'
 import Typography from './components/core/Typography'
 import Modal from './components/core/Modal'
+import List from './components/core/List'
 
 import { useState } from 'react'
 
@@ -196,6 +197,31 @@ const App = () => {
             </InputRadio>
           </Card>
         </div>
+      </div>
+
+      <div style={{
+        margin: '1rem 15rem',
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        alignItems: 'start',
+        gap: '2rem',
+      }}>
+        <List size='s'>
+          <List.Item>List item</List.Item>
+          <List.Item>List item</List.Item>
+          <List.Item>List item</List.Item>
+        </List>
+
+        <List>
+          <List.Item>List item</List.Item>
+          <List.Item>List item</List.Item>
+          <List.Item>List item</List.Item>
+        </List>
+
+        <List size='l'>
+          <List.Item>List item</List.Item>
+          <List.Item>List item</List.Item>
+        </List>
       </div>
 
       <div style={{

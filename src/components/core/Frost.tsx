@@ -87,16 +87,6 @@ const Frost: React.FC<FrostProps> = ({
         >
           {children}
         </div>
-
-        <div
-          className={styles['overlay']}
-          style={{
-            maskImage: `radial-gradient(
-              200px 200px at ${currentPos.x}px ${currentPos.y}px,
-              #00000006 0%, #00000000
-            )`
-          }}
-        ></div>
       </div>
     </>
   )
