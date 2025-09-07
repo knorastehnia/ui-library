@@ -1,6 +1,5 @@
 .list-s, .list-m, .list-l {
   border-radius: var(--border-radius);
-  overflow: clip;
 }
 
 .list-n {

@@ -5,6 +5,27 @@
   &.radius {
     border-radius: inherit;
   }
+
+  .left, .right {
+    position: absolute;
+    top: -30px;
+    width: 0.8px;
+    height: calc(100% + 60px);
+    background-color: var(--gray-1);
+  }
+
+  .top, .bottom {
+    position: absolute;
+    left: -30px;
+    width: calc(100% + 60px);
+    height: 0.8px;
+    background-color: var(--gray-1);
+  }
+
+  .left { left: 0 }
+  .right { right: 0; }
+  .top { top: 0 }
+  .bottom { bottom: 0 }
 }
 
 .border {
@@ -14,10 +35,9 @@
   border-radius: inherit;
   background-clip: content-box;
   
-  /* &.level-1 { background-color: var(--gray-9) }
+  &.level-1 { background-color: var(--gray-9) }
   &.level-2 { background-color: var(--gray-6) }
-  &.level-3 { background-color: var(--gray-3) } */
-  background-color: var(--gray-9);
+  &.level-3 { background-color: var(--gray-3) }
 }
 
 .content {
@@ -25,13 +45,4 @@
   width: 100%; height: 100%;
   border-radius: inherit;
   background-color: var(--background);
-}
-
-.overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border-radius: inherit;
-  background-color: var(--overlay);
-  pointer-events: none;
 }

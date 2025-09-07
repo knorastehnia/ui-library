@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Frost.module.css'
 
 interface FrostProps {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   level: number,
   radius?: boolean,
   all?: boolean,
@@ -67,7 +67,6 @@ const Frost: React.FC<FrostProps> = ({
           paddingRight: right ? '0.8px' : '0',
         }}
       >
-
         <div
           className={`
             ${styles['border']} 
