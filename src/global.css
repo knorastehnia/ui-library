@@ -7,10 +7,6 @@
   --gray-6: #555;
   --gray-9: #888;
 
-  /* --border-dynamic: #ccc; */
-  /* --border-dynamic: hsl(34, 42%, 86%); */
-  /* --border-dynamic: hsl(90, 42%, 86%); */
-
   --background: #fff;
   --foreground: #363636;
   --overlay: #000;
@@ -18,6 +14,8 @@
   --gray-3: #aaa;
   --gray-6: #999;
   --gray-9: #777;
+
+  --accent: hsl(120, 42%, 50%);
 
   --error: #ec0000;
   --border-radius: 0px;
@@ -31,11 +29,6 @@
 }
 
 html {
-  /* font-size: 15px; */
-  
-  /* pointer-events: none;
-  cursor: none; */
-  
   scroll-behavior: smooth;
 }
 

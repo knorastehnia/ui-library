@@ -76,7 +76,7 @@ const Frost: React.FC<FrostProps> = ({
           style={{
             maskImage: `radial-gradient(
               200px 200px at ${currentPos.x}px ${currentPos.y}px,
-              #00000085 0%, #000000${(level + 1) * 10}
+              #00000095 0%, #000000${(level + 1) * 10}
             )`
           }}
         ></div>
