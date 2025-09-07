@@ -8,7 +8,7 @@ interface ListItemProps {
 interface ListProps {
   children: React.ReactNode,
   width?: string,
-  size?: 's' | 'm' | 'l',
+  size?: 'n' | 's' | 'm' | 'l',
 }
 
 type ListComponent = React.FC<ListProps> & {

@@ -11,6 +11,7 @@ import Header from './components/core/Header'
 import Typography from './components/core/Typography'
 import Modal from './components/core/Modal'
 import List from './components/core/List'
+import Accordion from './components/core/Accordion'
 
 import { useState } from 'react'
 
@@ -222,6 +223,31 @@ const App = () => {
           <List.Item>List item</List.Item>
           <List.Item>List item</List.Item>
         </List>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '5rem 0',
+      }}>
+        <Accordion width='500px'>
+          <Accordion.Item label='Accordion Item'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+            corporis consequuntur porro suscipit inventore atque cupiditate 
+            quos beatae, officia deserunt esse praesentium fugiat adipisci 
+            optio unde voluptates saepe similique veniam!
+          </Accordion.Item>
+
+          <Accordion.Item label='Accordion Item'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+            Atque, est dicta, eaque adipisci.
+          </Accordion.Item>
+
+          <Accordion.Item label='Accordion Item'>
+            Lorem, ipsum dolor sit amet.
+          </Accordion.Item>
+        </Accordion>
       </div>
 
       <div style={{
