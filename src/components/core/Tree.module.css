@@ -44,4 +44,9 @@
     filter: none;
     margin: 5px 0 5px 10px;
   }
+
+  &:not(.open) * {
+    visibility: hidden;
+  }
+
 }
