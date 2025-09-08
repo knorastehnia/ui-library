@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({
         className={styles['card']}
         style={{ width, height }}
       >
-        <Frost padding='30px 20px' all radius level={2}>
+        <Frost padding='20px' all radius level={2}>
           {children}
         </Frost>
       </div>

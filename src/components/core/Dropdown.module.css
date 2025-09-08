@@ -38,9 +38,8 @@
   }
 
   hr {
-    margin: 10px auto;
     height: 0.8px;
-    width: calc(100% - 50px);
+    width: 100%;
     border: none;
     background-color: var(--gray-1);
   }

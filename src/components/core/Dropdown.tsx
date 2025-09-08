@@ -64,7 +64,7 @@ const Dropdown: DropdownComponent = ({
             ${isOpen && styles['dropdown-visible']}
           `}
         >
-          <Frost padding='15px 10px' all radius level={3}>
+          <Frost all radius level={3}>
             {children}
           </Frost>
         </div>

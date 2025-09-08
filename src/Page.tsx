@@ -213,19 +213,25 @@ const Page = () => {
         }}>
           <Accordion size='s' width='500px'>
             <Accordion.Item label='Accordion Item'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-              corporis consequuntur porro suscipit inventore atque cupiditate 
-              quos beatae, officia deserunt esse praesentium fugiat adipisci 
-              optio unde voluptates saepe similique veniam!
+              <Typography role='p'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                corporis consequuntur porro suscipit inventore atque cupiditate 
+                quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                optio unde voluptates saepe similique veniam!
+              </Typography>
             </Accordion.Item>
 
             <Accordion.Item label='Accordion Item'>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-              Atque, est dicta, eaque adipisci.
+              <Typography role='p'>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                Atque, est dicta, eaque adipisci.
+              </Typography>
             </Accordion.Item>
 
             <Accordion.Item label='Accordion Item'>
-              Lorem, ipsum dolor sit amet.
+              <Typography role='p'>
+                Lorem, ipsum dolor sit amet.
+              </Typography>
             </Accordion.Item>
           </Accordion>
         </div>
