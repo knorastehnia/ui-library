@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 interface TreeItemProps {
   children: React.ReactNode,
+  href: string,
 }
 
 interface TreeBranchProps {
@@ -23,12 +24,13 @@ type TreeComponent = React.FC<TreeProps> & {
 
 const TreeItem: React.FC<TreeItemProps> = ({
   children,
+  href,
 }) => {
   return (
     <>
-      <button className={styles['item']}>
+      <a href={href} className={styles['item']}>
         {children}
-      </button>
+      </a>
     </>
   )
 }

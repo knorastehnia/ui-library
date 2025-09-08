@@ -9,29 +9,33 @@ const App = () => {
     <>
       <Layout>
         <Layout.Sidebar>
+          <Tree.Item href='#'>Top Level Item</Tree.Item>
+          <Tree.Item href='#'>Top Level Item</Tree.Item>
+          <Tree.Item href='#'>Top Level Item</Tree.Item>
+
           <Tree>
             <Tree.Branch label='Tree Branch'>
-              <Tree.Item>Tree Item</Tree.Item>
-              <Tree.Item>Tree Item</Tree.Item>
-              <Tree.Item>Tree Item</Tree.Item>
-              <Tree.Item>Tree Item</Tree.Item>
+              <Tree.Item href='#'>Tree Item</Tree.Item>
+              <Tree.Item href='#'>Tree Item</Tree.Item>
+              <Tree.Item href='#'>Tree Item</Tree.Item>
+              <Tree.Item href='#'>Tree Item</Tree.Item>
             </Tree.Branch>
 
             <Tree.Branch label='Tree Branch'>
               <Tree.Branch label='Tree Branch'>
                 <Tree.Branch label='Tree Branch'>
-                  <Tree.Item>Tree Item</Tree.Item>
-                  <Tree.Item>Tree Item</Tree.Item>
-                  <Tree.Item>Tree Item</Tree.Item>
+                  <Tree.Item href='#'>Tree Item</Tree.Item>
+                  <Tree.Item href='#'>Tree Item</Tree.Item>
+                  <Tree.Item href='#'>Tree Item</Tree.Item>
                 </Tree.Branch>
 
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
-                <Tree.Item>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item href='#'>Tree Item</Tree.Item>
               </Tree.Branch>
             </Tree.Branch>
           </Tree>

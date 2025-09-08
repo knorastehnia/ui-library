@@ -5,6 +5,7 @@
   justify-content: start;
   gap: 10px;
 
+  font-size: 0.95rem;
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
@@ -25,6 +26,7 @@
 }
 
 .item {
+  text-decoration: none;
   color: var(--foreground);
 }
 
