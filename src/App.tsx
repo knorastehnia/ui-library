@@ -41,7 +41,9 @@ const App = () => {
           </Tree>
         </Layout.Sidebar>
         <Layout.Content>
-          <Layout.Header>Header</Layout.Header>
+          <Layout.Header>
+            <div>Header</div>
+          </Layout.Header>
           <Page />
         </Layout.Content>
       </Layout>

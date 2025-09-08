@@ -78,14 +78,16 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div className={styles['sidebar']}>
-        <div className={styles['sidebar-header']}>
-          <Frost padding='10px' right bottom level={1}></Frost>
-        </div>
+        <div className={styles['sidebar-fixed']}>
+          <div className={styles['sidebar-header']}>
+            <Frost padding='10px' right bottom level={1}></Frost>
+          </div>
 
-        <div className={styles['sidebar-content']}>
-          <Frost padding='10px' right level={1}>
-            {children}
-          </Frost>
+          <div className={styles['sidebar-content']}>
+            <Frost padding='10px' right level={1}>
+              {children}
+            </Frost>
+          </div>
         </div>
       </div>
     </>
