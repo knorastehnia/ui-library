@@ -1,34 +1,15 @@
-.accordion-n {
-  .button { padding: 0px }
-  .content { margin: 0 }
-}
-
-.accordion-s {
-  .button { padding: 10px }
-  .content { margin: 0px 10px }
-}
-
-.accordion-m {
-  .button { padding: 15px }
-  .content { margin: 0px 15px }
-}
-
-.accordion-l {
-  .button { padding: 20px }
-  .content { margin: 0px 20px }
-}
-
-.button {
+.branch, .item {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   gap: 10px;
 
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
   border-radius: calc(var(--border-radius) * 0.5);
+  padding: 5px 0 5px 15px;
   width: 100%;
   transition: all 0.5s var(--curve);
 
@@ -43,17 +24,22 @@
   }
 }
 
+.item {
+  color: var(--foreground);
+}
+
 .content {
   overflow: hidden;
-  height: 0;
-  margin: 0 10px;
-  filter: blur(5px);
+  height: auto;
+  margin: 0 0 0 10px;
+  filter: blur(10px);
   visibility: hidden;
+  border-left: 1px solid var(--gray-1);
   transition: all 0.5s var(--curve);
 
   &.open {
     visibility: visible;
     filter: none;
-    margin-top: 10px;
+    margin: 5px 0 5px 10px;
   }
 }

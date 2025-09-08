@@ -1,8 +1,6 @@
 .svg {
   pointer-events: none;
   display: block;
-  width: 0.8rem;
-  height: 0.8rem;
 
   path {
     stroke: var(--gray-9);

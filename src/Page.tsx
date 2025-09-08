@@ -208,8 +208,8 @@ const Page = () => {
         <div style={{
           display: 'flex',
           marginTop: '5rem',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: 'space-evenly',
+          alignItems: 'start',
         }}>
           <Accordion size='s' width='500px'>
             <Accordion.Item label='Accordion Item'>

@@ -1,9 +1,23 @@
 import styles from './Arrow.module.css'
 
-const Arrow: React.FC<{state?: boolean}> = ({ state=false }) => {
+interface ArrowProps {
+  state?: boolean,
+  width?: string,
+  height?: string,
+}
+
+const Arrow: React.FC<ArrowProps> = ({
+  state=false,
+  width='0.7rem',
+  height='0.7rem',
+}) => {
   return (
     <>
       <svg
+        style={{
+          width,
+          height,
+        }}
         className={styles['svg']}
         viewBox="0 0 11 6"
         fill="none"
