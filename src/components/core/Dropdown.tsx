@@ -1,6 +1,5 @@
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
-import Frost from './Frost'
 import { useEffect, useRef, useState } from 'react'
 
 interface DropdownProps {
@@ -64,9 +63,7 @@ const Dropdown: DropdownComponent = ({
             ${isOpen && styles['dropdown-visible']}
           `}
         >
-          <Frost all radius level={3}>
-            {children}
-          </Frost>
+          {children}
         </div>
       </div>
     </>

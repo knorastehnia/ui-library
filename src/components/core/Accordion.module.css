@@ -28,7 +28,6 @@
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
-  border-radius: calc(var(--border-radius) * 0.5);
   width: 100%;
   transition: all 0.5s var(--curve);
 

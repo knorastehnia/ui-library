@@ -1,5 +1,4 @@
 import styles from './List.module.css'
-import Frost from './Frost'
 
 interface ListItemProps {
   children: React.ReactNode,
@@ -39,9 +38,7 @@ const List: ListComponent = ({
           width
         }}
       >
-        <Frost all radius level={3}>
           {children}
-        </Frost>
       </div>
     </>
   )

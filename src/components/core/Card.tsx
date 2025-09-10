@@ -1,4 +1,3 @@
-import Frost from './Frost'
 import styles from './Card.module.css'
 
 interface CardProps {
@@ -18,9 +17,7 @@ const Card: React.FC<CardProps> = ({
         className={styles['card']}
         style={{ width, height }}
       >
-        <Frost padding='20px' all radius level={2}>
-          {children}
-        </Frost>
+        {children}
       </div>
     </>
   )

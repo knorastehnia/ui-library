@@ -7,32 +7,12 @@
   margin: 5px 0;
   display: flex;
   flex-flow: row nowrap;
-
-  .label:first-of-type {
-    border-top-left-radius: calc(var(--border-radius) * 0.5);
-    border-bottom-left-radius: calc(var(--border-radius) * 0.5);
-  }
-
-  .label:last-of-type {
-    border-top-right-radius: calc(var(--border-radius) * 0.5);
-    border-bottom-right-radius: calc(var(--border-radius) * 0.5);
-  }
 }
 
 .radio-vertical {
   margin: 5px 0;
   display: flex;
   flex-flow: column nowrap;
-
-  .label:first-of-type {
-    border-top-left-radius: calc(var(--border-radius) * 0.5);
-    border-top-right-radius: calc(var(--border-radius) * 0.5);
-  }
-
-  .label:last-of-type {
-    border-bottom-left-radius: calc(var(--border-radius) * 0.5);
-    border-bottom-right-radius: calc(var(--border-radius) * 0.5);
-  }
 }
 
 .label {

@@ -20,7 +20,7 @@ const Page = () => {
 
   return (
     <>
-      <Layout.Section bottom>
+      <Layout.Section>
         <div
           className='bg'
           style={{
@@ -180,26 +180,15 @@ const Page = () => {
         </div>
       </Layout.Section>
 
-      <Layout.Section bottom>
+      <Layout.Section>
         <div style={{
           display: 'flex',
           flexFlow: 'row nowrap',
           alignItems: 'start',
           gap: '2rem',
         }}>
-          <List size='s'>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-          </List>
-
-          <List>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-          </List>
-
           <List size='l'>
+            <List.Item>List item</List.Item>
             <List.Item>List item</List.Item>
             <List.Item>List item</List.Item>
           </List>
@@ -211,7 +200,7 @@ const Page = () => {
           justifyContent: 'space-evenly',
           alignItems: 'start',
         }}>
-          <Accordion size='s' width='500px'>
+          <Accordion size='l'>
             <Accordion.Item label='Accordion Item'>
               <Typography role='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 

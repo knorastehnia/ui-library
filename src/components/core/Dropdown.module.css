@@ -1,7 +1,6 @@
 .dropdown {
   position: absolute;
   margin-top: 5px;
-  border-radius: calc(var(--border-radius) * 0.75);
 
   visibility: hidden;
   filter: blur(10px);
@@ -27,7 +26,6 @@
     text-align: left;
     width: 250px;
     border: none;
-    border-radius: calc(var(--border-radius) * 0.5);
     cursor: pointer;
     transition: all 0.5s var(--curve);
     
@@ -55,7 +53,6 @@
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
-  border-radius: calc(var(--border-radius) * 0.5);
   padding: 10px;
   width: 150px;
   transition: all 0.5s var(--curve);

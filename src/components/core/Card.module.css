@@ -1,4 +1,5 @@
 .card {
   position: relative;
-  border-radius: var(--border-radius);
+  padding: 40px;
+  background-color: var(--background);
 }

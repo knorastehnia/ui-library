@@ -40,10 +40,12 @@ const App = () => {
             </Tree.Branch>
           </Tree>
         </Layout.Sidebar>
+
+        <Layout.Header fixed>
+          <div>Header</div>
+        </Layout.Header>
+
         <Layout.Content>
-          <Layout.Header>
-            <div>Header</div>
-          </Layout.Header>
           <Page />
         </Layout.Content>
       </Layout>

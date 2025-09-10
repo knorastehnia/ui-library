@@ -1,10 +1,7 @@
 import styles from './Layout.module.css'
-import Frost from './Frost'
 
 interface SectionProps {
   children: React.ReactNode,
-  top?: boolean,
-  bottom?: boolean,
 }
 
 interface ContentProps {
@@ -13,6 +10,7 @@ interface ContentProps {
 
 interface HeaderProps {
   children: React.ReactNode,
+  fixed?: boolean,
 }
 
 interface SidebarProps {
@@ -30,17 +28,13 @@ type LayoutComponent = React.FC<LayoutProps> & {
   Section: React.FC<SectionProps>,
 }
 
-const Section: React.FC<SectionProps> =({
+const Section: React.FC<SectionProps> = ({
   children,
-  top=false,
-  bottom=false,
 }) => {
   return(
     <>
       <section className={styles['section']}>
-        <Frost padding='80px' top={top} bottom={bottom} level={2}>
-          {children}
-        </Frost>
+        {children}
       </section>
     </>
   )
@@ -60,13 +54,17 @@ const Content: React.FC<ContentProps> = ({
 
 const Header: React.FC<HeaderProps> = ({
   children,
+  fixed=false,
 }) => {
   return (
     <>
-      <header className={styles['header']}>
-        <Frost padding='10px' bottom level={1}>
-          {children}
-        </Frost>
+      <header
+        className={styles['header']}
+        style={{
+          position: fixed ? 'fixed' : 'static'
+        }}
+      >
+        {children}
       </header>
     </>
   )
@@ -80,13 +78,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className={styles['sidebar']}>
         <div className={styles['sidebar-fixed']}>
           <div className={styles['sidebar-header']}>
-            <Frost padding='10px' right bottom level={1}></Frost>
           </div>
 
           <div className={styles['sidebar-content']}>
-            <Frost padding='10px' right level={1}>
               {children}
-            </Frost>
           </div>
         </div>
       </div>

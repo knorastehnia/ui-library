@@ -4,13 +4,14 @@
   align-items: center;
   justify-content: start;
   gap: 10px;
+  /* margin-bottom: 5px; */
 
   font-size: 0.95rem;
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
   border-radius: calc(var(--border-radius) * 0.5);
-  padding: 5px 0 5px 15px;
+  padding: 10px 0 10px 10px;
   width: 100%;
   transition: all 0.5s var(--curve);
 
