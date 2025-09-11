@@ -1,5 +1,6 @@
 .list-s, .list-m, .list-l {
   border-radius: var(--border-radius);
+  color: var(--foreground);
 }
 
 .list-n {

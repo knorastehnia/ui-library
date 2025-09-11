@@ -1,6 +1,8 @@
 .dropdown {
   position: absolute;
   margin-top: 5px;
+  background-color: var(--background);
+  border: 1px solid var(--gray-1);
 
   visibility: hidden;
   filter: blur(10px);

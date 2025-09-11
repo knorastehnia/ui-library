@@ -9,7 +9,6 @@
 }
 
 .header {
-  position: fixed;
   border-bottom: 1px solid var(--gray-1);
   padding: 0 20px;
   right: 0;
@@ -19,17 +18,17 @@
   z-index: 100;
 
   color: var(--gray-9);
-
   background-color: var(--background);
+
   display: flex;
   align-items: center;
 }
 
-.sidebar {
+.sidebar-container {
   width: 250px;
   flex: none;
   
-  .sidebar-fixed {
+  .sidebar {
     position: fixed;
   }
   

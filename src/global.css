@@ -8,14 +8,14 @@
   --gray-9: #888; */
 
   --background: #fff;
-  --foreground: #000;
+  --foreground: #222;
   --overlay: #000;
-  --gray-1: #ddd;
+  --gray-1: #eee;
   --gray-3: #aaa;
   --gray-6: #999;
   --gray-9: #555;
 
-  --accent: hsl(120, 42%, 50%);
+  --accent: hsl(218, 84%, 57%);
 
   --error: #ec0000;
 

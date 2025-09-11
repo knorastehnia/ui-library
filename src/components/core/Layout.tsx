@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({
       <header
         className={styles['header']}
         style={{
-          position: fixed ? 'fixed' : 'static'
+          position: fixed ? 'fixed' : 'static',
         }}
       >
         {children}
@@ -75,8 +75,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   return (
     <>
-      <div className={styles['sidebar']}>
-        <div className={styles['sidebar-fixed']}>
+      <div className={styles['sidebar-container']}>
+        <div className={styles['sidebar']}>
           <div className={styles['sidebar-header']}>
           </div>
 
