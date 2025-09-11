@@ -7,7 +7,6 @@ interface ListItemProps {
 interface ListProps {
   children: React.ReactNode,
   width?: string,
-  size?: 'n' | 's' | 'm' | 'l',
 }
 
 type ListComponent = React.FC<ListProps> & {
@@ -28,12 +27,11 @@ const ListItem: React.FC<ListItemProps> = ({
 const List: ListComponent = ({
   children,
   width='100%',
-  size='m',
 }) => {
   return (
     <>
       <div
-        className={styles[`list-${size}`]}
+        className={styles['list']}
         style={{
           width
         }}

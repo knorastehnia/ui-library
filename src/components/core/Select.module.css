@@ -1,51 +1,58 @@
-.input-container {
-  margin-bottom: 25px;
-}
-
-.input-field {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  border: 1px solid var(--gray-1);
-  transition: all 0.5s var(--curve);
-}
-
-.input-active {
-  border-color: var(--gray-3);
-}
-
-.label {
-  pointer-events: none;
-  display: block;
+.select {
   position: absolute;
-  top: 0; left: 0;
-  transform: translate(10px, 10px);
-  color: var(--gray-9);
-  background-color: var(--background);
-  padding: 0 5px;
-  border-radius: 999px;
+  margin-top: 5px;
+  background-color: var(--foreground);
+  border-radius: 4px;
+  overflow: clip;
+
+  visibility: hidden;
+  filter: blur(5px);
+  opacity: 0;
+
   transition: all 0.5s var(--curve);
-}
+  z-index: 200;
 
-.label-active {
-  transform: translate(10px, -10px);
-  font-size: 0.9rem;
-}
-
-.input {
-  width: 100%;
-  color: var(--foreground);
-  padding: 10px 15px;
-  border: none;
-  transition: all 0.5s var(--curve), height 0.25s var(--curve);
-
-  &:focus {
-    outline: none;
+  &.select-visible {
+    visibility: visible;
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 
-  &:autofill {
-    z-index: 2;
+  .item {
+    display: block;
+    padding: 10px;
+    color: var(--background);
+    text-decoration: none;
+    text-align: left;
+    width: 150px;
+    border: none;
+    transition: all 0.5s var(--curve);
+    
+    &:hover, &:focus-visible {
+      outline: none;
+      background-color: var(--gray-9);
+    }
+  }
+}
+
+.button {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  
+  color: var(--gray-9);
+  background-color: var(--background);
+  border: 1px solid var(--gray-1);
+  border-radius: 4px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s var(--curve);
+  
+  &:hover, &:focus, &.button-active {
+    outline: none;
+    background-color: var(--gray-1);
   }
 }

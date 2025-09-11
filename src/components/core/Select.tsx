@@ -1,57 +1,113 @@
-import { useState } from 'react'
 import styles from './Select.module.css'
+import Arrow from '../icons/Arrow'
+import { useEffect, useRef, useState } from 'react'
 
 interface SelectProps {
   children: React.ReactNode,
-  name: string,
-  width?: string,
+  label: string,
+}
+
+interface SelectItemProps {
+  children: React.ReactNode,
+  href?: string,
+  onClick?: Function,
   disabled?: boolean,
 }
 
-const Select: React.FC<SelectProps> = ({
+type SelectComponent = React.FC<SelectProps> & {
+  Item: React.FC<SelectItemProps>
+}
+
+const Select: SelectComponent = ({
   children,
-  name,
-  width='100%',
-  disabled=false,
+  label,
 }) => {
-  const [focus, setFocus] = useState(false)
-  const [value, setValue] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+  const buttonRef = useRef(null)
+
+  const closeSelect = (event: MouseEvent) => {
+    const btn = buttonRef.current as HTMLButtonElement | null;
+    if (!btn) return
+
+    if (event.target !== btn && !btn.contains(event.target as Node)) {
+      setIsOpen(prev => {
+        if (prev) return false
+        return prev
+      })
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', closeSelect)
+    
+    return () => document.removeEventListener('click', closeSelect)
+  }, [])
 
   return (
     <>
-      <div
-        className={styles[`input-container`]}
-        style={{ width }}
-      >
-        <div className={`
-          ${styles['input-field']} 
-          ${
-            focus ? styles['input-active'] : ''
-          }
-        `}>
-          <label
-            className={`
-              ${styles['label']} 
-              ${(focus || value) && styles['label-active']}
-            `}
-            htmlFor={name}
-          >
-            {children}
-          </label>
+      <div ref={buttonRef} style={{width: 'fit-content'}}>
+        <button
+          className={`
+            ${styles['button']} 
+            ${isOpen && styles['button-active']}
+          `}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {label}
+          <Arrow state={isOpen} />
+        </button>
 
-          <input
-            className={styles['input']}
-            onFocus={() => setFocus(true)}
-            onBlur={() => { setFocus(false) }}
-            onChange={(e) => setValue(e.target.value)}
-            name={name}
-            id={name}
-            disabled={disabled}
-          />
+        <div
+          className={`
+            ${styles['select']} 
+            ${isOpen && styles['select-visible']}
+          `}
+        >
+          {children}
         </div>
       </div>
     </>
   )
 }
+
+const SelectItem: React.FC<SelectItemProps> = ({
+  children,
+  href='',
+  onClick=(() => null),
+  disabled=false,
+}) => {
+  return (
+    <>
+      {href.length > 0
+
+      ?
+        <a
+          href={href}
+          onClick={(e) => !disabled && onClick(e)}
+          className={`
+            ${styles['item']} 
+            ${disabled && styles['disabled']}
+          `}
+        >
+          {children}
+        </a>
+      
+      :
+        <button
+          disabled={disabled}
+          onClick={(e) => !disabled && onClick(e)}
+          className={`
+            ${styles['item']} 
+            ${disabled && styles['disabled']}
+          `}
+        >
+          {children}
+        </button>
+      }
+    </>
+  )
+}
+
+Select.Item = SelectItem
 
 export default Select

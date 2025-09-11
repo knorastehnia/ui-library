@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from 'react'
 interface AccordionProps {
   children: React.ReactNode,
   width?: string,
-  size?: 'n' | 's' | 'm' | 'l',
 }
 
 interface AccordionItemProps {
@@ -63,12 +62,11 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 const Accordion: AccordionComponent = ({
   children,
   width='100%',
-  size='m',
 }) => {
   return (
     <>
-      <div className={styles[`accordion-${size}`]}>
-        <List size='n' width={width}>
+      <div className={styles['accordion']}>
+        <List width={width}>
           {children}
         </List>
       </div>

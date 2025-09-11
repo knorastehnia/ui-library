@@ -1,22 +1,31 @@
 .radio-horizontal, .radio-vertical {
   width: fit-content;
   background-color: var(--background);
+  border: 1px solid var(--gray-1);
+  border-radius: 4px;
+  overflow: clip;
 }
 
 .radio-horizontal {
   margin: 5px 0;
   display: flex;
   flex-flow: row nowrap;
+
+  .label { border-right: 1px solid var(--gray-1) }
+  .label:last-child { border: none }
 }
 
 .radio-vertical {
   margin: 5px 0;
   display: flex;
   flex-flow: column nowrap;
+
+  .label { border-bottom: 1px solid var(--gray-1) }
+  .label:last-child { border: none }
 }
 
 .label {
-  cursor: pointer;
+  cursor: default;
   position: relative;
   width: fit-content;
   display: flex;
@@ -25,7 +34,7 @@
   justify-content: space-between;
   gap: 10px;
 
-  border: 1px solid var(--gray-1);
+  /* border: 1px solid var(--gray-1); */
   padding: 5px 20px;
   transition: all 0.5s var(--curve);
 

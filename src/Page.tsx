@@ -2,6 +2,7 @@ import Card from './components/core/Card'
 import Button from './components/core/Button'
 import Field from './components/core/Field'
 import TextArea from './components/core/TextArea'
+import Select from './components/core/Select'
 import Checkbox from './components/core/Checkbox'
 import Radio from './components/core/Radio'
 import Dropdown from './components/core/Dropdown'
@@ -22,161 +23,144 @@ const Page = () => {
     <>
       <Layout.Section>
         <div
-          className='bg'
           style={{
+            width: '100%',
             display: 'flex',
-            flexFlow: 'row nowrap',
-            gap: '30px',
-            justifyContent: 'center',
-            alignItems: 'start',
+            alignItems: 'center',
+            flexFlow: 'column',
+            gap: '100px',
           }}
         >
-          <div
-            style={{
-              width: '500px',
-              margin: '0',
+          <Card width='500px'>
+            <div style={{
               display: 'flex',
-              flexFlow: 'column',
-              gap: '30px',
-            }}
-          >
-            <Card>
-              <div style={{
-                display: 'flex',
-                flexFlow: 'row wrap',
-                alignItems: 'center',
-                gap: '20px',
-              }}>
-                <Button
-                  size='l'
-                  type='text'
-                  href='#'
-                  onClick={() => null}
-                  // disabled
-                >Link to homepage</Button>
-
-                <Button width='100%' disabled size='m'>Button</Button>
-
-                <Button size='s'>Button</Button>
-                <Button>Button</Button>
-                <Button href='#' size='l'>Button</Button>
-
-                <Button onClick={() => setShowModal(true)} width='100%' size='m'>Button</Button>
-
-                <Button size='s' type='fill'>Button</Button>
-                <Button type='fill'>Button</Button>
-                <Button type='fill' href='#' size='l'>Button</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <div>
-                <Typography role='h2' size='s'>Some Form</Typography>
-              </div>
-
-              <div style={{
-                display: 'flex',
-                gap: '15px',
-                width: '100%',
-              }}>
-                <Field
-                  width='150px'
-                  type='number'
-                  name='input1'
-                  limit={12}
-                  errors={[
-                    {message: 'This is a custom error message.', failState: someState},
-                  ]}
-                >
-                  Street No.
-                </Field>
-
-                <Field name='input2'>Street Name</Field>
-              </div>
-
-              <Field type='email' name='test'>Email</Field>
-              <Field type='password' name='password'>Password</Field>
+              flexFlow: 'row wrap',
+              alignItems: 'center',
+              gap: '20px',
+            }}>
               <Button
-                onClick={() => setSomeState(!someState)}
-                size='m'
-                type='fill'
-                width='100%'
-              >
-                Submit
-              </Button>
-            </Card>
-          </div>
+                size='l'
+                type='text'
+                href='#'
+                onClick={() => null}
+                // disabled
+              >Link to homepage</Button>
 
-          <div
-            style={{
-              width: '500px',
-              margin: '0',
-              display: 'flex',
-              flexFlow: 'column',
-              gap: '30px',
-            }}
-          >
-            <div style={{zIndex: 10}}>
-              <Card>
-                <TextArea limit={200} height={200} name='sta'>Static</TextArea>
-                <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
-                <div style={{
-                  display: 'flex',
-                  flexFlow: 'row',
-                  gap: '15px',
-                }}>
-                  <Dropdown label='Expand'>
-                    <Dropdown.Item>Dropdown Item</Dropdown.Item>
-                    <hr />
-                    <Dropdown.Item>Dropdown Item</Dropdown.Item>
-                    <Dropdown.Item>Dropdown Item</Dropdown.Item>
-                  </Dropdown>
+              <Button width='100%' disabled size='m'>Button</Button>
 
-                  <Dropdown label='Open Menu'>
-                    <Dropdown.Item>Dropdown Item</Dropdown.Item>
-                  </Dropdown>
-                </div>
-              </Card>
+              <Button size='s'>Button</Button>
+              <Button>Button</Button>
+              <Button href='#' size='l'>Button</Button>
 
-              <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
-                <Typography role='h3' size='xs'>Modal component</Typography>
+              <Button onClick={() => setShowModal(true)} width='100%' size='m'>Button</Button>
 
-                <Typography role='p'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
-                  Facilis quaerat similique maxime atque consequatur alias est, autem 
-                  obcaecati laboriosam mollitia harum, ad quia officia tempore 
-                  doloremque saepe explicabo!
-                </Typography>
+              <Button size='s' type='fill'>Button</Button>
+              <Button type='fill'>Button</Button>
+              <Button type='fill' href='#' size='l'>Button</Button>
+            </div>
+          </Card>
 
-                <div style={{
-                  width: '200px',
-                  marginLeft: 'auto',
-                  marginTop: '2rem',
-                  display: 'flex',
-                  flexFlow: 'row nowrap',
-                  justifyContent: 'space-between',
-                }}>
-                  <Button onClick={() => setShowModal(false)} width='49%' type='fill'>Confirm</Button>
-                  <Button onClick={() => setShowModal(false)} width='49%'>Cancel</Button>
-                </div>
-              </Modal>
+          <Card width='500px'>
+            <div>
+              <Typography role='h2' size='s'>Some Form</Typography>
             </div>
 
-            <Card>
-              <Checkbox name='firstcb'>Checkbox 1</Checkbox>
-              <Checkbox name='secondcb'>Checkbox 2</Checkbox>
-              <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
-              <Radio type='vertical' name='rgroup1'>
-                <Radio.Option value='r1' name='r1'>Radio 1.1</Radio.Option>
-                <Radio.Option value='r2' name='r2'>Radio 1.2</Radio.Option>
-                <Radio.Option value='r3' name='r3'>Radio 1.3</Radio.Option>
-              </Radio>
-              <Radio name='rgroup2'>
-                <Radio.Option value='r1' name='r1'>A</Radio.Option>
-                <Radio.Option value='r2' name='r2'>B</Radio.Option>
-              </Radio>
-            </Card>
-          </div>
+            <div style={{
+              display: 'flex',
+              gap: '15px',
+              width: '100%',
+            }}>
+              <Field
+                width='150px'
+                type='number'
+                name='input1'
+                limit={12}
+                errors={[
+                  {message: 'This is a custom error message.', failState: someState},
+                ]}
+              >
+                Street No.
+              </Field>
+
+              <Field name='input2'>Street Name</Field>
+            </div>
+
+            <Field type='email' name='test'>Email</Field>
+            <Field type='password' name='password'>Password</Field>
+            <Button
+              onClick={() => setSomeState(!someState)}
+              size='m'
+              type='fill'
+              width='100%'
+            >
+              Submit
+            </Button>
+          </Card>
+
+          <Card width='750px'>
+            <TextArea limit={200} height={200} name='sta'>Static</TextArea>
+            <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
+            <div style={{
+              display: 'flex',
+              flexFlow: 'row',
+              gap: '15px',
+            }}>
+              <Dropdown label='Expand'>
+                <Dropdown.Item>Dropdown Item</Dropdown.Item>
+                <hr />
+                <Dropdown.Item>Dropdown Item</Dropdown.Item>
+                <Dropdown.Item>Dropdown Item</Dropdown.Item>
+              </Dropdown>
+
+              <Dropdown label='Open Menu'>
+                <Dropdown.Item>Dropdown Item</Dropdown.Item>
+              </Dropdown>
+
+              <Select label='Select'>
+                <Select.Item>Select Item</Select.Item>
+                <Select.Item>Select Item</Select.Item>
+                <Select.Item>Select Item</Select.Item>
+              </Select>
+            </div>
+          </Card>
+
+          <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
+            <Typography role='h3' size='xs'>Modal component</Typography>
+
+            <Typography role='p'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
+              Facilis quaerat similique maxime atque consequatur alias est, autem 
+              obcaecati laboriosam mollitia harum, ad quia officia tempore 
+              doloremque saepe explicabo!
+            </Typography>
+
+            <div style={{
+              width: '200px',
+              marginLeft: 'auto',
+              marginTop: '2rem',
+              display: 'flex',
+              flexFlow: 'row nowrap',
+              justifyContent: 'space-between',
+            }}>
+              <Button onClick={() => setShowModal(false)} width='49%' type='fill'>Confirm</Button>
+              <Button onClick={() => setShowModal(false)} width='49%'>Cancel</Button>
+            </div>
+          </Modal>
+
+          <Card width='750px'>
+            <Checkbox name='firstcb'>Checkbox 1</Checkbox>
+            <Checkbox name='secondcb'>Checkbox 2</Checkbox>
+            <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
+            <Radio type='vertical' name='rgroup1'>
+              <Radio.Option value='r1' name='r1'>Radio 1.1</Radio.Option>
+              <Radio.Option value='r2' name='r2'>Radio 1.2</Radio.Option>
+              <Radio.Option value='r3' name='r3'>Radio 1.3</Radio.Option>
+            </Radio>
+            <Radio name='rgroup2'>
+              <Radio.Option value='r1' name='r1'>A</Radio.Option>
+              <Radio.Option value='r2' name='r2'>B</Radio.Option>
+            </Radio>
+          </Card>
         </div>
       </Layout.Section>
 
@@ -187,11 +171,13 @@ const Page = () => {
           alignItems: 'start',
           gap: '2rem',
         }}>
-          <List size='l'>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-          </List>
+          <Card width='500px'>
+            <List>
+              <List.Item>List item</List.Item>
+              <List.Item>List item</List.Item>
+              <List.Item>List item</List.Item>
+            </List>
+          </Card>
         </div>
 
         <div style={{
@@ -200,29 +186,31 @@ const Page = () => {
           justifyContent: 'space-evenly',
           alignItems: 'start',
         }}>
-          <Accordion size='l'>
-            <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-                corporis consequuntur porro suscipit inventore atque cupiditate 
-                quos beatae, officia deserunt esse praesentium fugiat adipisci 
-                optio unde voluptates saepe similique veniam!
-              </Typography>
-            </Accordion.Item>
+          <Card width='500px'>
+            <Accordion>
+              <Accordion.Item label='Accordion Item'>
+                <Typography role='p'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                  corporis consequuntur porro suscipit inventore atque cupiditate 
+                  quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                  optio unde voluptates saepe similique veniam!
+                </Typography>
+              </Accordion.Item>
 
-            <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Atque, est dicta, eaque adipisci.
-              </Typography>
-            </Accordion.Item>
+              <Accordion.Item label='Accordion Item'>
+                <Typography role='p'>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                  Atque, est dicta, eaque adipisci.
+                </Typography>
+              </Accordion.Item>
 
-            <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
-                Lorem, ipsum dolor sit amet.
-              </Typography>
-            </Accordion.Item>
-          </Accordion>
+              <Accordion.Item label='Accordion Item'>
+                <Typography role='p'>
+                  Lorem, ipsum dolor sit amet.
+                </Typography>
+              </Accordion.Item>
+            </Accordion>
+          </Card>
         </div>
       </Layout.Section>
 

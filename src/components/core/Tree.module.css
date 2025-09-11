@@ -4,14 +4,13 @@
   align-items: center;
   justify-content: start;
   gap: 10px;
-  /* margin-bottom: 5px; */
 
   font-size: 0.95rem;
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
-  border-radius: calc(var(--border-radius) * 0.5);
-  padding: 10px 0 10px 10px;
+  border-radius: 0 4px 4px 0;
+  padding: 10px 0 10px 15px;
   width: 100%;
   transition: all 0.5s var(--curve);
 
@@ -21,12 +20,12 @@
   }
 
   &:hover {
-    cursor: pointer;
     background-color: var(--gray-1);
   }
 }
 
 .item {
+  cursor: pointer;
   text-decoration: none;
   color: var(--foreground);
 }
@@ -34,7 +33,7 @@
 .content {
   overflow: hidden;
   height: auto;
-  margin: 0 0 0 10px;
+  margin-left: 10px;
   filter: blur(10px);
   visibility: hidden;
   border-left: 1px solid var(--gray-1);
@@ -43,7 +42,6 @@
   &.open {
     visibility: visible;
     filter: none;
-    margin: 5px 0 5px 10px;
   }
 
   &:not(.open) * {

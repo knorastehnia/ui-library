@@ -1,21 +1,7 @@
-.list-s, .list-m, .list-l {
+.list {
   border-radius: var(--border-radius);
   color: var(--foreground);
-}
 
-.list-n {
-  .item { padding: 0px }
-}
-
-.list-s {
-  .item { padding: 10px }
-}
-
-.list-m {
-  .item { padding: 15px }
-}
-
-.list-l {
   .item { padding: 20px }
 }
 
