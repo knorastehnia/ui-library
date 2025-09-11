@@ -1,9 +1,9 @@
 import Card from './components/core/Card'
 import Button from './components/core/Button'
-import InputText from './components/core/InputText'
-import InputTextArea from './components/core/InputTextArea'
-import InputCheckbox from './components/core/InputCheckbox'
-import InputRadio from './components/core/InputRadio'
+import Field from './components/core/Field'
+import TextArea from './components/core/TextArea'
+import Checkbox from './components/core/Checkbox'
+import Radio from './components/core/Radio'
 import Dropdown from './components/core/Dropdown'
 import Typography from './components/core/Typography'
 import Modal from './components/core/Modal'
@@ -79,7 +79,7 @@ const Page = () => {
                 gap: '15px',
                 width: '100%',
               }}>
-                <InputText
+                <Field
                   width='150px'
                   type='number'
                   name='input1'
@@ -89,13 +89,13 @@ const Page = () => {
                   ]}
                 >
                   Street No.
-                </InputText>
+                </Field>
 
-                <InputText name='input2'>Street Name</InputText>
+                <Field name='input2'>Street Name</Field>
               </div>
 
-              <InputText type='email' name='test'>Email</InputText>
-              <InputText type='password' name='password'>Password</InputText>
+              <Field type='email' name='test'>Email</Field>
+              <Field type='password' name='password'>Password</Field>
               <Button
                 onClick={() => setSomeState(!someState)}
                 size='m'
@@ -118,8 +118,8 @@ const Page = () => {
           >
             <div style={{zIndex: 10}}>
               <Card>
-                <InputTextArea limit={200} height={200} name='sta'>Static</InputTextArea>
-                <InputTextArea limit={10} name='dyn' resizable>Dynamic</InputTextArea>
+                <TextArea limit={200} height={200} name='sta'>Static</TextArea>
+                <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
                 <div style={{
                   display: 'flex',
                   flexFlow: 'row',
@@ -163,18 +163,18 @@ const Page = () => {
             </div>
 
             <Card>
-              <InputCheckbox name='firstcb'>Checkbox 1</InputCheckbox>
-              <InputCheckbox name='secondcb'>Checkbox 2</InputCheckbox>
-              <InputCheckbox name='thirdcb'>Checkbox 3</InputCheckbox>
-              <InputRadio type='vertical' name='rgroup1'>
-                <InputRadio.Option value='r1' name='r1'>Radio 1.1</InputRadio.Option>
-                <InputRadio.Option value='r2' name='r2'>Radio 1.2</InputRadio.Option>
-                <InputRadio.Option value='r3' name='r3'>Radio 1.3</InputRadio.Option>
-              </InputRadio>
-              <InputRadio name='rgroup2'>
-                <InputRadio.Option value='r1' name='r1'>A</InputRadio.Option>
-                <InputRadio.Option value='r2' name='r2'>B</InputRadio.Option>
-              </InputRadio>
+              <Checkbox name='firstcb'>Checkbox 1</Checkbox>
+              <Checkbox name='secondcb'>Checkbox 2</Checkbox>
+              <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
+              <Radio type='vertical' name='rgroup1'>
+                <Radio.Option value='r1' name='r1'>Radio 1.1</Radio.Option>
+                <Radio.Option value='r2' name='r2'>Radio 1.2</Radio.Option>
+                <Radio.Option value='r3' name='r3'>Radio 1.3</Radio.Option>
+              </Radio>
+              <Radio name='rgroup2'>
+                <Radio.Option value='r1' name='r1'>A</Radio.Option>
+                <Radio.Option value='r2' name='r2'>B</Radio.Option>
+              </Radio>
             </Card>
           </div>
         </div>

@@ -1,13 +1,13 @@
-import styles from './InputRadio.module.css'
+import styles from './Radio.module.css'
 import { useState, Children, cloneElement, type ReactElement } from 'react'
 
-interface InputRadioProps {
+interface RadioProps {
   children: React.ReactNode,
   name: string,
   type?: 'vertical' | 'horizontal',
 }
 
-interface InputRadioOptionProps {
+interface RadioOptionProps {
   children: React.ReactNode,
   name: string,
   value: string,
@@ -17,11 +17,11 @@ interface InputRadioOptionProps {
   disabled?: boolean,
 }
 
-type InputRadioComponent = React.FC<InputRadioProps> & {
-  Option: React.FC<InputRadioOptionProps>,
+type RadioComponent = React.FC<RadioProps> & {
+  Option: React.FC<RadioOptionProps>,
 }
 
-const InputRadio: InputRadioComponent = ({
+const Radio: RadioComponent = ({
   children,
   name,
   type='horizontal',
@@ -43,7 +43,7 @@ const InputRadio: InputRadioComponent = ({
   )
 }
 
-const InputRadioOption: React.FC<InputRadioOptionProps> = ({
+const RadioOption: React.FC<RadioOptionProps> = ({
   children,
   name,
   group,
@@ -80,6 +80,6 @@ const InputRadioOption: React.FC<InputRadioOptionProps> = ({
   )
 }
 
-InputRadio.Option = InputRadioOption
+Radio.Option = RadioOption
 
-export default InputRadio
+export default Radio

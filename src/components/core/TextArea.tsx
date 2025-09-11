@@ -1,76 +1,43 @@
-import { useEffect, useState } from 'react'
-import styles from './InputText.module.css'
+import { useState } from 'react'
+import styles from './Field.module.css'
 import Error from '../icons/Error'
-import Visibility from '../icons/Visibility'
 
 interface ErrorInterface {
   failState: boolean,
   message: string,
 }
 
-interface InputTextProps {
+interface TextAreaProps {
   children: React.ReactNode,
-  type?:
-    | 'text'
-    | 'number'
-    | 'email'
-    | 'password'
+  resizable?: boolean,
   name: string,
   limit?: number,
-  width?: string,
+  height?: number,
   errors?: ErrorInterface[],
   disabled?: boolean,
 }
 
-const InputText: React.FC<InputTextProps> = ({
+const TextArea: React.FC<TextAreaProps> = ({
   children,
-  type='text',
-  limit=0,
+  resizable=false,
   name,
-  width='100%',
+  limit=0,
+  height='6rem',
   errors,
   disabled=false,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
-  const [showValue, setShowValue] = useState(type !== 'password')
-  const [numberError, setNumberError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
   const [countError, setCountError] = useState(false)
 
-  const validateCount = () => {
+  const validateCount = (value: string) => {
     setCountError(value.length > limit && limit > 0)
   }
-
-  const validateEmail = () => {
-    const emailSyntax = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
-
-    setEmailError(!emailSyntax.test(value) && value.length !== 0)
-  }
-
-  const validateNumber = () => {
-    setNumberError(Number.isNaN(Number(value)))
-  }
-
-
-  // on blur
-  const handleInput = () => {
-    if (type === 'number') validateNumber()
-    else if (type === 'email') validateEmail()
-  }
-
-  // on change
-  useEffect(() => {
-    if (numberError) validateNumber()
-    else if (emailError) validateEmail()
-    validateCount()
-  }, [value])
 
   return (
     <>
       <div
         className={styles[`input-container`]}
-        style={{ width }}
       >
         <div className={`
           ${styles['input-field']} 
@@ -90,25 +57,23 @@ const InputText: React.FC<InputTextProps> = ({
             {children}
           </label>
 
-          <input
+          <textarea
             className={styles['input']}
+            style={{
+              resize: resizable ? 'vertical' : 'none',
+              height,
+              minHeight: height,
+            }}
             onFocus={() => setFocus(true)}
-            onBlur={() => { setFocus(false); handleInput(); }}
-            onChange={(e) => setValue(e.target.value)}
-            type={showValue ? 'text' : 'password'}
+            onBlur={() => setFocus(false)}
+            onChange={(e) => {
+              setValue(e.target.value)
+              validateCount(e.target.value)
+            }}
             name={name}
             id={name}
             disabled={disabled}
           />
-
-          {
-            type === 'password' &&
-              <div className={styles['eye-container']}>
-                <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
-                  <Visibility state={showValue} />
-                </button>
-              </div>
-          }
 
           {
             limit > 0 &&
@@ -142,38 +107,6 @@ const InputText: React.FC<InputTextProps> = ({
           </div>
         </div>
 
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${numberError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Please enter a valid number.
-            </span>
-          </div>
-        </div>
-
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${emailError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Please enter a valid email.
-            </span>
-          </div>
-        </div>
-
         {
           errors?.map((error, index) => (
             <div
@@ -199,4 +132,4 @@ const InputText: React.FC<InputTextProps> = ({
   )
 }
 
-export default InputText
+export default TextArea

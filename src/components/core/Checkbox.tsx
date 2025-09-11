@@ -1,15 +1,15 @@
-import styles from './InputCheckbox.module.css'
+import styles from './Checkbox.module.css'
 import Checkmark from '../icons/Checkmark'
 import { useState } from 'react'
 
-interface InputCheckboxProps {
+interface CheckboxProps {
   children: React.ReactNode,
   name: string,
   value?: string,
   disabled?: boolean,
 }
 
-const InputCheckbox: React.FC<InputCheckboxProps> = ({
+const Checkbox: React.FC<CheckboxProps> = ({
   children,
   name,
   value,
@@ -50,4 +50,4 @@ const InputCheckbox: React.FC<InputCheckboxProps> = ({
   )
 }
 
-export default InputCheckbox
+export default Checkbox
