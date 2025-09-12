@@ -9,9 +9,10 @@
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
-  border-radius: 0 4px 4px 0;
-  padding: 10px 0 10px 15px;
-  width: 100%;
+  border-radius: 4px;
+  margin-left: 5px;
+  padding: 10px;
+  width: calc(100% - 5px);
   transition: all 0.5s var(--curve);
 
   &:focus-visible {
@@ -34,14 +35,14 @@
   overflow: hidden;
   height: auto;
   margin-left: 10px;
-  filter: blur(10px);
+  opacity: 0;
   visibility: hidden;
   border-left: 1px solid var(--gray-1);
   transition: all 0.5s var(--curve);
 
   &.open {
     visibility: visible;
-    filter: none;
+    opacity: 1;
   }
 
   &:not(.open) * {
