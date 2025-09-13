@@ -33,7 +33,10 @@ const Area: React.FC<AreaProps> = ({
   return (
     <div
       className={styles['area']}
-      style={{ flex: `1 0 ${span * 25}%` }}
+      style={{
+        flex: `1 0 ${span * 25}%`,
+        minWidth: '300px',
+      }}
     >
       {children}
     </div>
@@ -44,10 +47,10 @@ const Grid: React.FC<GridProps> = ({
   children,
 }) => {
   return (
-    <div
-      className={styles['grid']}
-    >
-      {children}
+    <div className={styles['grid-container']}>
+      <div className={styles['grid']}>
+        {children}
+      </div>
     </div>
   )
 }

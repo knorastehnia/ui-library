@@ -4,7 +4,7 @@
     h4, h5, h6 {
       color: var(--foreground);
       font-weight: 300;
-      font-size: 1.5rem;
+      font-size: 1rem;
       line-height: 1.4;
       margin-bottom: 0.5rem;
     }
@@ -22,7 +22,7 @@
     h4, h5, h6 {
       color: var(--foreground);
       font-weight: 300;
-      font-size: 2rem;
+      font-size: 1.5rem;
       line-height: 1.4;
       margin-bottom: 0.5rem;
     }
@@ -40,7 +40,7 @@
     h4, h5, h6 {
       color: var(--foreground);
       font-weight: 300;
-      font-size: 4rem;
+      font-size: 3rem;
       line-height: 1.4;
       margin-bottom: 0.5rem;
     }
@@ -58,7 +58,7 @@
     h4, h5, h6 {
       color: var(--foreground);
       font-weight: 300;
-      font-size: 6.5rem;
+      font-size: 6rem;
       line-height: 1.4;
       margin-bottom: 0.5rem;
     }

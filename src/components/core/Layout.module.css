@@ -2,10 +2,14 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  max-width: 1800px;
+  margin: auto;
+  border-left: 1px solid var(--gray-1);
 }
 
 .content {
   position: relative;
+  width: 100%;
 }
 
 .header {
@@ -26,7 +30,7 @@
 .sidebar-container {
   width: 250px;
   flex: none;
-  
+
   .sidebar {
     position: fixed;
   }
@@ -43,21 +47,27 @@
   border-right: 1px solid var(--gray-1);
   padding: 20px;
   height: calc(100vh - 60px);
-  overflow: scroll;
+  overflow: auto;
 }
 
-.grid {
-  display: flex;
-  flex-flow: row wrap;
-  padding-bottom: 60px;
+.grid-container {
+  padding-bottom: 80px;
   border-bottom: 1px solid var(--gray-1);
+  background-color: var(--background);
+
+  .grid {
+    display: flex;
+    /* width: 100%; */
+    flex-flow: row wrap;
+    background-color: var(--gray-1);
+  }
 }
+
 
 .area {
   background-color: var(--background);
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
-  padding: 80px;
-  min-width: 50px;
+  padding: min(5vw, 80px);
   /* overflow: hidden; */
 }

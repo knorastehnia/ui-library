@@ -73,7 +73,7 @@ const Page = () => {
           </div>
         </Layout.Area>
 
-        <Layout.Area span={1}>
+        <Layout.Area span={2}>
           <Typography role='h2' size='s'>Some Form</Typography>
 
           <div style={{
