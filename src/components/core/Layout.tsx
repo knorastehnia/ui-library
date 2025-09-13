@@ -6,12 +6,11 @@ interface LayoutProps { children: React.ReactNode }
 
 interface AreaProps {
   children: React.ReactNode,
-  span?: number,
+  span?: 1 | 2 | 3 | 4,
 }
 
 interface GridProps {
   children: React.ReactNode,
-  areas?: string,
 }
 
 interface HeaderProps {
@@ -29,12 +28,12 @@ type LayoutComponent = React.FC<LayoutProps> & {
 
 const Area: React.FC<AreaProps> = ({
   children,
-  span=8,
+  span=4,
 }) => {
   return (
     <div
       className={styles['area']}
-      style={{ gridColumn: `span ${span}` }}
+      style={{ flex: `1 0 ${span * 25}%` }}
     >
       {children}
     </div>
@@ -43,12 +42,10 @@ const Area: React.FC<AreaProps> = ({
 
 const Grid: React.FC<GridProps> = ({
   children,
-  areas,
 }) => {
   return (
     <div
       className={styles['grid']}
-      // style={{ gridTemplateAreas: areas }}
     >
       {children}
     </div>

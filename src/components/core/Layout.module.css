@@ -47,8 +47,8 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  display: flex;
+  flex-flow: row wrap;
   padding-bottom: 60px;
   border-bottom: 1px solid var(--gray-1);
 }
@@ -58,5 +58,6 @@
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
   padding: 80px;
-  overflow: hidden;
+  min-width: 50px;
+  /* overflow: hidden; */
 }

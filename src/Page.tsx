@@ -43,10 +43,8 @@ const Page = () => {
         </div>
       </Modal>
 
-      <Layout.Grid areas={`
-        "fields boxes"
-      `}>
-        <Layout.Area span={3}>
+      <Layout.Grid>
+        <Layout.Area span={2}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -75,7 +73,7 @@ const Page = () => {
           </div>
         </Layout.Area>
 
-        <Layout.Area span={5}>
+        <Layout.Area span={1}>
           <Typography role='h2' size='s'>Some Form</Typography>
 
           <div style={{
@@ -110,7 +108,7 @@ const Page = () => {
           </Button>
         </Layout.Area>
 
-        <Layout.Area span={4}>
+        <Layout.Area span={3}>
           <TextArea limit={200} height={200} name='sta'>Static</TextArea>
           <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
           <div style={{
@@ -137,7 +135,7 @@ const Page = () => {
           </div>
         </Layout.Area>
 
-        <Layout.Area span={4}>
+        <Layout.Area span={1}>
           <Checkbox name='firstcb'>Checkbox 1</Checkbox>
           <Checkbox name='secondcb'>Checkbox 2</Checkbox>
           <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
@@ -154,15 +152,36 @@ const Page = () => {
       </Layout.Grid>
 
       <Layout.Grid>
-        <Layout.Area>
+        <Layout.Area span={2}>
           <List>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
-            <List.Item>List item</List.Item>
+            <List.Item>
+              <Typography role='h2' size='xs'>List Item</Typography>
+              <Typography role='p'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                corporis consequuntur porro suscipit inventore atque cupiditate 
+                quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                optio unde voluptates saepe similique veniam!
+              </Typography>
+            </List.Item>
+
+            <List.Item>
+              <Typography role='h2' size='xs'>List Item</Typography>
+              <Typography role='p'>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                Atque, est dicta, eaque adipisci.
+              </Typography>
+            </List.Item>
+
+            <List.Item>
+              <Typography role='h2' size='xs'>List Item</Typography>
+              <Typography role='p'>
+                Lorem, ipsum dolor sit amet.
+              </Typography>
+            </List.Item>
           </List>
         </Layout.Area>
 
-        <Layout.Area>
+        <Layout.Area span={2}>
           <Accordion>
             <Accordion.Item label='Accordion Item'>
               <Typography role='p'>
@@ -238,15 +257,15 @@ const Page = () => {
       </Layout.Area>
 
       <Layout.Grid>
-        <Layout.Area>1</Layout.Area>
-        <Layout.Area>2</Layout.Area>
-        <Layout.Area>3</Layout.Area>
-        <Layout.Area>4</Layout.Area>
-        <Layout.Area>5</Layout.Area>
-        <Layout.Area>6</Layout.Area>
-        <Layout.Area>7</Layout.Area>
-        <Layout.Area>8</Layout.Area>
-        <Layout.Area>9</Layout.Area>
+        <Layout.Area span={1}>1</Layout.Area>
+        <Layout.Area span={2}>2</Layout.Area>
+        <Layout.Area span={2}>3</Layout.Area>
+        <Layout.Area span={1}>4</Layout.Area>
+        <Layout.Area span={1}>5</Layout.Area>
+        <Layout.Area span={1}>6</Layout.Area>
+        <Layout.Area span={1}>7</Layout.Area>
+        <Layout.Area span={2}>8</Layout.Area>
+        <Layout.Area span={1}>9</Layout.Area>
       </Layout.Grid>
     </>
   )

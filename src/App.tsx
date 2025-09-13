@@ -55,12 +55,3 @@ const App = () => {
 }
 
 export default App
-
-
-{/* <Layout>
-  <Layout.Sidebar />
-  <Layout.Content>
-    <Layout.Header />
-    <Page />
-  </Layout.Content>
-</Layout> */}
