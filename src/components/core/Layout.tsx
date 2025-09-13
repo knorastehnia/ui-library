@@ -4,12 +4,12 @@ interface ContentProps { children: React.ReactNode }
 interface SidebarProps { children: React.ReactNode }
 interface LayoutProps { children: React.ReactNode }
 
-interface AreaProps {
+interface SubsectionProps {
   children: React.ReactNode,
-  span?: 1 | 2 | 3 | 4,
+  span?: 1 | 2 | 3,
 }
 
-interface GridProps {
+interface SectionProps {
   children: React.ReactNode,
 }
 
@@ -22,19 +22,19 @@ type LayoutComponent = React.FC<LayoutProps> & {
   Header: React.FC<HeaderProps>,
   Sidebar: React.FC<SidebarProps>,
   Content: React.FC<ContentProps>,
-  Grid: React.FC<GridProps>,
-  Area: React.FC<AreaProps>,
+  Section: React.FC<SectionProps>,
+  Subsection: React.FC<SubsectionProps>,
 }
 
-const Area: React.FC<AreaProps> = ({
+const Subsection: React.FC<SubsectionProps> = ({
   children,
-  span=4,
+  span=3,
 }) => {
   return (
     <div
-      className={styles['area']}
+      className={styles['subsection']}
       style={{
-        flex: `1 0 ${span * 25}%`,
+        flex: `1 0 ${span * 100 / 3}%`,
         minWidth: '300px',
       }}
     >
@@ -43,15 +43,15 @@ const Area: React.FC<AreaProps> = ({
   )
 }
 
-const Grid: React.FC<GridProps> = ({
+const Section: React.FC<SectionProps> = ({
   children,
 }) => {
   return (
-    <div className={styles['grid-container']}>
-      <div className={styles['grid']}>
+    <section className={styles['section']}>
+      <div className={styles['section-content']}>
         {children}
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -70,7 +70,13 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header
       className={styles['header']}
-      style={{ position: fixed ? 'fixed' : 'static' }}
+      style={ fixed ?
+        {
+          position: 'sticky',
+          top: '0',
+        }
+        : {}
+      }
     >
       {children}
     </header>
@@ -101,7 +107,7 @@ const Layout: LayoutComponent = ({
 Layout.Header = Header
 Layout.Sidebar = Sidebar
 Layout.Content = Content
-Layout.Grid = Grid
-Layout.Area = Area
+Layout.Section = Section
+Layout.Subsection = Subsection
 
 export default Layout

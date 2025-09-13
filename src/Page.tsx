@@ -43,8 +43,8 @@ const Page = () => {
         </div>
       </Modal>
 
-      <Layout.Grid>
-        <Layout.Area span={2}>
+      <Layout.Section>
+        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -71,9 +71,9 @@ const Page = () => {
             <Button type='fill'>Button</Button>
             <Button type='fill' href='#' size='l'>Button</Button>
           </div>
-        </Layout.Area>
+        </Layout.Subsection>
 
-        <Layout.Area span={2}>
+        <Layout.Subsection span={1}>
           <Typography role='h2' size='s'>Some Form</Typography>
 
           <div style={{
@@ -82,7 +82,6 @@ const Page = () => {
             width: '100%',
           }}>
             <Field
-              width='150px'
               type='number'
               name='input1'
               limit={12}
@@ -106,9 +105,9 @@ const Page = () => {
           >
             Submit
           </Button>
-        </Layout.Area>
+        </Layout.Subsection>
 
-        <Layout.Area span={3}>
+        <Layout.Subsection span={2}>
           <TextArea limit={200} height={200} name='sta'>Static</TextArea>
           <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
           <div style={{
@@ -133,9 +132,9 @@ const Page = () => {
               <Select.Item>Select Item</Select.Item>
             </Select>
           </div>
-        </Layout.Area>
+        </Layout.Subsection>
 
-        <Layout.Area span={1}>
+        <Layout.Subsection span={1}>
           <Checkbox name='firstcb'>Checkbox 1</Checkbox>
           <Checkbox name='secondcb'>Checkbox 2</Checkbox>
           <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
@@ -148,11 +147,11 @@ const Page = () => {
             <Radio.Option value='r1' name='r1'>A</Radio.Option>
             <Radio.Option value='r2' name='r2'>B</Radio.Option>
           </Radio>
-        </Layout.Area>
-      </Layout.Grid>
+        </Layout.Subsection>
+      </Layout.Section>
 
-      <Layout.Grid>
-        <Layout.Area span={2}>
+      <Layout.Section>
+        <Layout.Subsection span={1}>
           <List>
             <List.Item>
               <Typography role='h2' size='xs'>List Item</Typography>
@@ -179,9 +178,9 @@ const Page = () => {
               </Typography>
             </List.Item>
           </List>
-        </Layout.Area>
+        </Layout.Subsection>
 
-        <Layout.Area span={2}>
+        <Layout.Subsection span={1}>
           <Accordion>
             <Accordion.Item label='Accordion Item'>
               <Typography role='p'>
@@ -205,10 +204,10 @@ const Page = () => {
               </Typography>
             </Accordion.Item>
           </Accordion>
-        </Layout.Area>
-      </Layout.Grid>
+        </Layout.Subsection>
+      </Layout.Section>
 
-      <Layout.Area>
+      <Layout.Subsection>
         <Typography role='h2'>Header H2</Typography>
         <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
           elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
@@ -254,19 +253,19 @@ const Page = () => {
           elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
           doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
           pariatur aperiam aliquid minus inventore similique quam!</Typography>
-      </Layout.Area>
+      </Layout.Subsection>
 
-      <Layout.Grid>
-        <Layout.Area span={1}>1</Layout.Area>
-        <Layout.Area span={2}>2</Layout.Area>
-        <Layout.Area span={2}>3</Layout.Area>
-        <Layout.Area span={1}>4</Layout.Area>
-        <Layout.Area span={1}>5</Layout.Area>
-        <Layout.Area span={1}>6</Layout.Area>
-        <Layout.Area span={1}>7</Layout.Area>
-        <Layout.Area span={2}>8</Layout.Area>
-        <Layout.Area span={1}>9</Layout.Area>
-      </Layout.Grid>
+      <Layout.Section>
+        <Layout.Subsection span={1}>1</Layout.Subsection>
+        <Layout.Subsection span={2}>2</Layout.Subsection>
+        <Layout.Subsection span={1}>3</Layout.Subsection>
+        <Layout.Subsection span={1}>4</Layout.Subsection>
+        <Layout.Subsection span={1}>5</Layout.Subsection>
+        <Layout.Subsection span={1}>6</Layout.Subsection>
+        <Layout.Subsection span={1}>7</Layout.Subsection>
+        <Layout.Subsection span={2}>8</Layout.Subsection>
+        <Layout.Subsection span={1}>9</Layout.Subsection>
+      </Layout.Section>
     </>
   )
 }
