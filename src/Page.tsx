@@ -9,6 +9,7 @@ import Typography from './components/core/Typography'
 import Modal from './components/core/Modal'
 import List from './components/core/List'
 import Accordion from './components/core/Accordion'
+import Table from './components/core/Table'
 
 import Layout from './components/core/Layout'
 
@@ -150,6 +151,34 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
+        <Layout.Subsection span={3}>
+          <Table>
+            <Table.Header>
+              <Table.Row>
+                <Table.Cell>Lorem Ipsum</Table.Cell>
+                <Table.Cell>Ipsum</Table.Cell>
+                <Table.Cell>Dolor Sit</Table.Cell>
+              </Table.Row>
+            </Table.Header>
+
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>Sit Amet</Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+
+            <Table.Footer>
+              <Table.Row>
+                <Table.Cell>Cell</Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+              </Table.Row>
+            </Table.Footer>
+          </Table>
+        </Layout.Subsection>
+
         <Layout.Subsection span={1}>
           <List>
             <List.Item>

@@ -1,0 +1,19 @@
+.table {
+  background-color: var(--background);
+  border-collapse: collapse;
+}
+
+.header {
+  * {
+    font-weight: 400 !important;
+  }
+}
+
+.cell {
+  font-weight: 300;
+  padding: 20px;
+}
+
+.header .cell, .body .cell {
+  border-bottom: 1px solid var(--gray-1);
+}
