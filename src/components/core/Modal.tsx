@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import Card from './Card'
 import styles from './Modal.module.css'
 
 interface ModalProps {
@@ -41,8 +40,14 @@ const Modal: React.FC<ModalProps> = ({
         onClick={() => setIsOpen(false)}
       ></div>
 
-      <div className={styles['content']}>
-        <Card width={width} height={height}>{children}</Card>
+      <div
+        className={styles['content']}
+        style={{
+          width,
+          height,
+        }}
+      >
+        {children}
       </div>
     </div>
 

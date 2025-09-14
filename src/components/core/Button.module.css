@@ -1,12 +1,10 @@
-/* prop: style */
-
-.button-outline, .button-fill, .button-text {
+.style-outline, .style-fill, .style-text {
   overflow: clip;
   cursor: pointer;
   transition: all 0.5s var(--curve);
 }
 
-.button-outline {
+.style-outline {
   display: block;
   user-select: none;
   text-decoration: none;
@@ -21,7 +19,7 @@
   }
 }
 
-.button-fill {
+.style-fill {
   display: block;
   user-select: none;
   text-decoration: none;
@@ -36,17 +34,15 @@
   }
 }
 
-.button-text {
+.style-text {
   user-select: auto;
   border: none;
-  border-bottom: 1px solid transparent;
   color: var(--foreground);
-  font-weight: 500;
   text-decoration: none;
 
   &:hover, &:focus-visible {
     outline: none;
-    border-bottom: 1px solid var(--gray-9);
+    color: var(--gray-6);
   }
 
   &.disabled {
@@ -55,19 +51,9 @@
   }
 }
 
-/* prop: size */
-
-.button-s {
-  padding: 5px 10px;
-}
-
-.button-m {
-  padding: 10px 20px;
-}
-
-.button-l {
-  padding: 15px 30px;
-}
+.size-s { padding: 5px 10px }
+.size-m { padding: 10px 20px }
+.size-l { padding: 15px 30px }
 
 /* other */
 

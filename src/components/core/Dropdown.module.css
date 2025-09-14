@@ -1,7 +1,8 @@
 .dropdown {
   position: absolute;
   margin-top: 5px;
-  background-color: var(--foreground);
+  background-color: var(--background);
+  border: 1px solid var(--gray-1);
   border-radius: 4px;
   overflow: clip;
 
@@ -22,7 +23,7 @@
   .item {
     display: block;
     padding: 10px;
-    color: var(--background);
+    color: var(--foreground);
     text-decoration: none;
     text-align: left;
     width: 250px;
@@ -32,7 +33,7 @@
     
     &:hover, &:focus-visible {
       outline: none;
-      background-color: var(--gray-9);
+      background-color: var(--gray-1);
     }
   }
 
@@ -40,7 +41,7 @@
     height: 0.8px;
     width: 100%;
     border: none;
-    background-color: var(--gray-9);
+    background-color: var(--gray-1);
   }
 }
 

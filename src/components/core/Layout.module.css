@@ -4,7 +4,6 @@
   justify-content: space-between;
   max-width: 1800px;
   margin: auto;
-  border-left: 1px solid var(--gray-1);
 }
 
 .content {
@@ -28,9 +27,9 @@
 }
 
 .sidebar-container {
-  width: 250px;
+  width: 220px;
   flex: none;
-  
+
   .sidebar {
     display: flex;
     flex-flow: column nowrap;
@@ -41,14 +40,16 @@
   
   .sidebar-header {
     flex: 0 0 60px;
-    width: 250px;
+    width: 220px;
+    border-left: 1px solid var(--gray-1);
     border-right: 1px solid var(--gray-1);
     border-bottom: 1px solid var(--gray-1);
   }
-
+  
   .sidebar-content {
     flex: 0 1 100%;
-    width: 250px;
+    width: 220px;
+    border-left: 1px solid var(--gray-1);
     border-right: 1px solid var(--gray-1);
     padding: 20px;
     overflow: auto;
@@ -75,5 +76,5 @@
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
   padding: min(5vw, 80px);
-  /* overflow: hidden; */
+  overflow: hidden;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from './Field.module.css'
 import Error from '../icons/Error'
 import Visibility from '../icons/Visibility'
+import Typography from './Typography'
 
 interface ErrorInterface {
   failState: boolean,
@@ -9,12 +10,13 @@ interface ErrorInterface {
 }
 
 interface FieldProps {
-  children: React.ReactNode,
+  label: string,
   type?:
     | 'text'
     | 'number'
     | 'email'
-    | 'password'
+    | 'password',
+
   name: string,
   limit?: number,
   width?: string,
@@ -23,12 +25,12 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({
-  children,
+  label,
   type='text',
   limit=0,
   name,
   width='100%',
-  errors,
+  errors=[],
   disabled=false,
 }) => {
   const [focus, setFocus] = useState(false)
@@ -37,6 +39,13 @@ const Field: React.FC<FieldProps> = ({
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [countError, setCountError] = useState(false)
+
+  const allErrors = [
+    { failState: numberError, message: 'Please enter a valid number.' },
+    { failState: emailError, message: 'Please enter a valid email.' },
+    { failState: countError, message: 'Character count exceeds limit.' },
+    ...errors,
+  ]
 
   const validateCount = () => {
     setCountError(value.length > limit && limit > 0)
@@ -85,7 +94,9 @@ const Field: React.FC<FieldProps> = ({
             `}
             htmlFor={name}
           >
-            {children}
+            <Typography weight='400' size={(focus || value) ? 's' : 'm'}>
+              {label}
+            </Typography>
           </label>
 
           <input
@@ -117,63 +128,23 @@ const Field: React.FC<FieldProps> = ({
                     ? styles['excess-count']
                     : ''
                   }
-                >{value.length}</span>
+                >
+                  <Typography weight='400' size='xs'>
+                    {value.length}
+                  </Typography>
+                </span>
                 /
-                <span>{limit}</span>
+                <span>
+                  <Typography weight='400' size='xs'>
+                    {limit}
+                  </Typography>
+                </span>
               </div>
           }
         </div>
 
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${countError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Character count exceeds limit.
-            </span>
-          </div>
-        </div>
-
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${numberError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Please enter a valid number.
-            </span>
-          </div>
-        </div>
-
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${emailError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Please enter a valid email.
-            </span>
-          </div>
-        </div>
-
         {
-          errors?.map((error, index) => (
+          allErrors?.map((error, index) => (
             <div
               key={index}
               className={`
@@ -185,9 +156,11 @@ const Field: React.FC<FieldProps> = ({
                 <div className={styles['error-icon']}>
                   <Error />
                 </div>
-                <span>
-                  {error.message}
-                </span>
+                <div className={styles['error-message']}>
+                  <Typography weight='400' size='s'>
+                    {error.message}
+                  </Typography>
+                </div>
               </div>
             </div>
           ))

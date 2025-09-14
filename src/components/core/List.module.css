@@ -1,6 +1,5 @@
 .list {
   border-radius: var(--border-radius);
-  color: var(--foreground);
 
   .item { padding: 20px }
 }

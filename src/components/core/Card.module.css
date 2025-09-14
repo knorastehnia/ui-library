@@ -1,7 +1,0 @@
-.card {
-  position: relative;
-  padding: 20px;
-  background-color: var(--background);
-  border: 1px solid var(--gray-1);
-  border-radius: 10px;
-}

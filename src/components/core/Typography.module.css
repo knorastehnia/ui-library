@@ -1,91 +1,39 @@
-.typography {
-  &.xs {
-    h1, h2, h3,
-    h4, h5, h6 {
-      color: var(--foreground);
-      font-weight: 300;
-      font-size: 1rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--gray-9);
-      font-weight: 300;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-  }
-
-  &.s {
-    h1, h2, h3,
-    h4, h5, h6 {
-      color: var(--foreground);
-      font-weight: 300;
-      font-size: 1.5rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--gray-9);
-      font-weight: 300;
-      font-size: 1.2rem;
-      line-height: 1.4;
-    }
-  }
-
-  &.m {
-    h1, h2, h3,
-    h4, h5, h6 {
-      color: var(--foreground);
-      font-weight: 300;
-      font-size: 3rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--gray-9);
-      font-weight: 300;
-      font-size: 1.4rem;
-      line-height: 1.4;
-    }
-  }
-
-  &.l {
-    h1, h2, h3,
-    h4, h5, h6 {
-      color: var(--foreground);
-      font-weight: 300;
-      font-size: 6rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--gray-9);
-      font-weight: 300;
-      font-size: 1.6rem;
-      line-height: 1.4;
-    }
-  }
-
-  &.xl {
-    h1, h2, h3,
-    h4, h5, h6 {
-      color: var(--foreground);
-      font-weight: 300;
-      font-size: 10rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      color: var(--gray-9);
-      font-weight: 300;
-      font-size: 1.8rem;
-      line-height: 1.4;
-    }
-  }
+.h-xs, .h-s, .h-m,
+.h-l, .h-xl {
+  color: var(--foreground);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  transition: all 0.5s var(--curve);
 }
+
+.p-xs, .p-s, .p-m,
+.p-l, .p-xl {
+  color: var(--gray-9);
+  line-height: 1.4;
+  transition: all 0.5s var(--curve);
+}
+
+.span-xs, .span-s, .span-m,
+.span-l, .span-xl {
+  line-height: 1.4;
+  transition: all 0.5s var(--curve);
+}
+
+.weight-300 { font-weight: 300 }
+.weight-400 { font-weight: 400 }
+.weight-500 { font-weight: 500 }
+
+.h-xs { font-size: 1rem }
+.p-xs, .span-xs { font-size: 0.7rem; }
+
+.h-s { font-size: 1.5rem }
+.p-s, .span-s { font-size: 0.9rem; }
+
+.h-m { font-size: 3rem }
+.p-m, .span-m { font-size: 1rem; }
+
+.h-l { font-size: 6rem }
+.p-l, .span-l { font-size: 1.1rem; }
+
+.h-xl { font-size: 10rem }
+.p-xl, .span-xl { font-size: 1.3rem; }

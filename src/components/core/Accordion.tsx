@@ -1,6 +1,6 @@
 import styles from './Accordion.module.css'
-import List from './List'
 import Arrow from '../icons/Arrow'
+import Typography from './Typography'
 import { useEffect, useRef, useState } from 'react'
 
 interface AccordionProps {
@@ -36,25 +36,25 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 
   return (
     <>
-      <List.Item>
-        <button
-          className={styles['button']}
-          onClick={() => setIsOpen(!isOpen)}
-        >
+      <button
+        className={styles['button']}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Typography weight='400'>
           {label}
-          <Arrow state={isOpen} />
-        </button>
+        </Typography>
+        <Arrow state={isOpen} />
+      </button>
 
-        <div
-          ref={contentRef}
-          className={`
-            ${styles['content']} 
-            ${isOpen && styles['open']}
-          `}
-        >
-          {children}
-        </div>
-      </List.Item>
+      <div
+        ref={contentRef}
+        className={`
+          ${styles['content']} 
+          ${isOpen && styles['open']}
+        `}
+      >
+        {children}
+      </div>
     </>
   )
 }
@@ -65,10 +65,11 @@ const Accordion: AccordionComponent = ({
 }) => {
   return (
     <>
-      <div className={styles['accordion']}>
-        <List width={width}>
-          {children}
-        </List>
+      <div
+        className={styles['accordion']}
+        style={{ width }}
+      >
+        {children}
       </div>
     </>
   )

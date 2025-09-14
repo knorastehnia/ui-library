@@ -1,16 +1,17 @@
 import styles from './Checkbox.module.css'
 import Checkmark from '../icons/Checkmark'
+import Typography from './Typography'
 import { useState } from 'react'
 
 interface CheckboxProps {
-  children: React.ReactNode,
+  label: string,
   name: string,
   value?: string,
   disabled?: boolean,
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
-  children,
+  label,
   name,
   value,
   disabled=false,
@@ -42,7 +43,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
             <Checkmark state={checked} />
           </div>
           <span>
-            {children}
+            <Typography weight='400'>
+              {label}
+            </Typography>
           </span>
         </label>
       </div>

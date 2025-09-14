@@ -32,9 +32,7 @@ const List: ListComponent = ({
     <>
       <div
         className={styles['list']}
-        style={{
-          width
-        }}
+        style={{ width }}
       >
           {children}
       </div>

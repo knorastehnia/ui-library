@@ -31,8 +31,7 @@
 }
 
 .label-active {
-  transform: translate(10px, -10px);
-  font-size: 0.9rem;
+  transform: translate(10px, -13px);
 }
 
 .input {
@@ -79,7 +78,7 @@
   color: var(--error);
   font-size: 0.9rem;
 
-  span {
+  .error-message {
     height: 1rem;
   }
 }

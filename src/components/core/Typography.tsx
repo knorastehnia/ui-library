@@ -3,26 +3,34 @@ import { createElement } from 'react'
 
 interface TypographyProps {
   children: React.ReactNode,
-  role:
+  role?:
     | 'h1' | 'h2' | 'h3'
     | 'h4' | 'h5' | 'h6'
-    | 'p'
+    | 'p' | 'span',
 
   size?: 'xs' | 's' | 'm' | 'l' | 'xl',
+  weight?: '300' | '400' | '500',
 }
 
 const Typography: React.FC<TypographyProps> = ({
   children,
-  role,
-  size='xs',
+  role='span',
+  size='m',
+  weight='300',
 }) => {
+  const trimmedRole = role.at(0) === 'h' ? 'h' : role
+
   return (
-    <div className={`
-      ${styles['typography']} 
-      ${styles[size]}
-    `}>
-      {createElement(role, null, children)}
-    </div>
+    createElement(
+      role,
+      {
+        className: `
+          ${styles[`${trimmedRole}-${size}`]} 
+          ${styles[`weight-${weight}`]}
+        `
+      },
+      children,
+    )
   )
 }
 

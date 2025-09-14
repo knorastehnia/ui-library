@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
-import { useEffect, useRef, useState } from 'react'
+import Typography from './Typography'
 
 interface DropdownProps {
   children: React.ReactNode,
@@ -8,7 +9,7 @@ interface DropdownProps {
 }
 
 interface DropdownItemProps {
-  children: React.ReactNode,
+  label: string,
   href?: string,
   onClick?: Function,
   disabled?: boolean,
@@ -53,7 +54,9 @@ const Dropdown: DropdownComponent = ({
           `}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {label}
+          <Typography weight='400'>
+            {label}
+          </Typography>
           <Arrow state={isOpen} />
         </button>
 
@@ -71,7 +74,7 @@ const Dropdown: DropdownComponent = ({
 }
 
 const DropdownItem: React.FC<DropdownItemProps> = ({
-  children,
+  label,
   href='',
   onClick=(() => null),
   disabled=false,
@@ -89,7 +92,9 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
             ${disabled && styles['disabled']}
           `}
         >
-          {children}
+          <Typography weight='400'>
+            {label}
+          </Typography>
         </a>
       
       :
@@ -101,7 +106,9 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
             ${disabled && styles['disabled']}
           `}
         >
-          {children}
+          <Typography weight='400'>
+            {label}
+          </Typography>
         </button>
       }
     </>

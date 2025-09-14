@@ -1,4 +1,5 @@
 import styles from './Radio.module.css'
+import Typography from './Typography'
 import { useState, Children, cloneElement, type ReactElement } from 'react'
 
 interface RadioProps {
@@ -8,7 +9,7 @@ interface RadioProps {
 }
 
 interface RadioOptionProps {
-  children: React.ReactNode,
+  label: string,
   name: string,
   value: string,
   group?: string,
@@ -44,7 +45,7 @@ const Radio: RadioComponent = ({
 }
 
 const RadioOption: React.FC<RadioOptionProps> = ({
-  children,
+  label,
   name,
   group,
   value,
@@ -73,7 +74,9 @@ const RadioOption: React.FC<RadioOptionProps> = ({
         />
 
         <span>
-          {children}
+          <Typography weight='400'>
+            {label}
+          </Typography>
         </span>
       </label>
     </>

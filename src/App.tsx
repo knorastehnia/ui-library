@@ -9,33 +9,33 @@ const App = () => {
     <>
       <Layout>
         <Layout.Sidebar>
-          <Tree.Item href='#'>Top Level Item</Tree.Item>
-          <Tree.Item href='#'>Top Level Item</Tree.Item>
-          <Tree.Item href='#'>Top Level Item</Tree.Item>
+          <Tree.Item label='Tree Item' href='#' />
+          <Tree.Item label='Tree Item' href='#' />
+          <Tree.Item label='Tree Item' href='#' />
 
           <Tree>
             <Tree.Branch label='Tree Branch'>
-              <Tree.Item href='#'>Tree Item</Tree.Item>
-              <Tree.Item href='#'>Tree Item</Tree.Item>
-              <Tree.Item href='#'>Tree Item</Tree.Item>
-              <Tree.Item href='#'>Tree Item</Tree.Item>
+              <Tree.Item label='Tree Item' href='#' />
+              <Tree.Item label='Tree Item' href='#' />
+              <Tree.Item label='Tree Item' href='#' />
+              <Tree.Item label='Tree Item' href='#' />
             </Tree.Branch>
 
             <Tree.Branch label='Tree Branch'>
               <Tree.Branch label='Tree Branch'>
                 <Tree.Branch label='Tree Branch'>
-                  <Tree.Item href='#'>Tree Item</Tree.Item>
-                  <Tree.Item href='#'>Tree Item</Tree.Item>
-                  <Tree.Item href='#'>Tree Item</Tree.Item>
+                  <Tree.Item label='Tree Item' href='#' />
+                  <Tree.Item label='Tree Item' href='#' />
+                  <Tree.Item label='Tree Item' href='#' />
                 </Tree.Branch>
 
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
-                <Tree.Item href='#'>Tree Item</Tree.Item>
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
+                <Tree.Item label='Tree Item' href='#' />
               </Tree.Branch>
             </Tree.Branch>
           </Tree>

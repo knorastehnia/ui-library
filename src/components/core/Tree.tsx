@@ -1,9 +1,10 @@
 import styles from './Tree.module.css'
 import Arrow from '../icons/Arrow'
+import Typography from './Typography'
 import { useEffect, useRef, useState } from 'react'
 
 interface TreeItemProps {
-  children: React.ReactNode,
+  label: string,
   href: string,
 }
 
@@ -23,13 +24,15 @@ type TreeComponent = React.FC<TreeProps> & {
 }
 
 const TreeItem: React.FC<TreeItemProps> = ({
-  children,
+  label,
   href,
 }) => {
   return (
     <>
       <a href={href} className={styles['item']}>
-        {children}
+        <Typography weight='400' size='s'>
+          {label}
+        </Typography>
       </a>
     </>
   )
@@ -83,7 +86,9 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
         }}
       >
         <Arrow width='0.6rem' height='0.6rem' state={isOpen} />
-        {label}
+        <Typography weight='400' size='s'>
+          {label}
+        </Typography>
       </button>
 
       <div

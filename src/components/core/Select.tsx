@@ -1,6 +1,7 @@
 import styles from './Select.module.css'
 import Arrow from '../icons/Arrow'
 import { useEffect, useRef, useState } from 'react'
+import Typography from './Typography'
 
 interface SelectProps {
   children: React.ReactNode,
@@ -8,8 +9,7 @@ interface SelectProps {
 }
 
 interface SelectItemProps {
-  children: React.ReactNode,
-  href?: string,
+  label: string,
   onClick?: Function,
   disabled?: boolean,
 }
@@ -53,7 +53,9 @@ const Select: SelectComponent = ({
           `}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {label}
+          <Typography weight='400'>
+            {label}
+          </Typography>
           <Arrow state={isOpen} />
         </button>
 
@@ -71,40 +73,23 @@ const Select: SelectComponent = ({
 }
 
 const SelectItem: React.FC<SelectItemProps> = ({
-  children,
-  href='',
+  label,
   onClick=(() => null),
   disabled=false,
 }) => {
   return (
-    <>
-      {href.length > 0
-
-      ?
-        <a
-          href={href}
-          onClick={(e) => !disabled && onClick(e)}
-          className={`
-            ${styles['item']} 
-            ${disabled && styles['disabled']}
-          `}
-        >
-          {children}
-        </a>
-      
-      :
-        <button
-          disabled={disabled}
-          onClick={(e) => !disabled && onClick(e)}
-          className={`
-            ${styles['item']} 
-            ${disabled && styles['disabled']}
-          `}
-        >
-          {children}
-        </button>
-      }
-    </>
+      <button
+        disabled={disabled}
+        onClick={(e) => !disabled && onClick(e)}
+        className={`
+          ${styles['item']} 
+          ${disabled && styles['disabled']}
+        `}
+      >
+        <Typography weight='400'>
+          {label}
+        </Typography>
+      </button>
   )
 }
 

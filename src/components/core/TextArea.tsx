@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './Field.module.css'
 import Error from '../icons/Error'
+import Typography from './Typography'
 
 interface ErrorInterface {
   failState: boolean,
@@ -8,7 +9,7 @@ interface ErrorInterface {
 }
 
 interface TextAreaProps {
-  children: React.ReactNode,
+  label: string,
   resizable?: boolean,
   name: string,
   limit?: number,
@@ -18,17 +19,22 @@ interface TextAreaProps {
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
-  children,
+  label,
   resizable=false,
   name,
   limit=0,
   height='6rem',
-  errors,
+  errors=[],
   disabled=false,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
   const [countError, setCountError] = useState(false)
+
+  const allErrors = [
+    { failState: countError, message: 'Character count exceeds limit.' },
+    ...errors,
+  ]
 
   const validateCount = (value: string) => {
     setCountError(value.length > limit && limit > 0)
@@ -54,7 +60,9 @@ const TextArea: React.FC<TextAreaProps> = ({
             `}
             htmlFor={name}
           >
-            {children}
+            <Typography weight='400' size={(focus || value) ? 's' : 'm'}>
+              {label}
+            </Typography>
           </label>
 
           <textarea
@@ -91,24 +99,8 @@ const TextArea: React.FC<TextAreaProps> = ({
           }
         </div>
 
-        <div
-          className={`
-            ${styles['error-container']} 
-            ${countError ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['error']}>
-            <div className={styles['error-icon']}>
-              <Error />
-            </div>
-            <span>
-              Character count exceeds limit.
-            </span>
-          </div>
-        </div>
-
         {
-          errors?.map((error, index) => (
+          allErrors?.map((error, index) => (
             <div
               key={index}
               className={`
@@ -120,9 +112,11 @@ const TextArea: React.FC<TextAreaProps> = ({
                 <div className={styles['error-icon']}>
                   <Error />
                 </div>
-                <span>
-                  {error.message}
-                </span>
+                <div className={styles['error-message']}>
+                  <Typography weight='400' size='s'>
+                    {error.message}
+                  </Typography>
+                </div>
               </div>
             </div>
           ))

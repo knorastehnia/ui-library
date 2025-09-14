@@ -38,8 +38,8 @@ const Page = () => {
           flexFlow: 'row nowrap',
           justifyContent: 'space-between',
         }}>
-          <Button onClick={() => setShowModal(false)} width='49%' type='fill'>Confirm</Button>
-          <Button onClick={() => setShowModal(false)} width='49%'>Cancel</Button>
+          <Button label='Confirm' onClick={() => setShowModal(false)} width='49%' style='fill' />
+          <Button label='Cancel' onClick={() => setShowModal(false)} width='49%' />
         </div>
       </Modal>
 
@@ -52,24 +52,25 @@ const Page = () => {
             gap: '20px',
           }}>
             <Button
+              label='Link to homepage'
               size='l'
-              type='text'
+              style='text'
               href='#'
               onClick={() => null}
               // disabled
-            >Link to homepage</Button>
+            />
 
-            <Button width='100%' disabled size='m'>Button</Button>
+            <Button label='Button' width='100%' disabled size='m' />
 
-            <Button size='s'>Button</Button>
-            <Button>Button</Button>
-            <Button href='#' size='l'>Button</Button>
+            <Button label='Button' size='s' />
+            <Button label='Button' />
+            <Button label='Button' href='#' size='l' />
 
-            <Button onClick={() => setShowModal(true)} width='100%' size='m'>Button</Button>
+            <Button label='Button' onClick={() => setShowModal(true)} width='100%' size='m' />
 
-            <Button size='s' type='fill'>Button</Button>
-            <Button type='fill'>Button</Button>
-            <Button type='fill' href='#' size='l'>Button</Button>
+            <Button label='Button' size='s' style='fill' />
+            <Button label='Button' style='fill' />
+            <Button label='Button' style='fill' href='#' size='l' />
           </div>
         </Layout.Subsection>
 
@@ -82,70 +83,68 @@ const Page = () => {
             width: '100%',
           }}>
             <Field
+              label='Street No.'
               type='number'
               name='input1'
               limit={12}
               errors={[
                 {message: 'This is a custom error message.', failState: someState},
               ]}
-            >
-              Street No.
-            </Field>
+            />
 
-            <Field name='input2'>Street Name</Field>
+            <Field label='Street Name' name='input2' />
           </div>
 
-          <Field type='email' name='test'>Email</Field>
-          <Field type='password' name='password'>Password</Field>
+          <Field label='Email' type='email' name='test' />
+          <Field label='Password' type='password' name='password' />
           <Button
+            label='Submit'
             onClick={() => setSomeState(!someState)}
             size='m'
-            type='fill'
+            style='fill'
             width='100%'
-          >
-            Submit
-          </Button>
+          />
         </Layout.Subsection>
 
         <Layout.Subsection span={2}>
-          <TextArea limit={200} height={200} name='sta'>Static</TextArea>
-          <TextArea limit={10} name='dyn' resizable>Dynamic</TextArea>
+          <TextArea label='Static' limit={200} height={200} name='sta' />
+          <TextArea label='Dynamic' limit={10} name='dyn' resizable />
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
             gap: '15px',
           }}>
             <Dropdown label='Expand'>
-              <Dropdown.Item>Dropdown Item</Dropdown.Item>
+              <Dropdown.Item label='Dropdown Item' />
               <hr />
-              <Dropdown.Item>Dropdown Item</Dropdown.Item>
-              <Dropdown.Item>Dropdown Item</Dropdown.Item>
+              <Dropdown.Item label='Dropdown Item' />
+              <Dropdown.Item label='Dropdown Item' />
             </Dropdown>
 
             <Dropdown label='Open Menu'>
-              <Dropdown.Item>Dropdown Item</Dropdown.Item>
+              <Dropdown.Item label='Dropdown Item' />
             </Dropdown>
 
             <Select label='Select'>
-              <Select.Item>Select Item</Select.Item>
-              <Select.Item>Select Item</Select.Item>
-              <Select.Item>Select Item</Select.Item>
+              <Select.Item label='Select Item' />
+              <Select.Item label='Select Item' />
+              <Select.Item label='Select Item' />
             </Select>
           </div>
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <Checkbox name='firstcb'>Checkbox 1</Checkbox>
-          <Checkbox name='secondcb'>Checkbox 2</Checkbox>
-          <Checkbox name='thirdcb'>Checkbox 3</Checkbox>
+          <Checkbox label='Checkbox 1' name='firstcb' />
+          <Checkbox label='Checkbox 2' name='secondcb' />
+          <Checkbox label='Checkbox 3' name='thirdcb' />
           <Radio type='vertical' name='rgroup1'>
-            <Radio.Option value='r1' name='r1'>Radio 1.1</Radio.Option>
-            <Radio.Option value='r2' name='r2'>Radio 1.2</Radio.Option>
-            <Radio.Option value='r3' name='r3'>Radio 1.3</Radio.Option>
+            <Radio.Option label='Radio 1.1' value='r1' name='r1' />
+            <Radio.Option label='Radio 1.2' value='r2' name='r2' />
+            <Radio.Option label='Radio 1.3' value='r3' name='r3' />
           </Radio>
           <Radio name='rgroup2'>
-            <Radio.Option value='r1' name='r1'>A</Radio.Option>
-            <Radio.Option value='r2' name='r2'>B</Radio.Option>
+            <Radio.Option label='A' value='r1' name='r1' />
+            <Radio.Option label='B' value='r2' name='r2' />
           </Radio>
         </Layout.Subsection>
       </Layout.Section>
@@ -219,13 +218,7 @@ const Page = () => {
         <Typography size='l' role='h2'>Header H2 L</Typography>
         <Typography size='xl' role='h2'>Header H2 XL</Typography>
 
-        <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
-          elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
-          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
-          pariatur aperiam aliquid minus inventore similique quam!</Typography>
-        <hr style={{margin: '1rem 0', opacity: '0'}} />
-
-        <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
+        <Typography role='p' size='xs'>Lorem ipsum dolor sit amet consectetur adipisicing 
           elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
           doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
           pariatur aperiam aliquid minus inventore similique quam!</Typography>
