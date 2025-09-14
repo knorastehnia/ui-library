@@ -19,7 +19,6 @@
   }
 
   &:hover {
-    cursor: pointer;
     background-color: var(--gray-1);
   }
 }
@@ -30,11 +29,9 @@
   margin: 0 10px;
   opacity: 0;
   filter: blur(3px);
-  visibility: hidden;
   transition: all 0.5s var(--curve);
 
   &.open {
-    visibility: visible;
     opacity: 1;
     filter: none;
     margin: 10px;

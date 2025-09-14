@@ -37,7 +37,6 @@
 
   opacity: 0;
   filter: blur(3px);
-  visibility: hidden;
   pointer-events: none;
 
   border-left: 1px solid var(--gray-1);
@@ -46,13 +45,6 @@
   &.open {
     opacity: 1;
     filter: none;
-    visibility: visible;
     pointer-events: all;
   }
-  
-  /* &:not(.open) * {
-    pointer-events: none;
-    visibility: hidden;
-  } */
-
 }

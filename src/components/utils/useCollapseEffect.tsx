@@ -24,6 +24,7 @@ const useCollapseEffect = (
     content.style.height = 'auto'
   }
 
+
   useEffect(() => {
     updateHeight()
     const transitionEnd = setTimeout(setHeightAuto, duration)
