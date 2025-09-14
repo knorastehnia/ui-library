@@ -50,39 +50,6 @@
   }
 }
 
-.error-container {
-  white-space: nowrap;
-  user-select: none;
-  pointer-events: none;
-  height: 0;
-  margin: 0;
-  opacity: 0;
-  filter: blur(5px);
-  transition: all 0.5s var(--curve);
-}
-
-.error-visible {
-  height: 1rem;
-  margin-top: 10px;
-  opacity: 1;
-  filter: none;
-  overflow: visible;
-}
-
-.error {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: left;
-  align-items: end;
-  gap: 5px;
-  color: var(--error);
-  font-size: 0.9rem;
-
-  .error-message {
-    height: 1rem;
-  }
-}
-
 .eye-container {
   display: flex;
   align-items: center;

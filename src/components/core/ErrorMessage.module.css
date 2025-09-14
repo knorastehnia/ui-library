@@ -1,0 +1,22 @@
+.error {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  filter: blur(3px);
+  transition: all 0.5s var(--curve);
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: start;
+  gap: 5px;
+  color: var(--error);
+  font-size: 0.9rem;
+
+  &.error-visible {
+    margin-top: 10px;
+    opacity: 1;
+    filter: none;
+    overflow: visible;
+  }
+}

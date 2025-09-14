@@ -1,6 +1,6 @@
-import styles from './Error.module.css'
+import styles from './Alert.module.css'
 
-const Error = () => {
+const Alert = () => {
   return (
     <>
       <svg
@@ -27,4 +27,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default Alert

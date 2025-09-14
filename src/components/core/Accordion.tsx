@@ -1,7 +1,8 @@
 import styles from './Accordion.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface AccordionProps {
   children: React.ReactNode,
@@ -24,15 +25,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const contentRef = useRef(null)
 
-  useEffect(() => {
-    const content = contentRef.current as unknown as HTMLDivElement
-
-    if (isOpen) {
-      content.style.height = `${content.scrollHeight + 10}px`
-    } else {
-      content.style.height = '0'
-    }
-  }, [isOpen])
+  useCollapseEffect(contentRef, isOpen, 500)
 
   return (
     <>

@@ -32,20 +32,27 @@
 
 .content {
   overflow: hidden;
-  height: auto;
   margin-left: 10px;
+  height: auto;
+
   opacity: 0;
+  filter: blur(3px);
   visibility: hidden;
+  pointer-events: none;
+
   border-left: 1px solid var(--gray-1);
   transition: all 0.5s var(--curve);
-
+  
   &.open {
-    visibility: visible;
     opacity: 1;
+    filter: none;
+    visibility: visible;
+    pointer-events: all;
   }
-
-  &:not(.open) * {
+  
+  /* &:not(.open) * {
+    pointer-events: none;
     visibility: hidden;
-  }
+  } */
 
 }

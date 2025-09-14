@@ -34,13 +34,13 @@
   justify-content: space-between;
   gap: 10px;
 
-  /* border: 1px solid var(--gray-1); */
+  color: var(--foreground);
   padding: 5px 20px;
   transition: all 0.5s var(--curve);
 
   &.checked {
     background-color: var(--foreground) !important;
-    color: var(--background) !important;
+    color: var(--background);
     border-color: var(--foreground);
 
     &:has(.input:focus-visible) {

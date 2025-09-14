@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './Field.module.css'
-import Error from '../icons/Error'
 import Typography from './Typography'
+import ErrorMessage from './ErrorMessage'
 
 interface ErrorInterface {
   failState: boolean,
@@ -99,28 +99,15 @@ const TextArea: React.FC<TextAreaProps> = ({
           }
         </div>
 
-        {
-          allErrors?.map((error, index) => (
-            <div
-              key={index}
-              className={`
-                ${styles['error-container']} 
-                ${error.failState ? styles['error-visible'] : ''}
-              `}
-            >
-              <div className={styles['error']}>
-                <div className={styles['error-icon']}>
-                  <Error />
+        <div className={styles['error-container']}>
+          {
+            allErrors?.map((error, index) => (
+                <div key={index}>
+                  <ErrorMessage message={error.message} state={error.failState} />
                 </div>
-                <div className={styles['error-message']}>
-                  <Typography weight='400' size='s'>
-                    {error.message}
-                  </Typography>
-                </div>
-              </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
     </>
   )

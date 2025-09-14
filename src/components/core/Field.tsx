@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import useCollapseEffect from '../utils/useCollapseEffect'
 import styles from './Field.module.css'
-import Error from '../icons/Error'
 import Visibility from '../icons/Visibility'
 import Typography from './Typography'
+import ErrorMessage from './ErrorMessage'
 
 interface ErrorInterface {
   failState: boolean,
@@ -36,9 +37,12 @@ const Field: React.FC<FieldProps> = ({
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
   const [showValue, setShowValue] = useState(type !== 'password')
+
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [countError, setCountError] = useState(false)
+
+  useCollapseEffect
 
   const allErrors = [
     { failState: numberError, message: 'Please enter a valid number.' },
@@ -143,28 +147,15 @@ const Field: React.FC<FieldProps> = ({
           }
         </div>
 
-        {
-          allErrors?.map((error, index) => (
-            <div
-              key={index}
-              className={`
-                ${styles['error-container']} 
-                ${error.failState ? styles['error-visible'] : ''}
-              `}
-            >
-              <div className={styles['error']}>
-                <div className={styles['error-icon']}>
-                  <Error />
+        <div className={styles['error-container']}>
+          {
+            allErrors?.map((error, index) => (
+                <div key={index}>
+                  <ErrorMessage message={error.message} state={error.failState} />
                 </div>
-                <div className={styles['error-message']}>
-                  <Typography weight='400' size='s'>
-                    {error.message}
-                  </Typography>
-                </div>
-              </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
     </>
   )

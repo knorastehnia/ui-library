@@ -26,15 +26,17 @@
 
 .content {
   overflow: hidden;
-  height: 0;
+  height: auto;
   margin: 0 10px;
-  filter: blur(5px);
+  opacity: 0;
+  filter: blur(3px);
   visibility: hidden;
   transition: all 0.5s var(--curve);
 
   &.open {
     visibility: visible;
+    opacity: 1;
     filter: none;
-    margin-top: 10px;
+    margin: 10px;
   }
 }
