@@ -39,6 +39,7 @@
   border: none;
   color: var(--foreground);
   text-decoration: none;
+  padding: 0 10px;
 
   &:hover, &:focus-visible {
     outline: none;

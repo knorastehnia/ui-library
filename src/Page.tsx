@@ -248,8 +248,10 @@ const Page = () => {
         <Typography role='h2'>Header H2</Typography>
         <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
           elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
-          doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
-          pariatur aperiam aliquid minus inventore similique quam!</Typography>
+          doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
+          cupiditate <Button label='tempore tenetur' style='text' /> a
+          natus soluta. Voluptatem pariatur aperiam aliquid minus 
+          inventore similique quam!</Typography>
         <hr style={{margin: '1rem 0', opacity: '0'}} />
         <Typography size='s' role='h2'>Header H2 S</Typography>
         <Typography size='m' role='h2'>Header H2 M</Typography>

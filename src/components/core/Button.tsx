@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
           style={style !== 'text' ? { width } : {}}
           className={`
             ${styles[`style-${style}`]} 
-            ${styles[`size-${size}`]} 
+            ${style !== 'text' && styles[`size-${size}`]} 
             ${disabled && styles['disabled']}
           `}
         >
