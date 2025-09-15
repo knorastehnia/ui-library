@@ -1,6 +1,5 @@
 import Button from './components/core/Button'
 import Field from './components/core/Field'
-import TextArea from './components/core/TextArea'
 import Select from './components/core/Select'
 import Checkbox from './components/core/Checkbox'
 import Radio from './components/core/Radio'
@@ -108,8 +107,8 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={2}>
-          <TextArea label='Static' limit={200} height={200} name='sta' />
-          <TextArea label='Dynamic' limit={10} name='dyn' resizable />
+          <Field type='textarea' label='Static' limit={200} height='200px' name='sta' />
+          <Field type='textarea' label='Dynamic' limit={10} name='dyn' resizable />
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',

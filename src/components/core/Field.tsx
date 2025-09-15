@@ -14,12 +14,15 @@ interface FieldProps {
   label: string,
   type?:
     | 'text'
+    | 'textarea'
     | 'number'
     | 'email'
     | 'password',
 
   name: string,
   limit?: number,
+  resizable?: boolean,
+  height?: string,
   width?: string,
   errors?: ErrorInterface[],
   disabled?: boolean,
@@ -28,8 +31,10 @@ interface FieldProps {
 const Field: React.FC<FieldProps> = ({
   label,
   type='text',
-  limit=0,
   name,
+  limit=0,
+  resizable=false,
+  height='6rem',
   width='100%',
   errors=[],
   disabled=false,
@@ -103,16 +108,36 @@ const Field: React.FC<FieldProps> = ({
             </Typography>
           </label>
 
-          <input
-            className={styles['input']}
-            onFocus={() => setFocus(true)}
-            onBlur={() => { setFocus(false); handleInput(); }}
-            onChange={(e) => setValue(e.target.value)}
-            type={showValue ? 'text' : 'password'}
-            name={name}
-            id={name}
-            disabled={disabled}
-          />
+          {type === 'textarea'
+
+            ?
+            <textarea
+              className={styles['input']}
+              style={{
+                resize: resizable ? 'vertical' : 'none',
+                height,
+                minHeight: height,
+              }}
+              onFocus={() => setFocus(true)}
+              onBlur={() => setFocus(false)}
+              onChange={(e) => setValue(e.target.value)}
+              name={name}
+              id={name}
+              disabled={disabled}
+            />
+
+            :
+            <input
+              className={styles['input']}
+              onFocus={() => setFocus(true)}
+              onBlur={() => { setFocus(false); handleInput(); }}
+              onChange={(e) => setValue(e.target.value)}
+              type={showValue ? 'text' : 'password'}
+              name={name}
+              id={name}
+              disabled={disabled}
+            />
+          }
 
           {
             type === 'password' &&
