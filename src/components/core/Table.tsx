@@ -4,7 +4,13 @@ interface HeaderProps { children: React.ReactNode }
 interface FooterProps { children: React.ReactNode }
 interface BodyProps { children: React.ReactNode }
 interface RowProps { children: React.ReactNode }
-interface CellProps { children: React.ReactNode }
+
+interface CellProps {
+  children: React.ReactNode,
+  width?: string,
+  colSpan?: number,
+  rowSpan?: number,
+}
 
 interface TableProps {
   children: React.ReactNode,
@@ -27,9 +33,19 @@ const Row: React.FC<RowProps> = ({ children }) => {
   )
 }
 
-const Cell: React.FC<CellProps> = ({ children }) => {
+const Cell: React.FC<CellProps> = ({
+  children,
+  width='auto',
+  colSpan=1,
+  rowSpan=1,
+}) => {
   return (
-    <td className={styles['cell']}>
+    <td
+      className={styles['cell']}
+      width={width}
+      colSpan={colSpan}
+      rowSpan={rowSpan}
+    >
       {children}
     </td>
   )

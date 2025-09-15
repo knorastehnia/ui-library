@@ -3,6 +3,8 @@
   margin: 0;
   opacity: 0;
   filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
   transition: all 0.5s var(--curve);
 
   display: flex;
@@ -17,6 +19,7 @@
     margin-top: 10px;
     opacity: 1;
     filter: none;
-    overflow: visible;
+    pointer-events: all;
+    user-select: auto;
   }
 }

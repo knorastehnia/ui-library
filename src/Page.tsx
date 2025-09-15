@@ -151,7 +151,7 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection span={3}>
+        <Layout.Subsection>
           <Table>
             <Table.Header>
               <Table.Row>
@@ -163,19 +163,29 @@ const Page = () => {
 
             <Table.Body>
               <Table.Row>
+                <Table.Cell>
+                  <Field label='Field' name='field1' width='100px' />
+                  <Button label='Some button' />
+                  <Button label='Some button' />
+                </Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+                <Table.Cell>Cell</Table.Cell>
+              </Table.Row>
+              <Table.Row>
                 <Table.Cell>Sit Amet</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
+                <Table.Cell>Sit Amet</Table.Cell>
+                <Table.Cell rowSpan={2} colSpan={1} width='100px'>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
+                  porro doloribus. Ad ratione expedita, quae neque fugit, ea 
+                  laboriosam facere quas exercitationem sint doloribus. 
+                  Excepturi dolorum nobis ratione vel facilis?
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>Sit Amet</Table.Cell>
+                <Table.Cell>Sit Amet</Table.Cell>
               </Table.Row>
             </Table.Body>
-
-            <Table.Footer>
-              <Table.Row>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-              </Table.Row>
-            </Table.Footer>
           </Table>
         </Layout.Subsection>
 

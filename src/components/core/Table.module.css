@@ -3,13 +3,15 @@
   border-collapse: collapse;
 }
 
-.header {
+.header, .footer {
   * {
     font-weight: 400 !important;
   }
 }
 
 .cell {
+  height: fit-content;
+  width: fit-content;
   font-weight: 300;
   padding: 20px;
 }
