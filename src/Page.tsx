@@ -163,7 +163,7 @@ const Page = () => {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
-                  <Field label='Field' name='field1' width='100px' />
+                  <Field type='textarea' resizable label='Field' name='field1' />
                   <Button label='Some button' />
                   <Button label='Some button' />
                 </Table.Cell>

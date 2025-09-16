@@ -6,6 +6,7 @@
   border-radius: 4px;
   overflow: clip;
 
+  pointer-events: none;
   filter: blur(5px);
   opacity: 0;
 
@@ -13,6 +14,7 @@
   z-index: 200;
 
   &.select-visible {
+    pointer-events: all;
     opacity: 1;
     filter: none;
     transform: none;

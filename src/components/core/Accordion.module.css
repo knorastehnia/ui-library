@@ -27,11 +27,14 @@
   overflow: hidden;
   height: auto;
   margin: 0 10px;
+
+  pointer-events: none;
   opacity: 0;
   filter: blur(3px);
   transition: all 0.5s var(--curve);
 
   &.open {
+    pointer-events: all;
     opacity: 1;
     filter: none;
     margin: 10px;
