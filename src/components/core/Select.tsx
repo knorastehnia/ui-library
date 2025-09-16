@@ -27,7 +27,7 @@ const Select: SelectComponent = ({
   const buttonRef = useRef(null)
   const contentRef = useRef(null)
 
-  useCollapseEffect(contentRef, isOpen, 500)
+  useCollapseEffect(contentRef, isOpen, 0)
 
 
   const closeSelect = (event: MouseEvent) => {

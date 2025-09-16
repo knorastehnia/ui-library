@@ -42,7 +42,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  
+
   color: var(--gray-9);
   background-color: var(--background);
   border: 1px solid var(--gray-1);
@@ -50,7 +50,7 @@
   width: 150px;
   transition: all 0.5s var(--curve);
   
-  &:hover, &:focus, &.button-active {
+  &:hover, &:focus-visible, &.button-active {
     outline: none;
     border-color: var(--gray-6);
   }

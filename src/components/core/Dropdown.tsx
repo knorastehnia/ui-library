@@ -28,7 +28,7 @@ const Dropdown: DropdownComponent = ({
   const buttonRef = useRef(null)
   const contentRef = useRef(null)
 
-  useCollapseEffect(contentRef, isOpen, 500)
+  useCollapseEffect(contentRef, isOpen, 0)
 
   const closeDropdown = (event: MouseEvent) => {
     const btn = buttonRef.current as HTMLButtonElement | null;
