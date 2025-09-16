@@ -21,7 +21,6 @@
   justify-content: center;
   width: 1rem; height: 1rem;
   border: 1px solid var(--gray-3);
-  border-radius: 2px;
   transition: all 0.5s var(--curve);
   
   &.checked {

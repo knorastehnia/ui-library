@@ -3,7 +3,6 @@
   margin-top: 5px;
   background-color: var(--background);
   border: 1px solid var(--gray-1);
-  border-radius: 4px;
   overflow: clip;
 
   pointer-events: none;
@@ -47,13 +46,12 @@
   color: var(--gray-9);
   background-color: var(--background);
   border: 1px solid var(--gray-1);
-  border-radius: 4px;
   padding: 10px;
   width: 150px;
   transition: all 0.5s var(--curve);
   
   &:hover, &:focus, &.button-active {
     outline: none;
-    background-color: var(--gray-1);
+    border-color: var(--gray-6);
   }
 }

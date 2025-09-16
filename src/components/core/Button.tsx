@@ -35,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
             ${disabled && styles['disabled']}
           `}
         >
-          <Typography weight={style !== 'text' ? '400' : '500'}>
+          <Typography weight='400'>
             {label}
           </Typography>
         </a>

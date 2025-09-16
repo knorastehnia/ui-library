@@ -2,7 +2,6 @@
   width: fit-content;
   background-color: var(--background);
   border: 1px solid var(--gray-1);
-  border-radius: 4px;
   overflow: clip;
 }
 

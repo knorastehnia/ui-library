@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
+import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface DropdownProps {
   children: React.ReactNode,
@@ -25,6 +26,9 @@ const Dropdown: DropdownComponent = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef(null)
+  const contentRef = useRef(null)
+
+  useCollapseEffect(contentRef, isOpen, 500)
 
   const closeDropdown = (event: MouseEvent) => {
     const btn = buttonRef.current as HTMLButtonElement | null;
@@ -61,6 +65,7 @@ const Dropdown: DropdownComponent = ({
         </button>
 
         <div
+          ref={contentRef}
           className={`
             ${styles['dropdown']} 
             ${isOpen && styles['dropdown-visible']}

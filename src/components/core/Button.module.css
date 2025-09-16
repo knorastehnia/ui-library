@@ -9,13 +9,12 @@
   user-select: none;
   text-decoration: none;
   border: 1px solid var(--gray-1);
-  border-radius: 4px;
   background-color: var(--background);
   color: var(--foreground);
 
   &:hover, &:focus-visible {
     outline: none;
-    background-color: var(--gray-1);
+    border-color: var(--gray-6);
   }
 }
 
@@ -24,7 +23,6 @@
   user-select: none;
   text-decoration: none;
   border: none;
-  border-radius: 4px;
   background-color: var(--foreground);
   color: var(--background);
 
@@ -38,12 +36,11 @@
   user-select: auto;
   border: none;
   color: var(--foreground);
-  text-decoration: none;
-  padding: 0 10px;
+  text-decoration: underline solid var(--gray-1) 1px;
 
   &:hover, &:focus-visible {
     outline: none;
-    color: var(--gray-6);
+    text-decoration-color: var(--gray-9);
   }
 
   &.disabled {

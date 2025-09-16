@@ -2,7 +2,7 @@ import styles from './Tree.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
 import useCollapseEffect from '../utils/useCollapseEffect'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface TreeItemProps {
   label: string,
@@ -31,7 +31,7 @@ const TreeItem: React.FC<TreeItemProps> = ({
   return (
     <>
       <a href={href} className={styles['item']}>
-        <Typography weight='400' size='s'>
+        <Typography weight='400'>
           {label}
         </Typography>
       </a>
@@ -48,16 +48,6 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
 
   useCollapseEffect(contentRef, isOpen, 300)
 
-  useEffect(() => {
-    if (contentRef.current) {
-      if (isOpen) {
-        contentRef.current.removeAttribute('inert');
-      } else {
-        contentRef.current.setAttribute('inert', '');
-      }
-    }
-  }, [isOpen])
-
   return (
     <>
       <button
@@ -67,7 +57,7 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
         }}
       >
         <Arrow width='0.6rem' height='0.6rem' state={isOpen} />
-        <Typography weight='400' size='s'>
+        <Typography weight='400'>
           {label}
         </Typography>
       </button>

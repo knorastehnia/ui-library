@@ -9,12 +9,11 @@
   align-items: center;
   position: relative;
   border: 1px solid var(--gray-1);
-  border-radius: 4px;
   transition: all 0.5s var(--curve);
 }
 
 .input-active {
-  border-color: var(--gray-3);
+  border-color: var(--gray-6);
 }
 
 .label {
