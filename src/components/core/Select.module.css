@@ -1,41 +1,19 @@
-.select {
-  position: absolute;
-  margin-top: 5px;
-  background-color: var(--background);
-  border: 1px solid var(--gray-1);
-  overflow: clip;
-
-  pointer-events: none;
-  filter: blur(5px);
-  opacity: 0;
-
+.item {
+  display: block;
+  padding: 10px;
+  color: var(--foreground);
+  text-decoration: none;
+  text-align: left;
+  width: 150px;
+  border: none;
+  cursor: pointer;
   transition: all 0.5s var(--curve);
-  z-index: 200;
-
-  &.select-visible {
-    pointer-events: all;
-    opacity: 1;
-    filter: none;
-    transform: none;
-  }
-
-  .item {
-    display: block;
-    padding: 10px;
-    color: var(--foreground);
-    text-decoration: none;
-    text-align: left;
-    width: 150px;
-    border: none;
-    transition: all 0.5s var(--curve);
-    
-    &:hover, &:focus-visible {
-      outline: none;
-      background-color: var(--gray-1);
-    }
+  
+  &:hover, &:focus-visible {
+    outline: none;
+    background-color: var(--gray-1);
   }
 }
-
 .button {
   display: flex;
   flex-flow: row nowrap;

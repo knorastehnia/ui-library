@@ -1,8 +1,8 @@
+import { useRef, useState } from 'react'
 import styles from './Select.module.css'
 import Arrow from '../icons/Arrow'
-import { useEffect, useRef, useState } from 'react'
 import Typography from './Typography'
-import useCollapseEffect from '../utils/useCollapseEffect'
+import Popover from './Popover'
 
 interface SelectProps {
   children: React.ReactNode,
@@ -25,10 +25,6 @@ const Select: SelectComponent = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef(null)
-  const contentRef = useRef(null)
-
-  useCollapseEffect(contentRef, isOpen, 0)
-
 
   const closeSelect = (event: MouseEvent) => {
     const btn = buttonRef.current as HTMLButtonElement | null;
@@ -41,12 +37,6 @@ const Select: SelectComponent = ({
       })
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('click', closeSelect)
-    
-    return () => document.removeEventListener('click', closeSelect)
-  }, [])
 
   return (
     <>
@@ -64,15 +54,9 @@ const Select: SelectComponent = ({
           <Arrow state={isOpen} />
         </button>
 
-        <div
-          ref={contentRef}
-          className={`
-            ${styles['select']} 
-            ${isOpen && styles['select-visible']}
-          `}
-        >
+        <Popover isOpen={isOpen} onClose={closeSelect}>
           {children}
-        </div>
+        </Popover>
       </div>
     </>
   )

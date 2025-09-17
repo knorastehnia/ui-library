@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
-import useCollapseEffect from '../utils/useCollapseEffect'
+import Popover from './Popover'
 
 interface DropdownProps {
   children: React.ReactNode,
@@ -26,9 +26,6 @@ const Dropdown: DropdownComponent = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef(null)
-  const contentRef = useRef(null)
-
-  useCollapseEffect(contentRef, isOpen, 0)
 
   const closeDropdown = (event: MouseEvent) => {
     const btn = buttonRef.current as HTMLButtonElement | null;
@@ -41,12 +38,6 @@ const Dropdown: DropdownComponent = ({
       })
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('click', closeDropdown)
-    
-    return () => document.removeEventListener('click', closeDropdown)
-  }, [])
 
   return (
     <>
@@ -64,15 +55,9 @@ const Dropdown: DropdownComponent = ({
           <Arrow state={isOpen} />
         </button>
 
-        <div
-          ref={contentRef}
-          className={`
-            ${styles['dropdown']} 
-            ${isOpen && styles['dropdown-visible']}
-          `}
-        >
+        <Popover isOpen={isOpen} onClose={closeDropdown}>
           {children}
-        </div>
+        </Popover>
       </div>
     </>
   )
