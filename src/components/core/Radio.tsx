@@ -12,10 +12,10 @@ interface RadioOptionProps {
   label: string,
   name: string,
   value: string,
-  group?: string,
-  selected?: string,
-  setSelected?: Function,
   disabled?: boolean,
+  _group?: string,
+  _selected?: string,
+  _setSelected?: Function,
 }
 
 type RadioComponent = React.FC<RadioProps> & {
@@ -34,9 +34,9 @@ const Radio: RadioComponent = ({
       <div className={styles[`radio-${type}`]}>
         {Children.map(children, (child) => {
           return cloneElement(child as ReactElement<any>, {
-            selected,
-            setSelected,
-            group: name,
+            _selected: selected,
+            _setSelected: setSelected,
+            _group: name,
           })
         })}
       </div>
@@ -47,30 +47,30 @@ const Radio: RadioComponent = ({
 const RadioOption: React.FC<RadioOptionProps> = ({
   label,
   name,
-  group,
   value,
-  selected,
-  setSelected,
   disabled=false,
+  _group,
+  _selected,
+  _setSelected,
 }) => {
   return (
     <>
       <label
         className={`
           ${styles['label']} 
-          ${selected === name && styles['checked']}
+          ${_selected === name && styles['checked']}
         `}
-        htmlFor={group + name}
+        htmlFor={_group + name}
       >
         <input
           className={styles['input']}
           type='radio'
           disabled={disabled}
-          name={group}
-          id={group + name}
+          name={_group}
+          id={_group + name}
           value={value}
-          checked={selected === name}
-          onChange={() => setSelected!(name)}
+          checked={_selected === name}
+          onChange={() => _setSelected!(name)}
         />
 
         <span>
