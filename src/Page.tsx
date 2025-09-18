@@ -190,7 +190,13 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <ContextMenu>
+          <ContextMenu items={[
+            { label: 'Context Menu Item' },
+            { label: 'Refresh Page' },
+            { label: 'Inspect Item' },
+            { label: 'Loop Up Definition' },
+            { label: 'Save As...' },
+          ]}>
             <List>
               <List.Item>
                 <Typography role='h2' size='xs'>List Item</Typography>
@@ -252,7 +258,7 @@ const Page = () => {
         <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
           elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
           doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-          cupiditate <Button label='tempore tenetur' style='text' /> a
+          cupiditate <Button label='tempore tenetur' style='text' href='#' /> a
           natus soluta. Voluptatem pariatur aperiam aliquid minus 
           inventore similique quam!</Typography>
         <hr style={{margin: '1rem 0', opacity: '0'}} />

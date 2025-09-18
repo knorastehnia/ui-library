@@ -1,0 +1,14 @@
+.item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  width: 250px;
+  padding: 5px 10px;
+  border: none;
+  background-color: var(--background);
+  transition: all 0.5s var(--curve);
+
+  &:hover {
+    background-color: var(--gray-1);
+  }
+}
