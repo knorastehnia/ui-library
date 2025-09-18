@@ -27,15 +27,19 @@ const Dropdown: DropdownComponent = ({
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef(null)
 
-  const closeDropdown = (event: MouseEvent) => {
-    const btn = buttonRef.current as HTMLButtonElement | null;
-    if (!btn) return
-
-    if (event.target !== btn && !btn.contains(event.target as Node)) {
-      setIsOpen(prev => {
-        if (prev) return false
-        return prev
-      })
+  const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
+    if (event instanceof MouseEvent) {
+      const btn = buttonRef.current as HTMLButtonElement | null;
+      if (!btn) return
+  
+      if (event.target !== btn && !btn.contains(event.target as Node)) {
+        setIsOpen(prev => {
+          if (prev) return false
+          return prev
+        })
+      }
+    } else if (event instanceof KeyboardEvent) {
+      setIsOpen(false)
     }
   }
 
@@ -55,7 +59,7 @@ const Dropdown: DropdownComponent = ({
           <Arrow state={isOpen} />
         </button>
 
-        <Popover isOpen={isOpen} onClose={closeDropdown}>
+        <Popover position='absolute' isOpen={isOpen} onClose={closeDropdown}>
           {children}
         </Popover>
       </div>

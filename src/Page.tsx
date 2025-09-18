@@ -9,6 +9,7 @@ import Modal from './components/core/Modal'
 import List from './components/core/List'
 import Accordion from './components/core/Accordion'
 import Table from './components/core/Table'
+import ContextMenu from './components/core/ContextMenu'
 
 import Layout from './components/core/Layout'
 
@@ -192,12 +193,14 @@ const Page = () => {
           <List>
             <List.Item>
               <Typography role='h2' size='xs'>List Item</Typography>
-              <Typography role='p'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-                corporis consequuntur porro suscipit inventore atque cupiditate 
-                quos beatae, officia deserunt esse praesentium fugiat adipisci 
-                optio unde voluptates saepe similique veniam!
-              </Typography>
+              <ContextMenu>
+                <Typography role='p'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                  corporis consequuntur porro suscipit inventore atque cupiditate 
+                  quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                  optio unde voluptates saepe similique veniam!
+                </Typography>
+              </ContextMenu>
             </List.Item>
 
             <List.Item>

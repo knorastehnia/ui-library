@@ -1,5 +1,4 @@
 .popover {
-  position: absolute;
   margin-top: 5px;
   background-color: var(--background);
   box-sizing: content-box;
@@ -10,7 +9,7 @@
   filter: blur(5px);
   opacity: 0;
 
-  transition: all 0.5s var(--curve);
+  transition: all 0.5s var(--curve), inset 0s;
   z-index: 200;
 
   &.popover-visible {
