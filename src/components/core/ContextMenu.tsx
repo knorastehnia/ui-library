@@ -15,8 +15,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const openContextMenu = (event: React.MouseEvent) => {
     event.preventDefault()
     setPos({
-      x: event.clientX,
-      y: event.clientY,
+      x: event.clientX + window.scrollX,
+      y: event.clientY + window.scrollY,
     })
     setIsOpen(true)
   }
@@ -35,8 +35,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       <Popover
         isOpen={isOpen}
         onClose={closeContextMenu}
-        position='fixed'
-        inset={`${pos.y}px auto auto ${pos.x}px`}
+        position={{ y: pos.y, x: pos.x }}
       >
         Content
       </Popover>

@@ -190,34 +190,34 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <List>
-            <List.Item>
-              <Typography role='h2' size='xs'>List Item</Typography>
-              <ContextMenu>
+          <ContextMenu>
+            <List>
+              <List.Item>
+                <Typography role='h2' size='xs'>List Item</Typography>
                 <Typography role='p'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                   corporis consequuntur porro suscipit inventore atque cupiditate 
                   quos beatae, officia deserunt esse praesentium fugiat adipisci 
                   optio unde voluptates saepe similique veniam!
                 </Typography>
-              </ContextMenu>
-            </List.Item>
+              </List.Item>
 
-            <List.Item>
-              <Typography role='h2' size='xs'>List Item</Typography>
-              <Typography role='p'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Atque, est dicta, eaque adipisci.
-              </Typography>
-            </List.Item>
+              <List.Item>
+                <Typography role='h2' size='xs'>List Item</Typography>
+                <Typography role='p'>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                  Atque, est dicta, eaque adipisci.
+                </Typography>
+              </List.Item>
 
-            <List.Item>
-              <Typography role='h2' size='xs'>List Item</Typography>
-              <Typography role='p'>
-                Lorem, ipsum dolor sit amet.
-              </Typography>
-            </List.Item>
-          </List>
+              <List.Item>
+                <Typography role='h2' size='xs'>List Item</Typography>
+                <Typography role='p'>
+                  Lorem, ipsum dolor sit amet.
+                </Typography>
+              </List.Item>
+            </List>
+          </ContextMenu>
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>

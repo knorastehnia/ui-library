@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
@@ -25,11 +25,12 @@ const Dropdown: DropdownComponent = ({
   label,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const buttonRef = useRef(null)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
-      const btn = buttonRef.current as HTMLButtonElement | null;
+      const btn = buttonRef.current
       if (!btn) return
   
       if (event.target !== btn && !btn.contains(event.target as Node)) {
@@ -42,6 +43,18 @@ const Dropdown: DropdownComponent = ({
       setIsOpen(false)
     }
   }
+
+  useEffect(() => {
+    const btn = buttonRef.current
+    if (!btn) return
+
+    const rect = btn.getBoundingClientRect()
+
+    setPosition({
+      y: rect.y + window.scrollY + rect.height,
+      x: rect.x + window.scrollX,
+    })
+  }, [isOpen])
 
   return (
     <>
@@ -59,7 +72,11 @@ const Dropdown: DropdownComponent = ({
           <Arrow state={isOpen} />
         </button>
 
-        <Popover position='absolute' isOpen={isOpen} onClose={closeDropdown}>
+        <Popover
+          isOpen={isOpen}
+          onClose={closeDropdown}
+          position={position}
+        >
           {children}
         </Popover>
       </div>
