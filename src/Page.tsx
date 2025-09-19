@@ -115,16 +115,15 @@ const Page = () => {
             flexFlow: 'row wrap',
             gap: '15px',
           }}>
-            <Dropdown label='Expand'>
-              <Dropdown.Item label='Dropdown Item' />
-              <hr />
-              <Dropdown.Item label='Dropdown Item' />
-              <Dropdown.Item label='Dropdown Item' />
-            </Dropdown>
-
-            <Dropdown label='Open Menu'>
-              <Dropdown.Item label='Dropdown Item' />
-            </Dropdown>
+            <Dropdown
+              label='Dropdown'
+              items={[
+                { label: 'Item 1', href: '#' },
+                { label: 'Item 2', href: '#', onClick: () => null, disabled: true },
+                { label: 'Item 3', onClick: () => null, disabled: true },
+                { label: 'Item 4', href: '#', disabled: false },
+              ]}
+            />
 
             <Select label='Select'>
               <Select.Item label='Select Item' />
@@ -193,8 +192,8 @@ const Page = () => {
           <ContextMenu items={[
             { label: 'Context Menu Item' },
             { label: 'Refresh Page' },
-            { label: 'Inspect Item' },
-            { label: 'Loop Up Definition' },
+            { label: 'Inspect Item', disabled: true },
+            { label: 'Loop Up Definition', disabled: false },
             { label: 'Save As...' },
           ]}>
             <List>

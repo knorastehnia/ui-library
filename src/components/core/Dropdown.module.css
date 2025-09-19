@@ -13,6 +13,15 @@
     outline: none;
     background-color: var(--gray-1);
   }
+
+  &.disabled {
+    cursor: default;
+    color: var(--gray-6);
+
+    &:hover {
+      background-color: var(--background);
+    }
+  }
 }
 
 hr {

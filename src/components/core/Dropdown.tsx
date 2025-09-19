@@ -4,25 +4,21 @@ import Arrow from '../icons/Arrow'
 import Typography from './Typography'
 import Popover from './Popover'
 
-interface DropdownProps {
-  children: React.ReactNode,
-  label: string,
-}
-
-interface DropdownItemProps {
+interface ItemInterface {
   label: string,
   href?: string,
   onClick?: Function,
   disabled?: boolean,
 }
 
-type DropdownComponent = React.FC<DropdownProps> & {
-  Item: React.FC<DropdownItemProps>
+interface DropdownProps {
+  label: string,
+  items: ItemInterface[],
 }
 
-const Dropdown: DropdownComponent = ({
-  children,
+const Dropdown: React.FC<DropdownProps> = ({
   label,
+  items,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -77,55 +73,46 @@ const Dropdown: DropdownComponent = ({
           onClose={closeDropdown}
           position={position}
         >
-          {children}
+          {items.map((item, index) => {
+            return (
+              <div key={index}>
+                {item.href !== undefined && item.href.length > 0
+
+                ?
+                  <a
+                    href={!item.disabled ? item.href : undefined}
+                    onClick={(e) => !item.disabled && item.onClick?.(e)}
+                    className={`
+                      ${styles['item']} 
+                      ${item.disabled && styles['disabled']}
+                    `}
+                  >
+                    <Typography weight='400'>
+                      {item.label}
+                    </Typography>
+                  </a>
+                
+                :
+                  <button
+                    disabled={item.disabled}
+                    onClick={(e) => !item.disabled && item.onClick?.(e)}
+                    className={`
+                      ${styles['item']} 
+                      ${item.disabled && styles['disabled']}
+                    `}
+                  >
+                    <Typography weight='400'>
+                      {item.label}
+                    </Typography>
+                  </button>
+                }
+              </div>
+            )
+          })}
         </Popover>
       </div>
     </>
   )
 }
-
-const DropdownItem: React.FC<DropdownItemProps> = ({
-  label,
-  href='',
-  onClick=(() => null),
-  disabled=false,
-}) => {
-  return (
-    <>
-      {href.length > 0
-
-      ?
-        <a
-          href={href}
-          onClick={(e) => !disabled && onClick(e)}
-          className={`
-            ${styles['item']} 
-            ${disabled && styles['disabled']}
-          `}
-        >
-          <Typography weight='400'>
-            {label}
-          </Typography>
-        </a>
-      
-      :
-        <button
-          disabled={disabled}
-          onClick={(e) => !disabled && onClick(e)}
-          className={`
-            ${styles['item']} 
-            ${disabled && styles['disabled']}
-          `}
-        >
-          <Typography weight='400'>
-            {label}
-          </Typography>
-        </button>
-      }
-    </>
-  )
-}
-
-Dropdown.Item = DropdownItem
 
 export default Dropdown

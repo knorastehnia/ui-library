@@ -7,6 +7,7 @@ interface ItemInterface {
   label: string,
   href?: string,
   onClick?: Function,
+  disabled?: boolean,
 }
 
 interface ContextMenuProps {
@@ -48,29 +49,22 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       >
         {items.map((item, index) => {
           return (
-            <div key={index}>
-              {item.href !== undefined && item.href.length > 0
-
-              ?
-                <a
-                  href={item.href}
-                  onClick={() => item.onClick}
-                  className={styles['item']}
-                >
-                  {item.label}
-                </a>
-
-              :
-                <button
-                  onClick={() => item.onClick}
-                  className={styles['item']}
-                >
-                  <Typography size='s' weight='300'>
-                    {item.label}
-                  </Typography>
-                </button>
-              }
-            </div>
+            <button
+              key={index}
+              disabled={item.disabled}
+              onClick={(e) => {
+                !item.disabled && item.onClick?.(e)
+                setIsOpen(false)
+              }}
+              className={`
+                ${styles['item']} 
+                ${item.disabled && styles['disabled']}
+              `}
+            >
+              <Typography weight='300'>
+                {item.label}
+              </Typography>
+            </button>
           )
         })}
       </Popover>
