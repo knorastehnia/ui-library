@@ -3,6 +3,7 @@ import styles from './Select.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
 import Popover from './Popover'
+import Checkmark from '../icons/Checkmark'
 
 interface ItemInterface {
   label: string,
@@ -15,6 +16,7 @@ interface SelectProps {
   name: string,
   items: ItemInterface[],
   width?: string,
+  multiple?: boolean,
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -22,12 +24,13 @@ const Select: React.FC<SelectProps> = ({
   name,
   items,
   width='150px',
+  multiple=false,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const buttonRef = useRef<HTMLDivElement>(null)
 
-  const [selected, setSelected] = useState<ItemInterface | null>(null)
+  const [selected, setSelected] = useState<ItemInterface[] | null>(null)
 
   const closeSelect = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
@@ -48,13 +51,29 @@ const Select: React.FC<SelectProps> = ({
   const updateSelect = (item: ItemInterface) => {
     if (item.disabled) return
 
-    if (item.value === selected?.value) {
-      setSelected({ label: '', value: '' })
+    if (selected && selected[0].value === item.value) {
+      setSelected(null)
     } else {
-      setSelected(item)
+      setSelected([item])
     }
 
     setIsOpen(false)
+  }
+
+  const updateSelectMultiple = (item: ItemInterface) => {
+    if (item.disabled) return
+
+    if (!!selected?.find((selectedItem) => {
+      return selectedItem.value === item.value
+    })) {
+      setSelected(
+        selected.filter((selectedItem) => {
+          return selectedItem.value !== item.value
+        })
+      )
+    } else {
+      setSelected(selected ? [...selected, item] : [item])
+    }
   }
 
   useEffect(() => {
@@ -76,14 +95,18 @@ const Select: React.FC<SelectProps> = ({
           className={styles['select']}
           name={name}
           id={name}
-          value={selected?.value}
+          multiple={multiple}
         >
-          <option value=''></option>
-
           {
             items.map((item, index) => {
               return (
-                <option key={index} value={item.value}>
+                <option
+                  key={index}
+                  value={item.value}
+                  selected={!!selected?.find((selectedItem) => {
+                    return selectedItem.value === item.value
+                  })}
+                >
                   {item.label}
                 </option>
               )
@@ -95,11 +118,11 @@ const Select: React.FC<SelectProps> = ({
           <label
             className={`
               ${styles['label']} 
-              ${selected?.value && styles['label-active']}
+              ${!!selected?.length  && styles['label-active']}
             `}
             htmlFor={name}
           >
-            <Typography weight='400' size={selected?.value ? 's' : 'm'}>
+            <Typography weight='400' size={!!selected?.length ? 's' : 'm'}>
               {label}
             </Typography>
           </label>
@@ -113,9 +136,18 @@ const Select: React.FC<SelectProps> = ({
             onClick={() => setIsOpen(!isOpen)}
           >
             <Typography weight='400'>
-              {selected?.label}
+              {
+                selected?.map((item, index) => {
+                  return (
+                    item.label + (selected.length - 1 !== index ? ', ': '')
+                  )
+                })
+              }
             </Typography>
-            <Arrow state={isOpen} />
+
+            <div className={styles['expand-arrow']}>
+              <Arrow state={isOpen} />
+            </div>
           </button>
         </div>
 
@@ -130,7 +162,11 @@ const Select: React.FC<SelectProps> = ({
                 <button
                   key={index}
                   disabled={item.disabled}
-                  onClick={() => updateSelect(item)}
+                  onClick={() => {
+                    multiple
+                      ? updateSelectMultiple(item)
+                      : updateSelect(item)
+                  }}
                   className={`
                     ${styles['item']} 
                     ${item.disabled && styles['disabled']}
@@ -139,6 +175,13 @@ const Select: React.FC<SelectProps> = ({
                   <Typography weight='400'>
                     {item.label}
                   </Typography>
+
+                  <Checkmark
+                    state={
+                      !!selected?.includes(item)
+                    }
+                    color='dark'
+                  />
                 </button>
               )
             })

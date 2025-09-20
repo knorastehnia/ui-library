@@ -1,6 +1,14 @@
 import styles from './Checkmark.module.css'
 
-const Checkmark: React.FC<{state:boolean}> = ({ state }) => {
+interface CheckmarkProps {
+  state: boolean,
+  color: 'light' | 'dark',
+}
+
+const Checkmark: React.FC<CheckmarkProps> = ({
+  state,
+  color,
+}) => {
   return (
     <>
       <svg
@@ -11,9 +19,8 @@ const Checkmark: React.FC<{state:boolean}> = ({ state }) => {
       >
         <path
           className={`
-            ${
-              state ? styles['visible'] : styles['hidden']
-            }
+            ${styles[`color-${color}`]} 
+            ${state ? styles['visible'] : styles['hidden']}
           `}
           strokeMiterlimit='16'
           strokeLinecap='round'

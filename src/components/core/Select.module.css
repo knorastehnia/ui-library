@@ -1,5 +1,10 @@
 .item {
-  display: block;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
   padding: 5px 10px;
   color: var(--foreground);
   text-decoration: none;

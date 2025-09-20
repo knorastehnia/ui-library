@@ -126,6 +126,19 @@ const Page = () => {
             />
 
             <Select
+              multiple
+              width='600px'
+              label='Select OS'
+              name='os'
+              items={[
+                { label: 'Windows', value: 'windows', },
+                { label: 'macOS', value: 'macos', },
+                { label: 'Linux', value: 'linux', },
+                { label: 'A very long option indeed', value: 'a', },
+              ]}
+            />
+
+            <Select
               label='Select OS'
               name='os'
               items={[

@@ -8,8 +8,10 @@
   path {
     stroke-dashoffset: 1;
     stroke-dasharray: 1;
-    stroke: var(--gray-1);
   }
+
+  .color-light { stroke: var(--gray-1) }
+  .color-dark { stroke: var(--gray-9) }
 
   .hidden {
     animation: disappear var(--curve) 0.25s forwards;
