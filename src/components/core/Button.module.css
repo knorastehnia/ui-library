@@ -1,7 +1,6 @@
 .style-outline, .style-fill, .style-text {
   overflow: clip;
   cursor: pointer;
-  border-radius: var(--radius);
   transition: all 0.5s var(--curve);
 }
 
@@ -10,6 +9,7 @@
   user-select: none;
   text-decoration: none;
   border: 1px solid var(--gray-1);
+  border-radius: var(--radius);
   background-color: var(--background);
   color: var(--foreground);
 
@@ -24,6 +24,7 @@
   user-select: none;
   text-decoration: none;
   border: none;
+  border-radius: var(--radius);
   background-color: var(--foreground);
   color: var(--background);
 
