@@ -1,21 +1,22 @@
 :root {
-  /* --background: #101010;
-  --foreground: #fff;
-  --gray-1: #1c1c1c;
+  --background: #101010;
+  --foreground: #eee;
+  --gray-1: #242424;
   --gray-3: #252525;
   --gray-6: #444;
-  --gray-9: #aaa; */
+  --gray-9: #aaa;
 
-  --background: #fff;
+  /* --background: #fff;
   --foreground: #101010;
   --gray-1: #e2e2e2;
   --gray-3: #aaa;
   --gray-6: #999;
-  --gray-9: #555;
+  --gray-9: #555; */
 
   --radius: 4px;
 
   --accent: hsl(218, 84%, 57%);
+  --accent: oklch(0.476 0.0972 167.09);
 
   --error: #ec0000;
 

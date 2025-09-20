@@ -40,7 +40,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             ${styles['display-checkbox']} 
             ${checked && styles['checked']}
           `}>
-            <Checkmark state={checked} color='light' />
+            <Checkmark state={checked} color='background' />
           </div>
           <span>
             <Typography weight='400'>

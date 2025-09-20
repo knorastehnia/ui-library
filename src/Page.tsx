@@ -172,9 +172,17 @@ const Page = () => {
           <Table>
             <Table.Header>
               <Table.Row>
-                <Table.Cell>Lorem Ipsum</Table.Cell>
-                <Table.Cell>Ipsum</Table.Cell>
-                <Table.Cell>Dolor Sit</Table.Cell>
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
               </Table.Row>
             </Table.Header>
 
@@ -185,22 +193,41 @@ const Page = () => {
                   <Button label='Some button' />
                   <Button label='Some button' />
                 </Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-                <Table.Cell>Cell</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Sit Amet</Table.Cell>
-                <Table.Cell>Sit Amet</Table.Cell>
-                <Table.Cell rowSpan={2} colSpan={1} width='100px'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
-                  porro doloribus. Ad ratione expedita, quae neque fugit, ea 
-                  laboriosam facere quas exercitationem sint doloribus. 
-                  Excepturi dolorum nobis ratione vel facilis?
+
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+
+                <Table.Cell>
+                  <Typography>Cell</Typography>
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>Sit Amet</Table.Cell>
-                <Table.Cell>Sit Amet</Table.Cell>
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+                
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+
+                <Table.Cell rowSpan={2} colSpan={1} width='100px'>
+                  <Typography role='p'>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
+                    porro doloribus. Ad ratione expedita, quae neque fugit, ea 
+                    laboriosam facere quas exercitationem sint doloribus. 
+                    Excepturi dolorum nobis ratione vel facilis?
+                  </Typography>
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
+
+                <Table.Cell>
+                  <Typography>Cell</Typography>
+                </Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
@@ -315,15 +342,41 @@ const Page = () => {
       </Layout.Subsection>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>1</Layout.Subsection>
-        <Layout.Subsection span={2}>2</Layout.Subsection>
-        <Layout.Subsection span={1}>3</Layout.Subsection>
-        <Layout.Subsection span={1}>4</Layout.Subsection>
-        <Layout.Subsection span={1}>5</Layout.Subsection>
-        <Layout.Subsection span={1}>6</Layout.Subsection>
-        <Layout.Subsection span={1}>7</Layout.Subsection>
-        <Layout.Subsection span={2}>8</Layout.Subsection>
-        <Layout.Subsection span={1}>9</Layout.Subsection>
+        <Layout.Subsection span={1}>
+          <Typography>1</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={2}>
+          <Typography>2</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>3</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>4</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>5</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>6</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>7</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={2}>
+          <Typography>8</Typography>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <Typography>9</Typography>
+        </Layout.Subsection>
       </Layout.Section>
     </>
   )

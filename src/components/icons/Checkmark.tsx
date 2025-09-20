@@ -2,7 +2,7 @@ import styles from './Checkmark.module.css'
 
 interface CheckmarkProps {
   state: boolean,
-  color: 'light' | 'dark',
+  color: 'background' | 'foreground',
 }
 
 const Checkmark: React.FC<CheckmarkProps> = ({

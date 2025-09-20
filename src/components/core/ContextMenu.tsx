@@ -61,7 +61,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 ${item.disabled && styles['disabled']}
               `}
             >
-              <Typography weight='300'>
+              <Typography weight='400'>
                 {item.label}
               </Typography>
             </button>

@@ -6,6 +6,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
+  color: var(--foreground);
   gap: 10px;
 }
 

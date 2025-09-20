@@ -10,8 +10,8 @@
     stroke-dasharray: 1;
   }
 
-  .color-light { stroke: var(--gray-1) }
-  .color-dark { stroke: var(--gray-9) }
+  .color-background { stroke: var(--gray-1) }
+  .color-foreground { stroke: var(--gray-9) }
 
   .hidden {
     animation: disappear var(--curve) 0.25s forwards;

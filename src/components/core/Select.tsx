@@ -180,7 +180,7 @@ const Select: React.FC<SelectProps> = ({
                     state={
                       !!selected?.includes(item)
                     }
-                    color='dark'
+                    color='foreground'
                   />
                 </button>
               )
