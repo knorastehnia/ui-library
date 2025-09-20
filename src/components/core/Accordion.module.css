@@ -6,6 +6,7 @@
   gap: 10px;
 
   padding: 10px;
+  border-radius: var(--radius);
   color: var(--gray-9);
   background-color: var(--background);
   border: none;

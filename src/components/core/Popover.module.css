@@ -4,6 +4,7 @@
   background-color: var(--background);
   box-sizing: content-box;
   border: 1px solid var(--gray-1);
+  border-radius: var(--radius);
   overflow: hidden;
 
   pointer-events: none;

@@ -41,11 +41,12 @@ hr {
   color: var(--gray-9);
   background-color: var(--background);
   border: none;
+  border-radius: var(--radius);
   padding: 10px;
   width: 150px;
   transition: all 0.5s var(--curve);
   
-  &:hover, &:focus, &.button-active {
+  &:hover, &:focus-visible, &.button-active {
     outline: none;
     background-color: var(--gray-1);
   }

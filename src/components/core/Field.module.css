@@ -9,6 +9,7 @@
   align-items: center;
   position: relative;
   border: 1px solid var(--gray-1);
+  border-radius: var(--radius);
   transition: all 0.5s var(--curve);
 }
 
@@ -62,6 +63,7 @@
   align-items: center;
   margin: 0 10px 0 5px;
   border: none;
+  border-radius: var(--radius);
   cursor: pointer;
   background-color: transparent;
   transition: all 0.5s var(--curve);

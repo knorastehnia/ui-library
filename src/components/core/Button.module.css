@@ -1,6 +1,7 @@
 .style-outline, .style-fill, .style-text {
   overflow: clip;
   cursor: pointer;
+  border-radius: var(--radius);
   transition: all 0.5s var(--curve);
 }
 
@@ -60,12 +61,11 @@
   pointer-events: none;
   background-color: var(--gray-1);
   border: 1px solid var(--gray-1);
-  color: var(--gray-9);
-  opacity: 0.8;
+  color: var(--gray-6);
 
   &:hover, &:focus {
     background-color: var(--gray-1);
     border: 1px solid var(--gray-1);
-    color: var(--gray-9);
+    color: var(--gray-6);
   }
 }

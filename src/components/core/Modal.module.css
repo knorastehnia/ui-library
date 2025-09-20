@@ -21,6 +21,7 @@
 
   .content {
     opacity: 0;
+    border-radius: var(--radius);
     transition: inherit;
     transform: scale(0.95);
     transform-origin: center;
