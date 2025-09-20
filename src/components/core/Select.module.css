@@ -24,7 +24,8 @@
   background-color: var(--background);
   border: 1px solid var(--gray-1);
   border-radius: var(--radius);
-  padding: 10px;
+  padding: 0 10px;
+  height: calc(1.4rem + 20px);
   width: 150px;
 
   transform: translate(5px 5px);
@@ -50,14 +51,18 @@
   pointer-events: none;
   display: block;
   position: absolute;
+  padding: 0;
+  white-space: nowrap;
   top: 0; left: 0;
   transform: translate(10px, 10px);
   color: var(--gray-9);
   background-color: var(--background);
   border-radius: 999px;
   transition: all 0.5s var(--curve);
+
+  &.label-active {
+    padding: 0 5px;
+    transform: translate(5px, -13px);
+  }
 }
 
-.label-active {
-  transform: translate(10px, -13px);
-}

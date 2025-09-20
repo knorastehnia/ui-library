@@ -46,7 +46,12 @@ const Select: React.FC<SelectProps> = ({
   const updateSelect = (item: ItemInterface) => {
     if (item.disabled) return
 
-    setSelected(item)
+    if (item.value === selected?.value) {
+      setSelected({ label: '', value: '' })
+    } else {
+      setSelected(item)
+    }
+
     setIsOpen(false)
   }
 
@@ -105,7 +110,7 @@ const Select: React.FC<SelectProps> = ({
             onClick={() => setIsOpen(!isOpen)}
           >
             <Typography weight='400'>
-              {selected?.label || '-'}
+              {selected?.label}
             </Typography>
             <Arrow state={isOpen} />
           </button>
