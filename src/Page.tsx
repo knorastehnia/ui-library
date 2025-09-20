@@ -89,7 +89,7 @@ const Page = () => {
               name='input1'
               limit={12}
               errors={[
-                {message: 'This is a custom error message.', failState: someState},
+                {message: 'This is a custom error message and it is very long.', failState: someState},
               ]}
             />
 
@@ -132,6 +132,7 @@ const Page = () => {
                 { label: 'Windows', value: 'windows', },
                 { label: 'macOS', value: 'macos', },
                 { label: 'Linux', value: 'linux', },
+                { label: 'A very long option indeed', value: 'a', },
               ]}
             />
           </div>

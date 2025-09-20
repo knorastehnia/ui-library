@@ -16,12 +16,18 @@
 .span-xs, .span-s, .span-m,
 .span-l, .span-xl {
   line-height: 1.4;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   transition: all 0.5s var(--curve);
 }
 
 .weight-300 { font-weight: 300 }
 .weight-400 { font-weight: 400 }
 .weight-500 { font-weight: 500 }
+
+.color-error { color: var(--error) }
+.color-success { color: var(--success) }
 
 .h-xs { font-size: 1rem }
 .p-xs, .span-xs { font-size: 0.7rem; }

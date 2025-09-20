@@ -4,7 +4,7 @@
   color: var(--foreground);
   text-decoration: none;
   text-align: left;
-  width: 150px;
+  width: 100%;
   border: none;
   transition: all 0.5s var(--curve);
   
@@ -26,7 +26,6 @@
   border-radius: var(--radius);
   padding: 0 10px;
   height: calc(1.4rem + 20px);
-  width: 150px;
 
   transform: translate(5px 5px);
   transition: all 0.5s var(--curve);
@@ -40,6 +39,7 @@
 .select {
   appearance: none;
   position: absolute;
+  pointer-events: none;
   opacity: 0;
 }
 
@@ -52,7 +52,6 @@
   display: block;
   position: absolute;
   padding: 0;
-  white-space: nowrap;
   top: 0; left: 0;
   transform: translate(10px, 10px);
   color: var(--gray-9);

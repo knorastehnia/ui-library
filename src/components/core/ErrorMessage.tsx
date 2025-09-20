@@ -28,7 +28,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
         <Alert />
       </div>
 
-      <Typography weight='400' size='s'>
+      <Typography weight='400' size='s' role='p' color='error'>
         {message}
       </Typography>
     </div>

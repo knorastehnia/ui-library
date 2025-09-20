@@ -12,6 +12,7 @@
 .input {
   appearance: none;
   position: absolute;
+  pointer-events: none;
   opacity: 0;
 }
 

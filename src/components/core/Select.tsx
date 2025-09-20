@@ -14,12 +14,14 @@ interface SelectProps {
   label: string,
   name: string,
   items: ItemInterface[],
+  width?: string,
 }
 
 const Select: React.FC<SelectProps> = ({
   label,
   name,
   items,
+  width='150px',
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -103,6 +105,7 @@ const Select: React.FC<SelectProps> = ({
           </label>
 
           <button
+            style={{ width }}
             className={`
               ${styles['button']} 
               ${isOpen && styles['button-active']}

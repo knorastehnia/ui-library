@@ -10,6 +10,7 @@ interface TypographyProps {
 
   size?: 'xs' | 's' | 'm' | 'l' | 'xl',
   weight?: '300' | '400' | '500',
+  color?: 'normal' | 'success' | 'error'
 }
 
 const Typography: React.FC<TypographyProps> = ({
@@ -17,6 +18,7 @@ const Typography: React.FC<TypographyProps> = ({
   role='span',
   size='m',
   weight='300',
+  color='normal',
 }) => {
   const trimmedRole = role.at(0) === 'h' ? 'h' : role
 
@@ -27,6 +29,7 @@ const Typography: React.FC<TypographyProps> = ({
         className: `
           ${styles[`${trimmedRole}-${size}`]} 
           ${styles[`weight-${weight}`]}
+          ${styles[`color-${color}`]}
         `
       },
       children,
