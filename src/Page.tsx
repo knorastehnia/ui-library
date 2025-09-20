@@ -125,11 +125,15 @@ const Page = () => {
               ]}
             />
 
-            <Select label='Select'>
-              <Select.Item label='Select Item' />
-              <Select.Item label='Select Item' />
-              <Select.Item label='Select Item' />
-            </Select>
+            <Select
+              label='Select OS'
+              name='os'
+              items={[
+                { label: 'Windows', value: 'windows', },
+                { label: 'macOS', value: 'macos', },
+                { label: 'Linux', value: 'linux', },
+              ]}
+            />
           </div>
         </Layout.Subsection>
 

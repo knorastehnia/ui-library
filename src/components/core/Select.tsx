@@ -4,28 +4,28 @@ import Arrow from '../icons/Arrow'
 import Typography from './Typography'
 import Popover from './Popover'
 
-interface SelectProps {
-  children: React.ReactNode,
+interface ItemInterface {
   label: string,
-}
-
-interface SelectItemProps {
-  label: string,
-  onClick?: Function,
+  value: string,
   disabled?: boolean,
 }
 
-type SelectComponent = React.FC<SelectProps> & {
-  Item: React.FC<SelectItemProps>
+interface SelectProps {
+  label: string,
+  name: string,
+  items: ItemInterface[],
 }
 
-const Select: SelectComponent = ({
-  children,
+const Select: React.FC<SelectProps> = ({
   label,
+  name,
+  items,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const buttonRef = useRef<HTMLDivElement>(null)
+
+  const [selected, setSelected] = useState<ItemInterface | null>(null)
 
   const closeSelect = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
@@ -43,6 +43,13 @@ const Select: SelectComponent = ({
     }
   }
 
+  const updateSelect = (item: ItemInterface) => {
+    if (item.disabled) return
+
+    setSelected(item)
+    setIsOpen(false)
+  }
+
   useEffect(() => {
     const btn = buttonRef.current
     if (!btn) return
@@ -58,52 +65,80 @@ const Select: SelectComponent = ({
   return (
     <>
       <div ref={buttonRef} style={{width: 'fit-content'}}>
-        <button
-          className={`
-            ${styles['button']} 
-            ${isOpen && styles['button-active']}
-          `}
-          onClick={() => setIsOpen(!isOpen)}
+        <select
+          className={styles['select']}
+          name={name}
+          id={name}
+          value={selected?.value}
         >
-          <Typography weight='400'>
-            {label}
-          </Typography>
-          <Arrow state={isOpen} />
-        </button>
+          <option value=''></option>
+
+          {
+            items.map((item, index) => {
+              return (
+                <option key={index} value={item.value}>
+                  {item.label}
+                </option>
+              )
+            })
+          }
+        </select>
+
+        <div className={styles['display-select']}>
+          <label
+            className={`
+              ${styles['label']} 
+              ${selected?.value && styles['label-active']}
+            `}
+            htmlFor={name}
+          >
+            <Typography weight='400' size={selected?.value ? 's' : 'm'}>
+              {label}
+            </Typography>
+          </label>
+
+          <button
+            className={`
+              ${styles['button']} 
+              ${isOpen && styles['button-active']}
+            `}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <Typography weight='400'>
+              {selected?.label || '-'}
+            </Typography>
+            <Arrow state={isOpen} />
+          </button>
+        </div>
 
         <Popover
           position={position}
           isOpen={isOpen}
           onClose={closeSelect}
         >
-          {children}
+          {
+            items.map((item, index) => {
+              return (
+                <button
+                  key={index}
+                  disabled={item.disabled}
+                  onClick={() => updateSelect(item)}
+                  className={`
+                    ${styles['item']} 
+                    ${item.disabled && styles['disabled']}
+                  `}
+                >
+                  <Typography weight='400'>
+                    {item.label}
+                  </Typography>
+                </button>
+              )
+            })
+          }
         </Popover>
       </div>
     </>
   )
 }
-
-const SelectItem: React.FC<SelectItemProps> = ({
-  label,
-  onClick=(() => null),
-  disabled=false,
-}) => {
-  return (
-      <button
-        disabled={disabled}
-        onClick={(e) => !disabled && onClick(e)}
-        className={`
-          ${styles['item']} 
-          ${disabled && styles['disabled']}
-        `}
-      >
-        <Typography weight='400'>
-          {label}
-        </Typography>
-      </button>
-  )
-}
-
-Select.Item = SelectItem
 
 export default Select

@@ -1,12 +1,11 @@
 .item {
   display: block;
-  padding: 10px;
+  padding: 5px 10px;
   color: var(--foreground);
   text-decoration: none;
   text-align: left;
   width: 150px;
   border: none;
-  cursor: pointer;
   transition: all 0.5s var(--curve);
   
   &:hover, &:focus-visible {
@@ -22,16 +21,43 @@
   justify-content: space-between;
   gap: 10px;
 
-  color: var(--gray-9);
   background-color: var(--background);
   border: 1px solid var(--gray-1);
   border-radius: var(--radius);
   padding: 10px;
   width: 150px;
+
+  transform: translate(5px 5px);
   transition: all 0.5s var(--curve);
   
   &:hover, &:focus-visible, &.button-active {
     outline: none;
     border-color: var(--gray-6);
   }
+}
+
+.select {
+  appearance: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.display-select {
+  position: relative;
+}
+
+.label {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: 0; left: 0;
+  transform: translate(10px, 10px);
+  color: var(--gray-9);
+  background-color: var(--background);
+  border-radius: 999px;
+  transition: all 0.5s var(--curve);
+}
+
+.label-active {
+  transform: translate(10px, -13px);
 }
