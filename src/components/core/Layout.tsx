@@ -1,4 +1,5 @@
 import styles from './Layout.module.css'
+import Typography from './Typography'
 
 interface ContentProps { children: React.ReactNode }
 interface SidebarProps { children: React.ReactNode }
@@ -47,11 +48,17 @@ const Section: React.FC<SectionProps> = ({
   children,
 }) => {
   return (
-    <section className={styles['section']}>
-      <div className={styles['section-content']}>
-        {children}
+    <>
+      <div className={styles['section-header']}>
+        <Typography role='h2' weight='300' size='s'>Section Header</Typography>
       </div>
-    </section>
+
+      <section className={styles['section']}>
+        <div className={styles['section-content']}>
+          {children}
+        </div>
+      </section>
+    </>
   )
 }
 

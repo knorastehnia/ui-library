@@ -17,20 +17,22 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   useCollapseEffect(errorRef, state, 500)
 
   return (
-    <div
-      ref={errorRef}
-      className={`
-        ${styles['error']} 
-        ${state ? styles['error-visible'] : ''}
-      `}
-    >
-      <div className={styles['alert-icon']}>
-        <Alert />
-      </div>
+    <div className={styles['error-container']}>
+      <div
+        ref={errorRef}
+        className={`
+          ${styles['error']} 
+          ${state ? styles['error-visible'] : ''}
+        `}
+      >
+        <div className={styles['alert-icon']}>
+          <Alert />
+        </div>
 
-      <Typography weight='400' size='s' role='p' color='error'>
-        {message}
-      </Typography>
+        <Typography weight='400' size='s' role='p' color='error'>
+          {message}
+        </Typography>
+      </div>
     </div>
   )
 }

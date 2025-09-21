@@ -38,6 +38,7 @@ const Page = () => {
           display: 'flex',
           flexFlow: 'row nowrap',
           justifyContent: 'space-between',
+          gap: '10px',
         }}>
           <Button label='Confirm' onClick={() => setShowModal(false)} width='49%' style='fill' />
           <Button label='Cancel' onClick={() => setShowModal(false)} width='49%' />
@@ -49,29 +50,14 @@ const Page = () => {
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
-            alignItems: 'center',
+            alignItems: 'end',
             gap: '20px',
           }}>
-            <Button
-              label='Link to homepage'
-              size='l'
-              style='text'
-              href='#'
-              onClick={() => null}
-              // disabled
-            />
-
             <Button label='Button' width='100%' disabled size='m' />
-
-            <Button label='Button' size='s' />
-            <Button label='Button' />
-            <Button label='Button' href='#' size='l' />
-
             <Button label='Button' onClick={() => setShowModal(true)} width='100%' size='m' />
 
-            <Button label='Button' size='s' style='fill' />
+            <Button label='Button' />
             <Button label='Button' style='fill' />
-            <Button label='Button' style='fill' href='#' size='l' />
           </div>
         </Layout.Subsection>
 
@@ -80,74 +66,88 @@ const Page = () => {
 
           <div style={{
             display: 'flex',
-            gap: '15px',
+            flexFlow: 'column',
+            gap: '20px',
             width: '100%',
           }}>
-            <Field
-              label='Street No.'
-              type='number'
-              name='input1'
-              limit={12}
-              errors={[
-                {message: 'This is a custom error message and it is very long.', failState: someState},
-              ]}
+            <div style={{
+              display: 'flex',
+              gap: '20px',
+              width: '100%',
+            }}>
+              <Field
+                label='Street No.'
+                type='number'
+                name='input1'
+                limit={12}
+                errors={[
+                  {message: 'This is a custom error message and it is very long.', failState: someState},
+                ]}
+              />
+
+              <Field label='Street Name' name='input2' />
+            </div>
+
+            <Field label='Email' type='email' name='test' />
+            <Field label='Password' type='password' name='password' />
+            <Button
+              label='Submit'
+              onClick={() => setSomeState(!someState)}
+              size='m'
+              style='fill'
+              width='100%'
             />
-
-            <Field label='Street Name' name='input2' />
           </div>
-
-          <Field label='Email' type='email' name='test' />
-          <Field label='Password' type='password' name='password' />
-          <Button
-            label='Submit'
-            onClick={() => setSomeState(!someState)}
-            size='m'
-            style='fill'
-            width='100%'
-          />
         </Layout.Subsection>
 
         <Layout.Subsection span={2}>
-          <Field type='textarea' label='Static' limit={200} height='200px' name='sta' />
-          <Field type='textarea' label='Dynamic' limit={10} name='dyn' resizable />
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
-            gap: '15px',
+            alignItems: 'end',
+            gap: '20px',
           }}>
-            <Dropdown
-              label='Dropdown'
-              items={[
-                { label: 'Item 1', href: '#' },
-                { label: 'Item 2', href: '#', onClick: () => null, disabled: true },
-                { label: 'Item 3', onClick: () => null, disabled: true },
-                { label: 'Item 4', href: '#', disabled: false },
-              ]}
-            />
+            <Field type='textarea' label='Static' limit={200} height='200px' name='sta' />
+            <Field type='textarea' label='Dynamic' limit={10} name='dyn' resizable />
+            <div style={{
+              display: 'flex',
+              flexFlow: 'row wrap',
+              gap: '20px',
+            }}>
+              <Select
+                multiple
+                width='600px'
+                label='Select OS'
+                name='os'
+                items={[
+                  { label: 'Windows', value: 'windows', },
+                  { label: 'macOS', value: 'macos', },
+                  { label: 'Linux', value: 'linux', },
+                  { label: 'A very long option indeed', value: 'a', },
+                ]}
+              />
 
-            <Select
-              multiple
-              width='600px'
-              label='Select OS'
-              name='os'
-              items={[
-                { label: 'Windows', value: 'windows', },
-                { label: 'macOS', value: 'macos', },
-                { label: 'Linux', value: 'linux', },
-                { label: 'A very long option indeed', value: 'a', },
-              ]}
-            />
+              <Select
+                label='Select OS'
+                name='os'
+                items={[
+                  { label: 'Windows', value: 'windows', },
+                  { label: 'macOS', value: 'macos', },
+                  { label: 'Linux', value: 'linux', },
+                  { label: 'A very long option indeed', value: 'a', },
+                ]}
+              />
 
-            <Select
-              label='Select OS'
-              name='os'
-              items={[
-                { label: 'Windows', value: 'windows', },
-                { label: 'macOS', value: 'macos', },
-                { label: 'Linux', value: 'linux', },
-                { label: 'A very long option indeed', value: 'a', },
-              ]}
-            />
+              <Dropdown
+                label='Dropdown'
+                items={[
+                  { label: 'Item 1', href: '#' },
+                  { label: 'Item 2', href: '#', onClick: () => null, disabled: true },
+                  { label: 'Item 3', onClick: () => null, disabled: true },
+                  { label: 'Item 4', href: '#', disabled: false },
+                ]}
+              />
+            </div>
           </div>
         </Layout.Subsection>
 
@@ -190,8 +190,6 @@ const Page = () => {
               <Table.Row>
                 <Table.Cell>
                   <Field type='textarea' resizable label='Field' name='field1' />
-                  <Button label='Some button' />
-                  <Button label='Some button' />
                 </Table.Cell>
 
                 <Table.Cell>

@@ -1,3 +1,7 @@
+.error-container {
+  overflow: hidden;
+}
+
 .error {
   height: 0;
   margin: 0;
@@ -16,7 +20,7 @@
   font-size: 0.9rem;
 
   &.error-visible {
-    margin-top: 10px;
+    margin: 5px 0;
     opacity: 1;
     filter: none;
     pointer-events: all;

@@ -2,7 +2,6 @@
 .h-l, .h-xl {
   color: var(--foreground);
   line-height: 1.4;
-  margin-bottom: 1rem;
   transition: all 0.5s var(--curve);
 }
 

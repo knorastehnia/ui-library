@@ -11,7 +11,7 @@
   border: 1px solid var(--gray-1);
   border-radius: var(--radius);
   background-color: var(--background);
-  color: inherit;
+  color: var(--foreground);
 
   &:hover, &:focus-visible {
     outline: none;
@@ -23,13 +23,14 @@
   display: block;
   user-select: none;
   text-decoration: none;
-  border: none;
+  border: 1px solid var(--gray-1);
   border-radius: var(--radius);
   background-color: var(--foreground);
-  color: var(--gray-1);
+  color: var(--background);
 
   &:hover, &:focus-visible {
     outline: none;
+    border-color: var(--gray-6);
     background-color: var(--gray-9);
   }
 }
