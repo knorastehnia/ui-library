@@ -60,5 +60,5 @@
   cursor: default;
   pointer-events: none;
   background-color: var(--gray-1);
-  border: 1px solid var(--gray-3);
+  border: 1px solid var(--gray-2);
 }

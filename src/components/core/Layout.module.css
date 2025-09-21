@@ -2,14 +2,18 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  max-width: 1800px;
   margin: auto;
 }
 
 .content {
   flex: 1 1 0;
   position: relative;
-  border-left: 1px solid var(--gray-2);
+  max-width: 1600px;
+  margin: auto;
+  
+  @media screen and (min-width: calc(1600px + 250px)) {
+    border-left: 1px solid var(--gray-1);
+  }
 }
 
 .topnav {
@@ -18,8 +22,6 @@
   position: sticky;
   top: 0;
   flex: 0 0 100%;
-  border-right: 1px solid var(--gray-1);
-  border-left: 1px solid var(--gray-2);
   border-bottom: 1px solid var(--gray-2);
   height: 60px;
   z-index: 1000;
@@ -42,7 +44,7 @@
 .sidenav {
   position: relative;
   flex: 0 0 250px;
-  border-left: 1px solid var(--gray-2);
+  border-right: 1px solid var(--gray-2);
   background-color: var(--background);
   
   .sidenav-content {
