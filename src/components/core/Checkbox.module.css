@@ -11,7 +11,6 @@
 }
 
 .input {
-  visibility: hidden;
   appearance: none;
   position: absolute;
   pointer-events: none;
@@ -23,7 +22,7 @@
   align-items: center;
   justify-content: center;
   width: 1rem; height: 1rem;
-  border: 1px solid var(--gray-3);
+  border: 1px solid var(--gray-2);
   border-radius: calc(var(--radius) / 2);
   transition: all 0.5s var(--curve);
   
@@ -37,13 +36,16 @@
 .input:hover + .display-checkbox {
   outline: none;
   background-color: var(--gray-2);
-}
-
-.input:focus-visible + .checked {
-  background-color: var(--gray-9) !important;
+  border-color: var(--gray-6);
 }
 
 .input:hover + .checked {
-  outline: none;
   background-color: var(--foreground);
+  border-color: var(--foreground);
+}
+
+.input:focus-visible + .checked {
+  outline: none;
+  background-color: var(--gray-9);
+  border-color: var(--gray-9);
 }

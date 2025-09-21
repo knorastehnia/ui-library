@@ -1,88 +1,65 @@
 import styles from './Radio.module.css'
 import Typography from './Typography'
-import { useState, Children, cloneElement, type ReactElement } from 'react'
-
-interface RadioProps {
-  children: React.ReactNode,
-  name: string,
-  type?: 'vertical' | 'horizontal',
-}
+import { useState } from 'react'
 
 interface RadioOptionProps {
   label: string,
   name: string,
   value: string,
   disabled?: boolean,
-  _group?: string,
-  _selected?: string,
-  _setSelected?: Function,
 }
 
-type RadioComponent = React.FC<RadioProps> & {
-  Option: React.FC<RadioOptionProps>,
+interface RadioProps {
+  name: string,
+  options: RadioOptionProps[],
+  style?: 'vertical' | 'horizontal',
 }
 
-const Radio: RadioComponent = ({
-  children,
+const Radio: React.FC<RadioProps> = ({
   name,
-  type='horizontal',
+  options,
+  style='horizontal',
 }) => {
   const [selected, setSelected] = useState<string>('')
 
   return (
     <>
-      <div className={styles[`radio-${type}`]}>
-        {Children.map(children, (child) => {
-          return cloneElement(child as ReactElement<any>, {
-            _selected: selected,
-            _setSelected: setSelected,
-            _group: name,
+      <div className={styles[`radio-${style}`]}>
+        {
+          options.map((option, index) => {
+            return (
+              <label
+                key={index}
+                className={`
+                  ${styles['label']} 
+                  ${selected === option.name && styles['checked']} 
+                  ${option.disabled && styles['disabled']}
+                `}
+                htmlFor={name + option.name}
+              >
+                <input
+                  className={styles['input']}
+                  type='radio'
+                  disabled={option.disabled}
+                  name={name}
+                  id={name + option.name}
+                  value={option.value}
+                  checked={selected === option.name}
+                  onChange={() => setSelected(option.name)}
+                />
+
+                <span>
+                  <Typography weight='400'>
+                    {option.label}
+                  </Typography>
+                </span>
+              </label>
+            )
           })
-        })}
+        }
       </div>
     </>
   )
 }
-
-const RadioOption: React.FC<RadioOptionProps> = ({
-  label,
-  name,
-  value,
-  disabled=false,
-  _group,
-  _selected,
-  _setSelected,
-}) => {
-  return (
-    <>
-      <label
-        className={`
-          ${styles['label']} 
-          ${_selected === name && styles['checked']}
-        `}
-        htmlFor={_group + name}
-      >
-        <input
-          className={styles['input']}
-          type='radio'
-          disabled={disabled}
-          name={_group}
-          id={_group + name}
-          value={value}
-          checked={_selected === name}
-          onChange={() => _setSelected!(name)}
-        />
-
-        <span>
-          <Typography weight='400'>
-            {label}
-          </Typography>
-        </span>
-      </label>
-    </>
-  )
-}
-
-Radio.Option = RadioOption
 
 export default Radio

@@ -155,15 +155,18 @@ const Page = () => {
           <Checkbox label='Checkbox 1' name='firstcb' />
           <Checkbox label='Checkbox 2' name='secondcb' />
           <Checkbox label='Checkbox 3' name='thirdcb' />
-          <Radio type='vertical' name='rgroup1'>
-            <Radio.Option label='Radio 1.1' value='r1' name='r1' />
-            <Radio.Option label='Radio 1.2' value='r2' name='r2' />
-            <Radio.Option label='Radio 1.3' value='r3' name='r3' />
-          </Radio>
-          <Radio name='rgroup2'>
-            <Radio.Option label='A' value='r1' name='r1' />
-            <Radio.Option label='B' value='r2' name='r2' />
-          </Radio>
+          <Radio style='vertical' name='rgroup1' options={[
+            { label: 'Radio 1.1', value: 'r1', name: 'r1' },
+            { label: 'Radio 1.2', value: 'r2', name: 'r2' },
+            { label: 'Radio 1.3', value: 'r3', name: 'r3', disabled: true },
+          ]} />
+
+          <Radio name='rgroup2' options={[
+            { label: 'A', value: 'r1', name: 'r1' },
+            { label: 'B', value: 'r2', name: 'r2' },
+            { label: 'C', value: 'r3', name: 'r3' },
+            { label: 'D', value: 'r4', name: 'r4' },
+          ]} />
         </Layout.Subsection>
       </Layout.Section>
 
