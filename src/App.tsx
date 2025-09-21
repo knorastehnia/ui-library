@@ -8,7 +8,11 @@ const App = () => {
   return (
     <>
       <Layout>
-        <Layout.Sidebar>
+        <Layout.TopNav>
+          <div style={{ color: 'var(--gray-9)' }}>Top Nav Bar</div>
+        </Layout.TopNav>
+
+        <Layout.SideNav>
           <Tree.Item label='Dashboard' href='#' />
           <Tree.Item label='Projects' href='#' />
           <Tree.Item label='Tree Item' href='#' />
@@ -39,13 +43,9 @@ const App = () => {
               </Tree.Branch>
             </Tree.Branch>
           </Tree>
-        </Layout.Sidebar>
-
+        </Layout.SideNav>
 
         <Layout.Content>
-          <Layout.Header fixed>
-            <div>Header</div>
-          </Layout.Header>
           <Page />
         </Layout.Content>
       </Layout>

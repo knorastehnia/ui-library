@@ -1,7 +1,7 @@
 import styles from './Layout.module.css'
 
 interface ContentProps { children: React.ReactNode }
-interface SidebarProps { children: React.ReactNode }
+interface SideNavProps { children: React.ReactNode }
 interface LayoutProps { children: React.ReactNode }
 
 interface SubsectionProps {
@@ -13,14 +13,13 @@ interface SectionProps {
   children: React.ReactNode,
 }
 
-interface HeaderProps {
+interface TopNavProps {
   children: React.ReactNode,
-  fixed?: boolean,
 }
 
 type LayoutComponent = React.FC<LayoutProps> & {
-  Header: React.FC<HeaderProps>,
-  Sidebar: React.FC<SidebarProps>,
+  TopNav: React.FC<TopNavProps>,
+  SideNav: React.FC<SideNavProps>,
   Content: React.FC<ContentProps>,
   Section: React.FC<SectionProps>,
   Subsection: React.FC<SubsectionProps>,
@@ -67,34 +66,26 @@ const Content: React.FC<ContentProps> = ({
   )
 }
 
-const Header: React.FC<HeaderProps> = ({
+const TopNav: React.FC<TopNavProps> = ({
   children,
-  fixed=false,
 }) => {
   return (
-    <header
-      className={styles['header']}
-      style={ fixed ?
-        {
-          position: 'sticky',
-          top: '0',
-        }
-        : {}
-      }
-    >
-      {children}
-    </header>
+    <div className={styles['topnav']}>
+      <div className={styles['topnav-side']}></div>
+      <div className={styles['topnav-content']}>
+        {children}
+      </div>
+    </div>
   )
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
+const SideNav: React.FC<SideNavProps> = ({
   children,
 }) => {
   return (
-    <div className={styles['sidebar-container']}>
-      <div className={styles['sidebar']}>
-        <div className={styles['sidebar-header']}></div>
-        <div className={styles['sidebar-content']}>{children}</div>
+    <div className={styles['sidenav']}>
+      <div className={styles['sidenav-content']}>
+        {children}
       </div>
     </div>
   )
@@ -108,8 +99,8 @@ const Layout: LayoutComponent = ({
   )
 }
 
-Layout.Header = Header
-Layout.Sidebar = Sidebar
+Layout.TopNav = TopNav
+Layout.SideNav = SideNav
 Layout.Content = Content
 Layout.Section = Section
 Layout.Subsection = Subsection
