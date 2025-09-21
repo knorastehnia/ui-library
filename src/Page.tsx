@@ -22,9 +22,9 @@ const Page = () => {
   return (
     <>
       <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
-        <Typography role='h3' size='xs'>Modal component</Typography>
+        <Typography type='h3' size='xs'>Modal component</Typography>
 
-        <Typography role='p'>
+        <Typography type='p'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
           Facilis quaerat similique maxime atque consequatur alias est, autem 
           obcaecati laboriosam mollitia harum, ad quia officia tempore 
@@ -40,7 +40,7 @@ const Page = () => {
           justifyContent: 'space-between',
           gap: '10px',
         }}>
-          <Button label='Confirm' onClick={() => setShowModal(false)} width='49%' style='fill' />
+          <Button label='Confirm' onClick={() => setShowModal(false)} width='49%' type='fill' />
           <Button label='Cancel' onClick={() => setShowModal(false)} width='49%' />
         </div>
       </Modal>
@@ -57,7 +57,7 @@ const Page = () => {
             <Button label='Button' onClick={() => setShowModal(true)} width='100%' size='m' />
 
             <Button label='Button' />
-            <Button label='Button' style='fill' />
+            <Button label='Button' type='fill' />
           </div>
         </Layout.Subsection>
 
@@ -68,7 +68,7 @@ const Page = () => {
             gap: '20px',
             width: '100%',
           }}>
-            <Typography role='h2' size='s'>Some Form</Typography>
+            <Typography type='h2' size='s'>Some Form</Typography>
 
             <div style={{
               display: 'flex',
@@ -94,7 +94,7 @@ const Page = () => {
               label='Submit'
               onClick={() => setSomeState(!someState)}
               size='m'
-              style='fill'
+              type='fill'
               width='100%'
             />
           </div>
@@ -221,7 +221,7 @@ const Page = () => {
                 </Table.Cell>
 
                 <Table.Cell rowSpan={2} colSpan={1} width='100px'>
-                  <Typography role='p'>
+                  <Typography type='p'>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
                     porro doloribus. Ad ratione expedita, quae neque fugit, ea 
                     laboriosam facere quas exercitationem sint doloribus. 
@@ -252,8 +252,8 @@ const Page = () => {
           ]}>
             <List>
               <List.Item>
-                <Typography role='h2' size='xs'>List Item</Typography>
-                <Typography role='p'>
+                <Typography type='h2' size='xs'>List Item</Typography>
+                <Typography type='p'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                   corporis consequuntur porro suscipit inventore atque cupiditate 
                   quos beatae, officia deserunt esse praesentium fugiat adipisci 
@@ -262,16 +262,16 @@ const Page = () => {
               </List.Item>
 
               <List.Item>
-                <Typography role='h2' size='xs'>List Item</Typography>
-                <Typography role='p'>
+                <Typography type='h2' size='xs'>List Item</Typography>
+                <Typography type='p'>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
                   Atque, est dicta, eaque adipisci.
                 </Typography>
               </List.Item>
 
               <List.Item>
-                <Typography role='h2' size='xs'>List Item</Typography>
-                <Typography role='p'>
+                <Typography type='h2' size='xs'>List Item</Typography>
+                <Typography type='p'>
                   Lorem, ipsum dolor sit amet.
                 </Typography>
               </List.Item>
@@ -282,7 +282,7 @@ const Page = () => {
         <Layout.Subsection span={1}>
           <Accordion>
             <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
+              <Typography type='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                 corporis consequuntur porro suscipit inventore atque cupiditate 
                 quos beatae, officia deserunt esse praesentium fugiat adipisci 
@@ -291,14 +291,14 @@ const Page = () => {
             </Accordion.Item>
 
             <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
+              <Typography type='p'>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
                 Atque, est dicta, eaque adipisci.
               </Typography>
             </Accordion.Item>
 
             <Accordion.Item label='Accordion Item'>
-              <Typography role='p'>
+              <Typography type='p'>
                 Lorem, ipsum dolor sit amet.
               </Typography>
             </Accordion.Item>
@@ -308,44 +308,44 @@ const Page = () => {
 
       <Layout.Section>
         <Layout.Subsection>
-          <Typography role='h2'>Header H2</Typography>
-          <Typography role='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='h2'>Header H2</Typography>
+          <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button label='tempore tenetur' style='text' href='#' /> a
+            cupiditate <Button label='tempore tenetur' type='text' href='#' /> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
-          <Typography size='s' role='h2'>Header H2 S</Typography>
-          <Typography size='m' role='h2'>Header H2 M</Typography>
-          <Typography size='l' role='h2'>Header H2 L</Typography>
-          <Typography size='xl' role='h2'>Header H2 XL</Typography>
+          <Typography size='s' type='h2'>Header H2 S</Typography>
+          <Typography size='m' type='h2'>Header H2 M</Typography>
+          <Typography size='l' type='h2'>Header H2 L</Typography>
+          <Typography size='xl' type='h2'>Header H2 XL</Typography>
 
-          <Typography role='p' size='xs'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='p' size='xs'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
 
-          <Typography role='p' size='s'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='p' size='s'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
 
-          <Typography role='p' size='m'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='p' size='m'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
 
-          <Typography role='p' size='l'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='p' size='l'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
 
-          <Typography role='p' size='xl'>Lorem ipsum dolor sit amet consectetur adipisicing 
+          <Typography type='p' size='xl'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>

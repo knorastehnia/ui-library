@@ -3,9 +3,8 @@ import { createElement } from 'react'
 
 interface TypographyProps {
   children: React.ReactNode,
-  role?:
-    | 'h1' | 'h2' | 'h3'
-    | 'h4' | 'h5' | 'h6'
+  type?:
+    | 'h1' | 'h2' | 'h3' | 'h4'
     | 'p' | 'span',
 
   size?: 'xs' | 's' | 'm' | 'l' | 'xl',
@@ -21,16 +20,16 @@ interface TypographyProps {
 
 const Typography: React.FC<TypographyProps> = ({
   children,
-  role='span',
+  type='span',
   size='m',
   weight='300',
-  color=(role === 'p' ? 'dimmed' : 'primary'),
+  color=(type === 'p' ? 'dimmed' : 'primary'),
 }) => {
-  const trimmedRole = role.at(0) === 'h' ? 'h' : role
+  const trimmedRole = type.at(0) === 'h' ? 'h' : type
 
   return (
     createElement(
-      role,
+      type,
       {
         className: `
           ${styles[`${trimmedRole}-${size}`]} 

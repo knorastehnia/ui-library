@@ -1,5 +1,6 @@
 .list {
-  .item { padding: 20px }
+  padding: 20px;
+  .item { padding: 20px 0 }
 }
 
 .divider {

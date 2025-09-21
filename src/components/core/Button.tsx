@@ -5,7 +5,7 @@ interface ButtonProps {
   label: string,
   href?: string,
   onClick?: Function,
-  style?: 'fill' | 'outline' | 'text',
+  type?: 'fill' | 'outline' | 'text',
   size?: 's' | 'm' | 'l',
   width?: string,
   disabled?: boolean,
@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   label,
   href='',
   onClick=(() => null),
-  style='outline',
+  type='outline',
   size='m',
   width='auto',
   disabled=false,
@@ -28,10 +28,10 @@ const Button: React.FC<ButtonProps> = ({
         <a
           href={href}
           onClick={(e) => !disabled && onClick(e)}
-          style={style !== 'text' ? { width } : {}}
+          style={type !== 'text' ? { width } : {}}
           className={`
-            ${styles[`style-${style}`]} 
-            ${style !== 'text' && styles[`size-${size}`]} 
+            ${styles[`style-${type}`]} 
+            ${type !== 'text' && styles[`size-${size}`]} 
             ${disabled && styles['disabled']}
           `}
         >
@@ -44,10 +44,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled}
           onClick={(e) => !disabled && onClick(e)}
-          style={style !== 'text' ? { width } : {}}
+          style={type !== 'text' ? { width } : {}}
           className={`
-            ${styles[`style-${style}`]} 
-            ${style !== 'text' && styles[`size-${size}`]} 
+            ${styles[`style-${type}`]} 
+            ${type !== 'text' && styles[`size-${size}`]} 
             ${disabled && styles['disabled']}
           `}
         >

@@ -7,6 +7,7 @@ interface ListItemProps {
 interface ListProps {
   children: React.ReactNode,
   width?: string,
+  height?: string,
 }
 
 type ListComponent = React.FC<ListProps> & {
@@ -27,12 +28,13 @@ const ListItem: React.FC<ListItemProps> = ({
 const List: ListComponent = ({
   children,
   width='100%',
+  height='auto',
 }) => {
   return (
     <>
       <div
         className={styles['list']}
-        style={{ width }}
+        style={{ width, height }}
       >
           {children}
       </div>
