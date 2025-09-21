@@ -49,7 +49,7 @@ const Radio: React.FC<RadioProps> = ({
                 />
 
                 <span>
-                  <Typography weight='400'>
+                  <Typography weight='400' color={option.disabled ? 'disabled' : 'primary'}>
                     {option.label}
                   </Typography>
                 </span>

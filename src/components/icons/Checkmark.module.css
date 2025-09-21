@@ -18,7 +18,7 @@
   }
 
   .visible {
-    animation: appear var(--curve) 0.25s 0.1s forwards;
+    animation: appear var(--curve) 0.25s forwards;
   }
 }
 

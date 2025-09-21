@@ -14,7 +14,6 @@
 
   &.disabled {
     cursor: default;
-    color: var(--gray-6);
 
     &:hover {
       background-color: var(--background);

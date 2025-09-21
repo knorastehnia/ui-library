@@ -8,15 +8,14 @@
   display: block;
   user-select: none;
   text-decoration: none;
-  border: 1px solid var(--gray-2);
   border-radius: var(--radius);
+  border: 1px solid var(--gray-2);
   background-color: var(--background);
-  color: var(--foreground);
 
   &:hover, &:focus-visible {
     outline: none;
     border-color: var(--gray-6);
-    background-color: var(--gray-2);
+    background-color: var(--gray-1);
   }
 }
 
@@ -24,23 +23,20 @@
   display: block;
   user-select: none;
   text-decoration: none;
-  border: 1px solid var(--foreground);
   border-radius: var(--radius);
-  background-color: var(--foreground);
-  color: var(--background);
+  border: 1px solid var(--gray-3);
+  background-color: var(--gray-1);
 
   &:hover, &:focus-visible {
     outline: none;
     border-color: var(--gray-6);
     background-color: var(--gray-2);
-    color: var(--foreground);
   }
 }
 
 .style-text {
   user-select: auto;
   border: none;
-  color: var(--foreground);
   text-decoration: underline solid var(--gray-2) 1px;
 
   &:hover, &:focus-visible {
@@ -63,13 +59,6 @@
 .disabled {
   cursor: default;
   pointer-events: none;
-  background-color: var(--gray-2);
-  border: 1px solid var(--gray-2);
-  color: var(--gray-6);
-
-  &:hover, &:focus {
-    background-color: var(--gray-2);
-    border: 1px solid var(--gray-2);
-    color: var(--gray-6);
-  }
+  background-color: var(--gray-1);
+  border: 1px solid var(--gray-3);
 }

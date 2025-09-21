@@ -25,6 +25,10 @@
 .weight-400 { font-weight: 400 }
 .weight-500 { font-weight: 500 }
 
+.color-primary { color: var(--foreground) }
+.color-dimmed { color: var(--gray-9) }
+.color-inverted { color: var(--background) }
+.color-disabled { color: var(--gray-6) }
 .color-error { color: var(--error) }
 .color-success { color: var(--success) }
 

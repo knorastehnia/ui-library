@@ -57,7 +57,7 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
         }}
       >
         <Arrow width='0.6rem' height='0.6rem' state={isOpen} />
-        <Typography weight='400'>
+        <Typography weight='400' color='dimmed'>
           {label}
         </Typography>
       </button>

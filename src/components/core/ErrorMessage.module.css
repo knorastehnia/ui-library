@@ -16,7 +16,6 @@
   justify-content: left;
   align-items: start;
   gap: 5px;
-  color: var(--error);
   font-size: 0.9rem;
 
   &.error-visible {

@@ -10,7 +10,13 @@ interface TypographyProps {
 
   size?: 'xs' | 's' | 'm' | 'l' | 'xl',
   weight?: '300' | '400' | '500',
-  color?: 'normal' | 'success' | 'error'
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
 }
 
 const Typography: React.FC<TypographyProps> = ({
@@ -18,7 +24,7 @@ const Typography: React.FC<TypographyProps> = ({
   role='span',
   size='m',
   weight='300',
-  color='normal',
+  color=(role === 'p' ? 'dimmed' : 'primary'),
 }) => {
   const trimmedRole = role.at(0) === 'h' ? 'h' : role
 

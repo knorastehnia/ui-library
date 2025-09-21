@@ -122,7 +122,11 @@ const Select: React.FC<SelectProps> = ({
             `}
             htmlFor={name}
           >
-            <Typography weight='400' size={!!selected?.length ? 's' : 'm'}>
+            <Typography
+              weight='400'
+              size={!!selected?.length ? 's' : 'm'}
+              color='dimmed'
+            >
               {label}
             </Typography>
           </label>

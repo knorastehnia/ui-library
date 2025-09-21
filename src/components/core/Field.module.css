@@ -19,7 +19,6 @@
   position: absolute;
   top: 0; left: 0;
   transform: translate(5px, 10px);
-  color: var(--gray-9);
   background-color: var(--background);
   padding: 0 5px;
   border-radius: 999px;
@@ -32,7 +31,6 @@
 
 .input {
   width: 100%;
-  color: var(--foreground);
   padding: 10px;
   border: none;
   transition: all 0.5s var(--curve), height 0.25s var(--curve);
@@ -75,14 +73,9 @@
   pointer-events: none;
   user-select: none;
   background-color: var(--background);
-  color: var(--gray-9);
   padding: 0 5px;
   border-radius: 999px;
   bottom: calc(-0.35rem - 2px); right: 10px;
   font-size: 0.7rem;
   z-index: 10;
-
-  .excess-count {
-    color: var(--error);
-  }
 }

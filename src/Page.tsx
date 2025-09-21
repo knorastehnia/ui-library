@@ -152,21 +152,29 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <Checkbox label='Checkbox 1' name='firstcb' />
-          <Checkbox label='Checkbox 2' name='secondcb' />
-          <Checkbox label='Checkbox 3' name='thirdcb' />
-          <Radio style='vertical' name='rgroup1' options={[
-            { label: 'Radio 1.1', value: 'r1', name: 'r1' },
-            { label: 'Radio 1.2', value: 'r2', name: 'r2' },
-            { label: 'Radio 1.3', value: 'r3', name: 'r3', disabled: true },
-          ]} />
+          <div style={{
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '20px',
+          }}>
+            <div>
+              <Checkbox label='Checkbox 1' name='firstcb' />
+              <Checkbox label='Checkbox 2' name='secondcb' />
+              <Checkbox label='Checkbox 3' name='thirdcb' />
+            </div>
+            <Radio style='vertical' name='rgroup1' options={[
+              { label: 'Radio 1.1', value: 'r1', name: 'r1' },
+              { label: 'Radio 1.2', value: 'r2', name: 'r2' },
+              { label: 'Radio 1.3', value: 'r3', name: 'r3', disabled: true },
+            ]} />
 
-          <Radio name='rgroup2' options={[
-            { label: 'A', value: 'r1', name: 'r1' },
-            { label: 'B', value: 'r2', name: 'r2' },
-            { label: 'C', value: 'r3', name: 'r3' },
-            { label: 'D', value: 'r4', name: 'r4' },
-          ]} />
+            <Radio name='rgroup2' options={[
+              { label: 'A', value: 'r1', name: 'r1' },
+              { label: 'B', value: 'r2', name: 'r2' },
+              { label: 'C', value: 'r3', name: 'r3' },
+              { label: 'D', value: 'r4', name: 'r4' },
+            ]} />
+          </div>
         </Layout.Subsection>
       </Layout.Section>
 

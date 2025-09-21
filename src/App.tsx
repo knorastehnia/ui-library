@@ -3,13 +3,14 @@ import './App.css'
 import Page from './Page'
 import Layout from './components/core/Layout'
 import Tree from './components/core/Tree'
+import Typography from './components/core/Typography'
 
 const App = () => {
   return (
     <>
       <Layout>
         <Layout.TopNav>
-          <div style={{ color: 'var(--gray-9)' }}>Top Nav Bar</div>
+          <Typography weight='400' color='dimmed'>Top Nav Bar</Typography>
         </Layout.TopNav>
 
         <Layout.SideNav>

@@ -87,7 +87,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                       ${item.disabled && styles['disabled']}
                     `}
                   >
-                    <Typography weight='400'>
+                    <Typography weight='400' color={item.disabled ? 'disabled' : 'primary'}>
                       {item.label}
                     </Typography>
                   </a>
@@ -101,7 +101,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                       ${item.disabled && styles['disabled']}
                     `}
                   >
-                    <Typography weight='400'>
+                    <Typography weight='400' color={item.disabled ? 'disabled' : 'primary'}>
                       {item.label}
                     </Typography>
                   </button>

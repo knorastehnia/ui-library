@@ -103,7 +103,12 @@ const Field: React.FC<FieldProps> = ({
             `}
             htmlFor={name}
           >
-            <Typography weight='400' size={(focus || value) ? 's' : 'm'}>
+            <Typography
+              weight='400'
+              size={(focus || value) ? 's' : 'm'}
+              color='dimmed'
+            >
+              
               {label}
             </Typography>
           </label>
@@ -151,21 +156,23 @@ const Field: React.FC<FieldProps> = ({
           {
             limit > 0 &&
               <div className={styles['counter']}>
-                <span
-                  className={
-                    value.length > limit
-                    ? styles['excess-count']
-                    : ''
-                  }
-                >
-                  <Typography weight='400' size='xs'>
+                <span>
+                  <Typography
+                    weight='400'
+                    size='xs'
+                    color={value.length > limit ? 'error' : 'dimmed'}
+                  >
                     {value.length}
                   </Typography>
                 </span>
-                /
+
                 <span>
-                  <Typography weight='400' size='xs'>
-                    {limit}
+                  <Typography
+                    weight='400'
+                    size='xs'
+                    color='dimmed'
+                  >
+                    {'/' + limit}
                   </Typography>
                 </span>
               </div>

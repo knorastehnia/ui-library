@@ -1,7 +1,6 @@
 .item {
   display: block;
   padding: 10px;
-  color: var(--foreground);
   text-decoration: none;
   text-align: left;
   width: 250px;
@@ -17,7 +16,6 @@
 
   &.disabled {
     cursor: default;
-    color: var(--gray-6);
 
     &:hover {
       background-color: var(--background);
@@ -39,7 +37,6 @@ hr {
   justify-content: space-between;
   gap: 10px;
 
-  color: var(--gray-9);
   background-color: var(--background);
   border: none;
   border-radius: var(--radius);

@@ -6,7 +6,6 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  color: var(--foreground);
   gap: 10px;
 }
 
@@ -24,11 +23,12 @@
   width: 1rem; height: 1rem;
   border: 1px solid var(--gray-2);
   border-radius: calc(var(--radius) / 2);
+  background-color: var(--background);
   transition: all 0.5s var(--curve);
   
   &.checked {
-    border-color: var(--foreground);
-    background-color: var(--foreground);
+    background-color: var(--gray-1);
+    border-color: var(--gray-3);
   }
 }
 
@@ -37,15 +37,4 @@
   outline: none;
   background-color: var(--gray-2);
   border-color: var(--gray-6);
-}
-
-.input:hover + .checked {
-  background-color: var(--foreground);
-  border-color: var(--foreground);
-}
-
-.input:focus-visible + .checked {
-  outline: none;
-  background-color: var(--gray-9);
-  border-color: var(--gray-9);
 }
