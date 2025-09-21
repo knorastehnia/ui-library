@@ -36,7 +36,7 @@
 .input:focus-visible + .display-checkbox,
 .input:hover + .display-checkbox {
   outline: none;
-  background-color: var(--gray-1);
+  background-color: var(--gray-2);
 }
 
 .input:focus-visible + .checked {

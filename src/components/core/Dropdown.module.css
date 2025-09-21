@@ -12,7 +12,7 @@
   
   &:hover, &:focus-visible {
     outline: none;
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 
   &.disabled {
@@ -29,7 +29,7 @@ hr {
   height: 0.8px;
   width: 100%;
   border: none;
-  background-color: var(--gray-1);
+  background-color: var(--gray-2);
 }
 
 .button {
@@ -49,6 +49,6 @@ hr {
   
   &:hover, &:focus-visible, &.button-active {
     outline: none;
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 }

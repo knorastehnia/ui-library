@@ -1,7 +1,7 @@
 .radio-horizontal, .radio-vertical {
   width: fit-content;
   background-color: var(--background);
-  border: 1px solid var(--gray-1);
+  border: 1px solid var(--gray-2);
   border-radius: var(--radius);
   overflow: clip;
 }
@@ -11,7 +11,7 @@
   display: flex;
   flex-flow: row nowrap;
 
-  .label { border-right: 1px solid var(--gray-1) }
+  .label { border-right: 1px solid var(--gray-2) }
   .label:last-child { border: none }
 }
 
@@ -20,7 +20,7 @@
   display: flex;
   flex-flow: column nowrap;
 
-  .label { border-bottom: 1px solid var(--gray-1) }
+  .label { border-bottom: 1px solid var(--gray-2) }
   .label:last-child { border: none }
 }
 
@@ -49,7 +49,7 @@
   }
 
   &:hover, &:has(.input:focus-visible) {
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 }
 
@@ -63,5 +63,5 @@
 .input:focus-visible + .radio,
 .input:hover + .radio {
   outline: none;
-  background-color: var(--gray-1);
+  background-color: var(--gray-2);
 }

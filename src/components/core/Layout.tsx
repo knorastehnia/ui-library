@@ -1,5 +1,4 @@
 import styles from './Layout.module.css'
-import Typography from './Typography'
 
 interface ContentProps { children: React.ReactNode }
 interface SidebarProps { children: React.ReactNode }
@@ -49,31 +48,13 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   return (
     <>
-      <div className={styles['section-header']}>
-        <svg
-          className={styles['border-top']}
-          viewBox='0 0 100 1' preserveAspectRatio='none' aria-hidden='true'
-        >
-          <line className={styles['dashed-line']} x1='0' y1='0.5' x2='100' y2='0.5'/>
-        </svg>
-
-        <div className={styles['section-header-content']}>
-          <Typography role='h2' weight='300' size='s'>Section Header</Typography>
-        </div>
-
-        <svg
-          className={styles['border-bottom']}
-          viewBox='0 0 100 1' preserveAspectRatio='none' aria-hidden='true'
-        >
-          <line className={styles['dashed-line']} x1='0' y1='0.5' x2='100' y2='0.5'/>
-        </svg>
-      </div>
-
       <section className={styles['section']}>
         <div className={styles['section-content']}>
           {children}
         </div>
       </section>
+
+      <div className={styles['section-divider']}></div>
     </>
   )
 }

@@ -10,7 +10,7 @@
     stroke-dasharray: 1;
   }
 
-  .color-background { stroke: var(--gray-1) }
+  .color-background { stroke: var(--gray-2) }
   .color-foreground { stroke: var(--gray-9) }
 
   .hidden {

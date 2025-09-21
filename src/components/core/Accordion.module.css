@@ -15,11 +15,11 @@
 
   &:focus-visible {
     outline: none;
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 
   &:hover {
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 }
 

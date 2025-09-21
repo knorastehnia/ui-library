@@ -9,7 +9,7 @@
   transition: all 0.5s var(--curve);
 
   &:hover {
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 
   &.disabled {

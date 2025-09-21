@@ -15,7 +15,7 @@
   
   &:hover, &:focus-visible {
     outline: none;
-    background-color: var(--gray-1);
+    background-color: var(--gray-2);
   }
 }
 
@@ -27,7 +27,7 @@
   gap: 10px;
 
   background-color: var(--background);
-  border: 1px solid var(--gray-1);
+  border: 1px solid var(--gray-2);
   border-radius: var(--radius);
   padding: 0 10px;
   height: calc(1.4rem + 20px);

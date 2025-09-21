@@ -13,8 +13,8 @@
 
 .header {
   border-right: 1px solid var(--gray-1);
-  border-bottom: 1px solid var(--gray-1);
-  padding: 0 40px;
+  border-bottom: 1px solid var(--gray-2);
+  padding: 0 80px;
   width: 100%;
   height: 60px;
   z-index: 1000;
@@ -41,43 +41,26 @@
   .sidebar-header {
     flex: 0 0 60px;
     width: 250px;
-    border-left: 1px solid var(--gray-1);
-    border-right: 1px solid var(--gray-1);
-    border-bottom: 1px solid var(--gray-1);
+    border-left: 1px solid var(--gray-2);
+    border-right: 1px solid var(--gray-2);
+    border-bottom: 1px solid var(--gray-2);
   }
   
   .sidebar-content {
     flex: 0 1 100%;
     width: 250px;
-    border-left: 1px solid var(--gray-1);
-    border-right: 1px solid var(--gray-1);
+    border-left: 1px solid var(--gray-2);
+    border-right: 1px solid var(--gray-2);
     padding: 20px;
     overflow: auto;
   }
 }
 
-.section-header {
-  position: relative;
-  padding-top: 40px;
+.section-divider {
   background-color: var(--background);
+  border-bottom: 1px solid var(--gray-2);
   border-right: 1px solid var(--gray-1);
-  z-index: 10;
-  
-  .section-header-content {
-    padding: 20px 40px;
-  }
-
-  .border-top, .border-bottom {
-    position: absolute;
-    width: 100%;
-    height: 1px;
-  
-    .dashed-line {
-      stroke: var(--gray-1);
-      stroke-width: 1px;
-      stroke-dasharray: 0.25 0.25;
-    }
-  }
+  height: 80px;
 }
 
 .section {
@@ -93,12 +76,8 @@
 
 .subsection {
   background-color: var(--background);
-
-  border-right: 1px solid #1a1a1a;
-  border-bottom: 1px solid #1a1a1a;
-
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
-  padding: 40px;
+  padding: 80px;
   overflow: hidden;
 }
