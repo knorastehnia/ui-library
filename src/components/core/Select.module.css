@@ -42,6 +42,7 @@
 }
 
 .select {
+  visibility: hidden;
   appearance: none;
   position: absolute;
   pointer-events: none;

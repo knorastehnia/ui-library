@@ -54,6 +54,7 @@
 }
 
 .input {
+  visibility: hidden;
   appearance: none;
   position: absolute;
   opacity: 0;
