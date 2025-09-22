@@ -3,7 +3,7 @@ import Typography from './Typography'
 
 interface ListItemProps {
   children: React.ReactNode,
-  label?: string,
+  label: string,
   sublabel?: string,
 }
 
