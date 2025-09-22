@@ -250,29 +250,47 @@ const Page = () => {
             { label: 'Loop Up Definition', disabled: false },
             { label: 'Save As...' },
           ]}>
+            {/* <List items={[
+              {
+                label: 'Item 1',
+                sublabel: 'Sublabel 1',
+              },
+              { label: 'Item 2', sublabel: 'Sublabel 2' },
+              { label: 'Item 3' },
+              { label: 'Item 4' },
+            ]} /> */}
+
             <List>
-              <List.Item>
-                <Typography type='h2' size='xs'>List Item</Typography>
+              <List.Item label='Item 1' sublabel='Sublabel 1'>
                 <Typography type='p'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-                  corporis consequuntur porro suscipit inventore atque cupiditate 
-                  quos beatae, officia deserunt esse praesentium fugiat adipisci 
-                  optio unde voluptates saepe similique veniam!
+                  Dolor sit amet consectetur adipisicing elit. 
+                  Ipsam atque dolores aliquam explicabo veniam, hic dolore dicta. 
+                  Adipisci animi sit exercitationem. Dolores omnis impedit sed 
+                  facilis saepe sint iusto veritatis!
                 </Typography>
               </List.Item>
 
-              <List.Item>
-                <Typography type='h2' size='xs'>List Item</Typography>
+              <List.Item label='Item 2' sublabel='Sublabel 2'>
                 <Typography type='p'>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                  Atque, est dicta, eaque adipisci.
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                  Ipsam atque dolores aliquam explicabo veniam.
                 </Typography>
               </List.Item>
 
-              <List.Item>
-                <Typography type='h2' size='xs'>List Item</Typography>
+              <List.Item label='Item 3'>
                 <Typography type='p'>
-                  Lorem, ipsum dolor sit amet.
+                  Sit amet consectetur adipisicing elit. Ipsam atque 
+                  dolores aliquam explicabo veniam, hic dolore dicta. 
+                  Adipisci animi sit exercitationem.
+                </Typography>
+              </List.Item>
+
+              <List.Item label='Item 4'>
+                <Typography type='p'>
+                  Adipisicing elit. Ipsam atque dolores aliquam 
+                  explicabo veniam, hic dolore dicta. Adipisci 
+                  animi sit exercitationem. Dolores omnis impedit sed 
+                  facilis saepe.
                 </Typography>
               </List.Item>
             </List>
