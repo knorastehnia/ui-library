@@ -2,57 +2,50 @@ import styles from './Button.module.css'
 import Typography from './Typography'
 
 interface ButtonProps {
-  label: string,
-  href?: string,
-  onClick?: Function,
+  children: React.ReactNode,
+  action?: string | Function,
   type?: 'fill' | 'outline' | 'text',
-  size?: 's' | 'm' | 'l',
-  width?: string,
+  width?: 'auto' | 'full',
   disabled?: boolean,
 }
 
 const Button: React.FC<ButtonProps> = ({
-  label,
-  href='',
-  onClick=(() => null),
+  children,
+  action,
   type='outline',
-  size='m',
   width='auto',
   disabled=false,
 }) => {
   return (
     <>
-      {href.length > 0
+      {(typeof action === 'string') && action.length > 0
 
       ?
         <a
-          href={href}
-          onClick={(e) => !disabled && onClick(e)}
-          style={type !== 'text' ? { width } : {}}
+          href={action}
           className={`
             ${styles[`style-${type}`]} 
-            ${type !== 'text' && styles[`size-${size}`]} 
+            ${type !== 'text' && styles[`width-${width}`]} 
             ${disabled && styles['disabled']}
           `}
         >
           <Typography weight='400' color={disabled ? 'disabled' : 'primary'}>
-            {label}
+            {children}
           </Typography>
         </a>
       
       :
         <button
           disabled={disabled}
-          onClick={(e) => !disabled && onClick(e)}
-          style={type !== 'text' ? { width } : {}}
+          onClick={(e) => !disabled && typeof action === 'function' && action(e)}
           className={`
             ${styles[`style-${type}`]} 
-            ${type !== 'text' && styles[`size-${size}`]} 
+            ${type !== 'text' && styles[`width-${width}`]} 
             ${disabled && styles['disabled']}
           `}
         >
           <Typography weight='400' color={disabled ? 'disabled' : 'primary'}>
-            {label}
+            {children}
           </Typography>
         </button>
       }

@@ -10,6 +10,7 @@ import List from './components/core/List'
 import Accordion from './components/core/Accordion'
 import Table from './components/core/Table'
 import ContextMenu from './components/core/ContextMenu'
+import Checkmark from './components/icons/Checkmark'
 
 import Layout from './components/core/Layout'
 
@@ -32,16 +33,15 @@ const Page = () => {
         </Typography>
 
         <div style={{
-          width: '200px',
           marginLeft: 'auto',
           marginTop: '2rem',
           display: 'flex',
           flexFlow: 'row nowrap',
-          justifyContent: 'space-between',
+          justifyContent: 'right',
           gap: '10px',
         }}>
-          <Button label='Confirm' onClick={() => setShowModal(false)} width='49%' type='fill' />
-          <Button label='Cancel' onClick={() => setShowModal(false)} width='49%' />
+          <Button action={() => setShowModal(false)} type='fill'>Confirm</Button>
+          <Button action={() => setShowModal(false)}>Cancel</Button>
         </div>
       </Modal>
 
@@ -53,11 +53,12 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Button label='Button' width='100%' disabled size='m' />
-            <Button label='Button' onClick={() => setShowModal(true)} width='100%' size='m' />
+            <Button disabled width='full'>Button</Button>
+            <Button action={() => setShowModal(true)} width='full'>Button</Button>
 
-            <Button label='Button' />
-            <Button label='Button' type='fill' />
+            <Button>Button</Button>
+            <Button type='fill'>Button</Button>
+            <Button width='auto'><Checkmark color='foreground' state={true} /></Button>
           </div>
         </Layout.Subsection>
 
@@ -91,12 +92,12 @@ const Page = () => {
             <Field label='Email' type='email' name='test' />
             <Field label='Password' type='password' name='password' />
             <Button
-              label='Submit'
-              onClick={() => setSomeState(!someState)}
-              size='m'
+              action={() => setSomeState(!someState)}
               type='fill'
-              width='100%'
-            />
+              width='full'
+            >
+              Submit
+            </Button>
           </div>
         </Layout.Subsection>
 
@@ -330,7 +331,7 @@ const Page = () => {
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button label='tempore tenetur' type='text' href='#' /> a
+            cupiditate <Button type='text' action='#'>tempore tenetur</Button> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
