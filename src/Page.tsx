@@ -15,6 +15,7 @@ import Checkmark from './components/icons/Checkmark'
 import Layout from './components/core/Layout'
 
 import { useState } from 'react'
+import Visibility from './components/icons/Visibility'
 
 const Page = () => {
   const [someState, setSomeState] = useState(false)
@@ -53,11 +54,11 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Button disabled width='full'>Button</Button>
-            <Button action={() => setShowModal(true)} width='full'>Button</Button>
+            <Button disabled width='full'>Disabled Button</Button>
+            <Button action={() => setShowModal(true)} width='full'>Open Modal</Button>
 
-            <Button>Button</Button>
-            <Button type='fill'>Button</Button>
+            <Button>Button Outline</Button>
+            <Button type='fill'>Button Fill</Button>
             <Button width='auto'><Checkmark color='foreground' state={true} /></Button>
           </div>
         </Layout.Subsection>
@@ -77,20 +78,21 @@ const Page = () => {
               width: '100%',
             }}>
               <Field
-                label='Street No.'
                 type='number'
                 name='input1'
                 limit={12}
                 errors={[
                   {message: 'This is a custom error message and it is very long.', failState: someState},
                 ]}
-              />
+              >
+                Street No.
+              </Field>
 
-              <Field label='Street Name' name='input2' />
+              <Field name='input2'>Street Name</Field>
             </div>
 
-            <Field label='Email' type='email' name='test' />
-            <Field label='Password' type='password' name='password' />
+            <Field type='email' name='test'>Email</Field>
+            <Field type='password' name='password'>Password</Field>
             <Button
               action={() => setSomeState(!someState)}
               type='fill'
@@ -108,8 +110,9 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Field type='textarea' label='Static' limit={200} height='200px' name='sta' />
-            <Field type='textarea' label='Dynamic' limit={10} name='dyn' resizable />
+            <Field type='textarea' limit={200} height='200px' name='sta'>Static</Field>
+            <Field type='textarea' limit={10} name='dyn' resizable>Dynamic</Field>
+
             <div style={{
               display: 'flex',
               flexFlow: 'row wrap',
@@ -158,23 +161,39 @@ const Page = () => {
             flexFlow: 'column',
             gap: '20px',
           }}>
-            <div>
-              <Checkbox label='Checkbox 1' name='firstcb' />
-              <Checkbox label='Checkbox 2' name='secondcb' />
-              <Checkbox label='Checkbox 3' name='thirdcb' />
-            </div>
-            <Radio style='vertical' name='rgroup1' options={[
-              { label: 'Radio 1.1', value: 'r1', name: 'r1' },
-              { label: 'Radio 1.2', value: 'r2', name: 'r2' },
-              { label: 'Radio 1.3', value: 'r3', name: 'r3', disabled: true },
-            ]} />
+            <div style={{
+              display: 'flex',
+              flexFlow: 'column',
+              gap: '20px',
+            }}>
+              <Checkbox name='cb1'>Checkbox 1</Checkbox>
 
-            <Radio name='rgroup2' options={[
-              { label: 'A', value: 'r1', name: 'r1' },
-              { label: 'B', value: 'r2', name: 'r2' },
-              { label: 'C', value: 'r3', name: 'r3' },
-              { label: 'D', value: 'r4', name: 'r4' },
-            ]} />
+              <Checkbox name='cb2'>
+                <div><Typography>Checkbox 2</Typography></div>
+                <div><Typography size='s' color='dimmed'>Sublabel</Typography></div>
+              </Checkbox>
+
+              <Checkbox name='cb3'>
+                <Typography size='xs'>Checkbox 3</Typography>
+              </Checkbox>
+
+              <Checkbox name='cb4'>
+                <Visibility state={false}></Visibility>
+              </Checkbox>
+            </div>
+
+            <Radio style='vertical' name='rgroup1'>
+              <Radio.Item value='r1'>Radio 1.1</Radio.Item>
+              <Radio.Item value='r2'>Radio 1.2</Radio.Item>
+              <Radio.Item value='r3'>Radio 1.3</Radio.Item>
+            </Radio>
+
+            <Radio name='rgroup2'>
+              <Radio.Item value='r1'>A</Radio.Item>
+              <Radio.Item value='r2'>B</Radio.Item>
+              <Radio.Item value='r3'>C</Radio.Item>
+              <Radio.Item value='r4'>D</Radio.Item>
+            </Radio>
           </div>
         </Layout.Subsection>
       </Layout.Section>
@@ -182,64 +201,37 @@ const Page = () => {
       <Layout.Section>
         <Layout.Subsection>
           <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
+            <Table.Row>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+            </Table.Row>
 
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
+            <Table.Row>
+              <Table.Cell>
+                <Field type='textarea' resizable name='field1'>Field</Field>
+              </Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+            </Table.Row>
 
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-              </Table.Row>
-            </Table.Header>
+            <Table.Row>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell rowSpan={2} colSpan={1}>
+                <Typography type='p'>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
+                  porro doloribus. Ad ratione expedita, quae neque fugit, ea 
+                  laboriosam facere quas exercitationem sint doloribus. 
+                  Excepturi dolorum nobis ratione vel facilis?
+                </Typography>
+              </Table.Cell>
+            </Table.Row>
 
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>
-                  <Field type='textarea' resizable label='Field' name='field1' />
-                </Table.Cell>
-
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-                
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-
-                <Table.Cell rowSpan={2} colSpan={1} width='100px'>
-                  <Typography type='p'>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
-                    porro doloribus. Ad ratione expedita, quae neque fugit, ea 
-                    laboriosam facere quas exercitationem sint doloribus. 
-                    Excepturi dolorum nobis ratione vel facilis?
-                  </Typography>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-
-                <Table.Cell>
-                  <Typography>Cell</Typography>
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
+            <Table.Row>
+              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell>Cell</Table.Cell>
+            </Table.Row>
           </Table>
         </Layout.Subsection>
 
@@ -251,34 +243,18 @@ const Page = () => {
             { label: 'Loop Up Definition', disabled: false },
             { label: 'Save As...' },
           ]}>
-            {/* <List items={[
-              {
-                label: 'Item 1',
-                sublabel: 'Sublabel 1',
-              },
-              { label: 'Item 2', sublabel: 'Sublabel 2' },
-              { label: 'Item 3' },
-              { label: 'Item 4' },
-            ]} /> */}
-
             <List>
-              <List.Item label='Item 1' sublabel='Sublabel 1'>
-                <Typography type='p'>
-                  Dolor sit amet consectetur adipisicing elit. 
-                  Ipsam atque dolores aliquam explicabo veniam, hic dolore dicta. 
-                  Adipisci animi sit exercitationem. Dolores omnis impedit sed 
-                  facilis saepe sint iusto veritatis!
-                </Typography>
+              <List.Item>
+                Dolor sit amet consectetur adipisicing elit.
               </List.Item>
 
-              <List.Item label='Item 2' sublabel='Sublabel 2'>
-                <Typography type='p'>
+              <List.Item>
+                <Typography type='span'>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                  Ipsam atque dolores aliquam explicabo veniam.
                 </Typography>
               </List.Item>
 
-              <List.Item label='Item 3'>
+              <List.Item>
                 <Typography type='p'>
                   Sit amet consectetur adipisicing elit. Ipsam atque 
                   dolores aliquam explicabo veniam, hic dolore dicta. 
@@ -286,7 +262,7 @@ const Page = () => {
                 </Typography>
               </List.Item>
 
-              <List.Item label='Item 4'>
+              <List.Item>
                 <Typography type='p'>
                   Adipisicing elit. Ipsam atque dolores aliquam 
                   explicabo veniam, hic dolore dicta. Adipisci 
@@ -372,41 +348,15 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>
-          <Typography>1</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={2}>
-          <Typography>2</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>3</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>4</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>5</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>6</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>7</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={2}>
-          <Typography>8</Typography>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <Typography>9</Typography>
-        </Layout.Subsection>
+        <Layout.Subsection span={1}>1</Layout.Subsection>
+        <Layout.Subsection span={2}>2</Layout.Subsection>
+        <Layout.Subsection span={1}>3</Layout.Subsection>
+        <Layout.Subsection span={1}>4</Layout.Subsection>
+        <Layout.Subsection span={1}>5</Layout.Subsection>
+        <Layout.Subsection span={1}>6</Layout.Subsection>
+        <Layout.Subsection span={1}>7</Layout.Subsection>
+        <Layout.Subsection span={2}>8</Layout.Subsection>
+        <Layout.Subsection span={1}>9</Layout.Subsection>
       </Layout.Section>
     </>
   )

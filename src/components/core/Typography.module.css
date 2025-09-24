@@ -1,23 +1,21 @@
 .h-xs, .h-s, .h-m,
 .h-l, .h-xl {
-  color: var(--foreground);
+  display: block;
   line-height: 1.4;
   transition: all 0.5s var(--curve);
 }
 
 .p-xs, .p-s, .p-m,
 .p-l, .p-xl {
-  color: var(--gray-9);
+  display: block;
   line-height: 1.4;
   transition: all 0.5s var(--curve);
 }
 
 .span-xs, .span-s, .span-m,
 .span-l, .span-xl {
+  display: inline;
   line-height: 1.4;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   transition: all 0.5s var(--curve);
 }
 

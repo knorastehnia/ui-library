@@ -11,7 +11,7 @@ interface ErrorInterface {
 }
 
 interface FieldProps {
-  label: string,
+  children: React.ReactNode,
   type?:
     | 'text'
     | 'textarea'
@@ -29,7 +29,7 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({
-  label,
+  children,
   type='text',
   name,
   limit=0,
@@ -104,12 +104,10 @@ const Field: React.FC<FieldProps> = ({
             htmlFor={name}
           >
             <Typography
-              weight='400'
               size={(focus || value) ? 's' : 'm'}
               color='dimmed'
             >
-              
-              {label}
+              {children}
             </Typography>
           </label>
 
@@ -183,7 +181,9 @@ const Field: React.FC<FieldProps> = ({
           {
             allErrors?.map((error, index) => (
                 <div key={index}>
-                  <ErrorMessage message={error.message} state={error.failState} />
+                  <ErrorMessage state={error.failState}>
+                    {error.message}
+                  </ErrorMessage>
                 </div>
             ))
           }

@@ -1,48 +1,36 @@
 import styles from './Table.module.css'
 
-interface HeaderProps { children: React.ReactNode }
-interface FooterProps { children: React.ReactNode }
-interface BodyProps { children: React.ReactNode }
-interface RowProps { children: React.ReactNode }
-
-interface CellProps {
+interface TableCellProps {
   children: React.ReactNode,
-  width?: string,
   colSpan?: number,
   rowSpan?: number,
 }
 
+interface TableRowProps {
+  children:
+    | React.ReactElement<TableCellProps>
+    | React.ReactElement<TableCellProps>[],
+}
+
 interface TableProps {
-  children: React.ReactNode,
-  width?: string,
+  children:
+    | React.ReactElement<TableRowProps>
+    | React.ReactElement<TableRowProps>[],
 }
 
 type TableComponent = React.FC<TableProps> & {
-  Header: React.FC<HeaderProps>,
-  Footer: React.FC<FooterProps>,
-  Body: React.FC<BodyProps>,
-  Row: React.FC<RowProps>,
-  Cell: React.FC<CellProps>,
+  Row: React.FC<TableRowProps>,
+  Cell: React.FC<TableCellProps>,
 }
 
-const Row: React.FC<RowProps> = ({ children }) => {
-  return (
-    <tr className={styles['row']}>
-      {children}
-    </tr>
-  )
-}
-
-const Cell: React.FC<CellProps> = ({
+const TableCell: React.FC<TableCellProps> = ({
   children,
-  width='auto',
   colSpan=1,
   rowSpan=1,
 }) => {
   return (
     <td
       className={styles['cell']}
-      width={width}
       colSpan={colSpan}
       rowSpan={rowSpan}
     >
@@ -51,48 +39,23 @@ const Cell: React.FC<CellProps> = ({
   )
 }
 
-const Header: React.FC<HeaderProps> = ({ children }) => {
+const TableRow: React.FC<TableRowProps> = ({ children }) => {
   return (
-    <thead className={styles['header']}>
+    <tr className={styles['row']}>
       {children}
-    </thead>
+    </tr>
   )
 }
 
-const Footer: React.FC<FooterProps> = ({ children }) => {
+const Table: TableComponent = ({ children }) => {
   return (
-    <tfoot className={styles['footer']}>
-      {children}
-    </tfoot>
-  )
-}
-
-const Body: React.FC<BodyProps> = ({ children }) => {
-  return (
-    <tbody className={styles['body']}>
-      {children}
-    </tbody>
-  )
-}
-
-const Table: TableComponent = ({
-  children,
-  width='100%',
-}) => {
-  return (
-    <table
-      className={styles['table']}
-      style={{ width }}
-    >
+    <table className={styles['table']}>
       {children}
     </table>
   )
 }
 
-Table.Header = Header
-Table.Footer = Footer
-Table.Body = Body
-Table.Row = Row
-Table.Cell = Cell
+Table.Row = TableRow
+Table.Cell = TableCell
 
 export default Table

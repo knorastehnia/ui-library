@@ -5,13 +5,13 @@ import useCollapseEffect from '../utils/useCollapseEffect'
 import { useRef } from 'react'
 
 interface ErrorMessageProps {
+  children: React.ReactNode,
   state?: boolean,
-  message: string,
 }
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({
+  children,
   state=true,
-  message,
 }) => {
   const errorRef = useRef<HTMLDivElement>(null)
   useCollapseEffect(errorRef, state, 500)
@@ -30,7 +30,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
         </div>
 
         <Typography weight='400' size='s' type='p' color='error'>
-          {message}
+          {children}
         </Typography>
       </div>
     </div>

@@ -1,23 +1,35 @@
 import styles from './Radio.module.css'
 import Typography from './Typography'
-import { useState } from 'react'
+import { createContext, useContext, useId, useState } from 'react'
 
-interface RadioOptionProps {
-  label: string,
-  name: string,
+interface RadioItemProps {
+  children: React.ReactNode,
   value: string,
   disabled?: boolean,
 }
 
 interface RadioProps {
+  children:
+    | React.ReactElement<typeof RadioItem>
+    | React.ReactElement<typeof RadioItem>[],
+
   name: string,
-  options: RadioOptionProps[],
   style?: 'vertical' | 'horizontal',
 }
 
-const Radio: React.FC<RadioProps> = ({
+type RadioComponent = React.FC<RadioProps> & {
+  Item: React.FC<RadioItemProps>,
+}
+
+const RadioContext = createContext<{
+  name: string,
+  selected: string,
+  setSelected: Function,
+} | null>(null)
+
+const Radio: RadioComponent = ({
+  children,
   name,
-  options,
   style='horizontal',
 }) => {
   const [selected, setSelected] = useState<string>('')
@@ -25,41 +37,57 @@ const Radio: React.FC<RadioProps> = ({
   return (
     <>
       <div className={styles[`radio-${style}`]}>
-        {
-          options.map((option, index) => {
-            return (
-              <label
-                key={index}
-                className={`
-                  ${styles['label']} 
-                  ${selected === option.name && styles['checked']} 
-                  ${option.disabled && styles['disabled']}
-                `}
-                htmlFor={name + option.name}
-              >
-                <input
-                  className={styles['input']}
-                  type='radio'
-                  disabled={option.disabled}
-                  name={name}
-                  id={name + option.name}
-                  value={option.value}
-                  checked={selected === option.name}
-                  onChange={() => setSelected(option.name)}
-                />
-
-                <span>
-                  <Typography weight='400' color={option.disabled ? 'disabled' : 'primary'}>
-                    {option.label}
-                  </Typography>
-                </span>
-              </label>
-            )
-          })
-        }
+        <RadioContext.Provider value={{
+          name,
+          selected,
+          setSelected,
+        }}>
+          {children}
+        </RadioContext.Provider>
       </div>
     </>
   )
 }
+
+const RadioItem: React.FC<RadioItemProps> = ({
+  children,
+  value,
+  disabled=false,
+}) => {
+  const ctx = useContext(RadioContext)
+  if (!ctx) throw new Error('<Radio.Item> must be a descendant of <Radio>')
+
+  const id = useId()
+
+  return (
+    <label
+      className={`
+        ${styles['label']} 
+        ${ctx.selected === value && styles['checked']} 
+        ${disabled && styles['disabled']}
+      `}
+      htmlFor={id}
+    >
+      <input
+        className={styles['input']}
+        type='radio'
+        disabled={disabled}
+        name={ctx.name}
+        id={id}
+        value={value}
+        checked={ctx.selected === value}
+        onChange={() => ctx.setSelected(value)}
+      />
+
+      <span>
+        <Typography color={disabled ? 'disabled' : 'primary'}>
+          {children}
+        </Typography>
+      </span>
+    </label>
+  )
+}
+
+Radio.Item = RadioItem
 
 export default Radio

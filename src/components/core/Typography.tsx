@@ -22,7 +22,7 @@ const Typography: React.FC<TypographyProps> = ({
   children,
   type='span',
   size='m',
-  weight='300',
+  weight=(type === 'span' ? '400' : '300'),
   color=(type === 'p' ? 'dimmed' : 'primary'),
 }) => {
   const trimmedRole = type.at(0) === 'h' ? 'h' : type

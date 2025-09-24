@@ -5,17 +5,27 @@ import useCollapseEffect from '../utils/useCollapseEffect'
 import { useRef, useState } from 'react'
 
 interface TreeItemProps {
-  label: string,
-  href: string,
+  children: React.ReactNode,
+  action: string | Function,
 }
 
 interface TreeBranchProps {
-  children: React.ReactNode,
+  children:
+    | React.ReactElement<TreeBranchProps>
+    | React.ReactElement<TreeBranchProps>[]
+    | React.ReactElement<TreeItemProps>
+    | React.ReactElement<TreeItemProps>[],
+
   label: string,
 }
 
 interface TreeProps {
-  children: React.ReactNode,
+  children:
+    | React.ReactElement<TreeBranchProps>
+    | React.ReactElement<TreeBranchProps>[]
+    | React.ReactElement<TreeItemProps>
+    | React.ReactElement<TreeItemProps>[],
+
   width?: string,
 }
 
@@ -25,16 +35,22 @@ type TreeComponent = React.FC<TreeProps> & {
 }
 
 const TreeItem: React.FC<TreeItemProps> = ({
-  label,
-  href,
+  children,
+  action,
 }) => {
   return (
     <>
-      <a href={href} className={styles['item']}>
-        <Typography weight='400'>
-          {label}
-        </Typography>
-      </a>
+      {(typeof action === 'string') && action.length > 0
+      ?
+        <a href={action} className={styles['item']}>
+          {children}
+        </a>
+
+      :
+        <button onClick={(e) => typeof action === 'function' && action(e)}>
+          {children}
+        </button>
+      }
     </>
   )
 }
@@ -57,7 +73,7 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
         }}
       >
         <Arrow width='0.6rem' height='0.6rem' state={isOpen} />
-        <Typography weight='400' color='dimmed'>
+        <Typography color='dimmed'>
           {label}
         </Typography>
       </button>

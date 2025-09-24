@@ -10,37 +10,37 @@ const App = () => {
     <>
       <Layout>
         <Layout.TopNav>
-          <Typography weight='400' color='dimmed'>Top Nav Bar</Typography>
+          <Typography color='dimmed'>Top Nav Bar</Typography>
         </Layout.TopNav>
 
         <Layout.SideNav>
-          <Tree.Item label='Dashboard' href='#' />
-          <Tree.Item label='Projects' href='#' />
-          <Tree.Item label='Tree Item' href='#' />
+          <Tree.Item action='#'>Dashboard</Tree.Item>
+          <Tree.Item action='#'>Projects</Tree.Item>
+          <Tree.Item action='#'>Tree Item</Tree.Item>
 
           <Tree>
             <Tree.Branch label='Assets'>
-              <Tree.Item label='Item #1' href='#' />
-              <Tree.Item label='Tree Item #2' href='#' />
-              <Tree.Item label='Tree Item #3' href='#' />
-              <Tree.Item label='Item #4' href='#' />
+              <Tree.Item action='#'>Item #1</Tree.Item>
+              <Tree.Item action='#'>Tree Item #2</Tree.Item>
+              <Tree.Item action='#'>Tree Item #3</Tree.Item>
+              <Tree.Item action='#'>Item #4</Tree.Item>
             </Tree.Branch>
 
             <Tree.Branch label='Components'>
               <Tree.Branch label='Core'>
                 <Tree.Branch label='Tree Branch'>
-                  <Tree.Item label='Tree Item' href='#' />
-                  <Tree.Item label='Tree Item' href='#' />
-                  <Tree.Item label='Tree Item' href='#' />
+                  <Tree.Item action='#'>Tree Item</Tree.Item>
+                  <Tree.Item action='#'>Tree Item</Tree.Item>
+                  <Tree.Item action='#'>Tree Item</Tree.Item>
                 </Tree.Branch>
 
-                <Tree.Item label='Accordion' href='#' />
-                <Tree.Item label='Button' href='#' />
-                <Tree.Item label='Checkbox' href='#' />
-                <Tree.Item label='Context Menu' href='#' />
-                <Tree.Item label='Dropdown' href='#' />
-                <Tree.Item label='Error Message' href='#' />
-                <Tree.Item label='Field' href='#' />
+                <Tree.Item action='#'>Accordion</Tree.Item>
+                <Tree.Item action='#'>Button</Tree.Item>
+                <Tree.Item action='#'>Checkbox</Tree.Item>
+                <Tree.Item action='#'>Context Menu</Tree.Item>
+                <Tree.Item action='#'>Dropdown</Tree.Item>
+                <Tree.Item action='#'>Error Message</Tree.Item>
+                <Tree.Item action='#'>Field</Tree.Item>
               </Tree.Branch>
             </Tree.Branch>
           </Tree>

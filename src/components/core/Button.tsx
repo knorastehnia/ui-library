@@ -25,11 +25,11 @@ const Button: React.FC<ButtonProps> = ({
           href={action}
           className={`
             ${styles[`style-${type}`]} 
-            ${type !== 'text' && styles[`width-${width}`]} 
+            ${styles[`width-${width}`]} 
             ${disabled && styles['disabled']}
           `}
         >
-          <Typography weight='400' color={disabled ? 'disabled' : 'primary'}>
+          <Typography color={disabled ? 'disabled' : 'primary'}>
             {children}
           </Typography>
         </a>
@@ -40,11 +40,11 @@ const Button: React.FC<ButtonProps> = ({
           onClick={(e) => !disabled && typeof action === 'function' && action(e)}
           className={`
             ${styles[`style-${type}`]} 
-            ${type !== 'text' && styles[`width-${width}`]} 
+            ${styles[`width-${width}`]} 
             ${disabled && styles['disabled']}
           `}
         >
-          <Typography weight='400' color={disabled ? 'disabled' : 'primary'}>
+          <Typography color={disabled ? 'disabled' : 'primary'}>
             {children}
           </Typography>
         </button>

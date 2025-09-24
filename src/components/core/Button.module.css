@@ -37,6 +37,7 @@
 }
 
 .style-text {
+  display: inline-block;
   user-select: auto;
   border: none;
   text-decoration: underline solid var(--gray-2) 1px;

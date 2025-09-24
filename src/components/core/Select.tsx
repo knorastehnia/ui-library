@@ -139,15 +139,13 @@ const Select: React.FC<SelectProps> = ({
             `}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <Typography weight='400'>
-              {
-                selected?.map((item, index) => {
-                  return (
-                    item.label + (selected.length - 1 !== index ? ', ': '')
-                  )
-                })
-              }
-            </Typography>
+            {
+              selected?.map((item, index) => {
+                return (
+                  item.label + (selected.length - 1 !== index ? ', ': '')
+                )
+              })
+            }
 
             <div className={styles['expand-arrow']}>
               <Arrow state={isOpen} />
@@ -176,9 +174,7 @@ const Select: React.FC<SelectProps> = ({
                     ${item.disabled && styles['disabled']}
                   `}
                 >
-                  <Typography weight='400'>
-                    {item.label}
-                  </Typography>
+                  {item.label}
 
                   <Checkmark
                     state={

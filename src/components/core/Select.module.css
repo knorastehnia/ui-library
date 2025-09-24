@@ -31,6 +31,12 @@
   padding: 0 10px;
   height: calc(1.4rem + 20px);
 
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   transform: translate(5px 5px);
   transition: all 0.5s var(--curve);
   
@@ -68,4 +74,3 @@
     transform: translate(5px, -13px);
   }
 }
-

@@ -2,6 +2,7 @@
   position: relative;
   background-color: var(--background);
   border-collapse: collapse;
+  width: 100%;
 
   &::after {
     content: '';
@@ -13,12 +14,6 @@
   }
 }
 
-.header, .footer {
-  * {
-    font-weight: 400 !important;
-  }
-}
-
 .cell {
   height: min-content;
   width: min-content;
@@ -26,6 +21,6 @@
   padding: 20px;
 }
 
-.header .cell, .body .cell {
+.cell {
   border-bottom: 1px solid var(--gray-2);
 }
