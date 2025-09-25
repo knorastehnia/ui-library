@@ -33,9 +33,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         className={styles['button']}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Typography weight='400'>
-          {label}
-        </Typography>
+        {label}
         <Arrow state={isOpen} />
       </button>
 

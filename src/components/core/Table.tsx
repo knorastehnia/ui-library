@@ -50,7 +50,9 @@ const TableRow: React.FC<TableRowProps> = ({ children }) => {
 const Table: TableComponent = ({ children }) => {
   return (
     <table className={styles['table']}>
-      {children}
+      <tbody>
+        {children}
+      </tbody>
     </table>
   )
 }

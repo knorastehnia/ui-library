@@ -139,13 +139,15 @@ const Select: React.FC<SelectProps> = ({
             `}
             onClick={() => setIsOpen(!isOpen)}
           >
-            {
-              selected?.map((item, index) => {
-                return (
-                  item.label + (selected.length - 1 !== index ? ', ': '')
-                )
-              })
-            }
+            <Typography>
+              {
+                selected?.map((item, index) => {
+                  return (
+                    item.label + (selected.length - 1 !== index ? ', ': '')
+                  )
+                })
+              }
+            </Typography>
 
             <div className={styles['expand-arrow']}>
               <Arrow state={isOpen} />
