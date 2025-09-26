@@ -63,7 +63,11 @@
 
 .disabled {
   cursor: default;
-  pointer-events: none;
   background-color: var(--gray-1);
   border: 1px solid var(--gray-2);
+
+  &:hover, &:focus {
+    background-color: var(--gray-1);
+    border: 1px solid var(--gray-2);
+  }
 }
