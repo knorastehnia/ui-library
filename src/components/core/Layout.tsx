@@ -34,7 +34,6 @@ const Subsection: React.FC<SubsectionProps> = ({
       className={styles['subsection']}
       style={{
         flex: `1 0 ${span * 100 / 3}%`,
-        minWidth: '300px',
       }}
     >
       {children}

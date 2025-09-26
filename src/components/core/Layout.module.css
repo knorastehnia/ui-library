@@ -6,9 +6,10 @@
 }
 
 .content {
-  flex: 1 1 0;
+  /* flex: 1 1 0; */
   position: relative;
   max-width: 1600px;
+  min-width: 0;
   margin: auto;
   
   @media screen and (min-width: calc(1600px + 250px)) {
@@ -81,5 +82,6 @@
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
   padding: 80px;
+  min-width: 300px;
   overflow: hidden;
 }
