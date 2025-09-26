@@ -3,7 +3,7 @@ import Checkmark from '../icons/Checkmark'
 import { useState } from 'react'
 
 interface CheckboxProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   name: string,
   value?: string,
   disabled?: boolean,
@@ -41,9 +41,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
           `}>
             <Checkmark state={checked} color='foreground' />
           </div>
-          <span>
+
+          <div>
             {children}
-          </span>
+          </div>
         </label>
       </div>
     </>

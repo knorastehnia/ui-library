@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface PopoverProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   isOpen: boolean,
   onClose?: Function,
   position?: { x: number, y: number },

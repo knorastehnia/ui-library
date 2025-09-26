@@ -1,7 +1,7 @@
 import styles from './List.module.css'
 
 interface ListItemProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
 }
 
 interface ListProps {

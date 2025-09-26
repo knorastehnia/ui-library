@@ -1,7 +1,7 @@
 import styles from './Table.module.css'
 
 interface TableCellProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   colSpan?: number,
   rowSpan?: number,
 }

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import styles from './Modal.module.css'
 
 interface ModalProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   isOpen: boolean,
   setIsOpen: Function,
   width?: string,

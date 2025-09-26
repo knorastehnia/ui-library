@@ -1,5 +1,6 @@
 import styles from './Typography.module.css'
-import { createElement } from 'react'
+import { createElement, useContext } from 'react'
+import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
 
 interface TypographyProps {
   children: React.ReactNode,
@@ -21,10 +22,15 @@ interface TypographyProps {
 const Typography: React.FC<TypographyProps> = ({
   children,
   type='span',
-  size='m',
-  weight=(type === 'span' ? '400' : '300'),
-  color=(type === 'p' ? 'dimmed' : 'primary'),
+  size,
+  weight,
+  color,
 }) => {
+  const defaultsContext = useContext(TypographyDefaultsContext)
+  const activeSize = size ?? defaultsContext.size ?? 'm'
+  const activeWeight = weight ?? defaultsContext.weight ?? (type === 'span' ? '400' : '300')
+  const activeColor = color ?? defaultsContext.color ?? (type === 'p' ? 'dimmed' : 'primary')
+
   const trimmedRole = type.at(0) === 'h' ? 'h' : type
 
   return (
@@ -32,9 +38,9 @@ const Typography: React.FC<TypographyProps> = ({
       type,
       {
         className: `
-          ${styles[`${trimmedRole}-${size}`]} 
-          ${styles[`weight-${weight}`]}
-          ${styles[`color-${color}`]}
+          ${styles[`${trimmedRole}-${activeSize}`]} 
+          ${styles[`weight-${activeWeight}`]}
+          ${styles[`color-${activeColor}`]}
         `
       },
       children,
@@ -43,3 +49,4 @@ const Typography: React.FC<TypographyProps> = ({
 }
 
 export default Typography
+export const T = Typography

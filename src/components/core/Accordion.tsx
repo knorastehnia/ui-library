@@ -5,12 +5,12 @@ import { useRef, useState } from 'react'
 import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface AccordionProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   width?: string,
 }
 
 interface AccordionItemProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   label: string,
 }
 
@@ -33,7 +33,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         className={styles['button']}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {label}
+        <Typography size='m' weight='400' color='primary'>{label}</Typography>
         <Arrow state={isOpen} />
       </button>
 

@@ -1,8 +1,8 @@
 import styles from './Button.module.css'
-import Typography from './Typography'
+import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
 
 interface ButtonProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   action?: string | Function,
   type?: 'fill' | 'outline' | 'text',
   width?: 'auto' | 'full',
@@ -17,7 +17,9 @@ const Button: React.FC<ButtonProps> = ({
   disabled=false,
 }) => {
   return (
-    <>
+    <TypographyDefaultsContext.Provider value={{
+      color: disabled ? 'disabled' : 'primary',
+    }}>
       {(typeof action === 'string') && action.length > 0
 
       ?
@@ -29,9 +31,7 @@ const Button: React.FC<ButtonProps> = ({
             ${disabled && styles['disabled']}
           `}
         >
-          <Typography color={disabled ? 'disabled' : 'primary'}>
-            {children}
-          </Typography>
+          {children}
         </a>
       
       :
@@ -44,12 +44,10 @@ const Button: React.FC<ButtonProps> = ({
             ${disabled && styles['disabled']}
           `}
         >
-          <Typography color={disabled ? 'disabled' : 'primary'}>
-            {children}
-          </Typography>
+          {children}
         </button>
       }
-    </>
+    </TypographyDefaultsContext.Provider>
   )
 }
 

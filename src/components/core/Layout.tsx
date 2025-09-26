@@ -1,20 +1,20 @@
 import styles from './Layout.module.css'
 
-interface ContentProps { children: React.ReactNode }
-interface SideNavProps { children: React.ReactNode }
-interface LayoutProps { children: React.ReactNode }
+interface ContentProps { children: React.ReactElement | React.ReactElement[] }
+interface SideNavProps { children: React.ReactElement | React.ReactElement[] }
+interface LayoutProps { children: React.ReactElement | React.ReactElement[] }
 
 interface SubsectionProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   span?: 1 | 2 | 3,
 }
 
 interface SectionProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
 }
 
 interface TopNavProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
 }
 
 type LayoutComponent = React.FC<LayoutProps> & {

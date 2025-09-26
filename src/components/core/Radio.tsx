@@ -3,7 +3,7 @@ import Typography from './Typography'
 import { createContext, useContext, useId, useState } from 'react'
 
 interface RadioItemProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   value: string,
   disabled?: boolean,
 }

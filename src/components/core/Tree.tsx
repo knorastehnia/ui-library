@@ -5,27 +5,17 @@ import useCollapseEffect from '../utils/useCollapseEffect'
 import { useRef, useState } from 'react'
 
 interface TreeItemProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   action: string | Function,
 }
 
 interface TreeBranchProps {
-  children:
-    | React.ReactElement<TreeBranchProps>
-    | React.ReactElement<TreeBranchProps>[]
-    | React.ReactElement<TreeItemProps>
-    | React.ReactElement<TreeItemProps>[],
-
   label: string,
+  children: React.ReactElement | React.ReactElement[],
 }
 
 interface TreeProps {
-  children:
-    | React.ReactElement<TreeBranchProps>
-    | React.ReactElement<TreeBranchProps>[]
-    | React.ReactElement<TreeItemProps>
-    | React.ReactElement<TreeItemProps>[],
-
+  children: React.ReactElement | React.ReactElement[],
   width?: string,
 }
 
@@ -56,8 +46,8 @@ const TreeItem: React.FC<TreeItemProps> = ({
 }
 
 const TreeBranch: React.FC<TreeBranchProps> = ({
-  children,
   label,
+  children,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)

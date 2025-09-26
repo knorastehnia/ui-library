@@ -11,7 +11,7 @@ interface ItemInterface {
 }
 
 interface ContextMenuProps {
-  children: React.ReactNode,
+  children: React.ReactElement | React.ReactElement[],
   items: ItemInterface[],
 }
 

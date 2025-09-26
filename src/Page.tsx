@@ -4,7 +4,7 @@ import Select from './components/core/Select'
 import Checkbox from './components/core/Checkbox'
 import Radio from './components/core/Radio'
 import Dropdown from './components/core/Dropdown'
-import Typography from './components/core/Typography'
+import Typography, { T } from './components/core/Typography'
 import Modal from './components/core/Modal'
 import List from './components/core/List'
 import Accordion from './components/core/Accordion'
@@ -24,14 +24,14 @@ const Page = () => {
   return (
     <>
       <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
-        <Typography type='h3' size='xs'>Modal component</Typography>
+        <T type='h3' size='xs'>Modal component</T>
 
-        <Typography type='p'>
+        <T type='p'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
           Facilis quaerat similique maxime atque consequatur alias est, autem 
           obcaecati laboriosam mollitia harum, ad quia officia tempore 
           doloremque saepe explicabo!
-        </Typography>
+        </T>
 
         <div style={{
           marginLeft: 'auto',
@@ -41,8 +41,12 @@ const Page = () => {
           justifyContent: 'right',
           gap: '10px',
         }}>
-          <Button action={() => setShowModal(false)} type='fill'>Confirm</Button>
-          <Button action={() => setShowModal(false)}>Cancel</Button>
+          <Button action={() => setShowModal(false)} type='fill'>
+            <T>Confirm</T>
+          </Button>
+          <Button action={() => setShowModal(false)}>
+            <T>Cancel</T>
+          </Button>
         </div>
       </Modal>
 
@@ -54,11 +58,15 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Button disabled width='full'>Disabled Button</Button>
-            <Button action={() => setShowModal(true)} width='full'>Open Modal</Button>
+            <Button disabled width='full'>
+              <T>Disabled Button</T>
+            </Button>
+            <Button action={() => setShowModal(true)} width='full'>
+              <Typography>Open Modal</Typography>
+            </Button>
 
-            <Button>Button Outline</Button>
-            <Button type='fill'>Button Fill</Button>
+            <Button><T>Button Outline</T></Button>
+            <Button type='fill'><T>Button Fill</T></Button>
             <Button width='auto'><Checkmark color='foreground' state={true} /></Button>
           </div>
         </Layout.Subsection>
@@ -85,20 +93,20 @@ const Page = () => {
                   {message: 'This is a custom error message and it is very long.', failState: someState},
                 ]}
               >
-                Street No.
+                <T>Street No.</T>
               </Field>
 
-              <Field name='input2'>Street Name</Field>
+              <Field name='input2'><T>Street Name</T></Field>
             </div>
 
-            <Field type='email' name='test'>Email</Field>
-            <Field type='password' name='password'>Password</Field>
+            <Field type='email' name='test'><T>Email</T></Field>
+            <Field type='password' name='password'><T>Password</T></Field>
             <Button
               action={() => setSomeState(!someState)}
               type='fill'
               width='full'
             >
-              Submit
+              <T>Submit</T>
             </Button>
           </div>
         </Layout.Subsection>
@@ -110,8 +118,8 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Field type='textarea' limit={200} height='200px' name='sta'>Static</Field>
-            <Field type='textarea' limit={10} name='dyn' resizable>Dynamic</Field>
+            <Field type='textarea' limit={200} height='200px' name='sta'><T>Static</T></Field>
+            <Field type='textarea' limit={10} name='dyn' resizable><T>Dynamic</T></Field>
 
             <div style={{
               display: 'flex',
@@ -166,7 +174,7 @@ const Page = () => {
               flexFlow: 'column',
               gap: '20px',
             }}>
-              <Checkbox name='cb1'>Checkbox 1</Checkbox>
+              <Checkbox name='cb1'><T>Checkbox 1</T></Checkbox>
 
               <Checkbox name='cb2'>
                 <div><Typography>Checkbox 2</Typography></div>
@@ -183,16 +191,16 @@ const Page = () => {
             </div>
 
             <Radio style='vertical' name='rgroup1'>
-              <Radio.Item value='r1'>Radio 1.1</Radio.Item>
-              <Radio.Item value='r2'>Radio 1.2</Radio.Item>
-              <Radio.Item value='r3'>Radio 1.3</Radio.Item>
+              <Radio.Item value='r1'><T>Radio 1.1</T></Radio.Item>
+              <Radio.Item value='r2'><T>Radio 1.2</T></Radio.Item>
+              <Radio.Item value='r3'><T>Radio 1.3</T></Radio.Item>
             </Radio>
 
             <Radio name='rgroup2'>
-              <Radio.Item value='r1'>A</Radio.Item>
-              <Radio.Item value='r2'>B</Radio.Item>
-              <Radio.Item value='r3'>C</Radio.Item>
-              <Radio.Item value='r4'>D</Radio.Item>
+              <Radio.Item value='r1'><T>A</T></Radio.Item>
+              <Radio.Item value='r2'><T>B</T></Radio.Item>
+              <Radio.Item value='r3'><T>C</T></Radio.Item>
+              <Radio.Item value='r4'><T>D</T></Radio.Item>
             </Radio>
           </div>
         </Layout.Subsection>
@@ -202,22 +210,22 @@ const Page = () => {
         <Layout.Subsection>
           <Table>
             <Table.Row>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
             </Table.Row>
 
             <Table.Row>
               <Table.Cell>
-                <Field type='textarea' resizable name='field1'>Field</Field>
+                <Field type='textarea' resizable name='field1'><T>Field</T></Field>
               </Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
             </Table.Row>
 
             <Table.Row>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
               <Table.Cell rowSpan={2} colSpan={1}>
                 <Typography type='p'>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
@@ -229,8 +237,8 @@ const Page = () => {
             </Table.Row>
 
             <Table.Row>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
+              <Table.Cell><T>Cell</T></Table.Cell>
             </Table.Row>
           </Table>
         </Layout.Subsection>
@@ -245,7 +253,7 @@ const Page = () => {
           ]}>
             <List>
               <List.Item>
-                Dolor sit amet consectetur adipisicing elit.
+                <T>Dolor sit amet consectetur adipisicing elit.</T>
               </List.Item>
 
               <List.Item>
@@ -307,7 +315,7 @@ const Page = () => {
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button type='text' action='#'>tempore tenetur</Button> a
+            cupiditate <Button type='text' action='#'><T>tempore tenetur</T></Button> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
@@ -348,15 +356,15 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>1</Layout.Subsection>
-        <Layout.Subsection span={2}>2</Layout.Subsection>
-        <Layout.Subsection span={1}>3</Layout.Subsection>
-        <Layout.Subsection span={1}>4</Layout.Subsection>
-        <Layout.Subsection span={1}>5</Layout.Subsection>
-        <Layout.Subsection span={1}>6</Layout.Subsection>
-        <Layout.Subsection span={1}>7</Layout.Subsection>
-        <Layout.Subsection span={2}>8</Layout.Subsection>
-        <Layout.Subsection span={1}>9</Layout.Subsection>
+        <Layout.Subsection span={1}><T>1</T></Layout.Subsection>
+        <Layout.Subsection span={2}><T>2</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>3</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>4</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>5</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>6</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>7</T></Layout.Subsection>
+        <Layout.Subsection span={2}><T>8</T></Layout.Subsection>
+        <Layout.Subsection span={1}><T>9</T></Layout.Subsection>
       </Layout.Section>
     </>
   )
