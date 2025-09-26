@@ -1,6 +1,6 @@
 import { createContext } from "react"
 
-interface TypographyDefaultsContextInterface {
+export interface TypographyDefaultsContextInterface {
   size?: 'xs' | 's' | 'm' | 'l' | 'xl',
   weight?: '300' | '400' | '500',
   color?:

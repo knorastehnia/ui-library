@@ -1,22 +1,13 @@
 import styles from './Typography.module.css'
 import { createElement, useContext } from 'react'
 import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
+import type { TypographyDefaultsContextInterface } from '../utils/TypographyDefaultsContext'
 
-interface TypographyProps {
+interface TypographyProps extends TypographyDefaultsContextInterface {
   children: React.ReactNode,
   type?:
     | 'h1' | 'h2' | 'h3' | 'h4'
     | 'p' | 'span',
-
-  size?: 'xs' | 's' | 'm' | 'l' | 'xl',
-  weight?: '300' | '400' | '500',
-  color?:
-    | 'primary'
-    | 'dimmed'
-    | 'inverted'
-    | 'disabled'
-    | 'success'
-    | 'error'
 }
 
 const Typography: React.FC<TypographyProps> = ({
