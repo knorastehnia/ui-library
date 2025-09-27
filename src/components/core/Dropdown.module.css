@@ -3,8 +3,10 @@
   padding: 10px;
   text-decoration: none;
   text-align: left;
-  width: 250px;
+  min-width: 200px;
+  width: 100%;
   border: none;
+  border-radius: var(--radius);
   cursor: pointer;
   user-select: none;
   transition: all 0.5s var(--curve);
@@ -41,11 +43,18 @@ hr {
   border: none;
   border-radius: var(--radius);
   padding: 10px;
-  width: 150px;
   transition: all 0.5s var(--curve);
   
   &:hover, &:focus-visible, &.button-active {
     outline: none;
     background-color: var(--gray-2);
   }
+}
+
+.width-auto {
+  width: fit-content;
+}
+
+.width-full {
+  width: 100%;
 }

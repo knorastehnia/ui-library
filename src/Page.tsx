@@ -150,15 +150,22 @@ const Page = () => {
                 ]}
               />
 
-              <Dropdown
-                label='Dropdown'
-                items={[
-                  { label: 'Item 1', href: '#' },
-                  { label: 'Item 2', href: '#', onClick: () => null, disabled: true },
-                  { label: 'Item 3', onClick: () => null, disabled: true },
-                  { label: 'Item 4', href: '#', disabled: false },
-                ]}
-              />
+              <Dropdown label='Dropdown'>
+                <Dropdown.Item action='#'><T>Item 1</T></Dropdown.Item>
+                <Dropdown label='Nested Dropdown 1'>
+                  <Dropdown.Item><T>Nested Item 1.1</T></Dropdown.Item>
+                  <Dropdown.Item><T>Nested Item 1.2</T></Dropdown.Item>
+                  <Dropdown.Item><T>Nested Item 1.3</T></Dropdown.Item>
+                </Dropdown>
+                <Dropdown label='Nested Dropdown 2'>
+                  <Dropdown.Item><T>Nested Item 2.1</T></Dropdown.Item>
+                  <Dropdown.Item><T>Nested Item 2.2</T></Dropdown.Item>
+                  <Dropdown.Item><T>Nested Item 2.3</T></Dropdown.Item>
+                </Dropdown>
+                <Dropdown.Item action={() => null} disabled><T>Item 2</T></Dropdown.Item>
+                <Dropdown.Item action={() => null} disabled><T>Item 3</T></Dropdown.Item>
+                <Dropdown.Item action={() => null}><T>Item 4</T></Dropdown.Item>
+              </Dropdown>
             </div>
           </div>
         </Layout.Subsection>
