@@ -51,6 +51,11 @@ body {
   font-family: 'IBMPlexSans', sans-serif;
 }
 
+#root {
+  position: relative;
+  overflow: hidden;
+}
+
 input, button, textarea, select {
   background-color: inherit;
   color: inherit;

@@ -57,7 +57,7 @@ const Popover: React.FC<PopoverProps> = ({
       >
         {children}
       </div>,
-      document.querySelector('#overlay')!
+      document.querySelector('#root')!
     )
   )
 }
