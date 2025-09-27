@@ -13,10 +13,6 @@
   min-width: 0;
   margin: auto;
   overflow: hidden;
-  
-  @media screen and (min-width: calc(1600px + 250px)) {
-    border-left: 1px solid var(--gray-1);
-  }
 }
 
 .topnav {
@@ -85,7 +81,6 @@
   border-right: 1px solid var(--gray-1);
   border-bottom: 1px solid var(--gray-1);
   padding: min(5vw, 80px);
-  min-width: 280px;
-  box-sizing: content-box;
+  min-width: 300px;
   overflow: hidden;
 }
