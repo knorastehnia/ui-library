@@ -15,7 +15,7 @@ interface SelectProps {
   label: string,
   name: string,
   items: ItemInterface[],
-  width?: string,
+  width?: 'auto' | 'full',
   multiple?: boolean,
 }
 
@@ -23,7 +23,7 @@ const Select: React.FC<SelectProps> = ({
   label,
   name,
   items,
-  width='150px',
+  width='auto',
   multiple=false,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -132,9 +132,9 @@ const Select: React.FC<SelectProps> = ({
           </label>
 
           <button
-            style={{ width }}
             className={`
               ${styles['button']} 
+              ${styles[`width-${width}`]} 
               ${isOpen && styles['button-active']}
             `}
             onClick={() => setIsOpen(!isOpen)}

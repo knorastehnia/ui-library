@@ -100,11 +100,11 @@ const Dropdown: DropdownComponent = ({
 
     setPosition(
       isTopLevel ? {
-        y: rect.y + window.scrollY + rect.height,
+        y: rect.y + window.scrollY + rect.height + 5,
         x: rect.x + window.scrollX,
       } : {
         y: rect.y + window.scrollY,
-        x: rect.x + window.scrollX + rect.width,
+        x: rect.x + window.scrollX + rect.width + 5,
       }
     )
   }, [isOpen])

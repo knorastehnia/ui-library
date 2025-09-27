@@ -128,7 +128,7 @@ const Page = () => {
             }}>
               <Select
                 multiple
-                width='600px'
+                width='full'
                 label='Select OS'
                 name='os'
                 items={[
@@ -292,6 +292,11 @@ const Page = () => {
         <Layout.Subsection span={1}>
           <Accordion>
             <Accordion.Item label='Accordion Item'>
+              <Accordion>
+                <Accordion.Item label='Item'>
+                  <T>Content</T>
+                </Accordion.Item>
+              </Accordion>
               <Typography type='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                 corporis consequuntur porro suscipit inventore atque cupiditate 

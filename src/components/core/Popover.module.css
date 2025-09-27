@@ -1,6 +1,5 @@
 .popover {
   position: absolute;
-  margin-top: 5px;
   background-color: var(--background);
   box-sizing: content-box;
   border: 1px solid var(--gray-2);
