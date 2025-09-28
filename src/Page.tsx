@@ -87,21 +87,20 @@ const Page = () => {
               width: '100%',
             }}>
               <Field
+                label='Street No.'
                 type='number'
                 name='input1'
                 limit={12}
                 errors={[
                   {message: 'This is a custom error message and it is very long.', failState: someState},
                 ]}
-              >
-                <T>Street No.</T>
-              </Field>
+              />
 
-              <Field name='input2'><T>Street Name</T></Field>
+              <Field label='Street Name' name='input2' />
             </div>
 
-            <Field type='email' name='test'><T>Email</T></Field>
-            <Field type='password' name='password'><T>Password</T></Field>
+            <Field label='Email' type='email' name='test' />
+            <Field label='Password' type='password' name='password' />
             <Button
               action={() => setSomeState(!someState)}
               type='fill'
@@ -119,8 +118,8 @@ const Page = () => {
             alignItems: 'end',
             gap: '20px',
           }}>
-            <Field type='textarea' limit={200} height='200px' name='sta'><T>Static</T></Field>
-            <Field type='textarea' limit={10} name='dyn' resizable><T>Dynamic</T></Field>
+            <Field label='Static' type='textarea' limit={200} height='200px' name='sta' />
+            <Field label='Dynamic' type='textarea' limit={10} name='dyn' resizable />
 
               <Select
                 multiple
@@ -128,7 +127,7 @@ const Page = () => {
                 label='Select OS'
                 name='os'
                 items={[
-                  { label: 'Windows', value: 'windows', },
+                  { label: 'Windows', value: 'windows', disabled: true, },
                   { label: 'macOS', value: 'macos', },
                   { label: 'Linux', value: 'linux', },
                   { label: 'A very long option indeed', value: 'a', },
@@ -140,7 +139,7 @@ const Page = () => {
                 name='os'
                 items={[
                   { label: 'Windows', value: 'windows', },
-                  { label: 'macOS', value: 'macos', },
+                  { label: 'macOS', value: 'macos', disabled: true },
                   { label: 'Linux', value: 'linux', },
                   { label: 'A very long option indeed', value: 'a', },
                 ]}
@@ -171,26 +170,26 @@ const Page = () => {
                   <Tree.Item action='#'><T>Item 3</T></Tree.Item>
                 </Tree>
                 <div>
-                  <Dropdown.Item action='#'><T>Item 1</T></Dropdown.Item>
+                  <Dropdown.Item label='Item 1' action='#' />
                   <Dropdown label='Nested Dropdown 1'>
-                    <Dropdown.Item><T>Nested Item 1.1</T></Dropdown.Item>
-                    <Dropdown.Item><T>Nested Item 1.2</T></Dropdown.Item>
-                    <Dropdown.Item><T>Nested Item 1.3</T></Dropdown.Item>
+                    <Dropdown.Item label='Nested Item 1.1' />
+                    <Dropdown.Item label='Nested Item 1.2' />
+                    <Dropdown.Item label='Nested Item 1.3' />
                   </Dropdown>
                   <Dropdown label='Nested Dropdown 2' direction='right'>
-                    <Dropdown.Item><T>Nested Item 2.1</T></Dropdown.Item>
-                    <Dropdown.Item><T>Nested Item 2.2</T></Dropdown.Item>
-                    <Dropdown.Item><T>Nested Item 2.3</T></Dropdown.Item>
+                    <Dropdown.Item label='Nested Item 2.1' />
+                    <Dropdown.Item label='Nested Item 2.2' />
+                    <Dropdown.Item label='Nested Item 2.3' />
 
                     <Dropdown label='Nested Dropdown 2.1'>
-                      <Dropdown.Item><T>Nested Item 2.3.1</T></Dropdown.Item>
-                      <Dropdown.Item><T>Nested Item 2.3.2</T></Dropdown.Item>
-                      <Dropdown.Item><T>Nested Item 2.3.3</T></Dropdown.Item>
+                      <Dropdown.Item label='Nested Item 2.3.1' />
+                      <Dropdown.Item label='Nested Item 2.3.1' />
+                      <Dropdown.Item label='Nested Item 2.3.1' />
                     </Dropdown>
                   </Dropdown>
-                  <Dropdown.Item action={() => null} disabled><T>Item 2</T></Dropdown.Item>
-                  <Dropdown.Item action={() => null} disabled><T>Item 3</T></Dropdown.Item>
-                  <Dropdown.Item action={() => null}><T>Item 4</T></Dropdown.Item>
+                  <Dropdown.Item label='Item 2' action={() => null} disabled />
+                  <Dropdown.Item label='Item 3' action={() => null} disabled />
+                  <Dropdown.Item label='Item 4' action={() => null} />
                 </div>
               </div>
             </Dropdown>
@@ -251,7 +250,7 @@ const Page = () => {
 
             <Table.Row>
               <Table.Cell>
-                <Field type='textarea' resizable name='field1'><T>Field</T></Field>
+                <Field label='Field' type='textarea' resizable name='field1' />
               </Table.Cell>
               <Table.Cell><T>Cell</T></Table.Cell>
               <Table.Cell><T>Cell</T></Table.Cell>

@@ -4,7 +4,7 @@ import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
 interface ButtonProps {
   children: React.ReactElement | React.ReactElement[],
   action?: string | Function,
-  type?: 'fill' | 'outline' | 'text',
+  type?: 'fill' | 'outline' | 'hollow' | 'text',
   width?: 'auto' | 'full',
   disabled?: boolean,
 }
@@ -26,6 +26,7 @@ const Button: React.FC<ButtonProps> = ({
         <a
           href={action}
           className={`
+            ${styles['button']} 
             ${styles[`style-${type}`]} 
             ${styles[`width-${width}`]} 
             ${disabled && styles['disabled']}
@@ -39,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
           disabled={disabled}
           onClick={(e) => !disabled && typeof action === 'function' && action(e)}
           className={`
+            ${styles['button']} 
             ${styles[`style-${type}`]} 
             ${styles[`width-${width}`]} 
             ${disabled && styles['disabled']}

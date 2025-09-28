@@ -22,6 +22,10 @@
     outline: none;
     background-color: var(--gray-2);
   }
+
+  &.disabled {
+    background-color: var(--background) !important;
+  }
 }
 
 .button {

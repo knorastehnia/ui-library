@@ -1,12 +1,12 @@
 import { createContext, useContext, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
+import Button from './Button'
 import Typography from './Typography'
-import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
 import Popover from './Popover'
 
 interface DropdownItemProps {
-  children: React.ReactElement | React.ReactElement[],
+  label: string,
   action?: string | Function,
   disabled?: boolean,
 }
@@ -15,68 +15,41 @@ interface DropdownProps {
   children: React.ReactElement | React.ReactElement[],
   label: string,
   direction?: 'bottom' | 'right',
-  width?: 'auto' | 'full',
 }
 
 type DropdownComponent = React.FC<DropdownProps> & {
   Item: React.FC<DropdownItemProps>
 }
 
-const DropdownContext = createContext<{
-  width?: 'auto' | 'full',
-} | null>(null)
+const DropdownContext = createContext<true | undefined>(undefined)
 
 const DropdownItem: React.FC<DropdownItemProps> = ({
-  children,
+  label,
   action,
   disabled=false,
 }) => {
   return (
-    <TypographyDefaultsContext.Provider value={{
-      color: disabled ? 'disabled' : 'primary',
-    }}>
-      {(typeof action === 'string') && action.length > 0
-
-      ?
-        <a
-          href={!disabled ? action : undefined}
-          className={`
-            ${styles['item']} 
-            ${disabled && styles['disabled']}
-          `}
-        >
-            {children}
-        </a>
-      
-      :
-      <button
+    <Button
+      action={action}
       disabled={disabled}
-      onClick={(e) => !disabled && typeof action === 'function' && action(e)}
-      className={`
-        ${styles['item']} 
-        ${disabled && styles['disabled']}
-        `}
-        >
-          {children}
-        </button>
-      }
-    </TypographyDefaultsContext.Provider>
+      type='hollow'
+      width='full'
+    >
+      <Typography>{label}</Typography>
+    </Button>
   )
 }
 
 const Dropdown: DropdownComponent = ({
   children,
   label,
-  width,
   direction,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const buttonRef = useRef<HTMLDivElement>(null)
 
   const ctx = useContext(DropdownContext)
   const activeDirection = direction ?? (!!ctx ? 'right' : 'bottom')
-
-  const activeWidth = width ?? ctx?.width ?? 'auto'
 
   const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
@@ -96,31 +69,29 @@ const Dropdown: DropdownComponent = ({
 
   return (
     <div className={styles[`dropdown-${activeDirection}`]}>
-      <button
-        ref={buttonRef}
-        className={`
-          ${styles['button']} 
-          ${styles[`width-${activeWidth}`]} 
-          ${isOpen && styles['button-active']}
-        `}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <Typography>{label}</Typography>
-        <div style={{
-          transform: activeDirection === 'right' ? 'rotate(-90deg)' : '',
-        }}>
-          <Arrow state={isOpen} />
-        </div>
-      </button>
+      <div ref={buttonRef}>
+        <Button
+          action={() => setIsOpen(!isOpen)}
+          type='hollow'
+          width='full'
+        >
+          <div className={styles['button-content']}>
+            <Typography>{label}</Typography>
+            <div style={{
+              transform: activeDirection === 'right' ? 'rotate(-90deg)' : '',
+            }}>
+              <Arrow state={isOpen} />
+            </div>
+          </div>
+        </Button>
+      </div>
 
       <div className={styles[`content-${activeDirection}`]}>
         <Popover
           isOpen={isOpen}
           onClose={closeDropdown}
         >
-          <DropdownContext.Provider value={{
-            width: 'full',
-          }}>
+          <DropdownContext.Provider value={true}>
             {children}
           </DropdownContext.Provider>
         </Popover>

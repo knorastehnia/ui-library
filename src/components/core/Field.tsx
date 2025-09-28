@@ -3,7 +3,6 @@ import useCollapseEffect from '../utils/useCollapseEffect'
 import styles from './Field.module.css'
 import Visibility from '../icons/Visibility'
 import Typography from './Typography'
-import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
 import ErrorMessage from './ErrorMessage'
 
 interface ErrorInterface {
@@ -12,7 +11,7 @@ interface ErrorInterface {
 }
 
 interface FieldProps {
-  children: React.ReactElement | React.ReactElement[],
+  label: string,
   type?:
     | 'text'
     | 'textarea'
@@ -30,7 +29,7 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({
-  children,
+  label,
   type='text',
   name,
   limit=0,
@@ -103,13 +102,9 @@ const Field: React.FC<FieldProps> = ({
           `}
           htmlFor={name}
         >
-          <TypographyDefaultsContext.Provider value={{
-            size: (focus || value) ? 's' : 'm',
-            color: 'dimmed',
-          }}
-          >
-            {children}
-          </TypographyDefaultsContext.Provider>
+          <Typography size={(focus || value) ? 's' : 'm'} color='dimmed'>
+            {label}
+          </Typography>
         </label>
 
         {type === 'textarea'

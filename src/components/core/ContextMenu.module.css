@@ -1,22 +1,4 @@
-.item {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: left;
+.context-menu {
+  position: absolute;
   width: 250px;
-  padding: 10px;
-  border: none;
-  background-color: var(--background);
-  transition: all 0.5s var(--curve);
-
-  &:hover {
-    background-color: var(--gray-2);
-  }
-
-  &.disabled {
-    cursor: default;
-
-    &:hover {
-      background-color: var(--background);
-    }
-  }
 }

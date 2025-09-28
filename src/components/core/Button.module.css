@@ -1,4 +1,4 @@
-.style-outline, .style-fill, .style-text {
+.button {
   overflow: clip;
   cursor: pointer;
   transition: all 0.5s var(--curve);
@@ -36,8 +36,31 @@
   }
 }
 
+.style-hollow {
+  display: block;
+  text-align: left;
+  user-select: none;
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1px solid var(--background);
+  background-color: var(--background);
+  padding: 10px;
+
+  &:hover, &:focus-visible {
+    outline: none;
+    border-color: var(--gray-2);
+    background-color: var(--gray-2);
+  }
+
+  &.disabled {
+    border: 1px solid var(--background) !important;
+    background-color: var(--background) !important;
+  }
+}
+
 .style-text {
   display: inline-block;
+  text-align: left;
   user-select: auto;
   border: none;
   text-decoration: underline solid var(--gray-2) 1px;
@@ -54,10 +77,11 @@
 }
 
 .width-auto {
-  width: fit-content;
+  width: max-content;
 }
 
 .width-full {
+  min-width: max-content;
   width: 100%;
 }
 

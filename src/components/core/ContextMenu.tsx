@@ -2,11 +2,12 @@ import { useState } from 'react'
 import styles from './ContextMenu.module.css'
 import Popover from './Popover'
 import Typography from './Typography'
+import Button from './Button'
+import { createPortal } from 'react-dom'
 
 interface ItemInterface {
   label: string,
-  href?: string,
-  onClick?: Function,
+  action?: string | Function,
   disabled?: boolean,
 }
 
@@ -42,32 +43,36 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     >
       {children}
 
-      <Popover
-        isOpen={isOpen}
-        onClose={closeContextMenu}
-        position={{ y: pos.y, x: pos.x }}
-      >
-        {items.map((item, index) => {
-          return (
-            <button
-              key={index}
-              disabled={item.disabled}
-              onClick={(e) => {
-                !item.disabled && item.onClick?.(e)
-                setIsOpen(false)
-              }}
-              className={`
-                ${styles['item']} 
-                ${item.disabled && styles['disabled']}
-              `}
+      {
+        createPortal(
+          <div
+            className={styles['context-menu']}
+            style={{ top: pos.y, left: pos.x, }}
+          >
+            <Popover
+              isOpen={isOpen}
+              onClose={closeContextMenu}
             >
-              <Typography weight='400' color={item.disabled ? 'disabled' : 'primary'}>
-                {item.label}
-              </Typography>
-            </button>
-          )
-        })}
-      </Popover>
+              {items.map((item, index) => {
+                return (
+                  <Button
+                    key={index}
+                    action={item.action}
+                    type='hollow'
+                    width='full'
+                    disabled={item.disabled}
+                  >
+                    <Typography>
+                      {item.label}
+                    </Typography>
+                  </Button>
+                )
+              })}
+            </Popover>
+          </div>,
+          document.querySelector('#root')!
+        )
+      }
     </div>
   )
 }

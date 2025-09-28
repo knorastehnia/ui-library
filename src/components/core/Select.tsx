@@ -27,6 +27,7 @@ const Select: React.FC<SelectProps> = ({
   multiple=false,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isInteractive, setIsInteractive] = useState(true)
   const buttonRef = useRef<HTMLDivElement>(null)
 
   const [selected, setSelected] = useState<ItemInterface[] | null>(null)
@@ -56,7 +57,12 @@ const Select: React.FC<SelectProps> = ({
       setSelected([item])
     }
 
-    setIsOpen(false)
+    setIsInteractive(false)
+
+    setTimeout(() => {
+      setIsOpen(false)
+      setIsInteractive(true)
+    }, 150)
   }
 
   const updateSelectMultiple = (item: ItemInterface) => {
@@ -158,14 +164,16 @@ const Select: React.FC<SelectProps> = ({
                     onClick={() => {
                       multiple
                         ? updateSelectMultiple(item)
-                        : updateSelect(item)
+                        : (isInteractive ? updateSelect(item) : null)
                     }}
                     className={`
                       ${styles['item']} 
                       ${item.disabled && styles['disabled']}
                     `}
                   >
-                    {item.label}
+                    <Typography color={item.disabled ? 'disabled' : 'primary'}>
+                      {item.label}
+                    </Typography>
 
                     <Checkmark
                       state={
