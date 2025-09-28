@@ -77,7 +77,10 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <>
-      <div ref={buttonRef} style={{width: 'fit-content'}}>
+      <div
+        ref={buttonRef}
+        className={styles[`width-${width}`]}
+      >
         <select
           className={styles['select']}
           name={name}
@@ -121,7 +124,6 @@ const Select: React.FC<SelectProps> = ({
           <button
             className={`
               ${styles['button']} 
-              ${styles[`width-${width}`]} 
               ${isOpen && styles['button-active']}
             `}
             onClick={() => setIsOpen(!isOpen)}
