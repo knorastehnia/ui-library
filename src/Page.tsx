@@ -170,26 +170,26 @@ const Page = () => {
                   <Tree.Item action='#'><T>Item 3</T></Tree.Item>
                 </Tree>
                 <div>
-                  <Dropdown.Item label='Item 1' action='#' />
+                  <Button action='#'><T>Dropdown Item</T></Button>
                   <Dropdown label='Nested Dropdown 1'>
-                    <Dropdown.Item label='Nested Item 1.1' />
-                    <Dropdown.Item label='Nested Item 1.2' />
-                    <Dropdown.Item label='Nested Item 1.3' />
+                    <Button><T>Dropdown Item</T></Button>
+                    <Button><T>Dropdown Item</T></Button>
+                    <Button><T>Dropdown Item</T></Button>
                   </Dropdown>
                   <Dropdown label='Nested Dropdown 2' direction='right'>
-                    <Dropdown.Item label='Nested Item 2.1' />
-                    <Dropdown.Item label='Nested Item 2.2' />
-                    <Dropdown.Item label='Nested Item 2.3' />
+                    <Button><T>Dropdown Item</T></Button>
+                    <Button><T>Dropdown Item</T></Button>
+                    <Button><T>Dropdown Item</T></Button>
 
                     <Dropdown label='Nested Dropdown 2.1'>
-                      <Dropdown.Item label='Nested Item 2.3.1' />
-                      <Dropdown.Item label='Nested Item 2.3.1' />
-                      <Dropdown.Item label='Nested Item 2.3.1' />
+                      <Button><T>Dropdown Item</T></Button>
+                      <Button><T>Dropdown Item</T></Button>
+                      <Button><T>Dropdown Item</T></Button>
                     </Dropdown>
                   </Dropdown>
-                  <Dropdown.Item label='Item 2' action={() => null} disabled />
-                  <Dropdown.Item label='Item 3' action={() => null} disabled />
-                  <Dropdown.Item label='Item 4' action={() => null} />
+                  <Button action={() => null} disabled><T>Dropdown Item</T></Button>
+                  <Button action={() => null} disabled><T>Dropdown Item</T></Button>
+                  <Button action={() => null}><T>Dropdown Item</T></Button>
                 </div>
               </div>
             </Dropdown>
@@ -318,11 +318,6 @@ const Page = () => {
         <Layout.Subsection span={1}>
           <Accordion>
             <Accordion.Item label='Accordion Item'>
-              <Accordion>
-                <Accordion.Item label='Item'>
-                  <T>Content</T>
-                </Accordion.Item>
-              </Accordion>
               <Typography type='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                 corporis consequuntur porro suscipit inventore atque cupiditate 

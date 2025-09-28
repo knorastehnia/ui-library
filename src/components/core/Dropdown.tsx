@@ -4,12 +4,7 @@ import Arrow from '../icons/Arrow'
 import Button from './Button'
 import Typography from './Typography'
 import Popover from './Popover'
-
-interface DropdownItemProps {
-  label: string,
-  action?: string | Function,
-  disabled?: boolean,
-}
+import ButtonDefaultsContext from '../utils/ButtonDefaultsContext'
 
 interface DropdownProps {
   children: React.ReactElement | React.ReactElement[],
@@ -17,30 +12,9 @@ interface DropdownProps {
   direction?: 'bottom' | 'right',
 }
 
-type DropdownComponent = React.FC<DropdownProps> & {
-  Item: React.FC<DropdownItemProps>
-}
-
 const DropdownContext = createContext<true | undefined>(undefined)
 
-const DropdownItem: React.FC<DropdownItemProps> = ({
-  label,
-  action,
-  disabled=false,
-}) => {
-  return (
-    <Button
-      action={action}
-      disabled={disabled}
-      type='hollow'
-      width='full'
-    >
-      <Typography>{label}</Typography>
-    </Button>
-  )
-}
-
-const Dropdown: DropdownComponent = ({
+const Dropdown: React.FC<DropdownProps> = ({
   children,
   label,
   direction,
@@ -92,14 +66,17 @@ const Dropdown: DropdownComponent = ({
           onClose={closeDropdown}
         >
           <DropdownContext.Provider value={true}>
-            {children}
+            <ButtonDefaultsContext.Provider value={{
+              type: 'hollow',
+              width: 'full'
+            }}>
+              {children}
+            </ButtonDefaultsContext.Provider>
           </DropdownContext.Provider>
         </Popover>
       </div>
     </div>
   )
 }
-
-Dropdown.Item = DropdownItem
 
 export default Dropdown
