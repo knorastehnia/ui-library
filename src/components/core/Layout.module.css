@@ -67,7 +67,7 @@
 .section {
   position: relative;
   background-color: var(--background);
-  overflow: hidden;
+  /* overflow: hidden; */
   
   .section-content {
     display: flex;
@@ -82,5 +82,5 @@
   border-bottom: 1px solid var(--gray-1);
   padding: min(5vw, 80px);
   min-width: 300px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }

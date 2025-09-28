@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
@@ -14,6 +14,7 @@ interface DropdownItemProps {
 interface DropdownProps {
   children: React.ReactElement | React.ReactElement[],
   label: string,
+  direction?: 'bottom' | 'right',
   width?: 'auto' | 'full',
 }
 
@@ -67,13 +68,14 @@ const Dropdown: DropdownComponent = ({
   children,
   label,
   width,
+  direction,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [position, setPosition] = useState({ x: 0, y: 0 })
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const ctx = useContext(DropdownContext)
-  const isTopLevel = ctx === null
+  const activeDirection = direction ?? (!!ctx ? 'right' : 'bottom')
+
   const activeWidth = width ?? ctx?.width ?? 'auto'
 
   const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
@@ -92,25 +94,8 @@ const Dropdown: DropdownComponent = ({
     }
   }
 
-  useEffect(() => {
-    const btn = buttonRef.current
-    if (!btn) return
-
-    const rect = btn.getBoundingClientRect()
-
-    setPosition(
-      isTopLevel ? {
-        y: rect.y + window.scrollY + rect.height + 5,
-        x: rect.x + window.scrollX,
-      } : {
-        y: rect.y + window.scrollY,
-        x: rect.x + window.scrollX + rect.width + 5,
-      }
-    )
-  }, [isOpen])
-
   return (
-    <>
+    <div className={styles[`dropdown-${activeDirection}`]}>
       <button
         ref={buttonRef}
         className={`
@@ -122,24 +107,25 @@ const Dropdown: DropdownComponent = ({
       >
         <Typography>{label}</Typography>
         <div style={{
-          transform: isTopLevel ? '' : 'rotate(-90deg)'
+          transform: activeDirection === 'right' ? 'rotate(-90deg)' : '',
         }}>
           <Arrow state={isOpen} />
         </div>
       </button>
 
-      <Popover
-        isOpen={isOpen}
-        onClose={closeDropdown}
-        position={position}
-      >
-        <DropdownContext.Provider value={{
-          width: 'full',
-        }}>
-          {children}
-        </DropdownContext.Provider>
-      </Popover>
-    </>
+      <div className={styles[`content-${activeDirection}`]}>
+        <Popover
+          isOpen={isOpen}
+          onClose={closeDropdown}
+        >
+          <DropdownContext.Provider value={{
+            width: 'full',
+          }}>
+            {children}
+          </DropdownContext.Provider>
+        </Popover>
+      </div>
+    </div>
   )
 }
 

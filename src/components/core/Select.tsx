@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './Select.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
@@ -27,7 +27,6 @@ const Select: React.FC<SelectProps> = ({
   multiple=false,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [position, setPosition] = useState({ x: 0, y: 0 })
   const buttonRef = useRef<HTMLDivElement>(null)
 
   const [selected, setSelected] = useState<ItemInterface[] | null>(null)
@@ -75,18 +74,6 @@ const Select: React.FC<SelectProps> = ({
       setSelected(selected ? [...selected, item] : [item])
     }
   }
-
-  useEffect(() => {
-    const btn = buttonRef.current
-    if (!btn) return
-
-    const rect = btn.getBoundingClientRect()
-
-    setPosition({
-      y: rect.y + window.scrollY + rect.height,
-      x: rect.x + window.scrollX,
-    })
-  }, [isOpen])
 
   return (
     <>
@@ -156,7 +143,6 @@ const Select: React.FC<SelectProps> = ({
         </div>
 
         <Popover
-          position={position}
           isOpen={isOpen}
           onClose={closeSelect}
         >

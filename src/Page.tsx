@@ -8,6 +8,7 @@ import Typography, { T } from './components/core/Typography'
 import Modal from './components/core/Modal'
 import List from './components/core/List'
 import Accordion from './components/core/Accordion'
+import Tree from './components/core/Tree'
 import Table from './components/core/Table'
 import ContextMenu from './components/core/ContextMenu'
 import Checkmark from './components/icons/Checkmark'
@@ -150,21 +151,53 @@ const Page = () => {
                 ]}
               />
 
-              <Dropdown label='Dropdown'>
-                <Dropdown.Item action='#'><T>Item 1</T></Dropdown.Item>
-                <Dropdown label='Nested Dropdown 1'>
-                  <Dropdown.Item><T>Nested Item 1.1</T></Dropdown.Item>
-                  <Dropdown.Item><T>Nested Item 1.2</T></Dropdown.Item>
-                  <Dropdown.Item><T>Nested Item 1.3</T></Dropdown.Item>
-                </Dropdown>
-                <Dropdown label='Nested Dropdown 2'>
-                  <Dropdown.Item><T>Nested Item 2.1</T></Dropdown.Item>
-                  <Dropdown.Item><T>Nested Item 2.2</T></Dropdown.Item>
-                  <Dropdown.Item><T>Nested Item 2.3</T></Dropdown.Item>
-                </Dropdown>
-                <Dropdown.Item action={() => null} disabled><T>Item 2</T></Dropdown.Item>
-                <Dropdown.Item action={() => null} disabled><T>Item 3</T></Dropdown.Item>
-                <Dropdown.Item action={() => null}><T>Item 4</T></Dropdown.Item>
+              <Dropdown label='Dropdown' direction='bottom'>
+                <div style={{
+                  display: 'flex',
+                  flexFlow: 'row',
+                  marginRight: '1px solid #333',
+                  width: '400px',
+                }}>
+                  <Tree>
+                    <Tree.Branch label='Branch 1'>
+                      <Tree.Item action='#'><T>Item 1</T></Tree.Item>
+                      <Tree.Item action='#'><T>Item 2</T></Tree.Item>
+                      <Tree.Item action='#'><T>Item 3</T></Tree.Item>
+                    </Tree.Branch>
+
+                    <Tree.Branch label='Branch 2'>
+                      <Tree.Item action='#'><T>Item 1</T></Tree.Item>
+                      <Tree.Item action='#'><T>Item 2</T></Tree.Item>
+                      <Tree.Item action='#'><T>Item 3</T></Tree.Item>
+                    </Tree.Branch>
+
+                    <Tree.Item action='#'><T>Item 1</T></Tree.Item>
+                    <Tree.Item action='#'><T>Item 2</T></Tree.Item>
+                    <Tree.Item action='#'><T>Item 3</T></Tree.Item>
+                  </Tree>
+                  <div>
+                    <Dropdown.Item action='#'><T>Item 1</T></Dropdown.Item>
+                    <Dropdown label='Nested Dropdown 1'>
+                      <Dropdown.Item><T>Nested Item 1.1</T></Dropdown.Item>
+                      <Dropdown.Item><T>Nested Item 1.2</T></Dropdown.Item>
+                      <Dropdown.Item><T>Nested Item 1.3</T></Dropdown.Item>
+                    </Dropdown>
+                    <Dropdown label='Nested Dropdown 2' direction='right'>
+                      <Dropdown.Item><T>Nested Item 2.1</T></Dropdown.Item>
+                      <Dropdown.Item><T>Nested Item 2.2</T></Dropdown.Item>
+                      <Dropdown.Item><T>Nested Item 2.3</T></Dropdown.Item>
+
+                      <Dropdown label='Nested Dropdown 2.1'>
+                        <Dropdown.Item><T>Nested Item 2.3.1</T></Dropdown.Item>
+                        <Dropdown.Item><T>Nested Item 2.3.2</T></Dropdown.Item>
+                        <Dropdown.Item><T>Nested Item 2.3.3</T></Dropdown.Item>
+                      </Dropdown>
+                    </Dropdown>
+                    <Dropdown.Item action={() => null} disabled><T>Item 2</T></Dropdown.Item>
+                    <Dropdown.Item action={() => null} disabled><T>Item 3</T></Dropdown.Item>
+                    <Dropdown.Item action={() => null}><T>Item 4</T></Dropdown.Item>
+                  </div>
+                </div>
               </Dropdown>
             </div>
           </div>

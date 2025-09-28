@@ -1,3 +1,23 @@
+.dropdown-bottom {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.dropdown-right {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.content-bottom {
+  position: relative;
+  top: 5px;
+}
+
+.content-right {
+  position: relative;
+  left: 5px;
+}
+
 .item {
   display: block;
   padding: 10px;
