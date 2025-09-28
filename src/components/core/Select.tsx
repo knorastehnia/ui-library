@@ -143,40 +143,42 @@ const Select: React.FC<SelectProps> = ({
             </div>
           </button>
         </div>
+        
+        <div className={styles['content']}>
+          <Popover
+            isOpen={isOpen}
+            onClose={closeSelect}
+          >
+            {
+              items.map((item, index) => {
+                return (
+                  <button
+                    key={index}
+                    disabled={item.disabled}
+                    onClick={() => {
+                      multiple
+                        ? updateSelectMultiple(item)
+                        : updateSelect(item)
+                    }}
+                    className={`
+                      ${styles['item']} 
+                      ${item.disabled && styles['disabled']}
+                    `}
+                  >
+                    {item.label}
 
-        <Popover
-          isOpen={isOpen}
-          onClose={closeSelect}
-        >
-          {
-            items.map((item, index) => {
-              return (
-                <button
-                  key={index}
-                  disabled={item.disabled}
-                  onClick={() => {
-                    multiple
-                      ? updateSelectMultiple(item)
-                      : updateSelect(item)
-                  }}
-                  className={`
-                    ${styles['item']} 
-                    ${item.disabled && styles['disabled']}
-                  `}
-                >
-                  {item.label}
-
-                  <Checkmark
-                    state={
-                      !!selected?.includes(item)
-                    }
-                    color='foreground'
-                  />
-                </button>
-              )
-            })
-          }
-        </Popover>
+                    <Checkmark
+                      state={
+                        !!selected?.includes(item)
+                      }
+                      color='foreground'
+                    />
+                  </button>
+                )
+              })
+            }
+          </Popover>
+        </div>
       </div>
     </>
   )

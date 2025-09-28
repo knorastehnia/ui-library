@@ -33,11 +33,11 @@ const Popover: React.FC<PopoverProps> = ({
   }
 
   useEffect(() => {
-    document.addEventListener('mousedown', closePopover)
+    document.addEventListener('click', closePopover)
     document.addEventListener('keydown', escapePopover)
     
     return () => {
-      document.removeEventListener('mousedown', closePopover)
+      document.removeEventListener('click', closePopover)
       document.addEventListener('keydown', escapePopover)
     }
   }, [])
