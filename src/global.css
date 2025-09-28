@@ -53,7 +53,7 @@ body {
 
 #root {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 input, button, textarea, select {

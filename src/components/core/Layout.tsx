@@ -70,7 +70,6 @@ const TopNav: React.FC<TopNavProps> = ({
 }) => {
   return (
     <div className={styles['topnav']}>
-      <div className={styles['topnav-side']}></div>
       <div className={styles['topnav-content']}>
         {children}
       </div>
@@ -83,8 +82,11 @@ const SideNav: React.FC<SideNavProps> = ({
 }) => {
   return (
     <div className={styles['sidenav']}>
-      <div className={styles['sidenav-content']}>
-        {children}
+      <div className={styles['sidenav-fixed']}>
+        <div className={styles['sidenav-header']}></div>
+        <div className={styles['sidenav-content']}>
+          {children}
+        </div>
       </div>
     </div>
   )
