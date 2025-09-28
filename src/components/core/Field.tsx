@@ -74,14 +74,15 @@ const Field: React.FC<FieldProps> = ({
   // on blur
   const handleInput = () => {
     if (type === 'number') validateNumber()
-    else if (type === 'email') validateEmail()
+    if (type === 'email') validateEmail()
+    if (limit > 0) validateCount()
   }
 
   // on change
   useEffect(() => {
     if (numberError) validateNumber()
-    else if (emailError) validateEmail()
-    validateCount()
+    if (emailError) validateEmail()
+    if (countError) validateCount()
   }, [value])
 
   return (
