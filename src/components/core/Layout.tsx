@@ -1,8 +1,23 @@
+import { useState } from 'react'
 import styles from './Layout.module.css'
+import Button from './Button'
+import { T } from './Typography'
 
-interface ContentProps { children: React.ReactElement | React.ReactElement[] }
-interface SideNavProps { children: React.ReactElement | React.ReactElement[] }
-interface LayoutProps { children: React.ReactElement | React.ReactElement[] }
+interface LayoutProps {
+  children: React.ReactElement | React.ReactElement[],
+}
+
+interface TopNavProps {
+  children: React.ReactElement | React.ReactElement[],
+}
+
+interface SideNavProps {
+  children: React.ReactElement | React.ReactElement[],
+}
+
+interface ContentProps {
+  children: React.ReactElement | React.ReactElement[],
+}
 
 interface SubsectionProps {
   children: React.ReactElement | React.ReactElement[],
@@ -10,10 +25,6 @@ interface SubsectionProps {
 }
 
 interface SectionProps {
-  children: React.ReactElement | React.ReactElement[],
-}
-
-interface TopNavProps {
   children: React.ReactElement | React.ReactElement[],
 }
 
@@ -80,11 +91,26 @@ const TopNav: React.FC<TopNavProps> = ({
 const SideNav: React.FC<SideNavProps> = ({
   children,
 }) => {
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
   return (
     <div className={styles['sidenav']}>
-      <div className={styles['sidenav-fixed']}>
-        <div className={styles['sidenav-header']}></div>
-        <div className={styles['sidenav-content']}>
+      <div
+        className={`
+          ${styles['sidenav-fixed']} 
+          ${isCollapsed && styles['collapsed']}
+        `}
+      >
+        <div className={styles['sidenav-header']}>
+          <Button
+            type='hollow'
+            action={() => setIsCollapsed(!isCollapsed)}
+          >
+            <T>_</T>
+          </Button>
+        </div>
+
+        <div className={styles['sidenav-main']}>
           {children}
         </div>
       </div>
