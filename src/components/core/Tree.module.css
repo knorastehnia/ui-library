@@ -33,16 +33,15 @@
   margin-left: 10px;
   height: auto;
 
+  transform: translateY(10px);
   opacity: 0;
-  filter: blur(3px);
   pointer-events: none;
 
-  /* border-left: 1px solid var(--gray-2); */
   transition: all 0.5s var(--curve);
   
   &.open {
+    transform: none;
     opacity: 1;
-    filter: none;
     pointer-events: all;
   }
 }

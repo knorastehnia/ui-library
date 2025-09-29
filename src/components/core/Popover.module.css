@@ -5,17 +5,16 @@
   border: 1px solid var(--gray-2);
   border-radius: var(--radius);
 
+  transform: translateY(5px);
   pointer-events: none;
-  filter: blur(5px);
   opacity: 0;
 
   transition: all 0.5s var(--curve), inset 0s;
   z-index: 200;
 
   &.popover-visible {
+    transform: none;
     pointer-events: all;
     opacity: 1;
-    filter: none;
-    transform: none;
   }
 }

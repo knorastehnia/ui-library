@@ -1,11 +1,11 @@
 :root {
   --background: #000;
   --foreground: #f0f0f0;
-  --gray-1: #0c0c0c;
-  --gray-2: #151515;
-  --gray-3: #222;
-  --gray-6: #333;
-  --gray-9: #b6b6b6;
+  --gray-1: #0d0d0d;
+  --gray-2: #161616;
+  --gray-3: #232323;
+  --gray-6: #343434;
+  --gray-9: #b7b7b7;
 
   /* --background: #fff;
   --foreground: #0f0f0f;

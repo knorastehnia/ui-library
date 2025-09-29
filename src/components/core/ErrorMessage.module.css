@@ -4,9 +4,10 @@
 
 .error {
   height: 0;
+
+  transform: translateY(10px);
   margin: 0;
   opacity: 0;
-  filter: blur(3px);
   pointer-events: none;
   user-select: none;
   transition: all 0.5s var(--curve);
@@ -19,9 +20,9 @@
   font-size: 0.9rem;
 
   &.error-visible {
+    transform: none;
     margin: 5px 0;
     opacity: 1;
-    filter: none;
     pointer-events: all;
     user-select: auto;
   }
