@@ -2,21 +2,21 @@
 .h-l, .h-xl {
   display: block;
   line-height: 1.4;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .p-xs, .p-s, .p-m,
 .p-l, .p-xl {
   display: block;
   line-height: 1.4;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .span-xs, .span-s, .span-m,
 .span-l, .span-xl {
   display: inline;
   line-height: 1.4;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .weight-300 { font-weight: 300 }

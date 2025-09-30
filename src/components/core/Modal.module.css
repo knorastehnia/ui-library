@@ -6,7 +6,7 @@
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: 2000;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
   
   visibility: hidden;
   user-select: none;

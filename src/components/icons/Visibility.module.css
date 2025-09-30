@@ -21,11 +21,11 @@
   }
 
   .hidden {
-    animation: unstrike var(--curve) 0.25s forwards;
+    animation: unstrike var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;
   }
 
   .visible {
-    animation: strike var(--curve) 0.25s forwards;
+    animation: strike var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;
   }
 }
 

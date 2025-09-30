@@ -14,11 +14,11 @@
   .color-foreground { stroke: var(--gray-9) }
 
   .hidden {
-    animation: disappear var(--curve) 0.25s forwards;
+    animation: disappear var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;
   }
 
   .visible {
-    animation: appear var(--curve) 0.25s forwards;
+    animation: appear var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;
   }
 }
 

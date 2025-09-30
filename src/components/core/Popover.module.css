@@ -9,7 +9,7 @@
   pointer-events: none;
   opacity: 0;
 
-  transition: all 0.5s var(--curve), inset 0s;
+  transition: all var(--ease-out-t) var(--ease-out-c), inset 0s;
   z-index: 200;
 
   &.popover-visible {

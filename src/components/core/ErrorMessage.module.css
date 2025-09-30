@@ -10,7 +10,7 @@
   opacity: 0;
   pointer-events: none;
   user-select: none;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   display: flex;
   flex-flow: row nowrap;

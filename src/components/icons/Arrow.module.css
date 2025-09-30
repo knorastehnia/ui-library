@@ -4,7 +4,7 @@
 
   path {
     stroke: var(--gray-9);
-    transition: all 0.25s var(--curve);
+    transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
   }
 
   .active {

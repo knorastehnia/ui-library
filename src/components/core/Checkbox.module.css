@@ -24,7 +24,7 @@
   border: 1px solid var(--gray-2);
   border-radius: calc(var(--radius) / 2);
   background-color: var(--background);
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
   
   &.checked {
     background-color: var(--gray-1);

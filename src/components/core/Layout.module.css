@@ -57,7 +57,7 @@
     flex-flow: column nowrap;
     height: 100vh;
     pointer-events: none;
-    transition: all 0.5s var(--curve);
+    transition: all var(--ease-out-t) var(--ease-out-c);
 
     &.collapsed {
       width: 0;
@@ -81,7 +81,7 @@
     display: flex;
     align-items: center;
     padding: 0 20px;
-    transition: all 0.5s var(--curve);
+    transition: all var(--ease-out-t) var(--ease-out-c);
   }
 
   .sidenav-main {
@@ -92,7 +92,7 @@
     background-color: var(--background);
     border-right: 1px solid var(--gray-2);
     height: 100%;
-    transition: all 0.5s var(--curve);
+    transition: all var(--ease-out-t) var(--ease-out-c);
   }
 }
 

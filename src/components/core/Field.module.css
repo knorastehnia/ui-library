@@ -6,7 +6,7 @@
   position: relative;
   border: 1px solid var(--gray-2);
   border-radius: var(--radius);
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .input-active {
@@ -22,7 +22,7 @@
   background-color: var(--background);
   padding: 0 5px;
   border-radius: 999px;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .label-active {
@@ -33,7 +33,7 @@
   width: 100%;
   padding: 10px;
   border: none;
-  transition: all 0.5s var(--curve), height 0.25s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c), height calc(var(--ease-out-t) / 2) var(--ease-out-c);
 
   &:focus {
     outline: none;
@@ -60,7 +60,7 @@
   border-radius: var(--radius);
   cursor: pointer;
   background-color: transparent;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   &:hover, &:focus-visible {
     outline: none;

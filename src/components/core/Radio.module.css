@@ -4,7 +4,7 @@
   border: 1px solid var(--gray-2);
   border-radius: var(--radius);
   overflow: clip;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   &:has(.input:hover), &:has(.input:focus-visible) {
     border-color: var(--gray-6);
@@ -39,7 +39,7 @@
 
   background-color: var(--background);
   padding: 5px 20px;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   &:hover, &:has(.input:focus-visible) {
     background-color: var(--gray-1);
@@ -49,7 +49,7 @@
   &.checked {
     background-color: var(--gray-3);
     border-color: var(--gray-3);
-    transition: all 0.5s var(--curve), color 0s;
+    transition: all var(--ease-out-t) var(--ease-out-c), color 0s;
   }
 
   &.disabled {

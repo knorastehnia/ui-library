@@ -10,7 +10,7 @@
   background-color: var(--background);
   border: none;
   width: 100%;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   &:focus-visible {
     outline: none;
@@ -25,17 +25,17 @@
 .content {
   overflow: hidden;
   height: auto;
-  margin: 0 10px;
 
+  margin: 0 10px;
   transform: translateY(20px);
   pointer-events: none;
   opacity: 0;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 
   &.open {
+    margin: 10px;
     transform: none;
     pointer-events: all;
     opacity: 1;
-    margin: 10px;
   }
 }

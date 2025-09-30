@@ -1,7 +1,7 @@
 .button {
   overflow: clip;
   cursor: pointer;
-  transition: all 0.5s var(--curve);
+  transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
 .style-outline {
