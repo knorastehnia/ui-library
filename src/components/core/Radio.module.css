@@ -39,7 +39,7 @@
 
   background-color: var(--background);
   padding: 5px 20px;
-  transition: all var(--ease-out-t) var(--ease-out-c);
+  transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
 
   &:hover {
     background-color: var(--gray-1);
@@ -49,7 +49,6 @@
   &.checked {
     background-color: var(--gray-3);
     border-color: var(--gray-3);
-    transition: all var(--ease-out-t) var(--ease-out-c), color 0s;
   }
 
   &.disabled {
