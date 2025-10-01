@@ -33,7 +33,7 @@
   transition: all var(--ease-out-t) var(--ease-out-c);
 
   &.open {
-    margin: 10px;
+    margin: 0 10px 10px 10px;
     transform: none;
     pointer-events: all;
     opacity: 1;
