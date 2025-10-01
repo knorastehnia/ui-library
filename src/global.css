@@ -44,6 +44,9 @@ html {
   font-weight: 400;
   line-height: 1.4;
   font-size: 1rem;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-9) transparent;
 }
 
 body {

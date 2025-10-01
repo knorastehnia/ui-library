@@ -39,6 +39,7 @@
     align-items: center;
     padding: 0 min(5vw, 80px);
     border-bottom: 1px solid var(--gray-2);
+    border-right: 1px solid var(--gray-1);
   }
 }
 
