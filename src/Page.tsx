@@ -12,6 +12,7 @@ import Tree from './components/core/Tree'
 import Table from './components/core/Table'
 import ContextMenu from './components/core/ContextMenu'
 import Checkmark from './components/icons/Checkmark'
+import Spinner from './components/icons/Spinner'
 
 import Layout from './components/core/Layout'
 
@@ -21,6 +22,7 @@ import Visibility from './components/icons/Visibility'
 const Page = () => {
   const [someState, setSomeState] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [isSpinning, setIsSpinning] = useState(true)
 
   return (
     <>
@@ -69,6 +71,18 @@ const Page = () => {
             <Button><T>Button Outline</T></Button>
             <Button type='fill'><T>Button Fill</T></Button>
             <Button width='auto'><Checkmark color='foreground' state={true} /></Button>
+            <Button action={() => setIsSpinning(!isSpinning)}>
+              <div style={{
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '10px',
+              }}>
+                <Spinner width='1rem' height='1rem' state={isSpinning} />
+                <T>Spinner</T>
+              </div>
+            </Button>
           </div>
         </Layout.Subsection>
 

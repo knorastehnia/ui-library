@@ -1,0 +1,32 @@
+.svg {
+  pointer-events: none;
+  display: block;
+
+  circle {
+    stroke: var(--gray-9);
+    stroke-width: 2px;
+    stroke-dashoffset: 1;
+    stroke-dasharray: 0.5;
+    transform-origin: center;
+    animation: spin linear 1.25s reverse infinite;
+    transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
+  }
+
+  .visible {
+  }
+
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes spin {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 2;
+  }
+}
