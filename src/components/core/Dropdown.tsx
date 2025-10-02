@@ -4,7 +4,7 @@ import Arrow from '../icons/Arrow'
 import Button from './Button'
 import Typography from './Typography'
 import Popover from './Popover'
-import ButtonDefaultsContext from '../utils/ButtonDefaultsContext'
+import { ButtonDefaultsContext } from './Button'
 
 interface DropdownProps {
   children: React.ReactElement | React.ReactElement[],

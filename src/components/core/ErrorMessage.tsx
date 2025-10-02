@@ -1,7 +1,7 @@
 import styles from './ErrorMessage.module.css'
 import Alert from '../icons/Alert'
 import useCollapseEffect from '../utils/useCollapseEffect'
-import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
+import { TypographyDefaultsContext } from './Typography'
 import { useRef } from 'react'
 
 interface ErrorMessageProps {

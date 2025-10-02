@@ -1,14 +1,19 @@
 import styles from './Button.module.css'
-import TypographyDefaultsContext from '../utils/TypographyDefaultsContext'
-import ButtonDefaultsContext from '../utils/ButtonDefaultsContext'
-import type { ButtonDefaultsContextInterface } from '../utils/ButtonDefaultsContext'
-import { useContext } from 'react'
+import { TypographyDefaultsContext } from './Typography'
+import { createContext, useContext } from 'react'
+
+interface ButtonDefaultsContextInterface {
+  type?: 'fill' | 'outline' | 'hollow' | 'text',
+  width?: 'auto' | 'full',
+}
 
 interface ButtonProps extends ButtonDefaultsContextInterface {
   children: React.ReactElement | React.ReactElement[],
   action?: string | Function,
   disabled?: boolean,
 }
+
+const ButtonDefaultsContext = createContext<ButtonDefaultsContextInterface>({})
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -59,3 +64,4 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 export default Button
+export { ButtonDefaultsContext }
