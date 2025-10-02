@@ -1,5 +1,6 @@
 .svg {
   pointer-events: none;
+  overflow: visible;
   display: block;
 
   path {

@@ -1,7 +1,7 @@
 .svg {
   pointer-events: none;
+  overflow: visible;
   display: block;
-  height: 1rem;
 
   path {
     fill: var(--error);

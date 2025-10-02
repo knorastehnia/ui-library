@@ -1,5 +1,6 @@
 .svg {
   pointer-events: none;
+  overflow: visible;
   display: block;
 
   circle {
@@ -10,9 +11,6 @@
     transform-origin: center;
     animation: spin linear 1.25s reverse infinite;
     transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
-  }
-
-  .visible {
   }
 
   .hidden {

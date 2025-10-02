@@ -2,16 +2,12 @@
   pointer-events: none;
   overflow: visible;
   display: block;
-  width: 0.7rem;
-  height: 0.7rem;
 
   path {
+    stroke: var(--gray-9);
     stroke-dashoffset: 1;
     stroke-dasharray: 1;
   }
-
-  .color-background { stroke: var(--gray-2) }
-  .color-foreground { stroke: var(--gray-9) }
 
   .hidden {
     animation: disappear var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;

@@ -1,8 +1,7 @@
 .svg {
   pointer-events: none;
+  overflow: visible;
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
 
   path {
     fill: var(--gray-9);

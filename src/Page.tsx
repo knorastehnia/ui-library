@@ -70,7 +70,7 @@ const Page = () => {
 
             <Button><T>Button Outline</T></Button>
             <Button type='fill'><T>Button Fill</T></Button>
-            <Button width='auto'><Checkmark color='foreground' state={true} /></Button>
+            <Button width='auto'><Checkmark state={true} /></Button>
             <Button action={() => setIsSpinning(!isSpinning)}>
               <div style={{
                 display: 'flex',
@@ -79,7 +79,7 @@ const Page = () => {
                 alignItems: 'center',
                 gap: '10px',
               }}>
-                <Spinner width='1rem' height='1rem' state={isSpinning} />
+                <Spinner size='s' state={isSpinning} />
                 <T>Spinner</T>
               </div>
             </Button>

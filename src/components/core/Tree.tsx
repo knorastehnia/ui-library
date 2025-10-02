@@ -62,7 +62,7 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
           setIsOpen(!isOpen)
         }}
       >
-        <Arrow width='0.6rem' height='0.6rem' state={isOpen} />
+        <Arrow state={isOpen} />
         <Typography color='dimmed'>
           {label}
         </Typography>
