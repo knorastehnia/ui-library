@@ -134,30 +134,41 @@ const Page = () => {
           }}>
             <Field label='Static' type='textarea' limit={200} height='200px' name='sta' />
             <Field label='Dynamic' type='textarea' limit={10} name='dyn' resizable />
+            <Select
+              label='Select OS'
+              name='os1'
+              items={[
+                { label: 'Windows', value: 'windows', },
+                { label: 'macOS', value: 'macos', disabled: true },
+                { label: 'Linux', value: 'linux', },
+                { label: 'A very long option indeed', value: 'a', },
+              ]}
+            />
 
-              <Select
-                multiple
-                width='full'
-                label='Select OS'
-                name='os'
-                items={[
-                  { label: 'Windows', value: 'windows', disabled: true, },
-                  { label: 'macOS', value: 'macos', },
-                  { label: 'Linux', value: 'linux', },
-                  { label: 'A very long option indeed', value: 'a', },
-                ]}
-              />
+            <Select
+              type='multiple'
+              width='full'
+              label='Select OS'
+              name='os2'
+              items={[
+                { label: 'Windows', value: 'windows', disabled: true, },
+                { label: 'macOS', value: 'macos', },
+                { label: 'Linux', value: 'linux', },
+                { label: 'A very long option indeed', value: 'a', },
+              ]}
+            />
 
-              <Select
-                label='Select OS'
-                name='os'
-                items={[
-                  { label: 'Windows', value: 'windows', },
-                  { label: 'macOS', value: 'macos', disabled: true },
-                  { label: 'Linux', value: 'linux', },
-                  { label: 'A very long option indeed', value: 'a', },
-                ]}
-              />
+            <Select
+              type='search'
+              label='Select OS'
+              name='os3'
+              items={[
+                { label: 'Windows', value: 'windows', },
+                { label: 'macOS', value: 'macos', disabled: true },
+                { label: 'Linux', value: 'linux', },
+                { label: 'A very long option indeed', value: 'a', },
+              ]}
+            />
 
             <Dropdown label='Dropdown' direction='bottom'>
               <div style={{

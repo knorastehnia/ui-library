@@ -13,6 +13,7 @@
   padding: 5px 10px;
   text-decoration: none;
   text-align: left;
+  min-width: 200px;
   width: 100%;
   border: none;
   border-radius: var(--radius);
@@ -93,4 +94,3 @@
 .width-full {
   width: 100%;
 }
-

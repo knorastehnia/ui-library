@@ -19,7 +19,7 @@ interface FieldProps {
     | 'email'
     | 'password',
 
-  name: string,
+  name?: string,
   limit?: number,
   resizable?: boolean,
   height?: string,
