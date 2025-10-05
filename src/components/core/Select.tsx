@@ -141,7 +141,7 @@ const Select: React.FC<SelectProps> = ({
 
   useEffect(() => {
     visibleItemCountRef.current = visibleItems.length
-  }, visibleItems)
+  }, [visibleItems])
 
   return (
     <>
