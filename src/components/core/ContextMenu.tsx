@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './ContextMenu.module.css'
 import Popover from './Popover'
 import Typography from './Typography'
@@ -22,9 +22,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [pos, setPos] = useState({ x: 0, y: 0 })
+  const contextRef = useRef<HTMLDivElement>(null)
 
   const openContextMenu = (event: React.MouseEvent) => {
     event.preventDefault()
+    if (contextRef?.current?.contains(event.target as HTMLElement)) return
+
     setPos({
       x: event.clientX + window.scrollX,
       y: event.clientY + window.scrollY,
@@ -46,6 +49,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       {
         createPortal(
           <div
+            ref={contextRef}
             className={styles['context-menu']}
             style={{ top: pos.y, left: pos.x, }}
           >

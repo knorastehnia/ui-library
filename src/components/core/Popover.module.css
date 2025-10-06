@@ -12,6 +12,10 @@
   transition: all var(--ease-out-t) var(--ease-out-c), inset 0s;
   z-index: 200;
 
+  top: 0;
+  left: 0;
+  min-width: 100%;
+
   &.popover-visible {
     transform: none;
     pointer-events: all;

@@ -1,5 +1,5 @@
 import styles from './Popover.module.css'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface PopoverProps {
@@ -13,7 +13,9 @@ const Popover: React.FC<PopoverProps> = ({
   isOpen,
   onClose,
 }) => {
-  const contentRef = useRef(null)
+  const [invertHorizontal, setInvertHorizontal] = useState(false)
+  const [invertVertical, setInvertVertical] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useCollapseEffect(contentRef, isOpen, 0)
 
@@ -33,18 +35,44 @@ const Popover: React.FC<PopoverProps> = ({
   }
 
   useEffect(() => {
+    if (!contentRef.current) return
+
+    const rect = contentRef.current.getBoundingClientRect()
+    console.log(rect.top + contentRef.current?.scrollHeight, window.innerHeight)
+
+    if (!invertHorizontal) {
+      setInvertHorizontal(rect.right >= window.innerWidth)
+    } else {
+      setInvertHorizontal(rect.right + rect.width >= window.innerWidth)
+    }
+
+
+    if (!invertVertical) {
+      setInvertVertical(rect.top + contentRef.current?.scrollHeight >= window.innerHeight)
+    } else {
+      setInvertVertical(rect.top + 2*contentRef.current?.scrollHeight >= window.innerHeight)
+    }
+  }, [isOpen])
+
+  useEffect(() => {
     document.addEventListener('click', closePopover)
+    document.addEventListener('mousedown', closePopover)
     document.addEventListener('keydown', escapePopover)
     
     return () => {
       document.removeEventListener('click', closePopover)
-      document.addEventListener('keydown', escapePopover)
+      document.removeEventListener('mousedown', closePopover)
+      document.removeEventListener('keydown', escapePopover)
     }
   }, [])
 
   return (
     <div
       ref={contentRef}
+      style={{
+        left: `-${invertHorizontal ? contentRef.current?.scrollWidth : 0}px`,
+        top: `-${invertVertical ? contentRef.current?.scrollHeight : 0}px`,
+      }}
       className={`
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}

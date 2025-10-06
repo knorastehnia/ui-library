@@ -341,29 +341,37 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <Accordion>
-            <Accordion.Item label='Accordion Item'>
-              <Typography type='p'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-                corporis consequuntur porro suscipit inventore atque cupiditate 
-                quos beatae, officia deserunt esse praesentium fugiat adipisci 
-                optio unde voluptates saepe similique veniam!
-              </Typography>
-            </Accordion.Item>
+          <ContextMenu items={[
+            { label: 'Context Menu Item' },
+            { label: 'Refresh Page' },
+            { label: 'Inspect Item', disabled: true },
+            { label: 'Loop Up Definition', disabled: false },
+            { label: 'Save As...' },
+          ]}>
+            <Accordion>
+              <Accordion.Item label='Accordion Item'>
+                <Typography type='p'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                  corporis consequuntur porro suscipit inventore atque cupiditate 
+                  quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                  optio unde voluptates saepe similique veniam!
+                </Typography>
+              </Accordion.Item>
 
-            <Accordion.Item label='Accordion Item'>
-              <Typography type='p'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                Atque, est dicta, eaque adipisci.
-              </Typography>
-            </Accordion.Item>
+              <Accordion.Item label='Accordion Item'>
+                <Typography type='p'>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                  Atque, est dicta, eaque adipisci.
+                </Typography>
+              </Accordion.Item>
 
-            <Accordion.Item label='Accordion Item'>
-              <Typography type='p'>
-                Lorem, ipsum dolor sit amet.
-              </Typography>
-            </Accordion.Item>
-          </Accordion>
+              <Accordion.Item label='Accordion Item'>
+                <Typography type='p'>
+                  Lorem, ipsum dolor sit amet.
+                </Typography>
+              </Accordion.Item>
+            </Accordion>
+          </ContextMenu>
         </Layout.Subsection>
       </Layout.Section>
 
