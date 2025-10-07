@@ -1,9 +1,11 @@
 .dropdown-bottom {
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
 }
 
 .dropdown-right {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
 }
@@ -17,11 +19,16 @@
 }
 
 .content-bottom {
-  position: relative;
-  top: 5px;
+  position: absolute;
+  pointer-events: none;
+  height: calc(1.4rem + 30px);
+  width: 100%;
+  top: -5px;
 }
 
 .content-right {
-  position: relative;
-  left: 5px;
+  position: absolute;
+  pointer-events: none;
+  width: 0;
+  left: calc(100% + 5px);
 }

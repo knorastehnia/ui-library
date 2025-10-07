@@ -1,6 +1,5 @@
 import styles from './Popover.module.css'
-import { useEffect, useRef, useState } from 'react'
-import useCollapseEffect from '../utils/useCollapseEffect'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 interface PopoverProps {
   children: React.ReactElement | React.ReactElement[],
@@ -17,8 +16,6 @@ const Popover: React.FC<PopoverProps> = ({
   const [invertVertical, setInvertVertical] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
 
-  useCollapseEffect(contentRef, isOpen, 0)
-
   const closePopover = (event: MouseEvent) => {
     const content = contentRef.current as HTMLButtonElement | null;
     if (!content) return
@@ -34,11 +31,10 @@ const Popover: React.FC<PopoverProps> = ({
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!contentRef.current) return
 
     const rect = contentRef.current.getBoundingClientRect()
-    console.log(rect.top + contentRef.current?.scrollHeight, window.innerHeight)
 
     if (!invertHorizontal) {
       setInvertHorizontal(rect.right >= window.innerWidth)
@@ -46,11 +42,10 @@ const Popover: React.FC<PopoverProps> = ({
       setInvertHorizontal(rect.right + rect.width >= window.innerWidth)
     }
 
-
     if (!invertVertical) {
-      setInvertVertical(rect.top + contentRef.current?.scrollHeight >= window.innerHeight)
+      setInvertVertical(rect.bottom >= window.innerHeight)
     } else {
-      setInvertVertical(rect.top + 2*contentRef.current?.scrollHeight >= window.innerHeight)
+      setInvertVertical(rect.bottom + rect.height >= window.innerHeight)
     }
   }, [isOpen])
 
@@ -70,8 +65,10 @@ const Popover: React.FC<PopoverProps> = ({
     <div
       ref={contentRef}
       style={{
-        left: `-${invertHorizontal ? contentRef.current?.scrollWidth : 0}px`,
-        top: `-${invertVertical ? contentRef.current?.scrollHeight : 0}px`,
+        left: invertHorizontal ? 'auto' : '0',
+        right: invertHorizontal ? '0' : 'auto',
+        top: invertVertical ? 'auto' : '100%',
+        bottom: invertVertical ? '100%' : 'auto',
       }}
       className={`
         ${styles['popover']} 

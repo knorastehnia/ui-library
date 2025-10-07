@@ -211,6 +211,12 @@ const Page = () => {
                       <Button><T>Dropdown Item</T></Button>
                       <Button><T>Dropdown Item</T></Button>
                     </Dropdown>
+
+                    <Dropdown label='Nested Dropdown 2.2' direction='bottom'>
+                      <Button><T>Dropdown Item</T></Button>
+                      <Button><T>Dropdown Item</T></Button>
+                      <Button><T>Dropdown Item</T></Button>
+                    </Dropdown>
                   </Dropdown>
                   <Button action={() => null} disabled><T>Dropdown Item</T></Button>
                   <Button action={() => null} disabled><T>Dropdown Item</T></Button>
