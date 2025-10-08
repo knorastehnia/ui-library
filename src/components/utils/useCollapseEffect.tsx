@@ -29,14 +29,6 @@ const useCollapseEffect = (
     updateHeight()
     const transitionEnd = setTimeout(setHeightAuto, duration)
 
-    if (ref.current) {
-      if (state) {
-        ref.current.removeAttribute('inert');
-      } else {
-        ref.current.setAttribute('inert', '');
-      }
-    }
-
     return () => {
       clearTimeout(transitionEnd)
     }

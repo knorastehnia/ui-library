@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import useCollapseEffect from '../utils/useCollapseEffect'
 import styles from './Field.module.css'
 import Visibility from '../icons/Visibility'
 import Typography from './Typography'
@@ -46,8 +45,6 @@ const Field: React.FC<FieldProps> = ({
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [countError, setCountError] = useState(false)
-
-  useCollapseEffect
 
   const allErrors = [
     { failState: numberError, message: 'Please enter a valid number.' },

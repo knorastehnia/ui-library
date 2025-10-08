@@ -2,7 +2,7 @@ import styles from './Tree.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
 import useCollapseEffect from '../utils/useCollapseEffect'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface TreeItemProps {
   children: React.ReactElement | React.ReactElement[],
@@ -53,6 +53,16 @@ const TreeBranch: React.FC<TreeBranchProps> = ({
   const contentRef = useRef<HTMLDivElement>(null)
 
   useCollapseEffect(contentRef, isOpen, 300)
+
+  useEffect(() => {
+    if (contentRef.current) {
+      if (isOpen) {
+        contentRef.current.removeAttribute('inert');
+      } else {
+        contentRef.current.setAttribute('inert', '');
+      }
+    }
+  }, [isOpen])
 
   return (
     <>

@@ -1,7 +1,7 @@
 import styles from './Accordion.module.css'
 import Arrow from '../icons/Arrow'
 import Typography from './Typography'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useCollapseEffect from '../utils/useCollapseEffect'
 
 interface AccordionProps {
@@ -23,9 +23,19 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   label,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const contentRef = useRef(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useCollapseEffect(contentRef, isOpen, 500)
+
+  useEffect(() => {
+    if (contentRef.current) {
+      if (isOpen) {
+        contentRef.current.removeAttribute('inert');
+      } else {
+        contentRef.current.setAttribute('inert', '');
+      }
+    }
+  }, [isOpen])
 
   return (
     <>

@@ -32,6 +32,7 @@ const Select: React.FC<SelectProps> = ({
   const [visibleItems, setVisibleItems] = useState(items)
   const [selected, setSelected] = useState<ItemInterface[] | null>(null)
 
+  const contentRef = useRef<HTMLDivElement>(null)
   const visibleItemCountRef = useRef(0)
   const buttonRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -135,6 +136,14 @@ const Select: React.FC<SelectProps> = ({
       setVisibleItems(items)
     }
 
+    if (contentRef.current) {
+      if (isOpen) {
+        contentRef.current.removeAttribute('inert');
+      } else {
+        contentRef.current.setAttribute('inert', '');
+      }
+    }
+
     document.addEventListener('keydown', selectFirst)
     return () => document.removeEventListener('keydown', selectFirst)
   }, [isOpen])
@@ -233,7 +242,10 @@ const Select: React.FC<SelectProps> = ({
           }
         </div>
 
-        <div className={styles['content']}>
+        <div
+          ref={contentRef}
+          className={styles['content']}
+        >
           <Popover
             isOpen={isOpen}
             onClose={closeSelect}

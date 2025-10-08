@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import styles from './Dropdown.module.css'
 import Arrow from '../icons/Arrow'
 import Button from './Button'
@@ -21,6 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   const ctx = useContext(DropdownContext)
   const activeDirection = direction ?? (!!ctx ? 'right' : 'bottom')
@@ -41,6 +42,16 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   }
 
+  useEffect(() => {
+    if (contentRef.current) {
+      if (isOpen) {
+        contentRef.current.removeAttribute('inert');
+      } else {
+        contentRef.current.setAttribute('inert', '');
+      }
+    }
+  }, [isOpen])
+
   return (
     <div className={styles[`dropdown-${activeDirection}`]}>
       <div ref={buttonRef}>
@@ -60,7 +71,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         </Button>
       </div>
 
-      <div className={styles[`content-${activeDirection}`]}>
+      <div
+        ref={contentRef}
+        className={styles[`content-${activeDirection}`]}
+      >
         <Popover
           isOpen={isOpen}
           onClose={closeDropdown}
