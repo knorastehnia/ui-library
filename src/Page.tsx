@@ -13,6 +13,7 @@ import Table from './components/core/Table'
 import ContextMenu from './components/core/ContextMenu'
 import Checkmark from './components/icons/Checkmark'
 import Spinner from './components/icons/Spinner'
+import Tabs from './components/core/Tabs'
 
 import Layout from './components/core/Layout'
 
@@ -378,6 +379,24 @@ const Page = () => {
               </Accordion.Item>
             </Accordion>
           </ContextMenu>
+        </Layout.Subsection>
+      </Layout.Section>
+
+      <Layout.Section>
+        <Layout.Subsection>
+          <Tabs>
+            <Tabs.Tab defaultTab label='Tab 1'>
+              <T>Lorem ipsum dolor sit amet 1</T>
+            </Tabs.Tab>
+
+            <Tabs.Tab label='Tab 2'>
+              <T>Lorem ipsum dolor sit amet 2</T>
+            </Tabs.Tab>
+
+            <Tabs.Tab label='Tab 3'>
+              <T>Lorem ipsum dolor sit amet 3</T>
+            </Tabs.Tab>
+          </Tabs>
         </Layout.Subsection>
       </Layout.Section>
 

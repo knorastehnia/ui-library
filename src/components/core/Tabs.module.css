@@ -1,0 +1,10 @@
+.tab-list {
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--gray-2);
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 5px;
+  overflow-x: auto;
+}
