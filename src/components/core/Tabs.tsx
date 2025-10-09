@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import styles from './Tabs.module.css'
-import Button from './Button'
 import Typography from './Typography'
 import { createPortal } from 'react-dom'
 
@@ -12,6 +11,7 @@ interface TabProps {
 
 interface TabsProps {
   children: React.ReactNode,
+  navigation?: 'focus' | 'select',
 }
 
 type TabsComponent = React.FC<TabsProps> & {
@@ -40,10 +40,13 @@ const Tab: React.FC<TabProps> = ({
     <div className={styles['tab']}>
       {
         createPortal(
-          <Button
-            type='hollow'
-            action={() => ctx.setCurrentTab(label)}
-            disabled={ctx.currentTab === label}
+          <button
+            className={`
+              ${styles['button']} 
+              ${ctx.currentTab === label && styles['disabled']}
+            `}
+            onClick={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
+            tabIndex={ctx.currentTab === label ? 0 : -1}
           >
             <Typography
               color={ctx.currentTab === label ? 'primary' : 'dimmed'}
@@ -51,7 +54,7 @@ const Tab: React.FC<TabProps> = ({
             >
               {label}
             </Typography>
-          </Button>,
+          </button>,
           ctx.tabListRef.current!
         )
       }
@@ -63,15 +66,49 @@ const Tab: React.FC<TabProps> = ({
 
 const Tabs: TabsComponent = ({
   children,
+  navigation='focus',
 }) => {
   const [currentTab, setCurrentTab] = useState('')
   const [render, setRender] = useState(false)
+
   const tabListRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (!tabListRef.current) return
+  const navigate = (e: KeyboardEvent) => {
+    if (!tabListRef.current?.children) return
 
-    setRender(true)
+    if (e.key === 'ArrowRight') {
+      const children = tabListRef.current.children
+
+      for (let i = 0; i < children.length; i++) {
+        if (children[i] === document.activeElement) {
+          const current = children[i === children.length-1 ? 0 : i+1]
+          ;(current as HTMLElement).focus()
+          navigation === 'select' && (current as HTMLElement).click()
+
+          break
+        }
+      }
+    }
+
+    if (e.key === 'ArrowLeft') {
+      const children = tabListRef.current.children
+
+      for (let i = children.length-1; i > -1; i--) {
+        if (children[i] === document.activeElement) {
+          const current = children[i === 0 ? children.length-1 : i-1]
+          ;(current as HTMLElement).focus()
+          navigation === 'select' && (current as HTMLElement).click()
+
+          break
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (tabListRef.current) setRender(true)
+
+    document.addEventListener('keydown', navigate)
   }, [])
 
   return (

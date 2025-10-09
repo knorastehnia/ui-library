@@ -384,7 +384,7 @@ const Page = () => {
 
       <Layout.Section>
         <Layout.Subsection>
-          <Tabs>
+          <Tabs navigation='select'>
             <Tabs.Tab defaultTab label='Tab 1'>
               <T>Lorem ipsum dolor sit amet 1</T>
             </Tabs.Tab>
