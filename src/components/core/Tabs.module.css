@@ -33,9 +33,8 @@
 
   &.disabled {
     cursor: default;
-    pointer-events: none;
 
-    &:hover {
+    &:hover&:not(:focus-visible) {
       border: 1px solid var(--background);
       background-color: var(--background);
     }
