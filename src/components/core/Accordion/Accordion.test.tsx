@@ -29,12 +29,12 @@ describe('Accordion', () => {
     })
 
     it('should toggle visibility on Enter/Space', async () => {
-      const button = component.getByText('Item 1').parentElement
-      const content = component.getByText('Content for Item 1').parentElement
+      const button = component.getByText('Item 1').parentElement!
+      const content = component.getByText('Content for Item 1').parentElement!
 
       expect(content).toHaveAttribute('aria-hidden', 'true')
 
-      button!.focus()
+      button.focus()
       expect(button).toHaveFocus()
 
       await user.keyboard('[Enter]')
