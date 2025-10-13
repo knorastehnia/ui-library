@@ -42,6 +42,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
       <button
         className={styles['button']}
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
         <Typography size='m' weight='400' color='primary'>{label}</Typography>
         <Arrow state={isOpen} />
@@ -53,6 +54,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           ${styles['content']} 
           ${isOpen && styles['open']}
         `}
+        aria-hidden={!isOpen}
       >
         {children}
       </div>
