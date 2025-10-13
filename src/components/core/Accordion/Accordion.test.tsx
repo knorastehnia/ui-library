@@ -1,5 +1,6 @@
 import { render, type RenderResult } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
+import { axe } from 'vitest-axe'
 import { Accordion } from './Accordion'
 import { Typography } from '../Typography'
 
@@ -12,26 +13,30 @@ describe('Accordion', () => {
       user = userEvent.setup()
       component = render(<AccordionTest />)
     })
-  
+
+    it('should have no accessibility violations', async () => {
+        expect(await axe(component.container)).toHaveNoViolations()
+    })
+
     it('should toggle visibility on Click', async () => {
       const button = component.getByText('Item 1')
       const content = component.getByText('Content for Item 1').parentElement
-  
+
       expect(content).toHaveAttribute('aria-hidden', 'true')
 
       await user.click(button)
       expect(content).toHaveAttribute('aria-hidden', 'false')
     })
-  
+
     it('should toggle visibility on Enter/Space', async () => {
       const button = component.getByText('Item 1').parentElement
       const content = component.getByText('Content for Item 1').parentElement
-  
+
       expect(content).toHaveAttribute('aria-hidden', 'true')
 
       button!.focus()
       expect(button).toHaveFocus()
-  
+
       await user.keyboard('[Enter]')
       expect(content).toHaveAttribute('aria-hidden', 'false')
 
