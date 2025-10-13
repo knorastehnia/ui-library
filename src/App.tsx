@@ -1,9 +1,9 @@
 import './App.css'
 
 import Page from './Page'
-import Layout from './components/core/Layout'
-import Tree from './components/core/Tree'
-import Typography, { T } from './components/core/Typography'
+import { Layout } from './components/core'
+import { Tree } from './components/core'
+import { Typography, T } from './components/core'
 
 const App = () => {
   return (
