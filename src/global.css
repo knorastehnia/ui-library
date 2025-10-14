@@ -1,13 +1,13 @@
 :root {
-  --background: oklch(10% 0 275);
-  --foreground: oklch(97% 0 275);
-  --gray-1: oklch(14% 0 275);
-  --gray-2: oklch(18% 0 275);
-  --gray-3: oklch(22% 0 275);
-  --gray-6: oklch(26% 0 275);
-  --gray-9: oklch(85% 0 275);
+  --background: oklch(10% 0 265);
+  --foreground: oklch(97% 0 265);
+  --gray-1: oklch(14% 0 265);
+  --gray-2: oklch(18% 0 265);
+  --gray-3: oklch(22% 0 265);
+  --gray-6: oklch(26% 0 265);
+  --gray-9: oklch(85% 0 265);
 
-  --accent: oklch(50% 0.22 275 / 0.5);
+  --accent: oklch(60% 0.3 265 / 0.5);
 
   --error: #ec0000;
 

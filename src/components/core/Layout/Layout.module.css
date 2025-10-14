@@ -37,7 +37,7 @@
     background-color: var(--background);
     display: flex;
     align-items: center;
-    padding: 0 min(5vw, 50px);
+    padding: 0 min(5vw, 80px);
     border-bottom: 1px solid var(--gray-2);
     border-right: 1px solid var(--gray-1);
   }
@@ -101,7 +101,7 @@
   background-color: var(--background);
   border-bottom: 1px solid var(--gray-2);
   border-right: 1px solid var(--gray-1);
-  height: 50px;
+  height: 80px;
 }
 
 .section {
@@ -117,7 +117,7 @@
 
 .subsection {
   background-color: var(--background);
-  padding: 50px min(5vw, 50px);
+  padding: 80px min(5vw, 80px);
   border-bottom: 1px solid var(--gray-1);
   border-right: 1px solid var(--gray-1);
   width: 0;
