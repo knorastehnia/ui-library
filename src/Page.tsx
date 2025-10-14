@@ -54,78 +54,7 @@ const Page = () => {
       </Modal>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>
-          <div style={{
-            display: 'flex',
-            flexFlow: 'row wrap',
-            alignItems: 'end',
-            gap: '20px',
-          }}>
-            <Button disabled width='full'>
-              <T>Disabled Button</T>
-            </Button>
-            <Button action={() => setShowModal(true)} width='full'>
-              <Typography>Open Modal</Typography>
-            </Button>
-
-            <Button><T>Button Outline</T></Button>
-            <Button type='fill'><T>Button Fill</T></Button>
-            <Button width='auto'><Checkmark state={true} /></Button>
-            <Button action={() => setIsSpinning(!isSpinning)}>
-              <div style={{
-                display: 'flex',
-                flexFlow: 'row nowrap',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: '10px',
-              }}>
-                <Spinner size='s' state={isSpinning} />
-                <T>Spinner</T>
-              </div>
-            </Button>
-          </div>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <div style={{
-            display: 'flex',
-            flexFlow: 'column',
-            gap: '20px',
-            width: '100%',
-          }}>
-            <Typography type='h2' size='s'>Some Form</Typography>
-
-            <div style={{
-              display: 'flex',
-              gap: '20px',
-              width: '100%',
-            }}>
-              <Field
-                label='Street No.'
-                type='number'
-                name='input1'
-                limit={12}
-                errors={[
-                  {message: 'This is a custom error message and it is very long.', failState: someState},
-                ]}
-              />
-
-              <Field label='Street Name' name='input2' />
-            </div>
-
-            <Field label='Email' type='email' name='test' />
-            <Field label='Password' type='password' name='password' />
-            <Button
-              action={() => setSomeState(!someState)}
-              type='fill'
-              width='full'
-            >
-              <T>Submit</T>
-            </Button>
-          </div>
-        </Layout.Subsection>
-
-        <Layout.Subsection span={2}>
+        <Layout.Subsection span={3}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -224,6 +153,77 @@ const Page = () => {
                 </div>
               </div>
             </Dropdown>
+          </div>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <div style={{
+            display: 'flex',
+            flexFlow: 'row wrap',
+            alignItems: 'end',
+            gap: '20px',
+          }}>
+            <Button disabled width='full'>
+              <T>Disabled Button</T>
+            </Button>
+            <Button action={() => setShowModal(true)} width='full'>
+              <Typography>Open Modal</Typography>
+            </Button>
+
+            <Button><T>Button Outline</T></Button>
+            <Button type='fill'><T>Button Fill</T></Button>
+            <Button width='auto'><Checkmark state={true} /></Button>
+            <Button action={() => setIsSpinning(!isSpinning)}>
+              <div style={{
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '10px',
+              }}>
+                <Spinner size='s' state={isSpinning} />
+                <T>Spinner</T>
+              </div>
+            </Button>
+          </div>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
+          <div style={{
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '20px',
+            width: '100%',
+          }}>
+            <Typography type='h2' size='s'>Some Form</Typography>
+
+            <div style={{
+              display: 'flex',
+              gap: '20px',
+              width: '100%',
+            }}>
+              <Field
+                label='Street No.'
+                type='number'
+                name='input1'
+                limit={12}
+                errors={[
+                  {message: 'This is a custom error message and it is very long.', failState: someState},
+                ]}
+              />
+
+              <Field label='Street Name' name='input2' />
+            </div>
+
+            <Field label='Email' type='email' name='test' />
+            <Field label='Password' type='password' name='password' />
+            <Button
+              action={() => setSomeState(!someState)}
+              type='fill'
+              width='full'
+            >
+              <T>Submit</T>
+            </Button>
           </div>
         </Layout.Subsection>
 

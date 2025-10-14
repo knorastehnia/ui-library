@@ -1,11 +1,11 @@
 :root {
-  --background: #000;
-  --foreground: #f0f0f0;
-  --gray-1: #0d0d0d;
-  --gray-2: #161616;
-  --gray-3: #232323;
-  --gray-6: #343434;
-  --gray-9: #b7b7b7;
+  --background: hsl(270, 7%, 4%);
+  --foreground: hsl(270, 7%, 97%);
+  --gray-1: hsl(270, 7%, 8%);
+  --gray-2: hsl(270, 7%, 12%);
+  --gray-3: hsl(270, 7%, 16%);
+  --gray-6: hsl(270, 7%, 20%);
+  --gray-9: hsl(270, 7%, 75%);
 
   /* --background: #fff;
   --foreground: #0f0f0f;
@@ -15,7 +15,7 @@
   --gray-6: #ccc;
   --gray-9: #494949; */
 
-  --radius: 4px;
+  --radius: 3px;
 
   --accent: hsl(218, 84%, 57%);
   --accent: oklch(0.476 0.0972 167.09);
