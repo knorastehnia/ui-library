@@ -1,11 +1,15 @@
 :root {
-  --background: hsl(270, 7%, 4%);
-  --foreground: hsl(270, 7%, 97%);
-  --gray-1: hsl(270, 7%, 8%);
-  --gray-2: hsl(270, 7%, 12%);
-  --gray-3: hsl(270, 7%, 16%);
-  --gray-6: hsl(270, 7%, 20%);
-  --gray-9: hsl(270, 7%, 75%);
+  --background: oklch(10% 0 275);
+  --foreground: oklch(97% 0 275);
+  --gray-1: oklch(14% 0 275);
+  --gray-2: oklch(18% 0 275);
+  --gray-3: oklch(22% 0 275);
+  --gray-6: oklch(26% 0 275);
+  --gray-9: oklch(85% 0 275);
+
+  --accent: oklch(50% 0.22 275 / 0.5);
+
+  --error: #ec0000;
 
   /* --background: #fff;
   --foreground: #0f0f0f;
@@ -17,10 +21,6 @@
 
   --radius: 3px;
 
-  --accent: hsl(218, 84%, 57%);
-  --accent: oklch(0.476 0.0972 167.09);
-
-  --error: #ec0000;
 
   --ease-out-c: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-t: 0.5s;
@@ -58,6 +58,10 @@ body {
 #root {
   position: relative;
   overflow: clip;
+}
+
+::selection {
+  background-color: var(--accent);
 }
 
 input, button, textarea, select {
