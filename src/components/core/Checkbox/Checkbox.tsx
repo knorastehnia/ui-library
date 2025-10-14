@@ -5,17 +5,17 @@ import { Checkmark } from '../../icons'
 interface CheckboxProps {
   children: React.ReactElement | React.ReactElement[],
   name: string,
-  value?: string,
+  defaultChecked?: boolean,
   disabled?: boolean,
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   children,
   name,
-  value,
+  defaultChecked=false,
   disabled=false,
 }) => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(defaultChecked)
 
   return (
     <>
@@ -30,7 +30,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
             disabled={disabled}
             name={name}
             id={name}
-            value={value}
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
           />
