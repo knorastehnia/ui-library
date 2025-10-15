@@ -15,6 +15,7 @@ import { Checkmark } from './components/icons'
 import { Spinner } from './components/icons'
 import { Visibility } from './components/icons'
 import { Tabs } from './components/core'
+import { Slider } from './components/core'
 import { Layout } from './components/core'
 
 import { useState } from 'react'
@@ -153,6 +154,10 @@ const Page = () => {
                 </div>
               </div>
             </Dropdown>
+
+            <Slider name='slider1' minValue={0} maxValue={50} step={10}>
+              <T>Some slider</T>
+            </Slider>
           </div>
         </Layout.Subsection>
 
@@ -238,7 +243,7 @@ const Page = () => {
               flexFlow: 'column',
               gap: '20px',
             }}>
-              <Checkbox name='cb1'><T>Checkbox 1</T></Checkbox>
+              <Checkbox defaultChecked name='cb1'><T>Checkbox 1</T></Checkbox>
 
               <Checkbox name='cb2'>
                 <div><Typography>Checkbox 2</Typography></div>
