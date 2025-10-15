@@ -155,7 +155,7 @@ const Page = () => {
               </div>
             </Dropdown>
 
-            <Slider name='slider1' minValue={0} maxValue={50} step={10}>
+            <Slider name='slider1' minValue={0} maxValue={50}>
               <T>Some slider</T>
             </Slider>
           </div>

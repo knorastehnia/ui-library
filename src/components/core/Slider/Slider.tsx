@@ -21,16 +21,72 @@ const Slider: React.FC<SliderProps> = ({
   disabled=false,
 }) => {
   const [value, setValue] = useState(defaultValue)
+  const valueRef = useRef(value)
+
   const sliderRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const isDraggingRef = useRef(false)
 
-  const updateValue = (e: MouseEvent) => {
+  const setNormalizedValue = (rawValue: number) => {
+    setValue(Math.max(Math.min(rawValue, maxValue), minValue))
+  }
+
+  const handleKeyboard = (e: KeyboardEvent) => {
+    if (!sliderRef.current) return
+    if (inputRef.current !== document.activeElement) return
+
+    const keys = [
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+      'Shift',
+    ]
+
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
+
+    const shiftModifier = e.getModifierState('Shift') ? 10 : 1
+
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowUp':
+        setNormalizedValue(valueRef.current + (step * shiftModifier))
+        break
+
+      case 'ArrowLeft':
+      case 'ArrowDown':
+        setNormalizedValue(valueRef.current - (step * shiftModifier))
+        break
+
+      case 'PageUp':
+        setNormalizedValue(valueRef.current + (step * 10 * shiftModifier))
+        break
+
+      case 'PageDown':
+        setNormalizedValue(valueRef.current - (step * 10 * shiftModifier))
+        break
+
+      case 'End':
+        setValue(maxValue)
+        break
+
+      case 'Home':
+        setValue(minValue)
+        break
+
+      default:
+        break
+    }
+  }
+
+  const handlePointer = (e: MouseEvent) => {
     if (!sliderRef.current || !inputRef.current) return
     if (!isDraggingRef.current) return
-
-    // if (selected === thumbRef.current || thumbRef.current.contains(selected)) {
-    //   console.log('thumb selected')
 
     inputRef.current.focus()
 
@@ -41,7 +97,7 @@ const Slider: React.FC<SliderProps> = ({
       const valuePercentage = (e.clientX - rect.left) * 100 / (rect.right - rect.left)
       const rawValue = (valuePercentage / 100 * maxValue) + (step / 2)
       const steppedValue = minValue + rawValue - (rawValue % step)
-      setValue(Math.max(Math.min(steppedValue, maxValue), minValue))
+      setNormalizedValue(steppedValue)
     }
   }
 
@@ -60,18 +116,24 @@ const Slider: React.FC<SliderProps> = ({
   }
 
   useEffect(() => {
+    valueRef.current = value
+  }, [value])
+
+  useEffect(() => {
     document.addEventListener('pointerdown', pointerDown)
     document.addEventListener('pointerup', pointerUp)
+    document.addEventListener('pointerdown', handlePointer)
+    document.addEventListener('pointermove', handlePointer)
 
-    document.addEventListener('pointerdown', updateValue)
-    document.addEventListener('pointermove', updateValue)
+    document.addEventListener('keydown', handleKeyboard)
 
     return () => {
       document.removeEventListener('pointerdown', pointerDown)
       document.removeEventListener('pointerup', pointerUp)
+      document.removeEventListener('pointerdown', handlePointer)
+      document.removeEventListener('pointermove', handlePointer)
 
-      document.removeEventListener('pointerdown', updateValue)
-      document.removeEventListener('pointermove', updateValue)
+      document.removeEventListener('keydown', handleKeyboard)
     }
   }, [])
 
