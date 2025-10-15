@@ -45,30 +45,34 @@ const Slider: React.FC<SliderProps> = ({
       'PageUp',
       'PageDown',
       'Shift',
+      'Control',
     ]
 
     if (!keys.includes(e.key)) return
     e.preventDefault()
 
-    const shiftModifier = e.getModifierState('Shift') ? 10 : 1
+    const modifier =
+      e.getModifierState('Control') ||
+      e.getModifierState('Shift')
+      ? 10 : 1
 
     switch (e.key) {
       case 'ArrowRight':
       case 'ArrowUp':
-        setNormalizedValue(valueRef.current + (step * shiftModifier))
+        setNormalizedValue(valueRef.current + (step * modifier))
         break
 
       case 'ArrowLeft':
       case 'ArrowDown':
-        setNormalizedValue(valueRef.current - (step * shiftModifier))
+        setNormalizedValue(valueRef.current - (step * modifier))
         break
 
       case 'PageUp':
-        setNormalizedValue(valueRef.current + (step * 10 * shiftModifier))
+        setNormalizedValue(valueRef.current + (step * 10 * modifier))
         break
 
       case 'PageDown':
-        setNormalizedValue(valueRef.current - (step * 10 * shiftModifier))
+        setNormalizedValue(valueRef.current - (step * 10 * modifier))
         break
 
       case 'End':
