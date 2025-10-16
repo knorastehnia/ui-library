@@ -18,12 +18,23 @@ import { Tabs } from './components/core'
 import { Slider } from './components/core'
 import { Layout } from './components/core'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const Page = () => {
   const [someState, setSomeState] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isSpinning, setIsSpinning] = useState(true)
+  const [value, setValue] = useState(0)
+
+  const pausedRef = useRef(false)
+
+  useEffect(() => {
+    const incrementTime = setTimeout(() => {
+      pausedRef.current || value > 30 || setValue(value + 1)
+    }, 50)
+
+    return () => clearTimeout(incrementTime)
+  }, [value])
 
   return (
     <>
@@ -155,8 +166,19 @@ const Page = () => {
               </div>
             </Dropdown>
 
-            <Slider name='slider1' minValue={0} maxValue={50}>
-              <T>Some slider</T>
+            <Slider name='slider1'
+              value={value}
+              onValueChange={() => pausedRef.current = true}
+              minValue={0}
+              maxValue={100}
+            >
+              <div style={{
+                display: 'flex',
+                flexFlow: 'column',
+              }}>
+                <T>Carnal Flowers</T>
+                <T color='dimmed' size='s'>Natural Snow Buildings</T>
+              </div>
             </Slider>
           </div>
         </Layout.Subsection>

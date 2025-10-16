@@ -44,6 +44,10 @@
   height: 100%;
   border-radius: inherit;
   transition: all var(--ease-out-t) var(--ease-out-c);
+
+  &.dragging {
+    transition: all calc(var(--ease-out-t) / 4) var(--ease-out-c);
+  }
 }
 
 .slider-thumb {

@@ -7,7 +7,8 @@ interface SliderProps {
   minValue: number,
   maxValue: number,
   step?: number,
-  defaultValue?: number,
+  value?: number,
+  onValueChange?: Function,
   disabled?: boolean,
 }
 
@@ -17,18 +18,35 @@ const Slider: React.FC<SliderProps> = ({
   minValue,
   maxValue,
   step=1,
-  defaultValue=minValue,
+  value=minValue,
+  onValueChange,
   disabled=false,
 }) => {
-  const [value, setValue] = useState(defaultValue)
-  const valueRef = useRef(value)
+  const [currentValue, setCurrentValue] = useState(value)
+  const valueRef = useRef(currentValue)
+
+  const [isDragging, setIsDragging] = useState(false)
+  const isDraggingRef = useRef(isDragging)
+  const isPointerDownRef = useRef(false)
 
   const sliderRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const isDraggingRef = useRef(false)
 
-  const setNormalizedValue = (rawValue: number) => {
-    setValue(Math.max(Math.min(rawValue, maxValue), minValue))
+  const getNormalizedValue = (rawVal: number) => {
+    return Math.max(Math.min(rawVal, maxValue), minValue)
+  }
+
+  const setInternalValue = (val: number) => {
+    const normalized = getNormalizedValue(val)
+
+    onValueChange?.(normalized)
+    setCurrentValue(normalized)
+  }
+
+  const setExternalValue = (val: number) => {
+    const normalized = getNormalizedValue(val)
+
+    setCurrentValue(normalized)
   }
 
   const handleKeyboard = (e: KeyboardEvent) => {
@@ -59,28 +77,28 @@ const Slider: React.FC<SliderProps> = ({
     switch (e.key) {
       case 'ArrowRight':
       case 'ArrowUp':
-        setNormalizedValue(valueRef.current + (step * modifier))
+        setInternalValue(valueRef.current + (step * modifier))
         break
 
       case 'ArrowLeft':
       case 'ArrowDown':
-        setNormalizedValue(valueRef.current - (step * modifier))
+        setInternalValue(valueRef.current - (step * modifier))
         break
 
       case 'PageUp':
-        setNormalizedValue(valueRef.current + (step * 10 * modifier))
+        setInternalValue(valueRef.current + (step * 10 * modifier))
         break
 
       case 'PageDown':
-        setNormalizedValue(valueRef.current - (step * 10 * modifier))
+        setInternalValue(valueRef.current - (step * 10 * modifier))
         break
 
       case 'End':
-        setValue(maxValue)
+        setInternalValue(maxValue)
         break
 
       case 'Home':
-        setValue(minValue)
+        setInternalValue(minValue)
         break
 
       default:
@@ -90,19 +108,23 @@ const Slider: React.FC<SliderProps> = ({
 
   const handlePointer = (e: MouseEvent) => {
     if (!sliderRef.current || !inputRef.current) return
-    if (!isDraggingRef.current) return
 
     inputRef.current.focus()
 
-    if (isDraggingRef.current) {
-      e.preventDefault()
+    e.preventDefault()
 
-      const rect = sliderRef.current.getBoundingClientRect()
-      const valuePercentage = (e.clientX - rect.left) * 100 / (rect.right - rect.left)
-      const rawValue = (valuePercentage / 100 * maxValue) + (step / 2)
-      const steppedValue = minValue + rawValue - (rawValue % step)
-      setNormalizedValue(steppedValue)
-    }
+    const rect = sliderRef.current.getBoundingClientRect()
+    const valuePercentage = (e.clientX - rect.left) * 100 / (rect.right - rect.left)
+    const rawValue = (valuePercentage / 100 * maxValue) + (step / 2)
+    const steppedValue = minValue + rawValue - (rawValue % step)
+    setInternalValue(steppedValue)
+  }
+
+  const pointerMove = (e: MouseEvent) => {
+    if (!isPointerDownRef.current) return
+
+    setIsDragging(true)
+    handlePointer(e)
   }
 
   const pointerDown = (e: MouseEvent) => {
@@ -111,31 +133,39 @@ const Slider: React.FC<SliderProps> = ({
     const selected = e.target as HTMLElement
 
     if (selected === sliderRef.current || sliderRef.current.contains(selected)) {
-      isDraggingRef.current = true
+      isPointerDownRef.current = true
+      handlePointer(e)
     }
   }
 
   const pointerUp = () => {
-    isDraggingRef.current = false
+    setIsDragging(false)
+    isPointerDownRef.current = false
   }
 
   useEffect(() => {
-    valueRef.current = value
+    setExternalValue(value)
   }, [value])
+
+  useEffect(() => {
+    valueRef.current = currentValue
+  }, [currentValue])
+
+  useEffect(() => {
+    isDraggingRef.current = isDragging
+  }, [isDragging])
 
   useEffect(() => {
     document.addEventListener('pointerdown', pointerDown)
     document.addEventListener('pointerup', pointerUp)
-    document.addEventListener('pointerdown', handlePointer)
-    document.addEventListener('pointermove', handlePointer)
+    document.addEventListener('pointermove', pointerMove)
 
     document.addEventListener('keydown', handleKeyboard)
 
     return () => {
       document.removeEventListener('pointerdown', pointerDown)
       document.removeEventListener('pointerup', pointerUp)
-      document.removeEventListener('pointerdown', handlePointer)
-      document.removeEventListener('pointermove', handlePointer)
+      document.removeEventListener('pointermove', pointerMove)
 
       document.removeEventListener('keydown', handleKeyboard)
     }
@@ -157,9 +187,8 @@ const Slider: React.FC<SliderProps> = ({
           min={minValue}
           max={maxValue}
           step={step}
-          value={value}
+          value={currentValue}
           disabled={disabled}
-          onChange={(e) => setValue(e.target.valueAsNumber)}
         />
 
         <div
@@ -168,9 +197,12 @@ const Slider: React.FC<SliderProps> = ({
         >
           <div className={styles['display-slider']}>
             <div
-              className={styles['slider-track']}
+              className={`
+                ${styles['slider-track']} 
+                ${isDragging && styles['dragging']}
+              `}
               style={{
-                maxWidth: `${value * 100 / maxValue}%`,
+                maxWidth: `${currentValue * 100 / maxValue}%`,
               }}
             />
             <div className={styles['slider-thumb']}>
