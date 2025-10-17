@@ -5,16 +5,20 @@ interface PopoverProps {
   children: React.ReactElement | React.ReactElement[],
   isOpen: boolean,
   onClose?: Function,
+  direction?: 'vertical' | 'horizontal',
 }
 
 const Popover: React.FC<PopoverProps> = ({
   children,
   isOpen,
   onClose,
+  direction='vertical',
 }) => {
   const [invertHorizontal, setInvertHorizontal] = useState(false)
   const [invertVertical, setInvertVertical] = useState(false)
+  const [insetStyles, setInsetStyles] = useState<React.CSSProperties>({})
   const contentRef = useRef<HTMLDivElement>(null)
+  const isOpenRef = useRef(isOpen)
 
   const closePopover = (event: MouseEvent) => {
     const content = contentRef.current as HTMLButtonElement | null;
@@ -31,6 +35,41 @@ const Popover: React.FC<PopoverProps> = ({
     }
   }
 
+  useEffect(() => {
+    isOpenRef.current = isOpen
+
+    if (contentRef.current) {
+      if (isOpen) {
+        contentRef.current.removeAttribute('inert');
+      } else {
+        contentRef.current.setAttribute('inert', '');
+      }
+    }
+  }, [isOpen])
+
+  useLayoutEffect(() => {
+    const left =
+      direction === 'vertical' && !invertHorizontal ? '0' :
+      direction === 'horizontal' && !invertHorizontal ? '100%' : 'auto'
+
+    const right =
+      direction === 'vertical' && invertHorizontal ? '0' :
+      direction === 'horizontal' && invertHorizontal ? '100%' : 'auto'
+
+    const top =
+      direction === 'horizontal' && !invertVertical ? '0' :
+      direction === 'vertical' && !invertVertical ? '100%' : 'auto'
+
+    const bottom =
+      direction === 'horizontal' && invertVertical ? '0' :
+      direction === 'vertical' && invertVertical ? '100%' : 'auto'
+
+    const margin =
+      `${direction === 'vertical' ? 5 : 0}px ${direction === 'horizontal' ? 5 : 0}px`
+
+    setInsetStyles({ left, right, top, bottom, margin })
+  }, [invertVertical, invertHorizontal, direction])
+
   useLayoutEffect(() => {
     if (!contentRef.current) return
 
@@ -46,6 +85,7 @@ const Popover: React.FC<PopoverProps> = ({
       setInvertVertical(rect.bottom >= window.innerHeight)
     } else {
       setInvertVertical(rect.bottom + rect.height >= window.innerHeight)
+      console.log(rect.height)
     }
   }, [isOpen])
 
@@ -64,12 +104,7 @@ const Popover: React.FC<PopoverProps> = ({
   return (
     <div
       ref={contentRef}
-      style={{
-        left: invertHorizontal ? 'auto' : '0',
-        right: invertHorizontal ? '0' : 'auto',
-        top: invertVertical ? 'auto' : '100%',
-        bottom: invertVertical ? '100%' : 'auto',
-      }}
+      style={insetStyles}
       className={`
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}

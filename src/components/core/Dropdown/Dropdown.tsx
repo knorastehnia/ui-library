@@ -1,5 +1,5 @@
 import styles from './Dropdown.module.css'
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Button, ButtonDefaultsContext } from '../Button'
 import { Typography } from '../Typography'
@@ -8,7 +8,7 @@ import { Popover } from '../Popover'
 interface DropdownProps {
   children: React.ReactElement | React.ReactElement[],
   label: string,
-  direction?: 'bottom' | 'right',
+  direction?: 'vertical' | 'horizontal',
 }
 
 const DropdownContext = createContext<true | undefined>(undefined)
@@ -20,10 +20,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
 
   const ctx = useContext(DropdownContext)
-  const activeDirection = direction ?? (!!ctx ? 'right' : 'bottom')
+  const activeDirection = direction ?? (!!ctx ? 'horizontal' : 'vertical')
 
   const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
@@ -41,18 +40,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   }
 
-  useEffect(() => {
-    if (contentRef.current) {
-      if (isOpen) {
-        contentRef.current.removeAttribute('inert');
-      } else {
-        contentRef.current.setAttribute('inert', '');
-      }
-    }
-  }, [isOpen])
-
   return (
-    <div className={styles[`dropdown-${activeDirection}`]}>
+    <div className={styles['dropdown']}>
       <div ref={buttonRef}>
         <Button
           action={() => setIsOpen(!isOpen)}
@@ -62,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           <div className={styles['button-content']}>
             <Typography>{label}</Typography>
             <div style={{
-              transform: activeDirection === 'right' ? 'rotate(-90deg)' : '',
+              transform: activeDirection === 'horizontal' ? 'rotate(-90deg)' : '',
             }}>
               <Arrow state={isOpen} />
             </div>
@@ -70,24 +59,20 @@ const Dropdown: React.FC<DropdownProps> = ({
         </Button>
       </div>
 
-      <div
-        ref={contentRef}
-        className={styles[`content-${activeDirection}`]}
+      <Popover
+        isOpen={isOpen}
+        onClose={closeDropdown}
+        direction={activeDirection}
       >
-        <Popover
-          isOpen={isOpen}
-          onClose={closeDropdown}
-        >
-          <DropdownContext.Provider value={true}>
-            <ButtonDefaultsContext.Provider value={{
-              type: 'hollow',
-              width: 'full'
-            }}>
-              {children}
-            </ButtonDefaultsContext.Provider>
-          </DropdownContext.Provider>
-        </Popover>
-      </div>
+        <DropdownContext.Provider value={true}>
+          <ButtonDefaultsContext.Provider value={{
+            type: 'hollow',
+            width: 'full'
+          }}>
+            {children}
+          </ButtonDefaultsContext.Provider>
+        </DropdownContext.Provider>
+      </Popover>
     </div>
   )
 }

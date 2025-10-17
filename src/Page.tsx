@@ -111,7 +111,7 @@ const Page = () => {
               ]}
             />
 
-            <Dropdown label='Dropdown' direction='bottom'>
+            <Dropdown label='Dropdown' direction='vertical'>
               <div style={{
                 display: 'flex',
                 flexFlow: 'row',
@@ -142,7 +142,7 @@ const Page = () => {
                     <Button><T>Dropdown Item</T></Button>
                     <Button><T>Dropdown Item</T></Button>
                   </Dropdown>
-                  <Dropdown label='Nested Dropdown 2' direction='right'>
+                  <Dropdown label='Nested Dropdown 2' direction='vertical'>
                     <Button><T>Dropdown Item</T></Button>
                     <Button><T>Dropdown Item</T></Button>
                     <Button><T>Dropdown Item</T></Button>
@@ -153,7 +153,7 @@ const Page = () => {
                       <Button><T>Dropdown Item</T></Button>
                     </Dropdown>
 
-                    <Dropdown label='Nested Dropdown 2.2' direction='bottom'>
+                    <Dropdown label='Nested Dropdown 2.2' direction='horizontal'>
                       <Button><T>Dropdown Item</T></Button>
                       <Button><T>Dropdown Item</T></Button>
                       <Button><T>Dropdown Item</T></Button>

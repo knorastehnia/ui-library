@@ -32,7 +32,6 @@ const Select: React.FC<SelectProps> = ({
   const [visibleItems, setVisibleItems] = useState(items)
   const [selected, setSelected] = useState<ItemInterface[] | null>(null)
 
-  const contentRef = useRef<HTMLDivElement>(null)
   const visibleItemCountRef = useRef(0)
   const buttonRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -136,14 +135,6 @@ const Select: React.FC<SelectProps> = ({
       setVisibleItems(items)
     }
 
-    if (contentRef.current) {
-      if (isOpen) {
-        contentRef.current.removeAttribute('inert');
-      } else {
-        contentRef.current.setAttribute('inert', '');
-      }
-    }
-
     document.addEventListener('keydown', selectFirst)
     return () => document.removeEventListener('keydown', selectFirst)
   }, [isOpen])
@@ -153,133 +144,127 @@ const Select: React.FC<SelectProps> = ({
   }, [visibleItems])
 
   return (
-    <>
-      <div
-        ref={buttonRef}
-        className={styles[`width-${width}`]}
+    <div
+      ref={buttonRef}
+      className={styles[`width-${width}`]}
+    >
+      <select
+        className={styles['select']}
+        name={name}
+        id={name}
+        multiple={type === 'multiple'}
       >
-        <select
-          className={styles['select']}
-          name={name}
-          id={name}
-          multiple={type === 'multiple'}
-        >
-          {
-            [{ value: '', label: '', }, ...items].map((item, index) => {
-              return (
-                <option
-                  key={index}
-                  value={item.value}
-                  selected={
-                    item.value !== '' || !!selected?.length ?
-                      !!selected?.find((selectedItem) => {
-                        return selectedItem.value === item.value
-                      })
-                    : true
-                  }
-                >
-                  {item.label}
-                </option>
-              )
-            })
-          }
-        </select>
-
-        <div className={styles['display-select']}>
-          <label
-            className={`
-              ${styles['label']} 
-              ${(!!selected?.length || isOpen) && styles['label-active']}
-            `}
-            htmlFor={name}
-          >
-            <Typography
-              weight='400'
-              size={(!!selected?.length || isOpen) ? 's' : 'm'}
-              color='dimmed'
-            >
-              {label}
-            </Typography>
-          </label>
-
-          {type !== 'search'
-
-          ?
-            <button
-              className={`
-                ${styles['button']} 
-                ${isOpen && styles['button-active']}
-              `}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <Typography>
-                {
-                  selected?.map((item, index) => {
-                    return (
-                      item.label + (selected.length - 1 !== index ? ', ': '')
-                    )
-                  })
+        {
+          [{ value: '', label: '', }, ...items].map((item, index) => {
+            return (
+              <option
+                key={index}
+                value={item.value}
+                selected={
+                  item.value !== '' || !!selected?.length ?
+                    !!selected?.find((selectedItem) => {
+                      return selectedItem.value === item.value
+                    })
+                  : true
                 }
-              </Typography>
+              >
+                {item.label}
+              </option>
+            )
+          })
+        }
+      </select>
 
-              <div className={styles['expand-arrow']}>
-                <Arrow state={isOpen} />
-              </div>
-            </button>
-
-          :
-            <input
-              ref={inputRef}
-              className={styles['button']}
-              onFocus={() => {
-                setIsOpen(true)
-                setVisibleItems(items)
-              }}
-              value={value}
-              onChange={(e) => updateSearch(e.target.value)}
-              type='text'
-            />
-          }
-        </div>
-
-        <div
-          ref={contentRef}
-          className={styles['content']}
+      <div className={styles['display-select']}>
+        <label
+          className={`
+            ${styles['label']} 
+            ${(!!selected?.length || isOpen) && styles['label-active']}
+          `}
+          htmlFor={name}
         >
-          <Popover
-            isOpen={isOpen}
-            onClose={closeSelect}
+          <Typography
+            weight='400'
+            size={(!!selected?.length || isOpen) ? 's' : 'm'}
+            color='dimmed'
           >
-            {
-              visibleItems.map((item, index) => {
-                return (
-                  <button
-                    ref={index === 0 ? firstItemRef : undefined}
-                    key={index}
-                    disabled={item.disabled}
-                    onClick={() => {
-                      type === 'multiple'
-                        ? updateSelectMultiple(item)
-                        : (isInteractive ? updateSelect(item) : null)
-                    }}
-                    className={`
-                      ${styles['item']} 
-                      ${item.disabled && styles['disabled']}
-                    `}
-                  >
-                    <Typography color={item.disabled ? 'disabled' : 'primary'}>
-                      {item.label}
-                    </Typography>
+            {label}
+          </Typography>
+        </label>
 
-                    <Checkmark state={!!selected?.includes(item)} />
-                  </button>
-                )
-              })
-            }
-          </Popover>
-        </div>
+        {type !== 'search'
+
+        ?
+          <button
+            className={`
+              ${styles['button']} 
+              ${isOpen && styles['button-active']}
+            `}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <Typography>
+              {
+                selected?.map((item, index) => {
+                  return (
+                    item.label + (selected.length - 1 !== index ? ', ': '')
+                  )
+                })
+              }
+            </Typography>
+
+            <div className={styles['expand-arrow']}>
+              <Arrow state={isOpen} />
+            </div>
+          </button>
+
+        :
+          <input
+            ref={inputRef}
+            className={styles['button']}
+            onFocus={() => {
+              setIsOpen(true)
+              setVisibleItems(items)
+            }}
+            value={value}
+            onChange={(e) => updateSearch(e.target.value)}
+            type='text'
+          />
+        }
       </div>
-    </>
+
+      <Popover
+        isOpen={isOpen}
+        onClose={closeSelect}
+        direction='vertical'
+      >
+        {
+          visibleItems.map((item, index) => {
+            return (
+              <button
+                ref={index === 0 ? firstItemRef : undefined}
+                key={index}
+                disabled={item.disabled}
+                onClick={() => {
+                  type === 'multiple'
+                    ? updateSelectMultiple(item)
+                    : (isInteractive ? updateSelect(item) : null)
+                }}
+                className={`
+                  ${styles['item']} 
+                  ${item.disabled && styles['disabled']}
+                `}
+              >
+                <Typography color={item.disabled ? 'disabled' : 'primary'}>
+                  {item.label}
+                </Typography>
+
+                <Checkmark state={!!selected?.includes(item)} />
+              </button>
+            )
+          })
+        }
+      </Popover>
+    </div>
   )
 }
 
