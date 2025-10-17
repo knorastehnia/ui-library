@@ -8,7 +8,7 @@ interface SliderProps {
   maxValue: number,
   step?: number,
   value?: number,
-  onValueChange?: Function,
+  onInput?: (expose: number) => void,
   disabled?: boolean,
 }
 
@@ -19,7 +19,7 @@ const Slider: React.FC<SliderProps> = ({
   maxValue,
   step=1,
   value=minValue,
-  onValueChange,
+  onInput,
   disabled=false,
 }) => {
   const [currentValue, setCurrentValue] = useState(value)
@@ -39,7 +39,7 @@ const Slider: React.FC<SliderProps> = ({
   const setInternalValue = (val: number) => {
     const normalized = getNormalizedValue(val)
 
-    onValueChange?.(normalized)
+    onInput?.(normalized)
     setCurrentValue(normalized)
   }
 

@@ -18,9 +18,9 @@
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 
-  @media screen and (min-width: calc(1600px + 250px)) {
+  /* @media screen and (min-width: calc(1600px + 250px)) {
     border-left: 1px solid var(--gray-1);
-  }
+  } */
 }
 
 .topnav {
@@ -37,8 +37,8 @@
     background-color: var(--background);
     display: flex;
     align-items: center;
-    padding: 0 min(5vw, 80px);
-    border-bottom: 1px solid var(--gray-2);
+    padding: 0 min(5vw, 50px);
+    border-bottom: 1px solid var(--gray-1);
     border-right: 1px solid var(--gray-1);
   }
 }
@@ -76,8 +76,8 @@
   .sidenav-header {
     pointer-events: all;
     flex: 0 0 50px;
-    border-bottom: 1px solid var(--gray-2);
-    /* border-right: 1px solid var(--gray-2); */
+    border-bottom: 1px solid var(--gray-1);
+    border-right: 1px solid var(--gray-1);
     background-color: var(--background);
     display: flex;
     align-items: center;
@@ -91,22 +91,16 @@
     pointer-events: all;
     padding: 20px;
     background-color: var(--background);
-    border-right: 1px solid var(--gray-2);
+    border-right: 1px solid var(--gray-1);
     height: 100%;
     transition: all var(--ease-out-t) var(--ease-out-c);
   }
 }
 
-.section-divider {
-  background-color: var(--background);
-  border-bottom: 1px solid var(--gray-2);
-  border-right: 1px solid var(--gray-1);
-  height: 80px;
-}
-
 .section {
   position: relative;
   background-color: var(--background);
+  border-bottom: 1px solid var(--gray-1);
 
   .section-content {
     display: flex;
@@ -117,9 +111,9 @@
 
 .subsection {
   background-color: var(--background);
-  padding: 80px min(5vw, 80px);
-  border-bottom: 1px solid var(--gray-1);
-  border-right: 1px solid var(--gray-1);
+  padding: 50px min(5vw, 50px);
+  /* border-bottom: 1px solid var(--gray-1);
+  border-right: 1px solid var(--gray-1); */
   width: 0;
   min-width: 300px;
 }

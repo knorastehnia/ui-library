@@ -168,7 +168,7 @@ const Page = () => {
 
             <Slider name='slider1'
               value={value}
-              onValueChange={() => pausedRef.current = true}
+              onInput={() => pausedRef.current = true}
               minValue={0}
               maxValue={100}
             >

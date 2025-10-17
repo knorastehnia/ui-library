@@ -62,8 +62,6 @@ const Section: React.FC<SectionProps> = ({
           {children}
         </div>
       </section>
-
-      <div className={styles['section-divider']}></div>
     </>
   )
 }

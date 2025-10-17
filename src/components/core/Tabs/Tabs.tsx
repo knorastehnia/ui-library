@@ -77,6 +77,8 @@ const Tabs: TabsComponent = ({
     if (!tabListRef.current?.children) return
 
     if (e.key === 'ArrowRight') {
+      e.preventDefault()
+
       const children = tabListRef.current.children
 
       for (let i = 0; i < children.length; i++) {
@@ -91,6 +93,8 @@ const Tabs: TabsComponent = ({
     }
 
     if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+
       const children = tabListRef.current.children
 
       for (let i = children.length-1; i > -1; i--) {
