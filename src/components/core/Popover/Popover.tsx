@@ -70,23 +70,25 @@ const Popover: React.FC<PopoverProps> = ({
     setInsetStyles({ left, right, top, bottom, margin })
   }, [invertVertical, invertHorizontal, direction])
 
-  useLayoutEffect(() => {
+  const updatePositioning = () => {
     if (!contentRef.current) return
 
+    const parentElement = contentRef.current.parentElement
+    if (!parentElement) return
+  
     const rect = contentRef.current.getBoundingClientRect()
+    const parentRect = parentElement.getBoundingClientRect()
 
-    if (!invertHorizontal) {
-      setInvertHorizontal(rect.right >= window.innerWidth)
-    } else {
-      setInvertHorizontal(rect.right + rect.width >= window.innerWidth)
-    }
+    setInvertHorizontal(parentRect.right + rect.width >= window.innerWidth)
+    setInvertVertical(parentRect.bottom + rect.height >= window.innerHeight)
+  }
 
-    if (!invertVertical) {
-      setInvertVertical(rect.bottom >= window.innerHeight)
-    } else {
-      setInvertVertical(rect.bottom + rect.height >= window.innerHeight)
-      console.log(rect.height)
-    }
+  useLayoutEffect(() => {
+    updatePositioning()
+
+    isOpen
+      ? document.addEventListener('scroll', updatePositioning)
+      : document.removeEventListener('scroll', updatePositioning)
   }, [isOpen])
 
   useEffect(() => {
