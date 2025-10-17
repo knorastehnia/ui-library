@@ -20,7 +20,24 @@ interface TypographyProps extends TypographyDefaultsContextInterface {
     | 'p' | 'span',
 }
 
+interface TypographyDefaultsProviderProps extends TypographyDefaultsContextInterface {
+  children: React.ReactElement | React.ReactElement[],
+}
+
 const TypographyDefaultsContext = createContext<TypographyDefaultsContextInterface>({})
+
+const TypographyDefaultsProvider: React.FC<TypographyDefaultsProviderProps> = ({
+  children,
+  size,
+  weight,
+  color,
+}) => {
+  return (
+    <TypographyDefaultsContext.Provider value={{ size, weight, color }}>
+      {children}
+    </TypographyDefaultsContext.Provider>
+  )
+}
 
 const Typography: React.FC<TypographyProps> = ({
   children,
@@ -56,5 +73,5 @@ const T = Typography
 export {
   Typography,
   T,
-  TypographyDefaultsContext,
+  TypographyDefaultsProvider,
 }

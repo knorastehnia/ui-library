@@ -1,7 +1,7 @@
 import styles from './ErrorMessage.module.css'
 import { useRef } from 'react'
 import { Alert } from '../../icons'
-import { TypographyDefaultsContext } from '../Typography'
+import { TypographyDefaultsProvider } from '../Typography'
 import { useCollapseEffect } from '../../../hooks/useCollapseEffect'
 
 interface ErrorMessageProps {
@@ -29,12 +29,9 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
           <Alert />
         </div>
 
-        <TypographyDefaultsContext.Provider value={{
-          color: 'error',
-          size: 's',
-        }}>
+        <TypographyDefaultsProvider color='error' size='s'>
           {children}
-        </TypographyDefaultsContext.Provider>
+        </TypographyDefaultsProvider>
       </div>
     </div>
   )

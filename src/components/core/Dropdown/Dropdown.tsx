@@ -1,7 +1,7 @@
 import styles from './Dropdown.module.css'
 import { createContext, useContext, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
-import { Button, ButtonDefaultsContext } from '../Button'
+import { Button, ButtonDefaultsProvider } from '../Button'
 import { Typography } from '../Typography'
 import { Popover } from '../Popover'
 
@@ -65,12 +65,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         direction={activeDirection}
       >
         <DropdownContext.Provider value={true}>
-          <ButtonDefaultsContext.Provider value={{
-            type: 'hollow',
-            width: 'full'
-          }}>
+          <ButtonDefaultsProvider type='hollow' width='full'>
             {children}
-          </ButtonDefaultsContext.Provider>
+          </ButtonDefaultsProvider>
         </DropdownContext.Provider>
       </Popover>
     </div>

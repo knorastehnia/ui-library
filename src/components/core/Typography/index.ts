@@ -1,5 +1,5 @@
 export {
   Typography,
   T,
-  TypographyDefaultsContext,
+  TypographyDefaultsProvider,
 } from './Typography'

@@ -1,6 +1,6 @@
 import styles from './Button.module.css'
 import { createContext, useContext } from 'react'
-import { TypographyDefaultsContext } from '../Typography'
+import { TypographyDefaultsProvider } from '../Typography'
 
 interface ButtonDefaultsContextInterface {
   type?: 'fill' | 'outline' | 'hollow' | 'text',
@@ -13,7 +13,23 @@ interface ButtonProps extends ButtonDefaultsContextInterface {
   disabled?: boolean,
 }
 
+interface ButtonDefaultsProviderProps extends ButtonDefaultsContextInterface {
+  children: React.ReactElement | React.ReactElement[],
+}
+
 const ButtonDefaultsContext = createContext<ButtonDefaultsContextInterface>({})
+
+const ButtonDefaultsProvider: React.FC<ButtonDefaultsProviderProps> = ({
+  children,
+  type,
+  width,
+}) => {
+  return (
+    <ButtonDefaultsContext.Provider value={{ type, width }}>
+      {children}
+    </ButtonDefaultsContext.Provider>
+  )
+}
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -27,9 +43,7 @@ const Button: React.FC<ButtonProps> = ({
   const activeWidth = width ?? defaultsContext.width ?? 'auto'
 
   return (
-    <TypographyDefaultsContext.Provider value={{
-      color: disabled ? 'disabled' : 'primary',
-    }}>
+    <TypographyDefaultsProvider color={disabled ? 'disabled' : 'primary'}>
       {(typeof action === 'string') && action.length > 0
 
       ?
@@ -59,11 +73,11 @@ const Button: React.FC<ButtonProps> = ({
           {children}
         </button>
       }
-    </TypographyDefaultsContext.Provider>
+    </TypographyDefaultsProvider>
   )
 }
 
 export {
   Button,
-  ButtonDefaultsContext,
+  ButtonDefaultsProvider,
 }

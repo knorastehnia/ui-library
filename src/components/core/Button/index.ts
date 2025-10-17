@@ -1,4 +1,4 @@
 export {
   Button,
-  ButtonDefaultsContext,
+  ButtonDefaultsProvider,
 } from './Button'
