@@ -220,7 +220,10 @@ const Select: React.FC<SelectProps> = ({
         :
           <input
             ref={inputRef}
-            className={styles['button']}
+            className={`
+              ${styles['button']} 
+              ${isOpen && styles['button-active']}
+            `}
             onFocus={() => {
               setIsOpen(true)
               setVisibleItems(items)

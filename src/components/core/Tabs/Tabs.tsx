@@ -75,6 +75,7 @@ const Tabs: TabsComponent = ({
 
   const navigate = (e: KeyboardEvent) => {
     if (!tabListRef.current?.children) return
+    if (!tabListRef.current.contains(document.activeElement)) return
 
     if (e.key === 'ArrowRight') {
       e.preventDefault()
