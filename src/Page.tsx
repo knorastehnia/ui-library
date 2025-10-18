@@ -265,7 +265,7 @@ const Page = () => {
               flexFlow: 'column',
               gap: '20px',
             }}>
-              <Checkbox defaultChecked name='cb1'><T>Checkbox 1</T></Checkbox>
+              <Checkbox value={true} name='cb1'><T>Checkbox 1</T></Checkbox>
 
               <Checkbox name='cb2'>
                 <div><Typography>Checkbox 2</Typography></div>

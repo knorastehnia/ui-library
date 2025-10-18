@@ -1,21 +1,27 @@
 import styles from './Checkbox.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Checkmark } from '../../icons'
 
 interface CheckboxProps {
   children: React.ReactElement | React.ReactElement[],
   name: string,
-  defaultChecked?: boolean,
+  value?: boolean,
+  onInput?: (expose: boolean) => void,
   disabled?: boolean,
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   children,
   name,
-  defaultChecked=false,
+  value=false,
+  onInput,
   disabled=false,
 }) => {
-  const [checked, setChecked] = useState(defaultChecked)
+  const [checked, setChecked] = useState(value)
+
+  useEffect(() => {
+    setChecked(value)
+  }, [value])
 
   return (
     <>
@@ -31,7 +37,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
             name={name}
             id={name}
             checked={checked}
-            onChange={(e) => setChecked(e.target.checked)}
+            onChange={(e) => {
+              const newValue = e.target.checked
+
+              setChecked(newValue)
+              onInput?.(newValue)
+            }}
           />
 
           <div className={`
