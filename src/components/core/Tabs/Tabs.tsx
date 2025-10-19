@@ -77,36 +77,68 @@ const Tabs: TabsComponent = ({
     if (!tabListRef.current?.children) return
     if (!tabListRef.current.contains(document.activeElement)) return
 
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
+    const keys = [
+      'ArrowLeft',
+      'ArrowRight',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+    ]
 
-      const children = tabListRef.current.children
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
 
-      for (let i = 0; i < children.length; i++) {
-        if (children[i] === document.activeElement) {
-          const current = children[i === children.length-1 ? 0 : i+1]
-          ;(current as HTMLElement).focus()
-          navigation === 'select' && (current as HTMLElement).click()
+    const children = tabListRef.current.children
+    let loop = false
 
-          break
+    switch (e.key) {
+      case 'ArrowRight':
+        loop = true
+      case 'PageDown':
+        for (let i = 0; i < children.length; i++) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === children.length-1 && loop ? 0 : i+1] as HTMLElement
+            current.focus()
+            navigation === 'select' && current.click()
+
+            break
+          }
         }
-      }
-    }
 
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
+        break
 
-      const children = tabListRef.current.children
-
-      for (let i = children.length-1; i > -1; i--) {
-        if (children[i] === document.activeElement) {
-          const current = children[i === 0 ? children.length-1 : i-1]
-          ;(current as HTMLElement).focus()
-          navigation === 'select' && (current as HTMLElement).click()
-
-          break
+      case 'ArrowLeft':
+        loop = true
+      case 'PageUp':
+        for (let i = children.length-1; i > -1; i--) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === 0 && loop ? children.length-1 : i-1] as HTMLElement
+            current.focus()
+            navigation === 'select' && current.click()
+    
+            break
+          }
         }
-      }
+
+        break
+
+      case 'End':
+        const lastTab = children[children.length - 1] as HTMLElement
+        lastTab.focus()
+        navigation === 'select' && lastTab.click()
+
+        break
+
+      case 'Home':
+        const firstTab = children[0] as HTMLElement
+        firstTab.focus()
+        navigation === 'select' && firstTab.click()
+
+        break
+
+      default:
+        break
     }
   }
 
