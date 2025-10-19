@@ -86,9 +86,13 @@ const Popover: React.FC<PopoverProps> = ({
   useLayoutEffect(() => {
     updatePositioning()
 
-    isOpen
-      ? document.addEventListener('scroll', updatePositioning)
-      : document.removeEventListener('scroll', updatePositioning)
+    if (isOpen) {
+      document.addEventListener('scroll', updatePositioning)
+      window.addEventListener('resize', updatePositioning)
+    } else {
+      document.removeEventListener('scroll', updatePositioning)
+      window.removeEventListener('resize', updatePositioning)
+    }
   }, [isOpen])
 
   useEffect(() => {
