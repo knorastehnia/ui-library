@@ -17,6 +17,7 @@ import { Visibility } from './components/icons'
 import { Tabs } from './components/core'
 import { Slider } from './components/core'
 import { Layout } from './components/core'
+import { Invisible } from './components/core'
 
 import { useEffect, useRef, useState } from 'react'
 
@@ -199,7 +200,10 @@ const Page = () => {
 
             <Button><T>Button Outline</T></Button>
             <Button type='fill'><T>Button Fill</T></Button>
-            <Button width='auto'><Checkmark state={true} /></Button>
+            <Button width='auto'>
+              <Checkmark state={true} />
+              <Invisible>Checkmark</Invisible>
+            </Button>
             <Button action={() => setIsSpinning(!isSpinning)}>
               <div style={{
                 display: 'flex',
