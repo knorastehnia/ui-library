@@ -419,9 +419,7 @@ const Page = () => {
               <T>Lorem ipsum dolor sit amet 1</T>
             </Tabs.Tab>
 
-            <Button><T>Button</T></Button>
-
-            <Tabs.Tab label='Tab 2'>
+            <Tabs.Tab label='Tab 2' disabled>
               <T>Lorem ipsum dolor sit amet 2</T>
             </Tabs.Tab>
 

@@ -7,6 +7,7 @@ interface TabProps {
   children: React.ReactNode,
   label: string,
   defaultTab?: boolean,
+  disabled?: boolean,
 }
 
 interface TabsProps {
@@ -28,6 +29,7 @@ const Tab: React.FC<TabProps> = ({
   children,
   label,
   defaultTab,
+  disabled,
 }) => {
   const ctx = useContext(TabsContext)
   if (!ctx) throw new Error('<Tabs.Tab> must be a descendant of <Tabs>')
@@ -43,13 +45,14 @@ const Tab: React.FC<TabProps> = ({
           <button
             className={`
               ${styles['button']} 
-              ${ctx.currentTab === label && styles['disabled']}
+              ${(ctx.currentTab === label || disabled) && styles['disabled']}
             `}
             onClick={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
             tabIndex={ctx.currentTab === label ? 0 : -1}
+            disabled={disabled}
           >
             <Typography
-              color={ctx.currentTab === label ? 'primary' : 'dimmed'}
+              color={ctx.currentTab === label ? 'primary' : disabled ? 'disabled' : 'dimmed'}
               weight={ctx.currentTab === label ? '500' : '300'}
             >
               {label}
@@ -89,7 +92,10 @@ const Tabs: TabsComponent = ({
     if (!keys.includes(e.key)) return
     e.preventDefault()
 
-    const children = tabListRef.current.children
+    const children = Array.from(tabListRef.current.children).filter((child) => {
+      return !(child as HTMLButtonElement).disabled
+    })
+
     let loop = false
 
     switch (e.key) {
