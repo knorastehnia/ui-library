@@ -11,13 +11,13 @@
 
   --error: #ec0000;
 
-  /* --background: #fff;
-  --foreground: #0f0f0f;
-  --gray-1: #f3f3f3;
-  --gray-2: #eaeaea;
-  --gray-3: #ddd;
-  --gray-6: #ccc;
-  --gray-9: #494949; */
+  --background: oklch(100% 0 265);
+  --foreground: oklch(4% 0 265);
+  --gray-1: oklch(94% 0 265);
+  --gray-2: oklch(90% 0 265);
+  --gray-3: oklch(86% 0 265);
+  --gray-6: oklch(82% 0 265);
+  --gray-9: oklch(40% 0 265);
 
   --radius: 5px;
 
