@@ -4,15 +4,23 @@ import { createPortal } from 'react-dom'
 import { Typography } from '../Typography'
 
 interface TabProps {
-  children: React.ReactNode,
-  label: string,
-  defaultTab?: boolean,
-  disabled?: boolean,
+  children: React.ReactNode
+  label: string
+  defaultTab?: boolean
+  disabled?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLButtonElement>
+  }
 }
 
 interface TabsProps {
-  children: React.ReactNode,
-  navigation?: 'focus' | 'select',
+  children: React.ReactNode
+  navigation?: 'focus' | 'select'
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    list?: React.RefAttributes<HTMLDivElement>
+    content?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 type TabsComponent = React.FC<TabsProps> & {
@@ -30,6 +38,7 @@ const Tab: React.FC<TabProps> = ({
   label,
   defaultTab,
   disabled,
+  internal,
 }) => {
   const ctx = useContext(TabsContext)
   if (!ctx) throw new Error('<Tabs.Tab> must be a descendant of <Tabs>')
@@ -39,7 +48,7 @@ const Tab: React.FC<TabProps> = ({
   }, [])
 
   return (
-    <div className={styles['tab']}>
+    <>
       {
         createPortal(
           <button
@@ -50,6 +59,7 @@ const Tab: React.FC<TabProps> = ({
             onClick={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
             tabIndex={ctx.currentTab === label ? 0 : -1}
             disabled={disabled}
+            {...internal?.root}
           >
             <Typography
               color={ctx.currentTab === label ? 'primary' : disabled ? 'disabled' : 'dimmed'}
@@ -63,13 +73,14 @@ const Tab: React.FC<TabProps> = ({
       }
 
       {ctx.currentTab === label && children}
-    </div>
+    </>
   )
 }
 
 const Tabs: TabsComponent = ({
   children,
   navigation='focus',
+  internal,
 }) => {
   const [currentTab, setCurrentTab] = useState('')
   const [render, setRender] = useState(false)
@@ -155,13 +166,20 @@ const Tabs: TabsComponent = ({
   }, [])
 
   return (
-    <div className={styles['tabs']}>
+    <div
+      className={styles['tabs']}
+      {...internal?.root}
+    >
       <div
         ref={tabListRef}
         className={styles['tab-list']}
+        {...internal?.list}
       />
 
-      <div className={styles['content']}>
+      <div
+        className={styles['content']}
+        {...internal?.content}
+      >
         <TabsContext.Provider value={{
           tabListRef,
           currentTab,
@@ -177,3 +195,8 @@ const Tabs: TabsComponent = ({
 Tabs.Tab = Tab
 
 export { Tabs }
+
+export type {
+  TabsProps,
+  TabProps,
+}

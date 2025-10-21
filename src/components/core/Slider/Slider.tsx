@@ -2,14 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Slider.module.css'
 
 interface SliderProps {
-  children: React.ReactElement | React.ReactElement[],
-  name: string,
-  minValue: number,
-  maxValue: number,
-  step?: number,
-  value?: number,
-  onInput?: (expose: number) => void,
-  disabled?: boolean,
+  children: React.ReactElement | React.ReactElement[]
+  name: string
+  minValue: number
+  maxValue: number
+  step?: number
+  value?: number
+  onInput?: (expose: number) => void
+  disabled?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    content?: React.RefAttributes<HTMLDivElement>
+    display?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 const Slider: React.FC<SliderProps> = ({
@@ -21,6 +26,7 @@ const Slider: React.FC<SliderProps> = ({
   value=minValue,
   onInput,
   disabled=false,
+  internal,
 }) => {
   const [currentValue, setCurrentValue] = useState(value)
   const valueRef = useRef(currentValue)
@@ -172,9 +178,12 @@ const Slider: React.FC<SliderProps> = ({
   }, [])
 
   return (
-    <div className={styles['slider']}>
+    <div
+      className={styles['slider']}
+      {...internal?.root}
+    >
       <label htmlFor={name}>
-        <div>
+        <div {...internal?.content}>
           {children}
         </div>
 
@@ -195,7 +204,10 @@ const Slider: React.FC<SliderProps> = ({
           ref={sliderRef}
           className={styles['slider-clickbox']}
         >
-          <div className={styles['display-slider']}>
+          <div
+            className={styles['display-slider']}
+            {...internal?.display}
+          >
             <div
               className={`
                 ${styles['slider-track']} 
@@ -216,3 +228,4 @@ const Slider: React.FC<SliderProps> = ({
 }
 
 export { Slider }
+export type { SliderProps }

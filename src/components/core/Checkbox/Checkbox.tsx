@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react'
 import { Checkmark } from '../../icons'
 
 interface CheckboxProps {
-  children: React.ReactElement | React.ReactElement[],
-  name: string,
-  value?: boolean,
-  onInput?: (expose: boolean) => void,
-  disabled?: boolean,
+  children: React.ReactElement | React.ReactElement[]
+  name: string
+  value?: boolean
+  onInput?: (expose: boolean) => void
+  disabled?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    display?: React.RefAttributes<HTMLDivElement>
+    content?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -16,6 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   value=false,
   onInput,
   disabled=false,
+  internal,
 }) => {
   const [checked, setChecked] = useState(value)
 
@@ -25,7 +31,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <>
-      <div className={styles['checkbox']}>
+      <div
+        className={styles['checkbox']}
+        {...internal?.root}
+      >
         <label
           className={styles['label']}
           htmlFor={name}
@@ -45,14 +54,17 @@ const Checkbox: React.FC<CheckboxProps> = ({
             }}
           />
 
-          <div className={`
-            ${styles['display-checkbox']} 
-            ${checked && styles['checked']}
-          `}>
+          <div
+            className={`
+              ${styles['display-checkbox']} 
+              ${checked && styles['checked']}
+            `}
+            {...internal?.display}
+          >
             <Checkmark state={checked} />
           </div>
 
-          <div>
+          <div {...internal?.content}>
             {children}
           </div>
         </label>
@@ -62,3 +74,4 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }
 
 export { Checkbox }
+export type { CheckboxProps }

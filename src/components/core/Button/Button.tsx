@@ -8,13 +8,16 @@ interface ButtonDefaultsContextInterface {
 }
 
 interface ButtonProps extends ButtonDefaultsContextInterface {
-  children: React.ReactElement | React.ReactElement[],
-  action?: string | Function,
-  disabled?: boolean,
+  children: React.ReactElement | React.ReactElement[]
+  action?: string | Function
+  disabled?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLElement>
+  }
 }
 
 interface ButtonDefaultsProviderProps extends ButtonDefaultsContextInterface {
-  children: React.ReactElement | React.ReactElement[],
+  children: React.ReactElement | React.ReactElement[]
 }
 
 const ButtonDefaultsContext = createContext<ButtonDefaultsContextInterface>({})
@@ -37,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
   type,
   width,
   disabled=false,
+  internal,
 }) => {
   const defaultsContext = useContext(ButtonDefaultsContext)
   const activeType = type ?? defaultsContext.type ?? 'outline'
@@ -55,6 +59,7 @@ const Button: React.FC<ButtonProps> = ({
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}
           `}
+          {...internal?.root as React.RefAttributes<HTMLAnchorElement>}
         >
           {children}
         </a>
@@ -69,6 +74,7 @@ const Button: React.FC<ButtonProps> = ({
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}
           `}
+          {...internal?.root as React.RefAttributes<HTMLButtonElement>}
         >
           {children}
         </button>
@@ -81,3 +87,5 @@ export {
   Button,
   ButtonDefaultsProvider,
 }
+
+export type { ButtonProps }

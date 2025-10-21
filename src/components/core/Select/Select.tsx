@@ -2,21 +2,27 @@ import styles from './Select.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Typography } from '../Typography'
-import { Popover } from '../Popover'
+import { Popover, type PopoverProps } from '../Popover'
 import { Checkmark } from '../../icons'
 
 interface ItemInterface {
-  label: string,
-  value: string,
-  disabled?: boolean,
+  label: string
+  value: string
+  disabled?: boolean
 }
 
 interface SelectProps {
-  label: string,
-  name: string,
-  items: ItemInterface[],
+  label: string
+  name: string
+  items: ItemInterface[]
   type?: 'single' | 'multiple' | 'search'
-  width?: 'auto' | 'full',
+  width?: 'auto' | 'full'
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    display?: React.RefAttributes<HTMLDivElement>
+    trigger?: React.RefAttributes<HTMLElement>
+    content?: PopoverProps
+  }
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -25,6 +31,7 @@ const Select: React.FC<SelectProps> = ({
   items,
   type='single',
   width='auto',
+  internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isInteractive, setIsInteractive] = useState(true)
@@ -147,6 +154,7 @@ const Select: React.FC<SelectProps> = ({
     <div
       ref={buttonRef}
       className={styles[`width-${width}`]}
+      {...internal?.root}
     >
       <select
         className={styles['select']}
@@ -175,7 +183,10 @@ const Select: React.FC<SelectProps> = ({
         }
       </select>
 
-      <div className={styles['display-select']}>
+      <div
+        className={styles['display-select']}
+        {...internal?.display}
+      >
         <label
           className={`
             ${styles['label']} 
@@ -201,6 +212,7 @@ const Select: React.FC<SelectProps> = ({
               ${isOpen && styles['button-active']}
             `}
             onClick={() => setIsOpen(!isOpen)}
+            {...internal?.trigger as React.HTMLAttributes<HTMLButtonElement>}
           >
             <Typography>
               {
@@ -231,6 +243,7 @@ const Select: React.FC<SelectProps> = ({
             value={value}
             onChange={(e) => updateSearch(e.target.value)}
             type='text'
+            {...internal?.trigger as React.HTMLAttributes<HTMLInputElement>}
           />
         }
       </div>
@@ -239,6 +252,7 @@ const Select: React.FC<SelectProps> = ({
         isOpen={isOpen}
         onClose={closeSelect}
         direction='vertical'
+        {...internal?.content}
       >
         {
           visibleItems.map((item, index) => {
@@ -272,3 +286,4 @@ const Select: React.FC<SelectProps> = ({
 }
 
 export { Select }
+export type { SelectProps }

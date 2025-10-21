@@ -3,11 +3,16 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 interface ModalProps {
-  children: React.ReactElement | React.ReactElement[],
-  isOpen: boolean,
-  setIsOpen: Function,
-  width?: string,
-  height?: string,
+  children: React.ReactElement | React.ReactElement[]
+  isOpen: boolean
+  setIsOpen: Function
+  width?: string
+  height?: string
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    background?: React.RefAttributes<HTMLDivElement>
+    content?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -16,6 +21,7 @@ const Modal: React.FC<ModalProps> = ({
   setIsOpen,
   width='auto',
   height='auto',
+  internal,
 }) => {
   const escapeModal = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -34,11 +40,13 @@ const Modal: React.FC<ModalProps> = ({
         ${styles['modal']} 
         ${isOpen && styles['open']}
       `}
+      {...internal?.root}
     >
       <div
         className={styles['modal-bg']}
         onClick={() => setIsOpen(false)}
-      ></div>
+        {...internal?.background}
+      />
 
       <div
         className={styles['content']}
@@ -46,13 +54,15 @@ const Modal: React.FC<ModalProps> = ({
           width,
           height,
         }}
+        {...internal?.content}
       >
         {children}
       </div>
-    </div>
+    </div>,
 
-    , document.querySelector('#root')!
+    document.querySelector('#root')!
   )
 }
 
 export { Modal }
+export type { ModalProps }

@@ -1,13 +1,20 @@
 import styles from './List.module.css'
 
 interface ListItemProps {
-  children: React.ReactElement | React.ReactElement[],
+  children: React.ReactElement | React.ReactElement[]
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    content?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 interface ListProps {
   children:
     | React.ReactElement<ListItemProps>
-    | React.ReactElement<ListItemProps>[],
+    | React.ReactElement<ListItemProps>[]
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 type ListComponent = React.FC<ListProps> & {
@@ -16,22 +23,30 @@ type ListComponent = React.FC<ListProps> & {
 
 const ListItem: React.FC<ListItemProps> = ({
   children,
+  internal,
 }) => {
   return (
-    <>
-      <div className={styles['item']}>
+    <div {...internal?.root}>
+      <div
+        className={styles['item']}
+        {...internal?.content}
+      >
         {children}
       </div>
       <div className={styles['divider']}></div>
-    </>
+    </div>
   )
 }
 
 const List: ListComponent = ({
   children,
+  internal,
 }) => {
   return (
-    <div className={styles['list']}>
+    <div
+      className={styles['list']}
+      {...internal?.root}
+    >
       {children}
     </div>
   )
@@ -40,3 +55,8 @@ const List: ListComponent = ({
 List.Item = ListItem
 
 export { List }
+
+export type {
+  ListProps,
+  ListItemProps,
+}

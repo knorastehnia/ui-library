@@ -5,19 +5,26 @@ import { TypographyDefaultsProvider } from '../Typography'
 import { useCollapseEffect } from '../../../hooks/useCollapseEffect'
 
 interface ErrorMessageProps {
-  children: React.ReactElement | React.ReactElement[],
-  state?: boolean,
+  children: React.ReactElement | React.ReactElement[]
+  state?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({
   children,
   state=true,
+  internal,
 }) => {
   const errorRef = useRef<HTMLDivElement>(null)
   useCollapseEffect(errorRef, state, 500)
 
   return (
-    <div className={styles['error-container']}>
+    <div
+      className={styles['error-container']}
+      {...internal?.root}
+    >
       <div
         ref={errorRef}
         className={`
@@ -38,3 +45,4 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
 }
 
 export { ErrorMessage }
+export type { ErrorMessageProps }

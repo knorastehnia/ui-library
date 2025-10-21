@@ -2,10 +2,13 @@ import styles from './Popover.module.css'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 interface PopoverProps {
-  children: React.ReactElement | React.ReactElement[],
-  isOpen: boolean,
-  onClose?: Function,
-  direction?: 'vertical' | 'horizontal',
+  children: React.ReactElement | React.ReactElement[]
+  isOpen: boolean
+  onClose?: Function
+  direction?: 'vertical' | 'horizontal'
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 const Popover: React.FC<PopoverProps> = ({
@@ -13,6 +16,7 @@ const Popover: React.FC<PopoverProps> = ({
   isOpen,
   onClose,
   direction='vertical',
+  internal,
 }) => {
   const [invertHorizontal, setInvertHorizontal] = useState(false)
   const [invertVertical, setInvertVertical] = useState(false)
@@ -115,6 +119,7 @@ const Popover: React.FC<PopoverProps> = ({
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}
       `}
+      {...internal?.root}
     >
       {children}
     </div>
@@ -122,3 +127,4 @@ const Popover: React.FC<PopoverProps> = ({
 }
 
 export { Popover }
+export type { PopoverProps }

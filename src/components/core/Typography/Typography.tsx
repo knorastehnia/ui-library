@@ -18,6 +18,9 @@ interface TypographyProps extends TypographyDefaultsContextInterface {
   type?:
     | 'h1' | 'h2' | 'h3' | 'h4'
     | 'p' | 'span',
+  internal?: {
+    root?: React.RefAttributes<HTMLElement>
+  }
 }
 
 interface TypographyDefaultsProviderProps extends TypographyDefaultsContextInterface {
@@ -45,6 +48,7 @@ const Typography: React.FC<TypographyProps> = ({
   size,
   weight,
   color,
+  internal,
 }) => {
   const defaultsContext = useContext(TypographyDefaultsContext)
   const activeSize = size ?? defaultsContext.size ?? 'm'
@@ -61,7 +65,8 @@ const Typography: React.FC<TypographyProps> = ({
           ${styles[`${trimmedRole}-${activeSize}`]} 
           ${styles[`weight-${activeWeight}`]}
           ${styles[`color-${activeColor}`]}
-        `
+        `,
+        ...(internal?.root ?? {})
       },
       children,
     )
@@ -75,3 +80,5 @@ export {
   T,
   TypographyDefaultsProvider,
 }
+
+export type { TypographyProps }

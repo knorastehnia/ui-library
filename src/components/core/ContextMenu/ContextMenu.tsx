@@ -1,24 +1,31 @@
 import styles from './ContextMenu.module.css'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Popover } from '../Popover'
 import { Typography } from '../Typography'
-import { Button } from '../Button'
+import { Popover, type PopoverProps } from '../Popover'
+import { Button, type ButtonProps } from '../Button'
 
 interface ItemInterface {
-  label: string,
-  action?: string | Function,
-  disabled?: boolean,
+  label: string
+  action?: string | Function
+  disabled?: boolean
 }
 
 interface ContextMenuProps {
-  children: React.ReactElement | React.ReactElement[],
-  items: ItemInterface[],
+  children: React.ReactElement | React.ReactElement[]
+  items: ItemInterface[]
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    display?: React.RefAttributes<HTMLDivElement>
+    content?: PopoverProps
+    trigger?: ButtonProps
+  }
 }
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
   children,
   items,
+  internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [pos, setPos] = useState({ x: 0, y: 0 })
@@ -43,6 +50,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     <div
       className={styles['context-container']}
       onContextMenu={openContextMenu}
+      {...internal?.root}
     >
       {children}
 
@@ -52,10 +60,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             ref={contextRef}
             className={styles['context-menu']}
             style={{ top: pos.y, left: pos.x, }}
+            {...internal?.display}
           >
             <Popover
               isOpen={isOpen}
               onClose={closeContextMenu}
+              {...internal?.content}
             >
               {items.map((item, index) => {
                 return (
@@ -65,6 +75,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                     type='hollow'
                     width='full'
                     disabled={item.disabled}
+                    {...internal?.trigger}
                   >
                     <Typography>
                       {item.label}
@@ -82,3 +93,4 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 }
 
 export { ContextMenu }
+export type { ContextMenuProps }

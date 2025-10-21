@@ -5,13 +5,21 @@ import { Typography } from '../Typography'
 import { useCollapseEffect } from '../../../hooks/useCollapseEffect'
 
 interface AccordionProps {
-  children: React.ReactElement | React.ReactElement[],
-  width?: string,
+  children: React.ReactElement | React.ReactElement[]
+  width?: string
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 interface AccordionItemProps {
-  children: React.ReactElement | React.ReactElement[],
-  label: string,
+  children: React.ReactElement | React.ReactElement[]
+  label: string
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    trigger?: React.RefAttributes<HTMLButtonElement>
+    content?: React.RefAttributes<HTMLDivElement>
+  }
 }
 
 type AccordionComponent = React.FC<AccordionProps> & {
@@ -21,6 +29,7 @@ type AccordionComponent = React.FC<AccordionProps> & {
 const AccordionItem: React.FC<AccordionItemProps> = ({
   children,
   label,
+  internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -38,11 +47,12 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   }, [isOpen])
 
   return (
-    <>
+    <div {...internal?.root}>
       <button
         className={styles['button']}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
+        {...internal?.trigger}
       >
         <Typography size='m' weight='400' color='primary'>{label}</Typography>
         <Arrow state={isOpen} />
@@ -55,22 +65,25 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           ${isOpen && styles['open']}
         `}
         aria-hidden={!isOpen}
+        {...internal?.content}
       >
         {children}
       </div>
-    </>
+    </div>
   )
 }
 
 const Accordion: AccordionComponent = ({
   children,
   width='100%',
+  internal,
 }) => {
   return (
     <>
       <div
         className={styles['accordion']}
         style={{ width }}
+        {...internal?.root}
       >
         {children}
       </div>
@@ -81,3 +94,8 @@ const Accordion: AccordionComponent = ({
 Accordion.Item = AccordionItem
 
 export { Accordion }
+
+export type {
+  AccordionProps,
+  AccordionItemProps,
+}

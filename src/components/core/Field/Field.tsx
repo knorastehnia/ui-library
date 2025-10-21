@@ -5,26 +5,30 @@ import { Typography } from '../Typography'
 import { ErrorMessage } from '../ErrorMessage'
 
 interface ErrorInterface {
-  failState: boolean,
-  message: string,
+  failState: boolean
+  message: string
 }
 
 interface FieldProps {
-  label: string,
+  label: string
   type?:
     | 'text'
     | 'textarea'
     | 'number'
     | 'email'
-    | 'password',
+    | 'password'
 
-  name?: string,
-  limit?: number,
-  resizable?: boolean,
-  height?: string,
-  width?: string,
-  errors?: ErrorInterface[],
-  disabled?: boolean,
+  name?: string
+  limit?: number
+  resizable?: boolean
+  height?: string
+  width?: string
+  errors?: ErrorInterface[]
+  disabled?: boolean
+  internal?: {
+    root?: React.RefAttributes<HTMLDivElement>
+    display?: React.RefAttributes<HTMLElement>
+  }
 }
 
 const Field: React.FC<FieldProps> = ({
@@ -37,6 +41,7 @@ const Field: React.FC<FieldProps> = ({
   width='100%',
   errors=[],
   disabled=false,
+  internal,
 }) => {
   const [focus, setFocus] = useState(false)
   const [value, setValue] = useState('')
@@ -86,6 +91,7 @@ const Field: React.FC<FieldProps> = ({
     <div
       className={styles[`input-container`]}
       style={{ width }}
+      {...internal?.root}
     >
       <div className={`
         ${styles['input-field']} 
@@ -121,6 +127,7 @@ const Field: React.FC<FieldProps> = ({
             name={name}
             id={name}
             disabled={disabled}
+            {...internal?.display as React.HTMLAttributes<HTMLTextAreaElement>}
           />
 
           :
@@ -133,6 +140,7 @@ const Field: React.FC<FieldProps> = ({
             name={name}
             id={name}
             disabled={disabled}
+            {...internal?.display as React.HTMLAttributes<HTMLInputElement>}
           />
         }
 
@@ -189,3 +197,4 @@ const Field: React.FC<FieldProps> = ({
 }
 
 export { Field }
+export type { FieldProps }
