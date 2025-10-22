@@ -18,9 +18,9 @@ interface SelectProps {
   type?: 'single' | 'multiple' | 'search'
   width?: 'auto' | 'full'
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    display?: React.RefAttributes<HTMLDivElement>
-    trigger?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    trigger?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
     content?: PopoverProps
   }
 }

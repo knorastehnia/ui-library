@@ -19,7 +19,7 @@ interface TypographyProps extends TypographyDefaultsContextInterface {
     | 'h1' | 'h2' | 'h3' | 'h4'
     | 'p' | 'span',
   internal?: {
-    root?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
   }
 }
 
@@ -35,8 +35,17 @@ const TypographyDefaultsProvider: React.FC<TypographyDefaultsProviderProps> = ({
   weight,
   color,
 }) => {
+  const defaultsContext = useContext(TypographyDefaultsContext)
+  const activeSize = size ?? defaultsContext.size
+  const activeWeight = weight ?? defaultsContext.weight
+  const activeColor = color ?? defaultsContext.color
+
   return (
-    <TypographyDefaultsContext.Provider value={{ size, weight, color }}>
+    <TypographyDefaultsContext.Provider value={{
+      size: activeSize,
+      weight: activeWeight,
+      color: activeColor,
+    }}>
       {children}
     </TypographyDefaultsContext.Provider>
   )

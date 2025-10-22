@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Visibility } from '../../icons'
 import { Typography } from '../Typography'
 import { ErrorMessage } from '../ErrorMessage'
+import { Button } from '../Button'
 
 interface ErrorInterface {
   failState: boolean
@@ -26,8 +27,8 @@ interface FieldProps {
   errors?: ErrorInterface[]
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    display?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    display?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
   }
 }
 
@@ -146,11 +147,20 @@ const Field: React.FC<FieldProps> = ({
 
         {
           type === 'password' &&
-            <div className={styles['eye-container']}>
-              <button onClick={() => setShowValue(!showValue)} className={styles['eye']}>
-                <Visibility state={showValue} />
-              </button>
-            </div>
+            <Button
+              action={() => setShowValue(!showValue)}
+              appearance='hollow'
+              internal={{
+                root: {
+                  style: {
+                    padding: '3px',
+                    margin: '0 10px 0 5px',
+                  }
+                }
+              }}
+            >
+              <Visibility state={showValue} />
+            </Button>
         }
 
         {

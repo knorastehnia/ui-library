@@ -8,7 +8,7 @@ interface ErrorMessageProps {
   children: React.ReactElement | React.ReactElement[]
   state?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

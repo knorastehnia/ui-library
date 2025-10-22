@@ -6,30 +6,30 @@ import { T } from '../Typography'
 interface LayoutProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
 interface TopNavProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
 interface SideNavProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     trigger?: ButtonProps
-    content?: React.RefAttributes<HTMLDivElement>
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
 interface ContentProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
   }
 }
 
@@ -37,14 +37,14 @@ interface SubsectionProps {
   children: React.ReactElement | React.ReactElement[]
   span?: 1 | 2 | 3
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
 interface SectionProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
   }
 }
 
@@ -130,7 +130,7 @@ const SideNav: React.FC<SideNavProps> = ({
       >
         <div className={styles['sidenav-header']}>
           <Button
-            type='hollow'
+            appearance='hollow'
             action={() => setIsCollapsed(!isCollapsed)}
             {...internal?.trigger}
           >

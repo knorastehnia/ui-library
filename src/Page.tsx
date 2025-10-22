@@ -4,11 +4,9 @@ import { Select } from './components/core'
 import { Checkbox } from './components/core'
 import { Radio } from './components/core'
 import { Dropdown } from './components/core'
-import { Typography, T } from './components/core/Typography'
+import { Typography, T } from './components/core'
 import { Modal } from './components/core'
 import { List } from './components/core'
-import { Accordion } from './components/core/Accordion'
-import { Tree } from './components/core'
 import { Table } from './components/core'
 import { ContextMenu } from './components/core'
 import { Checkmark } from './components/icons'
@@ -18,6 +16,7 @@ import { Tabs } from './components/core'
 import { Slider } from './components/core'
 import { Layout } from './components/core'
 import { Invisible } from './components/core'
+import { Collapsible } from './components/core'
 
 import { useEffect, useRef, useState } from 'react'
 
@@ -57,7 +56,7 @@ const Page = () => {
           justifyContent: 'right',
           gap: '10px',
         }}>
-          <Button action={() => setShowModal(false)} type='fill'>
+          <Button action={() => setShowModal(false)} appearance='fill'>
             <T>Confirm</T>
           </Button>
           <Button action={() => setShowModal(false)}>
@@ -113,58 +112,32 @@ const Page = () => {
             />
 
             <Dropdown label='Dropdown' direction='vertical'>
-              <div style={{
-                display: 'flex',
-                flexFlow: 'row',
-                marginRight: '1px solid #333',
-                width: '400px',
-              }}>
-                <Tree>
-                  <Tree.Branch label='Branch 1'>
-                    <Tree.Item action='#'><T>Item 1</T></Tree.Item>
-                    <Tree.Item action='#'><T>Item 2</T></Tree.Item>
-                    <Tree.Item action='#'><T>Item 3</T></Tree.Item>
-                  </Tree.Branch>
+              <Button action='#'><T>Dropdown Item</T></Button>
+              <Dropdown label='Nested Dropdown 1'>
+                <Button><T>Dropdown Item</T></Button>
+                <Button><T>Dropdown Item</T></Button>
+                <Button><T>Dropdown Item</T></Button>
+              </Dropdown>
+              <Dropdown label='Nested Dropdown 2' direction='vertical'>
+                <Button><T>Dropdown Item</T></Button>
+                <Button><T>Dropdown Item</T></Button>
+                <Button><T>Dropdown Item</T></Button>
 
-                  <Tree.Branch label='Branch 2'>
-                    <Tree.Item action='#'><T>Item 1</T></Tree.Item>
-                    <Tree.Item action='#'><T>Item 2</T></Tree.Item>
-                    <Tree.Item action='#'><T>Item 3</T></Tree.Item>
-                  </Tree.Branch>
+                <Dropdown label='Nested Dropdown 2.1'>
+                  <Button><T>Dropdown Item</T></Button>
+                  <Button><T>Dropdown Item</T></Button>
+                  <Button><T>Dropdown Item</T></Button>
+                </Dropdown>
 
-                  <Tree.Item action='#'><T>Item 1</T></Tree.Item>
-                  <Tree.Item action='#'><T>Item 2</T></Tree.Item>
-                  <Tree.Item action='#'><T>Item 3</T></Tree.Item>
-                </Tree>
-                <div>
-                  <Button action='#'><T>Dropdown Item</T></Button>
-                  <Dropdown label='Nested Dropdown 1'>
-                    <Button><T>Dropdown Item</T></Button>
-                    <Button><T>Dropdown Item</T></Button>
-                    <Button><T>Dropdown Item</T></Button>
-                  </Dropdown>
-                  <Dropdown label='Nested Dropdown 2' direction='vertical'>
-                    <Button><T>Dropdown Item</T></Button>
-                    <Button><T>Dropdown Item</T></Button>
-                    <Button><T>Dropdown Item</T></Button>
-
-                    <Dropdown label='Nested Dropdown 2.1'>
-                      <Button><T>Dropdown Item</T></Button>
-                      <Button><T>Dropdown Item</T></Button>
-                      <Button><T>Dropdown Item</T></Button>
-                    </Dropdown>
-
-                    <Dropdown label='Nested Dropdown 2.2' direction='horizontal'>
-                      <Button><T>Dropdown Item</T></Button>
-                      <Button><T>Dropdown Item</T></Button>
-                      <Button><T>Dropdown Item</T></Button>
-                    </Dropdown>
-                  </Dropdown>
-                  <Button action={() => null} disabled><T>Dropdown Item</T></Button>
-                  <Button action={() => null} disabled><T>Dropdown Item</T></Button>
-                  <Button action={() => null}><T>Dropdown Item</T></Button>
-                </div>
-              </div>
+                <Dropdown label='Nested Dropdown 2.2' direction='horizontal'>
+                  <Button><T>Dropdown Item</T></Button>
+                  <Button><T>Dropdown Item</T></Button>
+                  <Button><T>Dropdown Item</T></Button>
+                </Dropdown>
+              </Dropdown>
+              <Button action={() => null} disabled><T>Dropdown Item</T></Button>
+              <Button action={() => null} disabled><T>Dropdown Item</T></Button>
+              <Button action={() => null}><T>Dropdown Item</T></Button>
             </Dropdown>
 
             <Slider name='slider1'
@@ -194,12 +167,12 @@ const Page = () => {
             <Button disabled width='full'>
               <T>Disabled Button</T>
             </Button>
-            <Button action={() => setShowModal(true)} width='full'>
+            <Button action={() => setShowModal(true)} size='m' width='full'>
               <Typography>Open Modal</Typography>
             </Button>
 
             <Button><T>Button Outline</T></Button>
-            <Button type='fill'><T>Button Fill</T></Button>
+            <Button appearance='fill'><T>Button Fill</T></Button>
             <Button width='auto'>
               <Checkmark state={true} />
               <Invisible>Checkmark</Invisible>
@@ -250,7 +223,7 @@ const Page = () => {
             <Field label='Password' type='password' name='password' />
             <Button
               action={() => setSomeState(!someState)}
-              type='fill'
+              appearance='fill'
               width='full'
             >
               <T>Submit</T>
@@ -385,29 +358,27 @@ const Page = () => {
             { label: 'Loop Up Definition', disabled: false },
             { label: 'Save As...' },
           ]}>
-            <Accordion>
-              <Accordion.Item label='Accordion Item'>
-                <Typography type='p'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
-                  corporis consequuntur porro suscipit inventore atque cupiditate 
-                  quos beatae, officia deserunt esse praesentium fugiat adipisci 
-                  optio unde voluptates saepe similique veniam!
-                </Typography>
-              </Accordion.Item>
+            <Collapsible size='m' label='Collapsible 1' appearance='trailing'>
+              <Typography type='p'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
+                corporis consequuntur porro suscipit inventore atque cupiditate 
+                quos beatae, officia deserunt esse praesentium fugiat adipisci 
+                optio unde voluptates saepe similique veniam!
+              </Typography>
+            </Collapsible>
 
-              <Accordion.Item label='Accordion Item'>
-                <Typography type='p'>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                  Atque, est dicta, eaque adipisci.
-                </Typography>
-              </Accordion.Item>
+            <Collapsible label='Collapsible 2'>
+              <Typography type='p'>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                Atque, est dicta, eaque adipisci.
+              </Typography>
+            </Collapsible>
 
-              <Accordion.Item label='Accordion Item'>
-                <Typography type='p'>
-                  Lorem, ipsum dolor sit amet.
-                </Typography>
-              </Accordion.Item>
-            </Accordion>
+            <Collapsible label='Collapsible 3'>
+              <Typography type='p'>
+                Lorem, ipsum dolor sit amet.
+              </Typography>
+            </Collapsible>
           </ContextMenu>
         </Layout.Subsection>
       </Layout.Section>
@@ -436,7 +407,7 @@ const Page = () => {
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button type='text' action='#'><T>tempore tenetur</T></Button> a
+            cupiditate <Button appearance='text' action='#'><T>tempore tenetur</T></Button> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />

@@ -6,8 +6,8 @@ interface RadioItemProps {
   value: string
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLLabelElement>
-    content?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLLabelElement> & { ref?: React.Ref<HTMLLabelElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -18,7 +18,7 @@ interface RadioProps {
   name: string
   style?: 'vertical' | 'horizontal'
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

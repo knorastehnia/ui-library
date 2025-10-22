@@ -9,9 +9,9 @@ interface CheckboxProps {
   onInput?: (expose: boolean) => void
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    display?: React.RefAttributes<HTMLDivElement>
-    content?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

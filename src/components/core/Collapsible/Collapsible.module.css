@@ -1,0 +1,33 @@
+.trigger-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.appearance-leading {
+  flex-flow: row-reverse nowrap;
+  justify-content: start;
+}
+
+.appearance-trailing {
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.content {
+  overflow: hidden;
+  height: auto;
+
+  margin: 0 0 0 10px;
+  transform: translateY(20px);
+  pointer-events: none;
+  opacity: 0;
+  transition: all var(--ease-out-t) var(--ease-out-c);
+
+  &.open {
+    margin: 0 0 10px 10px;
+    transform: none;
+    pointer-events: all;
+    opacity: 1;
+  }
+}

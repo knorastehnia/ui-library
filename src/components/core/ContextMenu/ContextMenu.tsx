@@ -15,8 +15,8 @@ interface ContextMenuProps {
   children: React.ReactElement | React.ReactElement[]
   items: ItemInterface[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    display?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     content?: PopoverProps
     trigger?: ButtonProps
   }
@@ -72,7 +72,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                   <Button
                     key={index}
                     action={item.action}
-                    type='hollow'
+                    appearance='hollow'
                     width='full'
                     disabled={item.disabled}
                     {...internal?.trigger}

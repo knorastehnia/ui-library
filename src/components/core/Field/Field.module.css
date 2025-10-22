@@ -44,30 +44,6 @@
   }
 }
 
-.eye-container {
-  display: flex;
-  align-items: center;
-  height: 0;
-}
-
-.eye {
-  box-sizing: content-box;
-  padding: 3px;
-  display: flex;
-  align-items: center;
-  margin: 0 10px 0 5px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  background-color: transparent;
-  transition: all var(--ease-out-t) var(--ease-out-c);
-
-  &:hover, &:focus-visible {
-    outline: none;
-    background-color: var(--gray-2);
-  }
-}
-
 .counter {
   position: absolute;
   pointer-events: none;

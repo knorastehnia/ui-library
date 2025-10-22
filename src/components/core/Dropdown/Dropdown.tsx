@@ -10,7 +10,7 @@ interface DropdownProps {
   label: string
   direction?: 'vertical' | 'horizontal'
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     trigger?: ButtonProps
     content?: PopoverProps
   }
@@ -53,7 +53,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     >
       <Button
         action={() => setIsOpen(!isOpen)}
-        type='hollow'
+        appearance='hollow'
         width='full'
         internal={{ root: { ref: buttonRef } }}
         {...internal?.trigger}
@@ -75,7 +75,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {...internal?.content}
       >
         <DropdownContext.Provider value={true}>
-          <ButtonDefaultsProvider type='hollow' width='full'>
+          <ButtonDefaultsProvider appearance='hollow' width='full'>
             {children}
           </ButtonDefaultsProvider>
         </DropdownContext.Provider>

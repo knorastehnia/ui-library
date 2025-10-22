@@ -3,8 +3,9 @@ import { createContext, useContext } from 'react'
 import { TypographyDefaultsProvider } from '../Typography'
 
 interface ButtonDefaultsContextInterface {
-  type?: 'fill' | 'outline' | 'hollow' | 'text',
-  width?: 'auto' | 'full',
+  appearance?: 'fill' | 'outline' | 'hollow' | 'text'
+  size?: 's' | 'm' | 'l'
+  width?: 'auto' | 'full'
 }
 
 interface ButtonProps extends ButtonDefaultsContextInterface {
@@ -12,7 +13,7 @@ interface ButtonProps extends ButtonDefaultsContextInterface {
   action?: string | Function
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLElement>
+    root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
   }
 }
 
@@ -24,11 +25,21 @@ const ButtonDefaultsContext = createContext<ButtonDefaultsContextInterface>({})
 
 const ButtonDefaultsProvider: React.FC<ButtonDefaultsProviderProps> = ({
   children,
-  type,
+  appearance,
+  size,
   width,
 }) => {
+  const defaultsContext = useContext(ButtonDefaultsContext)
+  const activeAppearance = appearance ?? defaultsContext.appearance
+  const activeSize = size ?? defaultsContext.size
+  const activeWidth = width ?? defaultsContext.width
+
   return (
-    <ButtonDefaultsContext.Provider value={{ type, width }}>
+    <ButtonDefaultsContext.Provider value={{
+      appearance: activeAppearance,
+      size: activeSize,
+      width: activeWidth,
+    }}>
       {children}
     </ButtonDefaultsContext.Provider>
   )
@@ -37,17 +48,19 @@ const ButtonDefaultsProvider: React.FC<ButtonDefaultsProviderProps> = ({
 const Button: React.FC<ButtonProps> = ({
   children,
   action,
-  type,
+  appearance,
+  size,
   width,
   disabled=false,
   internal,
 }) => {
   const defaultsContext = useContext(ButtonDefaultsContext)
-  const activeType = type ?? defaultsContext.type ?? 'outline'
+  const activeAppearance = appearance ?? defaultsContext.appearance ?? 'outline'
+  const activeSize = size ?? defaultsContext.size ?? 'm'
   const activeWidth = width ?? defaultsContext.width ?? 'auto'
 
   return (
-    <TypographyDefaultsProvider color={disabled ? 'disabled' : 'primary'}>
+    <TypographyDefaultsProvider color={disabled ? 'disabled' : undefined}>
       {(typeof action === 'string') && action.length > 0
 
       ?
@@ -55,7 +68,8 @@ const Button: React.FC<ButtonProps> = ({
           href={action}
           className={`
             ${styles['button']} 
-            ${styles[`style-${activeType}`]} 
+            ${styles[`appearance-${activeAppearance}`]} 
+            ${styles[`size-${activeSize}`]} 
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}
           `}
@@ -70,7 +84,8 @@ const Button: React.FC<ButtonProps> = ({
           onClick={(e) => !disabled && typeof action === 'function' && action(e)}
           className={`
             ${styles['button']} 
-            ${styles[`style-${activeType}`]} 
+            ${styles[`appearance-${activeAppearance}`]} 
+            ${styles[`size-${activeSize}`]} 
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}
           `}

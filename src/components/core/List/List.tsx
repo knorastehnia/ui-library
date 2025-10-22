@@ -3,8 +3,8 @@ import styles from './List.module.css'
 interface ListItemProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    content?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -13,7 +13,7 @@ interface ListProps {
     | React.ReactElement<ListItemProps>
     | React.ReactElement<ListItemProps>[]
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

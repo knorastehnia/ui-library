@@ -8,35 +8,3 @@
   gap: 5px;
   overflow-x: auto;
 }
-
-.button {
-  overflow: clip;
-  cursor: pointer;
-  transition: all var(--ease-out-t) var(--ease-out-c);
-
-  display: block;
-  text-align: left;
-  user-select: none;
-  text-decoration: none;
-  border-radius: var(--radius);
-  border: 1px solid var(--background);
-  background-color: var(--background);
-  padding: 10px;
-
-  width: max-content;
-
-  &:hover, &:focus-visible {
-    outline: none;
-    border-color: var(--gray-2);
-    background-color: var(--gray-2);
-  }
-
-  &.disabled {
-    cursor: default;
-
-    &:hover&:not(:focus-visible) {
-      border: 1px solid var(--background);
-      background-color: var(--background);
-    }
-  }
-}

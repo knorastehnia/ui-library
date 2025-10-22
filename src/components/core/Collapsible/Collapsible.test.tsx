@@ -1,10 +1,10 @@
 import { render, type RenderResult } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { axe } from 'vitest-axe'
-import { Accordion } from './Accordion'
+import { Collapsible } from './Collapsible'
 import { Typography } from '../Typography'
 
-describe('Accordion', () => {
+describe('Collapsible', () => {
   let user: UserEvent
   let component: RenderResult
 
@@ -59,13 +59,13 @@ describe('Accordion', () => {
 
 const AccordionTest = () => {
   return (
-    <Accordion>
-      <Accordion.Item label='Item 1'>
+    <>
+      <Collapsible label='Item 1'>
         <Typography type='p'>Content for Item 1</Typography>
-      </Accordion.Item>
-      <Accordion.Item label='Item 2'>
+      </Collapsible>
+      <Collapsible label='Item 2'>
         <Typography type='p'>Content for Item 2</Typography>
-      </Accordion.Item>
-    </Accordion>
+      </Collapsible>
+    </>
   )
 }

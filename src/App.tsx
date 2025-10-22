@@ -2,8 +2,9 @@ import './App.css'
 
 import Page from './Page'
 import { Layout } from './components/core'
-import { Tree } from './components/core'
 import { Typography, T } from './components/core'
+import { Button } from './components/core'
+import { Collapsible } from './components/core'
 
 const App = () => {
   return (
@@ -14,36 +15,34 @@ const App = () => {
         </Layout.TopNav>
 
         <Layout.SideNav>
-          <Tree.Item action='#'><T>Dashboard</T></Tree.Item>
-          <Tree.Item action='#'><T>Projects</T></Tree.Item>
-          <Tree.Item action='#'><T>Tree Item</T></Tree.Item>
+          <Button size='s' appearance='hollow' width='full' action='#'><T>Dashboard</T></Button>
+          <Button size='s' appearance='hollow' width='full' action='#'><T>Projects</T></Button>
+          <Button size='s' appearance='hollow' width='full' action='#'><T>Tree Item</T></Button>
 
-          <Tree>
-            <Tree.Branch label='Assets'>
-              <Tree.Item action='#'><T>Item #1</T></Tree.Item>
-              <Tree.Item action='#'><T>Tree Item #2</T></Tree.Item>
-              <Tree.Item action='#'><T>Tree Item #3</T></Tree.Item>
-              <Tree.Item action='#'><T>Item #4</T></Tree.Item>
-            </Tree.Branch>
+          <Collapsible appearance='leading' size='s' label='Assets'>
+            <Button action='#'><T>Item #1</T></Button>
+            <Button action='#'><T>Tree Item #2</T></Button>
+            <Button action='#'><T>Tree Item #3</T></Button>
+            <Button action='#'><T>Item #4</T></Button>
+          </Collapsible>
 
-            <Tree.Branch label='Components'>
-              <Tree.Branch label='Core'>
-                <Tree.Branch label='Tree Branch'>
-                  <Tree.Item action='#'><T>Tree Item</T></Tree.Item>
-                  <Tree.Item action='#'><T>Tree Item</T></Tree.Item>
-                  <Tree.Item action='#'><T>Tree Item</T></Tree.Item>
-                </Tree.Branch>
+          <Collapsible appearance='leading' size='s' label='Components'>
+            <Collapsible appearance='leading' size='s' label='Core'>
+              <Collapsible appearance='leading' size='s' label='Tree Branch'>
+                <Button action='#'><T>Tree Item</T></Button>
+                <Button action='#'><T>Tree Item</T></Button>
+                <Button action='#'><T>Tree Item</T></Button>
+              </Collapsible>
 
-                <Tree.Item action='#'><T>Accordion</T></Tree.Item>
-                <Tree.Item action='#'><T>Button</T></Tree.Item>
-                <Tree.Item action='#'><T>Checkbox</T></Tree.Item>
-                <Tree.Item action='#'><T>Context Menu</T></Tree.Item>
-                <Tree.Item action='#'><T>Dropdown</T></Tree.Item>
-                <Tree.Item action='#'><T>Error Message</T></Tree.Item>
-                <Tree.Item action='#'><T>Field</T></Tree.Item>
-              </Tree.Branch>
-            </Tree.Branch>
-          </Tree>
+              <Button action='#'><T>Accordion</T></Button>
+              <Button action='#'><T>Button</T></Button>
+              <Button action='#'><T>Checkbox</T></Button>
+              <Button action='#'><T>Context Menu</T></Button>
+              <Button action='#'><T>Dropdown</T></Button>
+              <Button action='#'><T>Error Message</T></Button>
+              <Button action='#'><T>Field</T></Button>
+            </Collapsible>
+          </Collapsible>
         </Layout.SideNav>
 
         <Layout.Content>

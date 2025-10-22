@@ -9,9 +9,9 @@ interface ModalProps {
   width?: string
   height?: string
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    background?: React.RefAttributes<HTMLDivElement>
-    content?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    background?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

@@ -5,7 +5,7 @@ interface TableCellProps {
   colSpan?: number
   rowSpan?: number
   internal?: {
-    root?: React.RefAttributes<HTMLTableCellElement>
+    root?: React.HTMLAttributes<HTMLTableCellElement> & { ref?: React.Ref<HTMLTableCellElement> }
   }
 }
 
@@ -14,7 +14,7 @@ interface TableRowProps {
     | React.ReactElement<TableCellProps>
     | React.ReactElement<TableCellProps>[]
   internal?: {
-    root?: React.RefAttributes<HTMLTableRowElement>
+    root?: React.HTMLAttributes<HTMLTableRowElement> & { ref?: React.Ref<HTMLTableRowElement> }
   }
 }
 
@@ -23,8 +23,8 @@ interface TableProps {
     | React.ReactElement<TableRowProps>
     | React.ReactElement<TableRowProps>[]
   internal?: {
-    root?: React.RefAttributes<HTMLTableElement>
-    content?: React.RefAttributes<HTMLTableSectionElement>
+    root?: React.HTMLAttributes<HTMLTableElement> & { ref?: React.Ref<HTMLTableElement> }
+    content?: React.HTMLAttributes<HTMLTableSectionElement> & { ref?: React.Ref<HTMLTableSectionElement> }
   }
 }
 

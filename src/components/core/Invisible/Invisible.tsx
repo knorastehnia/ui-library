@@ -3,7 +3,7 @@ import styles from './Invisible.module.css'
 interface InvisibleProps {
   children: React.ReactNode
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

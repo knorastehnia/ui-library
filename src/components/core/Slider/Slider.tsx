@@ -11,9 +11,9 @@ interface SliderProps {
   onInput?: (expose: number) => void
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    content?: React.RefAttributes<HTMLDivElement>
-    display?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

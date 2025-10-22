@@ -4,14 +4,13 @@
   transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
-.style-outline {
+.appearance-outline {
   display: block;
   user-select: none;
   text-decoration: none;
   border-radius: var(--radius);
   border: 1px solid var(--gray-2);
   background-color: var(--background);
-  padding: 10px;
 
   &:hover, &:focus-visible {
     outline: none;
@@ -20,14 +19,13 @@
   }
 }
 
-.style-fill {
+.appearance-fill {
   display: block;
   user-select: none;
   text-decoration: none;
   border-radius: var(--radius);
   border: 1px solid var(--gray-3);
   background-color: var(--gray-1);
-  padding: 10px;
 
   &:hover, &:focus-visible {
     outline: none;
@@ -36,7 +34,7 @@
   }
 }
 
-.style-hollow {
+.appearance-hollow {
   display: block;
   text-align: left;
   user-select: none;
@@ -44,7 +42,6 @@
   border-radius: var(--radius);
   border: 1px solid var(--background);
   background-color: var(--background);
-  padding: 10px;
 
   &:hover, &:focus-visible {
     outline: none;
@@ -58,12 +55,13 @@
   }
 }
 
-.style-text {
+.appearance-text {
   display: inline-block;
   text-align: left;
   user-select: auto;
   border: none;
   text-decoration: underline solid var(--gray-2) 1px;
+  padding: 0px !important;
 
   &:hover, &:focus-visible {
     outline: none;
@@ -74,6 +72,18 @@
     border: none;
     background-color: transparent;
   }
+}
+
+.size-s {
+  padding: 5px 10px;
+}
+
+.size-m {
+  padding: 10px;
+}
+
+.size-l {
+  padding: 15px 10px;
 }
 
 .width-auto {

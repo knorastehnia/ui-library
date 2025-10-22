@@ -7,7 +7,7 @@ interface PopoverProps {
   onClose?: Function
   direction?: 'vertical' | 'horizontal'
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 

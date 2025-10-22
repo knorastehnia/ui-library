@@ -2,6 +2,7 @@ import styles from './Tabs.module.css'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Typography } from '../Typography'
+import { Button } from '../Button'
 
 interface TabProps {
   children: React.ReactNode
@@ -9,17 +10,18 @@ interface TabProps {
   defaultTab?: boolean
   disabled?: boolean
   internal?: {
-    root?: React.RefAttributes<HTMLButtonElement>
+    root?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
   }
 }
 
 interface TabsProps {
   children: React.ReactNode
   navigation?: 'focus' | 'select'
+  size?: 's' | 'm' | 'l'
   internal?: {
-    root?: React.RefAttributes<HTMLDivElement>
-    list?: React.RefAttributes<HTMLDivElement>
-    content?: React.RefAttributes<HTMLDivElement>
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    list?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -31,6 +33,7 @@ const TabsContext = createContext<{
   tabListRef: React.RefObject<HTMLDivElement | null>,
   currentTab: string,
   setCurrentTab: Function,
+  size: 's' | 'm' | 'l'
 } | null>(null)
 
 const Tab: React.FC<TabProps> = ({
@@ -51,14 +54,20 @@ const Tab: React.FC<TabProps> = ({
     <>
       {
         createPortal(
-          <button
-            className={`
-              ${styles['button']} 
-              ${(ctx.currentTab === label || disabled) && styles['disabled']}
-            `}
-            onClick={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
-            tabIndex={ctx.currentTab === label ? 0 : -1}
+          <Button
+            action={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
+            appearance='hollow'
             disabled={disabled}
+            size={ctx.size}
+            internal={{
+              root: {
+                tabIndex: ctx.currentTab === label ? 0 : -1,
+                style: {
+                  backgroundColor: (ctx.currentTab === label || disabled) ? 'transparent' : undefined,
+                  borderColor: (ctx.currentTab === label || disabled) ? 'transparent' : undefined
+                }
+              }
+            }}
             {...internal?.root}
           >
             <Typography
@@ -67,7 +76,7 @@ const Tab: React.FC<TabProps> = ({
             >
               {label}
             </Typography>
-          </button>,
+          </Button>,
           ctx.tabListRef.current!
         )
       }
@@ -80,6 +89,7 @@ const Tab: React.FC<TabProps> = ({
 const Tabs: TabsComponent = ({
   children,
   navigation='focus',
+  size='m',
   internal,
 }) => {
   const [currentTab, setCurrentTab] = useState('')
@@ -184,6 +194,7 @@ const Tabs: TabsComponent = ({
           tabListRef,
           currentTab,
           setCurrentTab,
+          size: size,
         }}>
           {render && children}
         </TabsContext.Provider>
