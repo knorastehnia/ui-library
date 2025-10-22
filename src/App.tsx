@@ -1,9 +1,9 @@
 import './App.css'
 
 import Page from './Page'
-import { Layout } from './components/core'
+import { Layout, TypographyDefaultsProvider } from './components/core'
 import { Typography, T } from './components/core'
-import { Button } from './components/core'
+import { Button, ButtonDefaultsProvider } from './components/core'
 import { Collapsible } from './components/core'
 
 const App = () => {
@@ -15,9 +15,19 @@ const App = () => {
         </Layout.TopNav>
 
         <Layout.SideNav>
-          <Button size='s' appearance='hollow' width='full' action='#'><T>Dashboard</T></Button>
-          <Button size='s' appearance='hollow' width='full' action='#'><T>Projects</T></Button>
-          <Button size='s' appearance='hollow' width='full' action='#'><T>Tree Item</T></Button>
+          <ButtonDefaultsProvider
+            size='s'
+            appearance='hollow'
+            width='full'
+          >
+            <TypographyDefaultsProvider
+              color='dimmed'
+            >
+              <Button action='#'><T>Dashboard</T></Button>
+              <Button action='#'><T>Projects</T></Button>
+              <Button action='#'><T>Tree Item</T></Button>
+            </TypographyDefaultsProvider>
+          </ButtonDefaultsProvider>
 
           <Collapsible appearance='leading' size='s' label='Assets'>
             <Button action='#'><T>Item #1</T></Button>
