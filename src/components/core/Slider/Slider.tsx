@@ -36,7 +36,6 @@ const Slider: React.FC<SliderProps> = ({
   const isPointerDownRef = useRef(false)
 
   const sliderRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const getNormalizedValue = (rawVal: number) => {
     return Math.max(Math.min(rawVal, maxValue), minValue)
@@ -47,18 +46,17 @@ const Slider: React.FC<SliderProps> = ({
 
     onInput?.(normalized)
     setCurrentValue(normalized)
+    valueRef.current = currentValue
   }
 
   const setExternalValue = (val: number) => {
     const normalized = getNormalizedValue(val)
 
     setCurrentValue(normalized)
+    valueRef.current = currentValue
   }
 
-  const handleKeyboard = (e: KeyboardEvent) => {
-    if (!sliderRef.current) return
-    if (inputRef.current !== document.activeElement) return
-
+  const handleKeyboard = (e: React.KeyboardEvent) => {
     const keys = [
       'ArrowLeft',
       'ArrowRight',
@@ -112,12 +110,11 @@ const Slider: React.FC<SliderProps> = ({
     }
   }
 
-  const handlePointer = (e: MouseEvent) => {
-    if (!sliderRef.current || !inputRef.current) return
-
-    inputRef.current.focus()
+  const handlePointer = (e: MouseEvent | React.MouseEvent) => {
+    if (!sliderRef.current) return
 
     e.preventDefault()
+    sliderRef.current.focus()
 
     const rect = sliderRef.current.getBoundingClientRect()
     const valuePercentage = (e.clientX - rect.left) * 100 / (rect.right - rect.left)
@@ -130,10 +127,11 @@ const Slider: React.FC<SliderProps> = ({
     if (!isPointerDownRef.current) return
 
     setIsDragging(true)
+    isDraggingRef.current = isDragging
     handlePointer(e)
   }
 
-  const pointerDown = (e: MouseEvent) => {
+  const pointerDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return
 
     const selected = e.target as HTMLElement
@@ -146,6 +144,7 @@ const Slider: React.FC<SliderProps> = ({
 
   const pointerUp = () => {
     setIsDragging(false)
+    isDraggingRef.current = isDragging
     isPointerDownRef.current = false
   }
 
@@ -154,26 +153,12 @@ const Slider: React.FC<SliderProps> = ({
   }, [value])
 
   useEffect(() => {
-    valueRef.current = currentValue
-  }, [currentValue])
-
-  useEffect(() => {
-    isDraggingRef.current = isDragging
-  }, [isDragging])
-
-  useEffect(() => {
-    document.addEventListener('pointerdown', pointerDown)
     document.addEventListener('pointerup', pointerUp)
     document.addEventListener('pointermove', pointerMove)
 
-    document.addEventListener('keydown', handleKeyboard)
-
     return () => {
-      document.removeEventListener('pointerdown', pointerDown)
       document.removeEventListener('pointerup', pointerUp)
       document.removeEventListener('pointermove', pointerMove)
-
-      document.removeEventListener('keydown', handleKeyboard)
     }
   }, [])
 
@@ -188,8 +173,6 @@ const Slider: React.FC<SliderProps> = ({
         </div>
 
         <input
-          ref={inputRef}
-          className={styles['input']}
           type='range'
           name={name}
           id={name}
@@ -198,11 +181,25 @@ const Slider: React.FC<SliderProps> = ({
           step={step}
           value={currentValue}
           disabled={disabled}
+          readOnly
+          hidden
+          aria-hidden='true'
         />
 
         <div
           ref={sliderRef}
-          className={styles['slider-clickbox']}
+          tabIndex={0}
+          aria-valuemin={minValue}
+          aria-valuemax={maxValue}
+          aria-valuenow={value}
+          aria-disabled={disabled}
+          role='slider'
+          className={`
+            ${styles['slider-clickbox']} 
+            ${disabled && styles['disabled']}
+          `}
+          onKeyDown={(e) => disabled || handleKeyboard(e)}
+          onPointerDown={(e) => disabled || pointerDown(e)}
         >
           <div
             className={styles['display-slider']}

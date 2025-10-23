@@ -1,29 +1,25 @@
-.slider {
-  &:has(.input:hover), &:has(.input:focus-visible) {
-    .thumb-display {
-      background-color: var(--foreground);
-    }
-  }
-}
-
-.input {
-  appearance: none;
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  width: 0; height: 0;
-
-  &:focus {
-    outline: none;
-  }
-}
-
 .slider-clickbox {
   cursor: pointer;
   display: flex;
   align-items: center;
   width: 200px;
   height: 40px;
+
+  &.disabled {
+    cursor: default;
+
+    .display-slider { background-color: var(--gray-1) !important }
+    .slider-track { background-color: var(--gray-6) !important }
+    .thumb-display { background-color: var(--gray-6) !important }
+  }
+
+  &:focus {
+    outline: none;
+
+    .thumb-display {
+      background-color: var(--foreground);
+    }
+  }
 }
 
 .display-slider {
@@ -38,7 +34,6 @@
 }
 
 .slider-track {
-  pointer-events: none;
   flex: 1 0 0;
   background-color: var(--gray-9);
   height: 100%;
@@ -51,7 +46,6 @@
 }
 
 .slider-thumb {
-  cursor: pointer;
   flex: 0 0 0;
   width: 0; height: 0;
   background-color: transparent;
