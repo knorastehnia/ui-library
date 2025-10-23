@@ -56,7 +56,7 @@ const Page = () => {
           justifyContent: 'right',
           gap: '10px',
         }}>
-          <Button action={() => setShowModal(false)} appearance='fill'>
+          <Button action={() => setShowModal(false)} surface='fill'>
             <T>Confirm</T>
           </Button>
           <Button action={() => setShowModal(false)}>
@@ -111,14 +111,14 @@ const Page = () => {
               ]}
             />
 
-            <Dropdown label='Dropdown' direction='vertical'>
+            <Dropdown label='Dropdown' arrangement='vertical'>
               <Button action='#'><T>Dropdown Item</T></Button>
               <Dropdown label='Nested Dropdown 1'>
                 <Button><T>Dropdown Item</T></Button>
                 <Button><T>Dropdown Item</T></Button>
                 <Button><T>Dropdown Item</T></Button>
               </Dropdown>
-              <Dropdown label='Nested Dropdown 2' direction='vertical'>
+              <Dropdown label='Nested Dropdown 2' arrangement='vertical'>
                 <Button><T>Dropdown Item</T></Button>
                 <Button><T>Dropdown Item</T></Button>
                 <Button><T>Dropdown Item</T></Button>
@@ -129,7 +129,7 @@ const Page = () => {
                   <Button><T>Dropdown Item</T></Button>
                 </Dropdown>
 
-                <Dropdown label='Nested Dropdown 2.2' direction='horizontal'>
+                <Dropdown label='Nested Dropdown 2.2' arrangement='horizontal'>
                   <Button><T>Dropdown Item</T></Button>
                   <Button><T>Dropdown Item</T></Button>
                   <Button><T>Dropdown Item</T></Button>
@@ -172,7 +172,7 @@ const Page = () => {
             </Button>
 
             <Button><T>Button Outline</T></Button>
-            <Button appearance='fill'><T>Button Fill</T></Button>
+            <Button surface='fill'><T>Button Fill</T></Button>
             <Button width='auto'>
               <Checkmark state={true} />
               <Invisible>Checkmark</Invisible>
@@ -223,7 +223,7 @@ const Page = () => {
             <Field label='Password' type='password' name='password' />
             <Button
               action={() => setSomeState(!someState)}
-              appearance='fill'
+              surface='fill'
               width='full'
             >
               <T>Submit</T>
@@ -258,7 +258,7 @@ const Page = () => {
               </Checkbox>
             </div>
 
-            <Radio style='vertical' name='rgroup1'>
+            <Radio arrangement='vertical' name='rgroup1'>
               <Radio.Item value='r1'><T>Radio 1.1</T></Radio.Item>
               <Radio.Item value='r2'><T>Radio 1.2</T></Radio.Item>
               <Radio.Item value='r3'><T>Radio 1.3</T></Radio.Item>
@@ -358,7 +358,7 @@ const Page = () => {
             { label: 'Loop Up Definition', disabled: false },
             { label: 'Save As...' },
           ]}>
-            <Collapsible size='m' label='Collapsible 1' appearance='trailing'>
+            <Collapsible size='m' label='Collapsible 1' arrangement='trailing'>
               <Typography type='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
                 corporis consequuntur porro suscipit inventore atque cupiditate 
@@ -407,7 +407,7 @@ const Page = () => {
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button appearance='text' action='#'><T>tempore tenetur</T></Button> a
+            cupiditate <Button surface='text' action='#'><T>tempore tenetur</T></Button> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />

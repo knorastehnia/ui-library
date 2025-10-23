@@ -11,15 +11,15 @@
 
   --error: #ec0000;
 
-  /* --background: oklch(100% 0 265);
+  --background: oklch(100% 0 265);
   --foreground: oklch(4% 0 265);
   --gray-1: oklch(94% 0 265);
   --gray-2: oklch(90% 0 265);
   --gray-3: oklch(86% 0 265);
   --gray-6: oklch(82% 0 265);
-  --gray-9: oklch(40% 0 265); */
+  --gray-9: oklch(40% 0 265);
 
-  --radius: 5px;
+  --radius: 4px;
 
 
   --ease-out-c: cubic-bezier(0.22, 1, 0.36, 1);

@@ -130,7 +130,7 @@ const SideNav: React.FC<SideNavProps> = ({
       >
         <div className={styles['sidenav-header']}>
           <Button
-            appearance='hollow'
+            surface='hollow'
             action={() => setIsCollapsed(!isCollapsed)}
             {...internal?.trigger}
           >

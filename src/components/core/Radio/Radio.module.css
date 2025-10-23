@@ -1,4 +1,4 @@
-.radio-horizontal, .radio-vertical {
+.arrangement-horizontal, .arrangement-vertical {
   width: fit-content;
   background-color: var(--background);
   border: 1px solid var(--gray-2);
@@ -11,7 +11,7 @@
   }
 }
 
-.radio-horizontal {
+.arrangement-horizontal {
   display: flex;
   flex-flow: row nowrap;
 
@@ -19,7 +19,7 @@
   .label:last-child { border: none }
 }
 
-.radio-vertical {
+.arrangement-vertical {
   display: flex;
   flex-flow: column nowrap;
 

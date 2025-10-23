@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react'
 import { TypographyDefaultsProvider } from '../Typography'
 
 interface ButtonDefaultsContextInterface {
-  appearance?: 'fill' | 'outline' | 'hollow' | 'text'
+  surface?: 'fill' | 'outline' | 'hollow' | 'text'
   size?: 's' | 'm' | 'l'
   width?: 'auto' | 'full'
 }
@@ -25,18 +25,18 @@ const ButtonDefaultsContext = createContext<ButtonDefaultsContextInterface>({})
 
 const ButtonDefaultsProvider: React.FC<ButtonDefaultsProviderProps> = ({
   children,
-  appearance,
+  surface,
   size,
   width,
 }) => {
   const defaultsContext = useContext(ButtonDefaultsContext)
-  const activeAppearance = appearance ?? defaultsContext.appearance
+  const activeSurface = surface ?? defaultsContext.surface
   const activeSize = size ?? defaultsContext.size
   const activeWidth = width ?? defaultsContext.width
 
   return (
     <ButtonDefaultsContext.Provider value={{
-      appearance: activeAppearance,
+      surface: activeSurface,
       size: activeSize,
       width: activeWidth,
     }}>
@@ -48,14 +48,14 @@ const ButtonDefaultsProvider: React.FC<ButtonDefaultsProviderProps> = ({
 const Button: React.FC<ButtonProps> = ({
   children,
   action,
-  appearance,
+  surface,
   size,
   width,
   disabled=false,
   internal,
 }) => {
   const defaultsContext = useContext(ButtonDefaultsContext)
-  const activeAppearance = appearance ?? defaultsContext.appearance ?? 'outline'
+  const activeSurface = surface ?? defaultsContext.surface ?? 'outline'
   const activeSize = size ?? defaultsContext.size ?? 'm'
   const activeWidth = width ?? defaultsContext.width ?? 'auto'
 
@@ -68,7 +68,7 @@ const Button: React.FC<ButtonProps> = ({
           href={action}
           className={`
             ${styles['button']} 
-            ${styles[`appearance-${activeAppearance}`]} 
+            ${styles[`surface-${activeSurface}`]} 
             ${styles[`size-${activeSize}`]} 
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}
@@ -84,7 +84,7 @@ const Button: React.FC<ButtonProps> = ({
           onClick={(e) => !disabled && typeof action === 'function' && action(e)}
           className={`
             ${styles['button']} 
-            ${styles[`appearance-${activeAppearance}`]} 
+            ${styles[`surface-${activeSurface}`]} 
             ${styles[`size-${activeSize}`]} 
             ${styles[`width-${activeWidth}`]} 
             ${disabled && styles['disabled']}

@@ -17,7 +17,7 @@ const App = () => {
         <Layout.SideNav>
           <ButtonDefaultsProvider
             size='s'
-            appearance='hollow'
+            surface='hollow'
             width='full'
           >
             <TypographyDefaultsProvider
@@ -29,16 +29,16 @@ const App = () => {
             </TypographyDefaultsProvider>
           </ButtonDefaultsProvider>
 
-          <Collapsible appearance='leading' size='s' label='Assets'>
+          <Collapsible arrangement='leading' size='s' label='Assets'>
             <Button action='#'><T>Item #1</T></Button>
             <Button action='#'><T>Tree Item #2</T></Button>
             <Button action='#'><T>Tree Item #3</T></Button>
             <Button action='#'><T>Item #4</T></Button>
           </Collapsible>
 
-          <Collapsible appearance='leading' size='s' label='Components'>
-            <Collapsible appearance='leading' size='s' label='Core'>
-              <Collapsible appearance='leading' size='s' label='Tree Branch'>
+          <Collapsible arrangement='leading' size='s' label='Components'>
+            <Collapsible arrangement='leading' size='s' label='Core'>
+              <Collapsible arrangement='leading' size='s' label='Tree Branch'>
                 <Button action='#'><T>Tree Item</T></Button>
                 <Button action='#'><T>Tree Item</T></Button>
                 <Button action='#'><T>Tree Item</T></Button>

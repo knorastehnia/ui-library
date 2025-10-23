@@ -4,7 +4,7 @@
   transition: all var(--ease-out-t) var(--ease-out-c);
 }
 
-.appearance-outline {
+.surface-outline {
   display: block;
   user-select: none;
   text-decoration: none;
@@ -19,7 +19,7 @@
   }
 }
 
-.appearance-fill {
+.surface-fill {
   display: block;
   user-select: none;
   text-decoration: none;
@@ -34,7 +34,7 @@
   }
 }
 
-.appearance-hollow {
+.surface-hollow {
   display: block;
   text-align: left;
   user-select: none;
@@ -55,7 +55,7 @@
   }
 }
 
-.appearance-text {
+.surface-text {
   display: inline-block;
   text-align: left;
   user-select: auto;

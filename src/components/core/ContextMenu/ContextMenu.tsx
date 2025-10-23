@@ -72,7 +72,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                   <Button
                     key={index}
                     action={item.action}
-                    appearance='hollow'
+                    surface='hollow'
                     width='full'
                     disabled={item.disabled}
                     {...internal?.trigger}

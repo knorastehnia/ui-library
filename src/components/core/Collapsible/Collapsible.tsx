@@ -9,7 +9,7 @@ interface CollapsibleProps {
   children: React.ReactElement | React.ReactElement[]
   label: string
   size?: 's' | 'm' | 'l'
-  appearance?: 'leading' | 'trailing'
+  arrangement?: 'leading' | 'trailing'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     trigger?: ButtonProps
@@ -21,7 +21,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
   children,
   label,
   size='m',
-  appearance='trailing',
+  arrangement='trailing',
   internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,7 +43,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
     <div {...internal?.root}>
       <Button
         action={() => setIsOpen(!isOpen)}
-        appearance='hollow'
+        surface='hollow'
         width='full'
         size={size}
         internal={{
@@ -55,7 +55,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
       >
         <div className={`
           ${styles['trigger-content']} 
-          ${styles[`appearance-${appearance}`]}
+          ${styles[`arrangement-${arrangement}`]}
         `}>
           <Typography size='m' weight='400' color='primary'>{label}</Typography>
           <Arrow state={isOpen} />
@@ -72,7 +72,7 @@ const Collapsible: React.FC<CollapsibleProps> = ({
         {...internal?.content}
       >
         <ButtonDefaultsProvider
-          appearance='hollow'
+          surface='hollow'
           width='full'
           size={size}
         >

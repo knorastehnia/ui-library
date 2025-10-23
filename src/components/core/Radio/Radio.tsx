@@ -16,7 +16,7 @@ interface RadioProps {
     | React.ReactElement<typeof RadioItem>
     | React.ReactElement<typeof RadioItem>[]
   name: string
-  style?: 'vertical' | 'horizontal'
+  arrangement?: 'vertical' | 'horizontal'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
@@ -35,7 +35,7 @@ const RadioContext = createContext<{
 const Radio: RadioComponent = ({
   children,
   name,
-  style='horizontal',
+  arrangement='horizontal',
   internal,
 }) => {
   const [selected, setSelected] = useState<string>('')
@@ -43,7 +43,7 @@ const Radio: RadioComponent = ({
   return (
     <>
       <div
-        className={styles[`radio-${style}`]}
+        className={styles[`arrangement-${arrangement}`]}
         {...internal?.root}
       >
         <RadioContext.Provider value={{

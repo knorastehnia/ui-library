@@ -56,7 +56,7 @@ const Tab: React.FC<TabProps> = ({
         createPortal(
           <Button
             action={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
-            appearance='hollow'
+            surface='hollow'
             disabled={disabled}
             size={ctx.size}
             internal={{

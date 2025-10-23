@@ -4,12 +4,12 @@
   gap: 10px;
 }
 
-.appearance-leading {
+.arrangement-leading {
   flex-flow: row-reverse nowrap;
   justify-content: start;
 }
 
-.appearance-trailing {
+.arrangement-trailing {
   flex-flow: row nowrap;
   justify-content: space-between;
 }

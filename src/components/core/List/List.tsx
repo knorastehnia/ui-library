@@ -33,7 +33,6 @@ const ListItem: React.FC<ListItemProps> = ({
       >
         {children}
       </div>
-      <div className={styles['divider']}></div>
     </div>
   )
 }

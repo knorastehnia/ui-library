@@ -8,7 +8,7 @@ import { Popover, type PopoverProps } from '../Popover'
 interface DropdownProps {
   children: React.ReactElement | React.ReactElement[]
   label: string
-  direction?: 'vertical' | 'horizontal'
+  arrangement?: 'vertical' | 'horizontal'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     trigger?: ButtonProps
@@ -21,14 +21,14 @@ const DropdownContext = createContext<true | undefined>(undefined)
 const Dropdown: React.FC<DropdownProps> = ({
   children,
   label,
-  direction,
+  arrangement,
   internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const buttonRef = useRef<HTMLDivElement>(null)
 
   const ctx = useContext(DropdownContext)
-  const activeDirection = direction ?? (!!ctx ? 'horizontal' : 'vertical')
+  const activeArrangement = arrangement ?? (!!ctx ? 'horizontal' : 'vertical')
 
   const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
@@ -53,7 +53,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     >
       <Button
         action={() => setIsOpen(!isOpen)}
-        appearance='hollow'
+        surface='hollow'
         width='full'
         internal={{ root: { ref: buttonRef } }}
         {...internal?.trigger}
@@ -61,7 +61,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <div className={styles['button-content']}>
           <Typography>{label}</Typography>
           <div style={{
-            transform: activeDirection === 'horizontal' ? 'rotate(-90deg)' : '',
+            transform: activeArrangement === 'horizontal' ? 'rotate(-90deg)' : '',
           }}>
             <Arrow state={isOpen} />
           </div>
@@ -71,11 +71,11 @@ const Dropdown: React.FC<DropdownProps> = ({
       <Popover
         isOpen={isOpen}
         onClose={closeDropdown}
-        direction={activeDirection}
+        arrangement={activeArrangement}
         {...internal?.content}
       >
         <DropdownContext.Provider value={true}>
-          <ButtonDefaultsProvider appearance='hollow' width='full'>
+          <ButtonDefaultsProvider surface='hollow' width='full'>
             {children}
           </ButtonDefaultsProvider>
         </DropdownContext.Provider>

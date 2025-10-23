@@ -149,7 +149,7 @@ const Field: React.FC<FieldProps> = ({
           type === 'password' &&
             <Button
               action={() => setShowValue(!showValue)}
-              appearance='hollow'
+              surface='hollow'
               internal={{
                 root: {
                   style: {

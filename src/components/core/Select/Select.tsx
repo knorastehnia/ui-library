@@ -251,7 +251,7 @@ const Select: React.FC<SelectProps> = ({
       <Popover
         isOpen={isOpen}
         onClose={closeSelect}
-        direction='vertical'
+        arrangement='vertical'
         {...internal?.content}
       >
         {

@@ -5,7 +5,7 @@ interface PopoverProps {
   children: React.ReactElement | React.ReactElement[]
   isOpen: boolean
   onClose?: Function
-  direction?: 'vertical' | 'horizontal'
+  arrangement?: 'vertical' | 'horizontal'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
@@ -15,7 +15,7 @@ const Popover: React.FC<PopoverProps> = ({
   children,
   isOpen,
   onClose,
-  direction='vertical',
+  arrangement='vertical',
   internal,
 }) => {
   const [invertHorizontal, setInvertHorizontal] = useState(false)
@@ -53,26 +53,26 @@ const Popover: React.FC<PopoverProps> = ({
 
   useLayoutEffect(() => {
     const left =
-      direction === 'vertical' && !invertHorizontal ? '0' :
-      direction === 'horizontal' && !invertHorizontal ? '100%' : 'auto'
+      arrangement === 'vertical' && !invertHorizontal ? '0' :
+      arrangement === 'horizontal' && !invertHorizontal ? '100%' : 'auto'
 
     const right =
-      direction === 'vertical' && invertHorizontal ? '0' :
-      direction === 'horizontal' && invertHorizontal ? '100%' : 'auto'
+      arrangement === 'vertical' && invertHorizontal ? '0' :
+      arrangement === 'horizontal' && invertHorizontal ? '100%' : 'auto'
 
     const top =
-      direction === 'horizontal' && !invertVertical ? '0' :
-      direction === 'vertical' && !invertVertical ? '100%' : 'auto'
+      arrangement === 'horizontal' && !invertVertical ? '0' :
+      arrangement === 'vertical' && !invertVertical ? '100%' : 'auto'
 
     const bottom =
-      direction === 'horizontal' && invertVertical ? '0' :
-      direction === 'vertical' && invertVertical ? '100%' : 'auto'
+      arrangement === 'horizontal' && invertVertical ? '0' :
+      arrangement === 'vertical' && invertVertical ? '100%' : 'auto'
 
     const margin =
-      `${direction === 'vertical' ? 5 : 0}px ${direction === 'horizontal' ? 5 : 0}px`
+      `${arrangement === 'vertical' ? 5 : 0}px ${arrangement === 'horizontal' ? 5 : 0}px`
 
     setInsetStyles({ left, right, top, bottom, margin })
-  }, [invertVertical, invertHorizontal, direction])
+  }, [invertVertical, invertHorizontal, arrangement])
 
   const updatePositioning = () => {
     if (!contentRef.current) return
