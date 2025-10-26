@@ -3,10 +3,10 @@
   overflow: visible;
   display: block;
 
-  &.color-primary > circle { stroke: var(--foreground) }
-  &.color-dimmed > circle { stroke: var(--gray-9) }
-  &.color-inverted > circle { stroke: var(--background) }
-  &.color-disabled > circle { stroke: var(--gray-6) }
-  &.color-error > circle { stroke: var(--error) }
-  &.color-success > circle { stroke: var(--success) }
+  &.color-primary > circle { fill: var(--foreground) }
+  &.color-dimmed > circle { fill: var(--gray-9) }
+  &.color-inverted > circle { fill: var(--background) }
+  &.color-disabled > circle { fill: var(--gray-6) }
+  &.color-error > circle { fill: var(--error) }
+  &.color-success > circle { fill: var(--success) }
 }
