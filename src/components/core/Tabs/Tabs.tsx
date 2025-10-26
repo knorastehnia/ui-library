@@ -97,7 +97,7 @@ const Tabs: TabsComponent = ({
 
   const tabListRef = useRef<HTMLDivElement>(null)
 
-  const navigate = (e: KeyboardEvent) => {
+  const handleKeyboard = (e: KeyboardEvent) => {
     if (!tabListRef.current?.children) return
     if (!tabListRef.current.contains(document.activeElement)) return
 
@@ -115,7 +115,7 @@ const Tabs: TabsComponent = ({
 
     const children = Array.from(tabListRef.current.children).filter((child) => {
       return !(child as HTMLButtonElement).disabled
-    })
+    }) as HTMLElement[]
 
     let loop = false
 
@@ -125,7 +125,7 @@ const Tabs: TabsComponent = ({
       case 'PageDown':
         for (let i = 0; i < children.length; i++) {
           if (children[i] === document.activeElement) {
-            const current = children[i === children.length-1 && loop ? 0 : i+1] as HTMLElement
+            const current = children[i === children.length-1 && loop ? 0 : i+1]
             current.focus()
             navigation === 'select' && current.click()
 
@@ -140,7 +140,7 @@ const Tabs: TabsComponent = ({
       case 'PageUp':
         for (let i = children.length-1; i > -1; i--) {
           if (children[i] === document.activeElement) {
-            const current = children[i === 0 && loop ? children.length-1 : i-1] as HTMLElement
+            const current = children[i === 0 && loop ? children.length-1 : i-1]
             current.focus()
             navigation === 'select' && current.click()
     
@@ -151,14 +151,14 @@ const Tabs: TabsComponent = ({
         break
 
       case 'End':
-        const lastTab = children[children.length - 1] as HTMLElement
+        const lastTab = children[children.length - 1]
         lastTab.focus()
         navigation === 'select' && lastTab.click()
 
         break
 
       case 'Home':
-        const firstTab = children[0] as HTMLElement
+        const firstTab = children[0]
         firstTab.focus()
         navigation === 'select' && firstTab.click()
 
@@ -172,7 +172,7 @@ const Tabs: TabsComponent = ({
   useEffect(() => {
     if (tabListRef.current) setRender(true)
 
-    document.addEventListener('keydown', navigate)
+    document.addEventListener('keydown', handleKeyboard)
   }, [])
 
   return (
