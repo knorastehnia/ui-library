@@ -1,5 +1,5 @@
 import styles from './Select.module.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useId } from 'react'
 import { Arrow } from '../../icons'
 import { Typography } from '../Typography'
 import { Popover, type PopoverProps } from '../Popover'
@@ -17,6 +17,10 @@ interface SelectProps {
   items: ItemInterface[]
   type?: 'single' | 'multiple' | 'search'
   width?: 'auto' | 'full'
+  value?: string[]
+  defaultValue?: string[]
+  onChange?: (value: string[]) => void
+  disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -31,13 +35,30 @@ const Select: React.FC<SelectProps> = ({
   items,
   type='single',
   width='auto',
+  value,
+  defaultValue=[],
+  onChange,
+  disabled=false,
   internal,
 }) => {
+  const deriveInterface = (valueArray?: string[]) => {
+    const derived = items.filter((item) => {
+      if (!valueArray) return false
+      return valueArray.includes(item.value)
+    })
+
+    return derived
+  }
+
+  const id = useId()
+
   const [isOpen, setIsOpen] = useState(false)
   const [isInteractive, setIsInteractive] = useState(true)
-  const [value, setValue] = useState('')
+  const [currentValue, setCurrentValue] = useState('')
   const [visibleItems, setVisibleItems] = useState(items)
-  const [selected, setSelected] = useState<ItemInterface[] | null>(null)
+  const [internalSelected, setInternalSelected] = useState<ItemInterface[]>(deriveInterface(defaultValue))
+
+  const selected = value !== undefined ? deriveInterface(value) : internalSelected
 
   const visibleItemCountRef = useRef(0)
   const buttonRef = useRef<HTMLDivElement>(null)
@@ -63,42 +84,44 @@ const Select: React.FC<SelectProps> = ({
   const updateSelect = (item: ItemInterface) => {
     if (item.disabled) return
 
-    if (selected && selected[0].value === item.value) {
-      setSelected(null)
-      setValue('')
+    if (selected.length && selected[0].value === item.value) {
+      onChange?.([])
+      setInternalSelected([])
+      setCurrentValue('')
     } else {
-      setSelected([item])
-      setValue(
+      onChange?.([item.value])
+      setInternalSelected([item])
+      setCurrentValue(
         String([item]?.map((i, index) => {
           return i.label + ([item].length - 1 !== index ? ', ': '')}))
       )
     }
 
     setIsInteractive(false)
-    
+
     setTimeout(() => {
       setIsOpen(false)
       setIsInteractive(true)
     }, 150)
   }
 
-  const updateSearch = (value: string) => {
-    setValue(value)
+  const updateSearch = (searchString: string) => {
+    setCurrentValue(searchString)
 
-    if (value !== selected?.at(0)?.label) {
-      setSelected(null)
+    if (searchString !== selected.at(0)?.label) {
+      setInternalSelected([])
     }
 
-    if (value.length === 0) {
+    if (searchString.length === 0) {
       setVisibleItems(items)
     } else {
       const filteredItems = items.filter((item) => {
         if (
           item.label.toLocaleLowerCase().trim()
-            .includes(value.toLocaleLowerCase().trim()) &&
+            .includes(searchString.toLocaleLowerCase().trim()) &&
           item.disabled !== true
         ) {
-          return item
+          return true
         }
       })
 
@@ -109,16 +132,20 @@ const Select: React.FC<SelectProps> = ({
   const updateSelectMultiple = (item: ItemInterface) => {
     if (item.disabled) return
 
-    if (!!selected?.find((selectedItem) => {
+    if (!!selected.find((selectedItem) => {
       return selectedItem.value === item.value
     })) {
-      setSelected(
-        selected.filter((selectedItem) => {
-          return selectedItem.value !== item.value
-        })
-      )
+      const filtered = selected.filter((selectedItem) => {
+        return selectedItem.value !== item.value
+      })
+
+      setInternalSelected(filtered)
+      onChange?.(filtered.map((item) => item.value))
     } else {
-      setSelected(selected ? [...selected, item] : [item])
+      const selectedItem = selected.length ? [...selected, item] : [item]
+
+      setInternalSelected(selectedItem)
+      onChange?.(selectedItem.map((item) => item.value))
     }
   }
 
@@ -137,9 +164,9 @@ const Select: React.FC<SelectProps> = ({
       inputRef.current?.blur()
     }
 
-    if (!selected) {
-      setValue('')
+    if (!selected.length) {
       setVisibleItems(items)
+      setCurrentValue('')
     }
 
     document.addEventListener('keydown', selectFirst)
@@ -157,10 +184,13 @@ const Select: React.FC<SelectProps> = ({
       {...internal?.root}
     >
       <select
-        className={styles['select']}
         name={name}
-        id={name}
+        id={id}
+        value={selected.map((item) => item.value)}
         multiple={type === 'multiple'}
+        disabled={disabled}
+        hidden
+        aria-hidden='true'
       >
         {
           [{ value: '', label: '', }, ...items].map((item, index) => {
@@ -168,13 +198,6 @@ const Select: React.FC<SelectProps> = ({
               <option
                 key={index}
                 value={item.value}
-                selected={
-                  item.value !== '' || !!selected?.length ?
-                    !!selected?.find((selectedItem) => {
-                      return selectedItem.value === item.value
-                    })
-                  : true
-                }
               >
                 {item.label}
               </option>
@@ -190,13 +213,13 @@ const Select: React.FC<SelectProps> = ({
         <label
           className={`
             ${styles['label']} 
-            ${(!!selected?.length || isOpen) && styles['label-active']}
+            ${(selected.length || isOpen) && styles['label-active']}
           `}
           htmlFor={name}
         >
           <Typography
             weight='400'
-            size={(!!selected?.length || isOpen) ? 's' : 'm'}
+            size={(selected.length || isOpen) ? 's' : 'm'}
             color='dimmed'
           >
             {label}
@@ -212,11 +235,13 @@ const Select: React.FC<SelectProps> = ({
               ${isOpen && styles['button-active']}
             `}
             onClick={() => setIsOpen(!isOpen)}
+            role='combobox'
+            aria-expanded={isOpen}
             {...internal?.trigger as React.HTMLAttributes<HTMLButtonElement>}
           >
             <Typography>
               {
-                selected?.map((item, index) => {
+                selected.map((item, index) => {
                   return (
                     item.label + (selected.length - 1 !== index ? ', ': '')
                   )
@@ -240,9 +265,11 @@ const Select: React.FC<SelectProps> = ({
               setIsOpen(true)
               setVisibleItems(items)
             }}
-            value={value}
+            value={currentValue}
             onChange={(e) => updateSearch(e.target.value)}
             type='text'
+            role='combobox'
+            aria-expanded={isOpen}
             {...internal?.trigger as React.HTMLAttributes<HTMLInputElement>}
           />
         }
@@ -275,7 +302,7 @@ const Select: React.FC<SelectProps> = ({
                   {item.label}
                 </Typography>
 
-                <Checkmark state={!!selected?.includes(item)} />
+                <Checkmark state={selected.some((s) => s.value === item.value)} />
               </button>
             )
           })

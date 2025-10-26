@@ -17,6 +17,9 @@ interface RadioProps {
     | React.ReactElement<typeof RadioItem>[]
   name: string
   arrangement?: 'vertical' | 'horizontal'
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
@@ -35,10 +38,20 @@ const RadioContext = createContext<{
 const Radio: RadioComponent = ({
   children,
   name,
+  value,
+  defaultValue='',
+  onChange,
   arrangement='horizontal',
   internal,
 }) => {
-  const [selected, setSelected] = useState<string>('')
+  const [internalSelected, setInternalSelected] = useState(defaultValue)
+
+  const selected = value ?? internalSelected
+
+  const updateInternalSelected = (value: string) => {
+    setInternalSelected(value)
+    onChange?.(value)
+  }
 
   return (
     <>
@@ -49,7 +62,7 @@ const Radio: RadioComponent = ({
         <RadioContext.Provider value={{
           name,
           selected,
-          setSelected,
+          setSelected: updateInternalSelected,
         }}>
           {children}
         </RadioContext.Provider>
@@ -68,6 +81,10 @@ const RadioItem: React.FC<RadioItemProps> = ({
   if (!ctx) throw new Error('<Radio.Item> must be a descendant of <Radio>')
 
   const id = useId()
+
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    e.preventDefault()
+  }
 
   return (
     <label
@@ -88,6 +105,7 @@ const RadioItem: React.FC<RadioItemProps> = ({
         value={value}
         checked={ctx.selected === value}
         onChange={() => ctx.setSelected(value)}
+        onKeyDown={(e) => handleKeyboard(e)}
       />
 
       <div {...internal?.content}>

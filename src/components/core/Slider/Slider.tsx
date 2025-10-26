@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useId } from 'react'
 import styles from './Slider.module.css'
 
 interface SliderProps {
@@ -8,7 +8,8 @@ interface SliderProps {
   maxValue: number
   step?: number
   value?: number
-  onInput?: (expose: number) => void
+  defaultValue?: number
+  onChange?: (value: number) => void
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -23,16 +24,19 @@ const Slider: React.FC<SliderProps> = ({
   minValue,
   maxValue,
   step=1,
-  value=minValue,
-  onInput,
+  value,
+  defaultValue=minValue,
+  onChange,
   disabled=false,
   internal,
 }) => {
-  const [currentValue, setCurrentValue] = useState(value)
+  const id = useId()
+  const [internalValue, setInternalValue] = useState(defaultValue)
+
+  const currentValue = value ?? internalValue
   const valueRef = useRef(currentValue)
 
   const [isDragging, setIsDragging] = useState(false)
-  const isDraggingRef = useRef(isDragging)
   const isPointerDownRef = useRef(false)
 
   const sliderRef = useRef<HTMLDivElement>(null)
@@ -41,19 +45,12 @@ const Slider: React.FC<SliderProps> = ({
     return Math.max(Math.min(rawVal, maxValue), minValue)
   }
 
-  const setInternalValue = (val: number) => {
+  const updateInternalValue = (val: number) => {
     const normalized = getNormalizedValue(val)
 
-    onInput?.(normalized)
-    setCurrentValue(normalized)
-    valueRef.current = currentValue
-  }
-
-  const setExternalValue = (val: number) => {
-    const normalized = getNormalizedValue(val)
-
-    setCurrentValue(normalized)
-    valueRef.current = currentValue
+    onChange?.(normalized)
+    setInternalValue(normalized)
+    valueRef.current = normalized
   }
 
   const handleKeyboard = (e: React.KeyboardEvent) => {
@@ -81,28 +78,28 @@ const Slider: React.FC<SliderProps> = ({
     switch (e.key) {
       case 'ArrowRight':
       case 'ArrowUp':
-        setInternalValue(valueRef.current + (step * modifier))
+        updateInternalValue(valueRef.current + (step * modifier))
         break
 
       case 'ArrowLeft':
       case 'ArrowDown':
-        setInternalValue(valueRef.current - (step * modifier))
+        updateInternalValue(valueRef.current - (step * modifier))
         break
 
       case 'PageUp':
-        setInternalValue(valueRef.current + (step * 10 * modifier))
+        updateInternalValue(valueRef.current + (step * 10 * modifier))
         break
 
       case 'PageDown':
-        setInternalValue(valueRef.current - (step * 10 * modifier))
+        updateInternalValue(valueRef.current - (step * 10 * modifier))
         break
 
       case 'End':
-        setInternalValue(maxValue)
+        updateInternalValue(maxValue)
         break
 
       case 'Home':
-        setInternalValue(minValue)
+        updateInternalValue(minValue)
         break
 
       default:
@@ -120,14 +117,13 @@ const Slider: React.FC<SliderProps> = ({
     const valuePercentage = (e.clientX - rect.left) * 100 / (rect.right - rect.left)
     const rawValue = (valuePercentage / 100 * maxValue) + (step / 2)
     const steppedValue = minValue + rawValue - (rawValue % step)
-    setInternalValue(steppedValue)
+    updateInternalValue(steppedValue)
   }
 
   const pointerMove = (e: MouseEvent) => {
     if (!isPointerDownRef.current) return
 
     setIsDragging(true)
-    isDraggingRef.current = isDragging
     handlePointer(e)
   }
 
@@ -144,13 +140,8 @@ const Slider: React.FC<SliderProps> = ({
 
   const pointerUp = () => {
     setIsDragging(false)
-    isDraggingRef.current = isDragging
     isPointerDownRef.current = false
   }
-
-  useEffect(() => {
-    setExternalValue(value)
-  }, [value])
 
   useEffect(() => {
     document.addEventListener('pointerup', pointerUp)
@@ -167,7 +158,7 @@ const Slider: React.FC<SliderProps> = ({
       className={styles['slider']}
       {...internal?.root}
     >
-      <label htmlFor={name}>
+      <label htmlFor={id}>
         <div {...internal?.content}>
           {children}
         </div>
@@ -175,7 +166,7 @@ const Slider: React.FC<SliderProps> = ({
         <input
           type='range'
           name={name}
-          id={name}
+          id={id}
           min={minValue}
           max={maxValue}
           step={step}

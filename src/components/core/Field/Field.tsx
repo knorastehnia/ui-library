@@ -1,5 +1,5 @@
 import styles from './Field.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useId } from 'react'
 import { Visibility } from '../../icons'
 import { Typography } from '../Typography'
 import { ErrorMessage } from '../ErrorMessage'
@@ -25,6 +25,9 @@ interface FieldProps {
   height?: string
   width?: string
   errors?: ErrorInterface[]
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -41,12 +44,18 @@ const Field: React.FC<FieldProps> = ({
   height='6rem',
   width='100%',
   errors=[],
+  value,
+  defaultValue='',
+  onChange,
   disabled=false,
   internal,
 }) => {
+  const id = useId()
   const [focus, setFocus] = useState(false)
-  const [value, setValue] = useState('')
+  const [internalValue, setInternalValue] = useState(defaultValue)
   const [showValue, setShowValue] = useState(type !== 'password')
+
+  const currentValue = value ?? internalValue
 
   const [numberError, setNumberError] = useState(false)
   const [emailError, setEmailError] = useState(false)
@@ -60,19 +69,25 @@ const Field: React.FC<FieldProps> = ({
   ]
 
   const validateCount = () => {
-    setCountError(value.length > limit && limit > 0)
+    setCountError(currentValue.length > limit && limit > 0)
   }
 
   const validateEmail = () => {
     const emailSyntax = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
-    setEmailError(!emailSyntax.test(value) && value.length !== 0)
+    setEmailError(!emailSyntax.test(currentValue) && currentValue.length !== 0)
   }
 
   const validateNumber = () => {
-    setNumberError(Number.isNaN(Number(value)))
+    setNumberError(Number.isNaN(Number(currentValue)))
   }
 
+  const updateInternalValue = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInternalValue(event.target.value)
+    onChange?.(event.target.value)
+  }
 
   // on blur
   const handleInput = () => {
@@ -86,7 +101,7 @@ const Field: React.FC<FieldProps> = ({
     if (numberError) validateNumber()
     if (emailError) validateEmail()
     if (countError) validateCount()
-  }, [value])
+  }, [currentValue])
 
   return (
     <div
@@ -103,11 +118,11 @@ const Field: React.FC<FieldProps> = ({
         <label
           className={`
             ${styles['label']} 
-            ${(focus || value) && styles['label-active']}
+            ${(focus || currentValue) && styles['label-active']}
           `}
-          htmlFor={name}
+          htmlFor={id}
         >
-          <Typography size={(focus || value) ? 's' : 'm'} color='dimmed'>
+          <Typography size={(focus || currentValue) ? 's' : 'm'} color='dimmed'>
             {label}
           </Typography>
         </label>
@@ -124,9 +139,10 @@ const Field: React.FC<FieldProps> = ({
             }}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
-            onChange={(e) => setValue(e.target.value)}
+            value={currentValue}
+            onChange={updateInternalValue}
             name={name}
-            id={name}
+            id={id}
             disabled={disabled}
             {...internal?.display as React.HTMLAttributes<HTMLTextAreaElement>}
           />
@@ -136,10 +152,11 @@ const Field: React.FC<FieldProps> = ({
             className={styles['input']}
             onFocus={() => setFocus(true)}
             onBlur={() => { setFocus(false); handleInput(); }}
-            onChange={(e) => setValue(e.target.value)}
+            value={currentValue}
+            onChange={updateInternalValue}
             type={showValue ? 'text' : 'password'}
             name={name}
-            id={name}
+            id={id}
             disabled={disabled}
             {...internal?.display as React.HTMLAttributes<HTMLInputElement>}
           />
@@ -170,9 +187,9 @@ const Field: React.FC<FieldProps> = ({
                 <Typography
                   weight='400'
                   size='xs'
-                  color={value.length > limit ? 'error' : 'dimmed'}
+                  color={currentValue.length > limit ? 'error' : 'dimmed'}
                 >
-                  {value.length}
+                  {currentValue.length}
                 </Typography>
               </span>
 

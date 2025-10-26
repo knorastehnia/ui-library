@@ -18,23 +18,15 @@ import { Layout } from './components/core'
 import { Invisible } from './components/core'
 import { Collapsible } from './components/core'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 const Page = () => {
   const [someState, setSomeState] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isSpinning, setIsSpinning] = useState(true)
-  const [value, setValue] = useState(0)
-
-  const pausedRef = useRef(false)
-
-  useEffect(() => {
-    const incrementTime = setTimeout(() => {
-      pausedRef.current || value > 30 || setValue(value + 1)
-    }, 50)
-
-    return () => clearTimeout(incrementTime)
-  }, [value])
+  const [selectOptions, setSelectOptions] = useState(['windows', 'linux'])
+  const [scalarValue, setScalarValue] = useState(20)
+  const [radioValue, setRadioValue] = useState('r2')
 
   return (
     <>
@@ -66,7 +58,7 @@ const Page = () => {
       </Modal>
 
       <Layout.Section>
-        <Layout.Subsection span={3}>
+        <Layout.Subsection span={2}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -91,6 +83,8 @@ const Page = () => {
               width='full'
               label='Select OS'
               name='os2'
+              value={selectOptions}
+              onChange={setSelectOptions}
               items={[
                 { label: 'Windows', value: 'windows', disabled: true, },
                 { label: 'macOS', value: 'macos', },
@@ -103,6 +97,8 @@ const Page = () => {
               type='search'
               label='Select OS'
               name='os3'
+              value={selectOptions}
+              onChange={setSelectOptions}
               items={[
                 { label: 'Windows', value: 'windows', },
                 { label: 'macOS', value: 'macos', disabled: true },
@@ -141,10 +137,10 @@ const Page = () => {
             </Dropdown>
 
             <Slider name='slider1'
-              value={value}
-              onInput={() => pausedRef.current = true}
               minValue={0}
               maxValue={100}
+              value={scalarValue}
+              onChange={setScalarValue}
             >
               <div style={{
                 display: 'flex',
@@ -242,9 +238,9 @@ const Page = () => {
               flexFlow: 'column',
               gap: '20px',
             }}>
-              <Checkbox value={true} name='cb1'><T>Checkbox 1</T></Checkbox>
+              <Checkbox value={isSpinning} onChange={setIsSpinning} name='cb1'><T>Checkbox 1</T></Checkbox>
 
-              <Checkbox name='cb2'>
+              <Checkbox defaultValue={false} name='cb2'>
                 <div><Typography>Checkbox 2</Typography></div>
                 <div><Typography size='s' color='dimmed'>Sublabel</Typography></div>
               </Checkbox>
@@ -258,7 +254,7 @@ const Page = () => {
               </Checkbox>
             </div>
 
-            <Radio arrangement='vertical' name='rgroup1'>
+            <Radio value={radioValue} onChange={setRadioValue} arrangement='vertical' name='rgroup1'>
               <Radio.Item value='r1'><T>Radio 1.1</T></Radio.Item>
               <Radio.Item value='r2'><T>Radio 1.2</T></Radio.Item>
               <Radio.Item value='r3'><T>Radio 1.3</T></Radio.Item>

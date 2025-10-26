@@ -1,12 +1,13 @@
 import styles from './Checkbox.module.css'
-import { useEffect, useState } from 'react'
+import { useState, useId } from 'react'
 import { Checkmark } from '../../icons'
 
 interface CheckboxProps {
   children: React.ReactElement | React.ReactElement[]
   name: string
   value?: boolean
-  onInput?: (expose: boolean) => void
+  defaultValue?: boolean
+  onChange?: (value: boolean) => void
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -18,16 +19,16 @@ interface CheckboxProps {
 const Checkbox: React.FC<CheckboxProps> = ({
   children,
   name,
-  value=false,
-  onInput,
+  value,
+  defaultValue=false,
+  onChange,
   disabled=false,
   internal,
 }) => {
-  const [checked, setChecked] = useState(value)
+  const id = useId()
+  const [internalChecked, setInternalChecked] = useState(defaultValue)
 
-  useEffect(() => {
-    setChecked(value)
-  }, [value])
+  const checked = value ?? internalChecked
 
   return (
     <>
@@ -37,20 +38,20 @@ const Checkbox: React.FC<CheckboxProps> = ({
       >
         <label
           className={styles['label']}
-          htmlFor={name}
+          htmlFor={id}
         >
           <input
             className={styles['input']}
             type='checkbox'
             disabled={disabled}
             name={name}
-            id={name}
+            id={id}
             checked={checked}
             onChange={(e) => {
               const newValue = e.target.checked
 
-              setChecked(newValue)
-              onInput?.(newValue)
+              setInternalChecked(newValue)
+              onChange?.(newValue)
             }}
           />
 
