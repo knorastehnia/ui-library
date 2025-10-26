@@ -24,7 +24,7 @@ const Page = () => {
   const [someState, setSomeState] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isSpinning, setIsSpinning] = useState(true)
-  const [selectOptions, setSelectOptions] = useState(['windows', 'linux'])
+  const [selectOptions, setSelectOptions] = useState(['windows'])
   const [scalarValue, setScalarValue] = useState(20)
   const [radioValue, setRadioValue] = useState('r2')
 

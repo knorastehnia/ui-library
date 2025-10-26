@@ -81,6 +81,11 @@ const Select: React.FC<SelectProps> = ({
     }
   }
 
+  const generatePreview = (item: ItemInterface) => {
+    return String([item]?.map((i, index) => {
+      return i.label + ([item].length - 1 !== index ? ', ': '')}))
+  }
+
   const updateSelect = (item: ItemInterface) => {
     if (item.disabled) return
 
@@ -91,10 +96,7 @@ const Select: React.FC<SelectProps> = ({
     } else {
       onChange?.([item.value])
       setInternalSelected([item])
-      setCurrentValue(
-        String([item]?.map((i, index) => {
-          return i.label + ([item].length - 1 !== index ? ', ': '')}))
-      )
+      setCurrentValue(generatePreview(item))
     }
 
     setIsInteractive(false)
@@ -109,6 +111,7 @@ const Select: React.FC<SelectProps> = ({
     setCurrentValue(searchString)
 
     if (searchString !== selected.at(0)?.label) {
+      onChange?.([])
       setInternalSelected([])
     }
 
@@ -158,6 +161,12 @@ const Select: React.FC<SelectProps> = ({
     firstItemRef.current?.focus()
     firstItemRef.current?.click()
   }
+
+  useEffect(() => {
+    if (selected.length === 0) return
+
+    setCurrentValue(generatePreview(selected[0]))
+  }, [value])
 
   useEffect(() => {
     if (!isOpen && type === 'search') {
