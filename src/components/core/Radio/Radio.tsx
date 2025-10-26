@@ -1,5 +1,5 @@
 import styles from './Radio.module.css'
-import { createContext, useContext, useId, useState } from 'react'
+import { createContext, useContext, useId, useRef, useState } from 'react'
 
 interface RadioItemProps {
   children: React.ReactElement | React.ReactElement[]
@@ -33,6 +33,8 @@ const RadioContext = createContext<{
   name: string,
   selected: string,
   setSelected: Function,
+  handleKeyboard: Function,
+  contentRef: React.RefObject<HTMLDivElement | null>,
 } | null>(null)
 
 const Radio: RadioComponent = ({
@@ -45,6 +47,7 @@ const Radio: RadioComponent = ({
   internal,
 }) => {
   const [internalSelected, setInternalSelected] = useState(defaultValue)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   const selected = value ?? internalSelected
 
@@ -53,16 +56,104 @@ const Radio: RadioComponent = ({
     onChange?.(value)
   }
 
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    if (!contentRef.current?.children) return
+
+    const keys = [
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowRight',
+      'ArrowLeft',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+    ]
+
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
+
+    const children = Array.from(contentRef.current.children).map((child) => {
+      return child.getElementsByTagName('input')[0]
+    }) as HTMLInputElement[]
+    
+    let loop = false
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        loop = true
+      case 'PageDown':
+        if (!children.some(item => item.checked)) {
+          children[0].click()
+
+          break
+        }
+
+        for (let i = 0; i < children.length; i++) {
+          if (children[i].checked === true) {
+            const current = children[i === children.length-1 && loop ? 0 : i+1]
+            current?.click()
+
+            break
+          }
+        }
+
+        break
+
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        loop = true
+      case 'PageUp':
+        if (!children.some(item => item.checked)) {
+          children[children.length - 1].click()
+
+          break
+        }
+
+        for (let i = children.length-1; i > -1; i--) {
+          if (children[i].checked === true) {
+            const current = children[i === 0 && loop ? children.length-1 : i-1]
+            current?.click()
+    
+            break
+          }
+        }
+
+        break
+
+      case 'End':
+        const lastTab = children[children.length - 1]
+        lastTab.click()
+
+        break
+
+      case 'Home':
+        const firstTab = children[0]
+        firstTab.click()
+
+        break
+
+      default:
+        break
+    }
+  }
+
   return (
     <>
       <div
         className={styles[`arrangement-${arrangement}`]}
+        ref={contentRef}
+        tabIndex={0}
+        onKeyDown={handleKeyboard}
         {...internal?.root}
       >
         <RadioContext.Provider value={{
           name,
           selected,
           setSelected: updateInternalSelected,
+          handleKeyboard,
+          contentRef,
         }}>
           {children}
         </RadioContext.Provider>
@@ -82,10 +173,6 @@ const RadioItem: React.FC<RadioItemProps> = ({
 
   const id = useId()
 
-  const handleKeyboard = (e: React.KeyboardEvent) => {
-    e.preventDefault()
-  }
-
   return (
     <label
       className={`
@@ -93,6 +180,7 @@ const RadioItem: React.FC<RadioItemProps> = ({
         ${ctx.selected === value && styles['checked']} 
         ${disabled && styles['disabled']}
       `}
+      tabIndex={-1}
       htmlFor={id}
       {...internal?.root}
     >
@@ -102,10 +190,12 @@ const RadioItem: React.FC<RadioItemProps> = ({
         disabled={disabled}
         name={ctx.name}
         id={id}
+        tabIndex={-1}
         value={value}
         checked={ctx.selected === value}
+        onFocus={() => ctx.contentRef.current?.focus()}
         onChange={() => ctx.setSelected(value)}
-        onKeyDown={(e) => handleKeyboard(e)}
+        onKeyDown={(e) => ctx.handleKeyboard(e)}
       />
 
       <div {...internal?.content}>

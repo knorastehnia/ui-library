@@ -6,7 +6,8 @@
   overflow: clip;
   transition: all var(--ease-out-t) var(--ease-out-c);
 
-  &:has(.input:hover), &:has(.input:focus-visible) {
+  &:focus {
+    outline: none;
     border-color: var(--gray-6);
   }
 }
