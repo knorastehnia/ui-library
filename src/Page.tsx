@@ -27,6 +27,7 @@ const Page = () => {
   const [selectOptions, setSelectOptions] = useState(['windows'])
   const [scalarValue, setScalarValue] = useState(20)
   const [radioValue, setRadioValue] = useState('r2')
+  const [tabValue, setTabValue] = useState('t1')
 
   return (
     <>
@@ -381,17 +382,21 @@ const Page = () => {
 
       <Layout.Section>
         <Layout.Subsection>
-          <Tabs navigation='select'>
-            <Tabs.Tab defaultTab label='Tab 1'>
+          <Tabs value={tabValue} onChange={setTabValue} navigation='select'>
+            <Tabs.Tab label='Tab 1' value='t1'>
               <T>Lorem ipsum dolor sit amet 1</T>
             </Tabs.Tab>
 
-            <Tabs.Tab label='Tab 2' disabled>
+            <Tabs.Tab label='Tab 2' value='t2' disabled>
               <T>Lorem ipsum dolor sit amet 2</T>
             </Tabs.Tab>
 
-            <Tabs.Tab label='Tab 3'>
+            <Tabs.Tab label='Tab 3' value='t3'>
               <T>Lorem ipsum dolor sit amet 3</T>
+            </Tabs.Tab>
+
+            <Tabs.Tab label='Tab 4' value='t4'>
+              <T>Lorem ipsum dolor sit amet 4</T>
             </Tabs.Tab>
           </Tabs>
         </Layout.Subsection>

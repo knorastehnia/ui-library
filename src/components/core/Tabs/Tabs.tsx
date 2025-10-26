@@ -7,7 +7,7 @@ import { Button } from '../Button'
 interface TabProps {
   children: React.ReactNode
   label: string
-  defaultTab?: boolean
+  value: string
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
@@ -18,6 +18,9 @@ interface TabsProps {
   children: React.ReactNode
   navigation?: 'focus' | 'select'
   size?: 's' | 'm' | 'l'
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     list?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -39,40 +42,32 @@ const TabsContext = createContext<{
 const Tab: React.FC<TabProps> = ({
   children,
   label,
-  defaultTab,
+  value,
   disabled,
   internal,
 }) => {
   const ctx = useContext(TabsContext)
   if (!ctx) throw new Error('<Tabs.Tab> must be a descendant of <Tabs>')
 
-  useEffect(() => {
-    if (defaultTab) ctx.setCurrentTab(label)
-  }, [])
-
   return (
     <>
       {
         createPortal(
           <Button
-            action={() => ctx.currentTab !== label && ctx.setCurrentTab(label)}
+            action={() => ctx.currentTab !== value && ctx.setCurrentTab(value)}
             surface='hollow'
             disabled={disabled}
             size={ctx.size}
             internal={{
               root: {
-                tabIndex: ctx.currentTab === label ? 0 : -1,
-                style: {
-                  backgroundColor: (ctx.currentTab === label || disabled) ? 'transparent' : undefined,
-                  borderColor: (ctx.currentTab === label || disabled) ? 'transparent' : undefined
-                }
+                tabIndex: ctx.currentTab === value ? 0 : -1,
               }
             }}
             {...internal?.root}
           >
             <Typography
-              color={ctx.currentTab === label ? 'primary' : disabled ? 'disabled' : 'dimmed'}
-              weight={ctx.currentTab === label ? '500' : '300'}
+              color={ctx.currentTab === value ? 'primary' : disabled ? 'disabled' : 'dimmed'}
+              weight={ctx.currentTab === value ? '500' : '300'}
             >
               {label}
             </Typography>
@@ -81,7 +76,7 @@ const Tab: React.FC<TabProps> = ({
         )
       }
 
-      {ctx.currentTab === label && children}
+      {ctx.currentTab === value && children}
     </>
   )
 }
@@ -90,10 +85,20 @@ const Tabs: TabsComponent = ({
   children,
   navigation='focus',
   size='m',
+  value,
+  defaultValue='',
+  onChange,
   internal,
 }) => {
-  const [currentTab, setCurrentTab] = useState('')
+  const [currentTab, setCurrentTab] = useState(defaultValue)
   const [render, setRender] = useState(false)
+
+  const activeTab = value ?? currentTab
+
+  const updateCurrentTab = (newTab: string) => {
+    setCurrentTab(newTab)
+    onChange?.(newTab)
+  }
 
   const tabListRef = useRef<HTMLDivElement>(null)
 
@@ -192,8 +197,8 @@ const Tabs: TabsComponent = ({
       >
         <TabsContext.Provider value={{
           tabListRef,
-          currentTab,
-          setCurrentTab,
+          currentTab: activeTab,
+          setCurrentTab: updateCurrentTab,
           size: size,
         }}>
           {render && children}
