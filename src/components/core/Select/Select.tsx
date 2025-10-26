@@ -63,6 +63,7 @@ const Select: React.FC<SelectProps> = ({
   const visibleItemCountRef = useRef(0)
   const buttonRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const firstItemRef= useRef<HTMLButtonElement>(null)
 
   const closeSelect = (event: MouseEvent | KeyboardEvent) => {
@@ -81,9 +82,15 @@ const Select: React.FC<SelectProps> = ({
     }
   }
 
-  const generatePreview = (item: ItemInterface) => {
-    return String([item]?.map((i, index) => {
-      return i.label + ([item].length - 1 !== index ? ', ': '')}))
+  const generatePreview = () => {
+    let preview = ''
+
+    selected.forEach((item, index) => {
+      preview += item.label + (selected.length - 1 !== index ? ', ': ''
+      )
+    })
+
+    return preview
   }
 
   const updateSelect = (item: ItemInterface) => {
@@ -96,7 +103,7 @@ const Select: React.FC<SelectProps> = ({
     } else {
       onChange?.([item.value])
       setInternalSelected([item])
-      setCurrentValue(generatePreview(item))
+      setCurrentValue(generatePreview())
     }
 
     setIsInteractive(false)
@@ -108,6 +115,7 @@ const Select: React.FC<SelectProps> = ({
   }
 
   const updateSearch = (searchString: string) => {
+    if (!contentRef.current?.children) return
     setCurrentValue(searchString)
 
     if (searchString !== selected.at(0)?.label) {
@@ -152,20 +160,106 @@ const Select: React.FC<SelectProps> = ({
     }
   }
 
-  const selectFirst = (e: KeyboardEvent) => {
-    if (!isOpen || e.key !== 'Enter' || type !== 'search') return
-    if (document.activeElement instanceof HTMLButtonElement) return
-    if (visibleItemCountRef.current === items.length) return
-    if (!buttonRef.current?.contains(document.activeElement)) return
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    if (!contentRef.current?.children) return
 
-    firstItemRef.current?.focus()
-    firstItemRef.current?.click()
+    if (
+      e.key === 'Enter' &&
+      type === 'search' &&
+      document.activeElement === inputRef.current &&
+      visibleItemCountRef.current !== items.length
+    ) {
+      firstItemRef.current?.focus()
+      firstItemRef.current?.click()
+
+      return
+    }
+
+    const keys = [
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+      'Enter',
+    ]
+
+    if (!keys.includes(e.key)) {
+      inputRef.current?.focus()
+      return
+    }
+
+    if (e.key !== 'Enter') e.preventDefault()
+
+    const children = Array.from(contentRef.current.children).filter((child) => {
+      return !(child as HTMLButtonElement).disabled
+    }) as HTMLElement[]
+
+    let loop = false
+
+    switch (e.key) {
+      case 'ArrowDown':
+        loop = true
+      case 'PageDown':
+        if (!contentRef.current.contains(document.activeElement)) {
+          children[0].focus()
+
+          break
+        }
+
+        for (let i = 0; i < children.length; i++) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === children.length-1 && loop ? 0 : i+1]
+            current.focus()
+
+            break
+          }
+        }
+
+        break
+
+      case 'ArrowUp':
+        loop = true
+      case 'PageUp':
+        if (!contentRef.current.contains(document.activeElement)) {
+          children[children.length - 1].focus()
+
+          break
+        }
+
+        for (let i = children.length-1; i > -1; i--) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === 0 && loop ? children.length-1 : i-1]
+            current.focus()
+    
+            break
+          }
+        }
+
+        break
+
+      case 'End':
+        const lastTab = children[children.length - 1]
+        lastTab.focus()
+
+        break
+
+      case 'Home':
+        const firstTab = children[0]
+        firstTab.focus()
+
+        break
+
+      default:
+        break
+    }
   }
 
   useEffect(() => {
     if (selected.length === 0) return
 
-    setCurrentValue(generatePreview(selected[0]))
+    setCurrentValue(generatePreview())
   }, [value])
 
   useEffect(() => {
@@ -177,9 +271,6 @@ const Select: React.FC<SelectProps> = ({
       setVisibleItems(items)
       setCurrentValue('')
     }
-
-    document.addEventListener('keydown', selectFirst)
-    return () => document.removeEventListener('keydown', selectFirst)
   }, [isOpen])
 
   useEffect(() => {
@@ -190,12 +281,22 @@ const Select: React.FC<SelectProps> = ({
     <div
       ref={buttonRef}
       className={styles[`width-${width}`]}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          setIsOpen(false)
+        }
+      }}
       {...internal?.root}
     >
       <select
         name={name}
         id={id}
-        value={selected.map((item) => item.value)}
+        value={
+          type === 'multiple' ?
+            selected.map((item) => item.value) :
+            selected.at(0)?.value
+        }
+        onChange={() => {}}
         multiple={type === 'multiple'}
         disabled={disabled}
         hidden
@@ -244,17 +345,14 @@ const Select: React.FC<SelectProps> = ({
               ${isOpen && styles['button-active']}
             `}
             onClick={() => setIsOpen(!isOpen)}
+            onKeyDown={handleKeyboard}
             role='combobox'
             aria-expanded={isOpen}
             {...internal?.trigger as React.HTMLAttributes<HTMLButtonElement>}
           >
             <Typography>
               {
-                selected.map((item, index) => {
-                  return (
-                    item.label + (selected.length - 1 !== index ? ', ': '')
-                  )
-                })
+                generatePreview()
               }
             </Typography>
 
@@ -274,6 +372,7 @@ const Select: React.FC<SelectProps> = ({
               setIsOpen(true)
               setVisibleItems(items)
             }}
+            onKeyDown={handleKeyboard}
             value={currentValue}
             onChange={(e) => updateSearch(e.target.value)}
             type='text'
@@ -290,32 +389,36 @@ const Select: React.FC<SelectProps> = ({
         arrangement='vertical'
         {...internal?.content}
       >
-        {
-          visibleItems.map((item, index) => {
-            return (
-              <button
-                ref={index === 0 ? firstItemRef : undefined}
-                key={index}
-                disabled={item.disabled}
-                onClick={() => {
-                  type === 'multiple'
-                    ? updateSelectMultiple(item)
-                    : (isInteractive ? updateSelect(item) : null)
-                }}
-                className={`
-                  ${styles['item']} 
-                  ${item.disabled && styles['disabled']}
-                `}
-              >
-                <Typography color={item.disabled ? 'disabled' : 'primary'}>
-                  {item.label}
-                </Typography>
+        <div ref={contentRef}>
+          {
+            visibleItems.map((item, index) => {
+              return (
+                <button
+                  ref={index === 0 ? firstItemRef : undefined}
+                  key={index}
+                  tabIndex={-1}
+                  disabled={item.disabled}
+                  onKeyDown={handleKeyboard}
+                  onClick={() => {
+                    type === 'multiple'
+                      ? updateSelectMultiple(item)
+                      : (isInteractive ? updateSelect(item) : null)
+                  }}
+                  className={`
+                    ${styles['item']} 
+                    ${item.disabled && styles['disabled']}
+                  `}
+                >
+                  <Typography color={item.disabled ? 'disabled' : 'primary'}>
+                    {item.label}
+                  </Typography>
 
-                <Checkmark state={selected.some((s) => s.value === item.value)} />
-              </button>
-            )
-          })
-        }
+                  <Checkmark state={selected.some((s) => s.value === item.value)} />
+                </button>
+              )
+            })
+          }
+        </div>
       </Popover>
     </div>
   )
