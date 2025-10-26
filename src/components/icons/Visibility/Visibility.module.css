@@ -3,9 +3,12 @@
   overflow: visible;
   display: block;
 
-  path {
-    fill: var(--gray-9);
-  }
+  &.color-primary path { fill: var(--foreground) }
+  &.color-dimmed path { fill: var(--gray-9) }
+  &.color-inverted path { fill: var(--background) }
+  &.color-disabled path { fill: var(--gray-6) }
+  &.color-error path { fill: var(--error) }
+  &.color-success path { fill: var(--success) }
 
   .strike-through {
     stroke-dasharray: 1;

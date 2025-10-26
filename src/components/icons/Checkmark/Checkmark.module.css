@@ -4,10 +4,16 @@
   display: block;
 
   path {
-    stroke: var(--gray-9);
     stroke-dashoffset: 1;
     stroke-dasharray: 1;
   }
+
+  &.color-primary > path { stroke: var(--foreground) }
+  &.color-dimmed > path { stroke: var(--gray-9) }
+  &.color-inverted > path { stroke: var(--background) }
+  &.color-disabled > path { stroke: var(--gray-6) }
+  &.color-error > path { stroke: var(--error) }
+  &.color-success > path { stroke: var(--success) }
 
   .hidden {
     animation: disappear var(--ease-out-c) calc(var(--ease-out-t) / 2) forwards;

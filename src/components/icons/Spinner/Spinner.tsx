@@ -1,13 +1,21 @@
 import styles from './Spinner.module.css'
 
 interface SpinnerProps {
-  state?: boolean,
-  size?: 's' | 'm' | 'l',
+  state?: boolean
+  size?: 's' | 'm' | 'l'
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
   state=false,
-  size='m'
+  size='m',
+  color='dimmed',
 }) => {
   const activeSize = {
     's': '1rem',
@@ -21,7 +29,10 @@ const Spinner: React.FC<SpinnerProps> = ({
         width: activeSize,
         height: activeSize,
       }}
-      className={styles['svg']}
+      className={`
+        ${styles['svg']} 
+        ${styles[`color-${color}`]}
+      `}
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,3 +52,4 @@ const Spinner: React.FC<SpinnerProps> = ({
 }
 
 export { Spinner }
+export type { SpinnerProps }

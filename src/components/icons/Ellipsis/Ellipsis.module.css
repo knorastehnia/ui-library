@@ -3,34 +3,10 @@
   overflow: visible;
   display: block;
 
-  circle {
-    stroke-width: 2px;
-    stroke-dashoffset: 1;
-    stroke-dasharray: 0.5;
-    transform-origin: center;
-    animation: spin linear 1.25s reverse infinite;
-    transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
-  }
-
   &.color-primary > circle { stroke: var(--foreground) }
   &.color-dimmed > circle { stroke: var(--gray-9) }
   &.color-inverted > circle { stroke: var(--background) }
   &.color-disabled > circle { stroke: var(--gray-6) }
   &.color-error > circle { stroke: var(--error) }
   &.color-success > circle { stroke: var(--success) }
-
-  .hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes spin {
-  0% {
-    stroke-dashoffset: 0;
-  }
-
-  100% {
-    stroke-dashoffset: 2;
-  }
 }

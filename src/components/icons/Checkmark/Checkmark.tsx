@@ -1,11 +1,19 @@
 import styles from './Checkmark.module.css'
 
 interface CheckmarkProps {
-  state: boolean,
+  state: boolean
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
 }
 
 const Checkmark: React.FC<CheckmarkProps> = ({
   state,
+  color='dimmed',
 }) => {
 
   return (
@@ -14,7 +22,10 @@ const Checkmark: React.FC<CheckmarkProps> = ({
         width: '0.65rem',
         height: '0.65rem',
       }}
-      className={styles['svg']}
+      className={`
+        ${styles['svg']} 
+        ${styles[`color-${color}`]}
+      `}
       viewBox='0 0 11 11'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -36,3 +47,4 @@ const Checkmark: React.FC<CheckmarkProps> = ({
 }
 
 export { Checkmark }
+export type { CheckmarkProps }

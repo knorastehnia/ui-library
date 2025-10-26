@@ -1,20 +1,30 @@
 import styles from './Arrow.module.css'
 
 interface ArrowProps {
-  state?: boolean,
+  state?: boolean
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
 }
 
 const Arrow: React.FC<ArrowProps> = ({
   state=false,
+  color='dimmed',
 }) => {
-
   return (
     <svg
       style={{
         width: '0.65rem',
         height: '0.65rem',
       }}
-      className={styles['svg']}
+      className={`
+        ${styles['svg']} 
+        ${styles[`color-${color}`]}
+      `}
       viewBox="0 0 11 6"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -34,3 +44,4 @@ const Arrow: React.FC<ArrowProps> = ({
 }
 
 export { Arrow }
+export type { ArrowProps }

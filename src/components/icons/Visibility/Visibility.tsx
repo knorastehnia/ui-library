@@ -1,11 +1,19 @@
 import styles from './Visibility.module.css'
 
 interface VisibilityProps {
-  state: boolean,
+  state: boolean
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
 }
 
 const Visibility: React.FC<VisibilityProps> = ({
   state,
+  color='dimmed',
 }) => {
 
   return (
@@ -14,7 +22,10 @@ const Visibility: React.FC<VisibilityProps> = ({
         width: '1.4rem',
         height: '1.4rem',
       }}
-      className={styles['svg']}
+      className={`
+        ${styles['svg']} 
+        ${styles[`color-${color}`]}
+      `}
       viewBox='0 0 20 12'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -81,3 +92,4 @@ const Visibility: React.FC<VisibilityProps> = ({
 }
 
 export { Visibility }
+export type { VisibilityProps }

@@ -1,14 +1,28 @@
 import styles from './Alert.module.css'
 
-const Alert = () => {
+interface AlertProps {
+  color?:
+    | 'primary'
+    | 'dimmed'
+    | 'inverted'
+    | 'disabled'
+    | 'success'
+    | 'error'
+}
 
+const Alert: React.FC<AlertProps> = ({
+  color='error',
+}) => {
   return (
     <svg
       style={{
         width: '1rem',
         height: '1rem',
       }}
-      className={styles['svg']}
+      className={`
+        ${styles['svg']} 
+        ${styles[`color-${color}`]}
+      `}
       viewBox='0 0 14 13'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -31,3 +45,4 @@ const Alert = () => {
 }
 
 export { Alert }
+export type { AlertProps }

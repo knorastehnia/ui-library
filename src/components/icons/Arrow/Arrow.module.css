@@ -4,11 +4,17 @@
   display: block;
 
   path {
-    stroke: var(--gray-9);
     transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
   }
 
   .active {
     d: path('M1 2.2L5.16782 2.2C5.35726 2.2 5.64274 2.2 5.83218 2.2L10 2.2');
   }
+
+  &.color-primary > path { stroke: var(--foreground) }
+  &.color-dimmed > path { stroke: var(--gray-9) }
+  &.color-inverted > path { stroke: var(--background) }
+  &.color-disabled > path { stroke: var(--gray-6) }
+  &.color-error > path { stroke: var(--error) }
+  &.color-success > path { stroke: var(--success) }
 }
