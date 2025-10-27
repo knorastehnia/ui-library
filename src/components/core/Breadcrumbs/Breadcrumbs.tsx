@@ -5,7 +5,7 @@ import { Arrow } from '../../icons'
 
 interface BreadcrumbItem {
   label: string,
-  href: string,
+  action?: string | Function,
 }
 
 interface BreadcrumbsProps {
@@ -21,8 +21,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         items.map((item, index) => {
           return (
             <>
-              {index + 1 < items.length ?
-                <Button surface='text' action={item.href}>
+              {item.action !== undefined ?
+                <Button surface='text' action={item.action}>
                   <Typography>
                     {item.label}
                   </Typography>

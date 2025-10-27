@@ -408,9 +408,9 @@ const Page = () => {
       <Layout.Section>
         <Layout.Subsection span={1}>
           <Breadcrumbs items={[
-            {label: 'Home', href: '#'},
-            {label: 'Movies', href: '#'},
-            {label: 'Mulholland Drive', href: '#'},
+            { label: 'Home', action: '#' },
+            { label: 'Movies', action: '#' },
+            { label: 'Mulholland Drive' },
           ]} />
         </Layout.Subsection>
 
