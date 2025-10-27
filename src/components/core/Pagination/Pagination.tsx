@@ -45,7 +45,9 @@ const Pagination: React.FC<PaginationProps> = ({
         outOfBoundsLeft ||
         outOfBoundsRight ||
         pageNumber === 1 ||
-        pageNumber === count
+        pageNumber === count ||
+        (pageNumber === 2 && activePage - 3 === siblingCount) ||
+        (pageNumber === count - 1 && (count - activePage) - 2 === siblingCount)
       )
         ? pageNumber : false
     )
