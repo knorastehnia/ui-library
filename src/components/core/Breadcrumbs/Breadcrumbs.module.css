@@ -1,0 +1,10 @@
+.breadcrumbs {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.seperator {
+  transform: rotate(-90deg);
+}

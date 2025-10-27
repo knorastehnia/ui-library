@@ -18,6 +18,7 @@ import { Layout } from './components/core'
 import { Invisible } from './components/core'
 import { Collapsible } from './components/core'
 import { Pagination } from './components/core'
+import { Breadcrumbs } from './components/core'
 
 import { useState } from 'react'
 
@@ -405,7 +406,15 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection>
+        <Layout.Subsection span={1}>
+          <Breadcrumbs items={[
+            {label: 'Home', href: '#'},
+            {label: 'Movies', href: '#'},
+            {label: 'Mulholland Drive', href: '#'},
+          ]} />
+        </Layout.Subsection>
+
+        <Layout.Subsection span={1}>
           <Pagination siblingCount={1} value={pageValue} onChange={setPageValue} count={20} />
         </Layout.Subsection>
       </Layout.Section>
