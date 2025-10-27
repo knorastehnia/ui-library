@@ -138,7 +138,7 @@ const Field: React.FC<FieldProps> = ({
               minHeight: height,
             }}
             onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onBlur={() => { setFocus(false); handleInput(); }}
             value={currentValue}
             onChange={updateInternalValue}
             name={name}
