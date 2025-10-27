@@ -33,12 +33,20 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const pages = [...Array(count)].map((_, index) => {
     const pageNumber = index + 1
+    const diff = Math.abs(pageNumber - activePage)
 
-    const outOfBoundsLeft = Math.abs(activePage - (pageNumber)) <= leftBoundary
-    const outOfBoundsRight = Math.abs(pageNumber - activePage) <= rightBoundary
+    const outOfBoundsLeft = diff <= leftBoundary
+    const outOfBoundsRight = diff <= rightBoundary
+
+    console.log(leftBoundary, rightBoundary)
 
     return (
-      (outOfBoundsLeft || outOfBoundsRight || pageNumber === 1 || pageNumber === count)
+      (
+        outOfBoundsLeft ||
+        outOfBoundsRight ||
+        pageNumber === 1 ||
+        pageNumber === count
+      )
         ? pageNumber : false
     )
   })
