@@ -1,5 +1,5 @@
 import styles from './ContextMenu.module.css'
-import { useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Typography } from '../Typography'
 import { Popover, type PopoverProps } from '../Popover'
@@ -40,10 +40,98 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       y: event.clientY + window.scrollY,
     })
     setIsOpen(true)
+
+    document.body.style.overflow = 'hidden'
   }
 
   const closeContextMenu = () => {
     setIsOpen(false)
+
+    document.body.style.overflow = 'auto'
+  }
+
+  useLayoutEffect(() => {
+    isOpen && contextRef.current?.focus()
+  }, [isOpen])
+
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    if (!contextRef.current?.children) return
+    const content = contextRef.current.querySelector('div')!
+
+    const keys = [
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+    ]
+
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
+
+    const children = Array.from(content.children).filter((child) => {
+      return !(child as HTMLButtonElement).disabled
+    }) as HTMLElement[]
+
+    let loop = false
+
+    switch (e.key) {
+      case 'ArrowDown':
+        loop = true
+      case 'PageDown':
+        if (!content.contains(document.activeElement)) {
+          children[0].focus()
+
+          break
+        }
+
+        for (let i = 0; i < children.length; i++) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === children.length-1 && loop ? 0 : i+1]
+            current.focus()
+
+            break
+          }
+        }
+
+        break
+
+      case 'ArrowUp':
+        loop = true
+      case 'PageUp':
+        if (!content.contains(document.activeElement)) {
+          children[children.length - 1].focus()
+
+          break
+        }
+
+        for (let i = children.length-1; i > -1; i--) {
+          if (children[i] === document.activeElement) {
+            const current = children[i === 0 && loop ? children.length-1 : i-1]
+            current.focus()
+    
+            break
+          }
+        }
+
+        break
+
+      case 'End':
+        const lastTab = children[children.length - 1]
+        lastTab.focus()
+
+        break
+
+      case 'Home':
+        const firstTab = children[0]
+        firstTab.focus()
+
+        break
+
+      default:
+        break
+    }
   }
 
   return (
@@ -60,6 +148,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             ref={contextRef}
             className={styles['context-menu']}
             style={{ top: pos.y, left: pos.x, }}
+            onKeyDown={handleKeyboard}
+            tabIndex={-1}
             {...internal?.display}
           >
             <Popover
@@ -85,6 +175,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               })}
             </Popover>
           </div>,
+
           document.querySelector('#root')!
         )
       }
