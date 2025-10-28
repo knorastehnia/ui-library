@@ -38,8 +38,6 @@ const Pagination: React.FC<PaginationProps> = ({
     const outOfBoundsLeft = diff <= leftBoundary
     const outOfBoundsRight = diff <= rightBoundary
 
-    console.log(leftBoundary, rightBoundary)
-
     return (
       (
         outOfBoundsLeft ||
@@ -58,7 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return (
       <Button
-        key={index}
+        key={`page-${index}`}
         surface={activePage === page ? 'fill' : 'hollow'}
         action={() => updateCurrentPage(page)}
         internal={{
@@ -82,10 +80,24 @@ const Pagination: React.FC<PaginationProps> = ({
   })
 
   pages[1] ||
-    renderedPages.splice(1, 0, <div className={styles['ellipsis-container']}><Ellipsis /></div>)
+    renderedPages.splice(
+      1,
+      0,
+
+      <div key={'ellipsis-left'} className={styles['ellipsis-container']}>
+        <Ellipsis />
+      </div>
+    )
 
   pages[count - 2] ||
-    renderedPages.splice(count - 1, 0, <div className={styles['ellipsis-container']}><Ellipsis /></div>)
+    renderedPages.splice(
+      count - 1,
+      0,
+
+      <div key={'ellipsis-right'} className={styles['ellipsis-container']}>
+        <Ellipsis />
+      </div>
+    )
 
   return (
     <div className={styles['pagination']}>
@@ -102,7 +114,9 @@ const Pagination: React.FC<PaginationProps> = ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-            }
+            },
+
+            'aria-label': 'Previous page'
           }
         }}
       >
@@ -126,7 +140,9 @@ const Pagination: React.FC<PaginationProps> = ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-            }
+            },
+
+            'aria-label': 'Next page'
           }
         }}
       >

@@ -1,4 +1,5 @@
 import styles from './Breadcrumbs.module.css'
+import { Fragment } from 'react/jsx-runtime'
 import { Button } from '../Button'
 import { Typography } from '../Typography'
 import { Arrow } from '../../icons'
@@ -20,7 +21,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       {
         items.map((item, index) => {
           return (
-            <>
+            <Fragment key={index}>
               {item.action !== undefined ?
                 <Button surface='text' action={item.action}>
                   <Typography>
@@ -39,7 +40,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                   <Arrow />
                 </div>
               }
-            </>
+            </Fragment>
           )
         })
       }
