@@ -175,7 +175,9 @@ const Field: React.FC<FieldProps> = ({
                   style: {
                     padding: '3px',
                     margin: '0 10px 0 5px',
-                  }
+                  },
+
+                  'aria-label': showValue ? 'Hide password' : 'Show password'
                 }
               }}
             >
