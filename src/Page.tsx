@@ -216,7 +216,7 @@ const Page = () => {
                 ]}
               />
 
-              <Field label='Street Name' name='input2' />
+              <Field disabled label='Street Name' name='input2' />
             </div>
 
             <Field label='Email' type='email' name='test' />

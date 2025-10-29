@@ -122,7 +122,10 @@ const Field: React.FC<FieldProps> = ({
           `}
           htmlFor={id}
         >
-          <Typography size={(focus || currentValue) ? 's' : 'm'} color='dimmed'>
+          <Typography
+            size={(focus || currentValue) ? 's' : 'm'}
+            color={disabled ? 'disabled' : 'dimmed'}
+          >
             {label}
           </Typography>
         </label>

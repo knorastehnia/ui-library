@@ -6,7 +6,8 @@ const useCollapseEffect = (
   duration: number,
 ) => {
   const updateHeight = () => {
-    const content = ref.current as unknown as HTMLDivElement
+    const content = ref.current
+    if (!content) return
 
     if (state) {
       content.style.height = `${content.scrollHeight}px`
@@ -18,8 +19,8 @@ const useCollapseEffect = (
   }
 
   const setHeightAuto = () => {
-    const content = ref.current as unknown as HTMLDivElement
-    if (!state) return
+    const content = ref.current
+    if (!state || !content) return
 
     content.style.height = 'auto'
   }

@@ -23,23 +23,26 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   return (
     <div
       className={styles['error-container']}
+      aria-hidden={state}
       {...internal?.root}
     >
-      <div
-        ref={errorRef}
-        className={`
-          ${styles['error']} 
-          ${state ? styles['error-visible'] : ''}
-        `}
-      >
-        <div className={styles['alert-icon']}>
-          <Alert />
-        </div>
+      {state &&
+        <div
+          ref={errorRef}
+          className={`
+            ${styles['error']} 
+            ${state ? styles['error-visible'] : ''}
+          `}
+        >
+          <div className={styles['alert-icon']}>
+            <Alert />
+          </div>
 
-        <TypographyDefaultsProvider color='error' size='s'>
-          {children}
-        </TypographyDefaultsProvider>
-      </div>
+          <TypographyDefaultsProvider color='error' size='s'>
+            {children}
+          </TypographyDefaultsProvider>
+        </div>
+      }
     </div>
   )
 }
