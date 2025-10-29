@@ -119,6 +119,8 @@ const Popover: React.FC<PopoverProps> = ({
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}
       `}
+      role='dialog'
+      aria-hidden={!isOpen}
       {...internal?.root}
     >
       {children}

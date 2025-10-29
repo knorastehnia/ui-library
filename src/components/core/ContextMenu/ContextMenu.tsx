@@ -89,7 +89,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         for (let i = 0; i < children.length; i++) {
           if (children[i] === document.activeElement) {
             const current = children[i === children.length-1 && loop ? 0 : i+1]
-            current.focus()
+            if (current !== undefined) current.focus()
 
             break
           }
@@ -109,7 +109,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         for (let i = children.length-1; i > -1; i--) {
           if (children[i] === document.activeElement) {
             const current = children[i === 0 && loop ? children.length-1 : i-1]
-            current.focus()
+            if (current !== undefined) current.focus()
     
             break
           }
