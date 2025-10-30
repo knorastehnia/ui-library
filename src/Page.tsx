@@ -249,7 +249,7 @@ const Page = () => {
                 <div><Typography size='s' color='dimmed'>Sublabel</Typography></div>
               </Checkbox>
 
-              <Checkbox name='cb3'>
+              <Checkbox disabled name='cb3'>
                 <Typography size='xs'>Checkbox 3</Typography>
               </Checkbox>
 
@@ -259,7 +259,7 @@ const Page = () => {
             </div>
 
             <Radio value={radioValue} onChange={setRadioValue} arrangement='vertical' name='rgroup1'>
-              <Radio.Item value='r1'><T>Radio 1.1</T></Radio.Item>
+              <Radio.Item disabled value='r1'><T>Radio 1.1</T></Radio.Item>
               <Radio.Item value='r2'><T>Radio 1.2</T></Radio.Item>
               <Radio.Item value='r3'><T>Radio 1.3</T></Radio.Item>
             </Radio>

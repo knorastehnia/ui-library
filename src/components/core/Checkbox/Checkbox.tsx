@@ -1,6 +1,7 @@
 import styles from './Checkbox.module.css'
 import { useState, useId } from 'react'
 import { Checkmark } from '../../icons'
+import { TypographyDefaultsProvider } from '../Typography'
 
 interface CheckboxProps {
   children: React.ReactElement | React.ReactElement[]
@@ -58,7 +59,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
           <div
             className={`
               ${styles['display-checkbox']} 
-              ${checked && styles['checked']}
+              ${checked && styles['checked']} 
+              ${disabled && styles['disabled']}
             `}
             {...internal?.display}
           >
@@ -66,7 +68,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
           </div>
 
           <div {...internal?.content}>
-            {children}
+            <TypographyDefaultsProvider color={disabled ? 'disabled' : undefined}>
+              {children}
+            </TypographyDefaultsProvider>
           </div>
         </label>
       </div>

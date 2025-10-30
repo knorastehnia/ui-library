@@ -30,6 +30,11 @@
     background-color: var(--gray-1);
     border-color: var(--gray-3);
   }
+
+  &.disabled {
+    background-color: var(--gray-1) !important;
+    border-color: var(--gray-2) !important;
+  }
 }
 
 .input:focus-visible + .display-checkbox,

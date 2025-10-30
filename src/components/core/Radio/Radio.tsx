@@ -1,3 +1,4 @@
+import { TypographyDefaultsProvider } from '../Typography'
 import styles from './Radio.module.css'
 import { createContext, useContext, useId, useRef, useState } from 'react'
 
@@ -73,10 +74,15 @@ const Radio: RadioComponent = ({
     if (!keys.includes(e.key)) return
     e.preventDefault()
 
-    const children = Array.from(contentRef.current.children).map((child) => {
-      return child.getElementsByTagName('input')[0]
+    const children = Array.from(contentRef.current.children).flatMap((child) => {
+      const input = child.getElementsByTagName('input')[0]
+      if (!input.disabled) {
+        return input
+      } else {
+        return []
+      }
     }) as HTMLInputElement[]
-    
+
     let loop = false
 
     switch (e.key) {
@@ -199,7 +205,9 @@ const RadioItem: React.FC<RadioItemProps> = ({
       />
 
       <div {...internal?.content}>
-        {children}
+        <TypographyDefaultsProvider color={disabled ? 'disabled' : undefined}>
+          {children}
+        </TypographyDefaultsProvider>
       </div>
     </label>
   )
