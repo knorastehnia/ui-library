@@ -1,5 +1,5 @@
 import styles from './ErrorMessage.module.css'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Alert } from '../../icons'
 import { TypographyDefaultsProvider } from '../Typography'
 import { useCollapseEffect } from '../../../hooks/useCollapseEffect'
@@ -17,8 +17,18 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   state=true,
   internal,
 }) => {
+  const [isVisible, setIsVisible] = useState(false)
   const errorRef = useRef<HTMLDivElement>(null)
-  useCollapseEffect(errorRef, state, 500)
+
+  const showMessage = (state: boolean) => {
+    state && setIsVisible(true)
+  }
+
+  const hideMessage = (state: boolean) => {
+    state || setIsVisible(false)
+  }
+
+  useCollapseEffect(errorRef, state, 500, showMessage, hideMessage)
 
   return (
     <div
@@ -26,23 +36,25 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
       aria-hidden={state}
       {...internal?.root}
     >
-      {state &&
-        <div
-          ref={errorRef}
-          className={`
-            ${styles['error']} 
-            ${state ? styles['error-visible'] : ''}
-          `}
-        >
-          <div className={styles['alert-icon']}>
-            <Alert />
-          </div>
+      <div
+        ref={errorRef}
+        className={`
+          ${styles['error']} 
+          ${state ? styles['error-visible'] : ''}
+        `}
+      >
+        {isVisible &&
+          <>
+            <div className={styles['alert-icon']}>
+              <Alert />
+            </div>
 
-          <TypographyDefaultsProvider color='error' size='s'>
-            {children}
-          </TypographyDefaultsProvider>
-        </div>
-      }
+            <TypographyDefaultsProvider color='error' size='s'>
+              {children}
+            </TypographyDefaultsProvider>
+          </>
+        }
+      </div>
     </div>
   )
 }
