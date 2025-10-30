@@ -158,7 +158,7 @@ const Slider: React.FC<SliderProps> = ({
       className={styles['slider']}
       {...internal?.root}
     >
-      <label htmlFor={id}>
+      <label id={id}>
         <div {...internal?.content}>
           {children}
         </div>
@@ -166,7 +166,6 @@ const Slider: React.FC<SliderProps> = ({
         <input
           type='range'
           name={name}
-          id={id}
           min={minValue}
           max={maxValue}
           step={step}
@@ -184,6 +183,7 @@ const Slider: React.FC<SliderProps> = ({
           aria-valuemax={maxValue}
           aria-valuenow={value}
           aria-disabled={disabled}
+          aria-labelledby={id}
           role='slider'
           className={`
             ${styles['slider-clickbox']} 
