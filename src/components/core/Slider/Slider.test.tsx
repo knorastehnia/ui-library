@@ -22,7 +22,7 @@ describe('Slider', () => {
         <SliderTest
           minValue={min}
           maxValue={max}
-          value={0}
+          defaultValue={0}
           onChange={onChange}
           disabled
         />
@@ -53,7 +53,7 @@ describe('Slider', () => {
         <SliderTest
           minValue={min}
           maxValue={max}
-          value={0}
+          defaultValue={0}
           onChange={onChange}
           step={step}
         />
@@ -101,14 +101,14 @@ const SliderTest: React.FC<{
   minValue: number
   maxValue: number
   step?: number
-  value?: number
+  defaultValue?: number
   onChange?: (value: number) => void
   disabled?: boolean
 }> = ({
   minValue,
   maxValue,
   step,
-  value,
+  defaultValue,
   onChange,
   disabled,
 }) => {
@@ -117,7 +117,7 @@ const SliderTest: React.FC<{
       name='s'
       disabled={disabled}
       step={step}
-      value={value}
+      defaultValue={defaultValue}
       onChange={onChange}
       minValue={minValue}
       maxValue={maxValue}
