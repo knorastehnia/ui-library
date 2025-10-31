@@ -29,7 +29,7 @@ describe('Tabs', () => {
 
     it('should switch tabs on Click and display the respective content', async () => {
       const tab = screen.getByRole('button', { name: 'Tab 3' })
-  
+
       await user.click(tab)
       expect(onChange).toHaveBeenCalledWith('tab3')
 
@@ -69,6 +69,71 @@ describe('Tabs', () => {
       expect(tab1Content).toBeVisible()
 
       await user.keyboard('[PageDown]')
+      expect(onChange).toHaveBeenCalledWith('tab3')
+    })
+  })
+
+  describe('with navigation=focus', () => {
+    beforeEach(() => {
+      onChange = vi.fn()
+      user = userEvent.setup()
+      component = render(
+        <TabsTest
+          navigation='focus'
+          defaultValue='tab1'
+          onChange={onChange}
+        />
+      )
+    })
+
+    it('should have no accessibility violations', async () => {
+      expect(await axe(component.container)).toHaveNoViolations()
+    })
+
+    it('should switch tabs on Click and display the respective content', async () => {
+      const tab = screen.getByRole('button', { name: 'Tab 3' })
+
+      await user.click(tab)
+      expect(onChange).toHaveBeenCalledWith('tab3')
+
+      const tabContent = screen.getByText('Tab 3 Content')
+      expect(tabContent).toBeVisible()
+    })
+
+    it('should ignore disabled tabs', async () => {
+      const tab = screen.getByText('Tab 2')
+
+      await user.click(tab)
+      expect(onChange).not.toHaveBeenCalled()
+
+      const tabContent = screen.queryByText('Tab 2 Content')
+      expect(tabContent).toBeNull()
+    })
+
+    it('should handle keyboard navigation', async () => {
+      const tab1 = screen.getByText('Tab 1')
+
+      await user.click(tab1)
+
+      await user.keyboard('[ArrowRight]')
+      expect(onChange).not.toHaveBeenCalledWith('tab3')
+      await user.keyboard('[Space]')
+      expect(onChange).toHaveBeenCalledWith('tab3')
+
+      const tab3Content = screen.queryByText('Tab 3 Content')
+      expect(tab3Content).toBeVisible()
+
+      await user.keyboard('[End][Enter]')
+      expect(onChange).toHaveBeenCalledWith('tab4')
+
+      await user.keyboard('[ArrowRight][Space]')
+      expect(onChange).toHaveBeenCalledWith('tab1')
+
+      await user.keyboard('[PageUp][Enter]')
+      const tab1Content = screen.queryByText('Tab 1 Content')
+      expect(tab1Content).toBeVisible()
+
+      await user.keyboard('[PageDown][Enter]')
       expect(onChange).toHaveBeenCalledWith('tab3')
     })
   })
