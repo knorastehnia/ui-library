@@ -10,6 +10,10 @@ interface PaginationProps {
   value?: number
   defaultValue?: number
   onChange?: (value: number) => void
+  internal?: {
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    trigger?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
+  }
 }
 
 const Pagination: React.FC<PaginationProps> = ({
@@ -18,6 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({
   value,
   defaultValue=1,
   onChange,
+  internal,
 }) => {
   const [currentPage, setCurrentPage] = useState(defaultValue)
 
@@ -71,6 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({
             }
           }
         }}
+        {...internal?.trigger}
       >
         <Typography>
           {page}
@@ -100,7 +106,10 @@ const Pagination: React.FC<PaginationProps> = ({
     )
 
   return (
-    <div className={styles['pagination']}>
+    <div
+      className={styles['pagination']}
+      {...internal?.root}
+    >
       <Button
         surface='hollow'
         disabled={activePage === 1}
