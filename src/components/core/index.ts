@@ -1,5 +1,6 @@
 export * from './Breadcrumbs'
 export * from './Button'
+export * from './Calendar'
 export * from './Checkbox'
 export * from './Collapsible'
 export * from './ContextMenu'

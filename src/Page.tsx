@@ -18,6 +18,7 @@ import { Collapsible } from './components/core'
 import { Pagination } from './components/core'
 import { Breadcrumbs } from './components/core'
 import { Menu } from './components/core'
+import { Calendar } from './components/core'
 
 import { useState } from 'react'
 
@@ -30,6 +31,7 @@ const Page = () => {
   const [radioValue, setRadioValue] = useState('r2')
   const [tabValue, setTabValue] = useState('t1')
   const [pageValue, setPageValue] = useState(1)
+  const [dateValue, setDateValue] = useState(new Date())
 
   return (
     <>
@@ -346,6 +348,22 @@ const Page = () => {
               { label: 'Item 4.3' },
             ] },
           ]} />
+        </Layout.Subsection>
+
+        <Layout.Subsection>
+          <div style={{
+            display: 'flex',
+            flexFlow: 'column',
+            gap: '40px',
+          }}>
+            <Calendar
+              minValue={new Date(2025, 5, 12)}
+              maxValue={new Date(2026, 1, 20)}
+              value={dateValue}
+              onChange={setDateValue}
+            />
+            <Typography>Selected date: {dateValue.toDateString()}</Typography>
+          </div>
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
