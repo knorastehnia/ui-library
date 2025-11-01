@@ -5,6 +5,7 @@ import { Button } from '../Button'
 import { Flyout } from '../Flyout'
 
 interface ItemInterface {
+  icon?: React.ReactElement
   label: string
   items?: ItemInterface[]
   action?: string | Function
@@ -77,7 +78,7 @@ const Submenu: React.FC<MenuItemInterface> = ({
     handleFocus()
   }
 
-  const handleClose = () => {
+  const closeSubmenu = () => {
     setIsOpen(false)
 
     const trigger = triggerRef.current
@@ -95,7 +96,7 @@ const Submenu: React.FC<MenuItemInterface> = ({
   return (
     <Flyout
       isOpen={isOpen}
-      onClose={handleClose}
+      onClose={closeSubmenu}
       size={size}
       arrangement='horizontal'
       label={menuItem.label}
@@ -115,7 +116,7 @@ const Submenu: React.FC<MenuItemInterface> = ({
       }}
       {...internal?.item}
     >
-      <MenuContext.Provider value={{ closeParent: handleClose }}>
+      <MenuContext.Provider value={{ closeParent: closeSubmenu }}>
         <Menu items={menuItem.items!} />
       </MenuContext.Provider>
     </Flyout>
@@ -247,9 +248,17 @@ const Menu: React.FC<MenuProps> = ({
           }}
           {...internal?.item}
         >
-          <Typography>
-            {menuItem.label}
-          </Typography>
+          <div className={styles['item-content']}>
+            {menuItem.icon !== undefined &&
+              <div className={styles['icon']}>
+                {menuItem.icon}
+              </div>
+            }
+
+            <Typography>
+              {menuItem.label}
+            </Typography>
+          </div>
         </Button>
       )
     } {

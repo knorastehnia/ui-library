@@ -1,3 +1,4 @@
+import { Alert, Checkmark, Visibility, Spinner } from './components/icons'
 import { Button } from './components/core'
 import { Field } from './components/core'
 import { Select } from './components/core'
@@ -9,9 +10,6 @@ import { Modal } from './components/core'
 import { List } from './components/core'
 import { Table } from './components/core'
 import { ContextMenu } from './components/core'
-import { Checkmark } from './components/icons'
-import { Spinner } from './components/icons'
-import { Visibility } from './components/icons'
 import { Tabs } from './components/core'
 import { Slider } from './components/core'
 import { Layout } from './components/core'
@@ -323,8 +321,8 @@ const Page = () => {
 
         <Layout.Subsection>
           <Menu items={[
-            { label: 'Item 1' },
-            { label: 'Item 2' },
+            { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
+            { icon: <Alert color='dimmed' />, label: 'Item 2' },
             { label: 'Item 3', items: [
               { label: 'Item 3.1' },
               { label: 'Item 3.2', items: [
@@ -352,7 +350,7 @@ const Page = () => {
 
         <Layout.Subsection span={1}>
           <ContextMenu items={[
-            { label: 'Context Menu Item' },
+            { icon: <Alert />,  label: 'Context Menu Item' },
             { label: 'Refresh Page' },
             { label: 'Inspect Item', disabled: true },
             { label: 'Loop Up Definition', disabled: false, items: [
