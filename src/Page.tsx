@@ -3,7 +3,7 @@ import { Field } from './components/core'
 import { Select } from './components/core'
 import { Checkbox } from './components/core'
 import { Radio } from './components/core'
-import { Dropdown } from './components/core'
+import { Flyout } from './components/core'
 import { Typography, T } from './components/core'
 import { Modal } from './components/core'
 import { List } from './components/core'
@@ -19,6 +19,7 @@ import { Invisible } from './components/core'
 import { Collapsible } from './components/core'
 import { Pagination } from './components/core'
 import { Breadcrumbs } from './components/core'
+import { Menu } from './components/core'
 
 import { useState } from 'react'
 
@@ -111,34 +112,43 @@ const Page = () => {
               ]}
             />
 
-            <Dropdown label='Dropdown' arrangement='vertical'>
-              <Button action='#'><T>Dropdown Item</T></Button>
-              <Dropdown label='Nested Dropdown 1'>
-                <Button><T>Dropdown Item</T></Button>
-                <Button><T>Dropdown Item</T></Button>
-                <Button><T>Dropdown Item</T></Button>
-              </Dropdown>
-              <Dropdown label='Nested Dropdown 2' arrangement='vertical'>
-                <Button><T>Dropdown Item</T></Button>
-                <Button><T>Dropdown Item</T></Button>
-                <Button><T>Dropdown Item</T></Button>
+            <Flyout label='Flyout' arrangement='vertical'>
+              <Button action='#'><T>Flyout Item</T></Button>
+              <Flyout label='Nested Flyout 1'>
+                <Button><T>Flyout Item</T></Button>
+                <Button><T>Flyout Item</T></Button>
+                <Button><T>Flyout Item</T></Button>
+              </Flyout>
+              <Flyout label='Nested Flyout 2' arrangement='vertical'>
+                <Button><T>Flyout Item</T></Button>
+                <Button><T>Flyout Item</T></Button>
+                <Button><T>Flyout Item</T></Button>
 
-                <Dropdown label='Nested Dropdown 2.1'>
-                  <Button><T>Dropdown Item</T></Button>
-                  <Button><T>Dropdown Item</T></Button>
-                  <Button><T>Dropdown Item</T></Button>
-                </Dropdown>
+                <Flyout label='Nested Flyout 2.1'>
+                  <Button><T>Flyout Item</T></Button>
+                  <Button><T>Flyout Item</T></Button>
+                  <Button><T>Flyout Item</T></Button>
+                </Flyout>
 
-                <Dropdown label='Nested Dropdown 2.2' arrangement='horizontal'>
-                  <Button><T>Dropdown Item</T></Button>
-                  <Button><T>Dropdown Item</T></Button>
-                  <Button><T>Dropdown Item</T></Button>
-                </Dropdown>
-              </Dropdown>
-              <Button action={() => null} disabled><T>Dropdown Item</T></Button>
-              <Button action={() => null} disabled><T>Dropdown Item</T></Button>
-              <Button action={() => null}><T>Dropdown Item</T></Button>
-            </Dropdown>
+                <Flyout label='Nested Flyout 2.2' arrangement='horizontal'>
+                  <Button><T>Flyout Item</T></Button>
+                  <Button><T>Flyout Item</T></Button>
+                  <Button><T>Flyout Item</T></Button>
+                </Flyout>
+              </Flyout>
+              <Button action={() => null} disabled><T>Flyout Item</T></Button>
+              <Button action={() => null} disabled><T>Flyout Item</T></Button>
+              <Button action={() => null}><T>Flyout Item</T></Button>
+            </Flyout>
+
+            <Flyout label='Dropdown'>
+              <Menu items={[
+                { label: 'Item 1' },
+                { label: 'Item 2' },
+                { label: 'Item 3' },
+                { label: 'Item 4' },
+              ]} />
+            </Flyout>
 
             <Slider name='slider1'
               minValue={0}
@@ -311,12 +321,46 @@ const Page = () => {
           </Table>
         </Layout.Subsection>
 
+        <Layout.Subsection>
+          <Menu items={[
+            { label: 'Item 1' },
+            { label: 'Item 2' },
+            { label: 'Item 3', items: [
+              { label: 'Item 3.1' },
+              { label: 'Item 3.2', items: [
+                { label: 'Item 3.2.1' },
+                { label: 'Item 3.2.2' },
+                { label: 'Item 3.2.3' },
+              ] },
+              { label: 'Item 3.3' },
+            ] },
+            { label: 'Item 4', items: [
+              { label: 'Item 4.1' },
+              { label: 'Item 4.2', items: [
+                { label: 'Item 4.2.1' },
+                { label: 'Item 4.2.2' },
+                { label: 'Item 4.2.3', items: [
+                  { label: 'Item 4.2.3.1' },
+                  { label: 'Item 4.2.3.2' },
+                  { label: 'Item 4.2.3.3' },
+                ] },
+              ] },
+              { label: 'Item 4.3' },
+            ] },
+          ]} />
+        </Layout.Subsection>
+
         <Layout.Subsection span={1}>
           <ContextMenu items={[
             { label: 'Context Menu Item' },
             { label: 'Refresh Page' },
             { label: 'Inspect Item', disabled: true },
-            { label: 'Loop Up Definition', disabled: false },
+            { label: 'Loop Up Definition', disabled: false, items: [
+              { label: 'Item 1' },
+              { label: 'Item 2' },
+              { label: 'Item 3' },
+              { label: 'Item 4' },
+            ] },
             { label: 'Save As...' },
           ]}>
             <List>

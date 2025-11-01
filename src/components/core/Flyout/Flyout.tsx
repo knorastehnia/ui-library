@@ -1,14 +1,18 @@
-import styles from './Dropdown.module.css'
-import { createContext, useContext, useRef, useState } from 'react'
+import styles from './Flyout.module.css'
+import { createContext, useContext, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Button, ButtonDefaultsProvider, type ButtonProps } from '../Button'
 import { Typography } from '../Typography'
 import { Popover, type PopoverProps } from '../Popover'
 
-interface DropdownProps {
+interface FlyoutProps {
   children: React.ReactElement | React.ReactElement[]
+  isOpen?: boolean
+  onClose?: Function
   label: string
+  size?: 's' | 'm' | 'l'
   arrangement?: 'vertical' | 'horizontal'
+  disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     trigger?: ButtonProps
@@ -16,46 +20,52 @@ interface DropdownProps {
   }
 }
 
-const DropdownContext = createContext<true | undefined>(undefined)
+const FlyoutContext = createContext<true | undefined>(undefined)
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Flyout: React.FC<FlyoutProps> = ({
   children,
+  isOpen,
+  onClose,
   label,
+  size='m',
   arrangement,
+  disabled=false,
   internal,
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const buttonRef = useRef<HTMLDivElement>(null)
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
 
-  const ctx = useContext(DropdownContext)
+  const activeIsOpen = isOpen ?? internalIsOpen
+
+  const updateIsOpen = (value: boolean) => {
+    isOpen ?? setInternalIsOpen(value)
+    activeIsOpen && onClose?.()
+  }
+
+  const ctx = useContext(FlyoutContext)
   const activeArrangement = arrangement ?? (!!ctx ? 'horizontal' : 'vertical')
 
-  const closeDropdown = (event: MouseEvent | KeyboardEvent) => {
-    if (event instanceof MouseEvent) {
-      const btn = buttonRef.current
-      if (!btn) return
-  
-      if (event.target !== btn && !btn.contains(event.target as Node)) {
-        setIsOpen(prev => {
-          if (prev) return false
-          return prev
-        })
-      }
-    } else if (event instanceof KeyboardEvent) {
-      setIsOpen(false)
-    }
+  const closeFlyout = () => {
+    updateIsOpen(false)
+  }
+
+  const openFlyout = () => {
+    if (activeIsOpen) return
+
+    updateIsOpen(true)
   }
 
   return (
     <div
-      className={styles['dropdown']}
+      className={styles['flyout']}
       {...internal?.root}
     >
       <Button
-        action={() => setIsOpen(!isOpen)}
+        action={openFlyout}
+        size={size}
         surface='hollow'
         width='full'
-        internal={{ root: { ref: buttonRef } }}
+        disabled={disabled}
+        internal={{ root: { 'aria-expanded': activeIsOpen } }}
         {...internal?.trigger}
       >
         <div className={styles['button-content']}>
@@ -63,26 +73,26 @@ const Dropdown: React.FC<DropdownProps> = ({
           <div style={{
             transform: activeArrangement === 'horizontal' ? 'rotate(-90deg)' : '',
           }}>
-            <Arrow state={isOpen} />
+            <Arrow state={activeIsOpen} color={disabled ? 'disabled' : undefined} />
           </div>
         </div>
       </Button>
 
       <Popover
-        isOpen={isOpen}
-        onClose={closeDropdown}
+        isOpen={activeIsOpen}
+        onClose={closeFlyout}
         arrangement={activeArrangement}
         {...internal?.content}
       >
-        <DropdownContext.Provider value={true}>
+        <FlyoutContext.Provider value={true}>
           <ButtonDefaultsProvider surface='hollow' width='full'>
             {children}
           </ButtonDefaultsProvider>
-        </DropdownContext.Provider>
+        </FlyoutContext.Provider>
       </Popover>
     </div>
   )
 }
 
-export { Dropdown }
-export type { DropdownProps }
+export { Flyout }
+export type { FlyoutProps }

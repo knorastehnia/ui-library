@@ -22,11 +22,11 @@ const Popover: React.FC<PopoverProps> = ({
   const [invertVertical, setInvertVertical] = useState(false)
   const [insetStyles, setInsetStyles] = useState<React.CSSProperties>({})
   const contentRef = useRef<HTMLDivElement>(null)
-  const isOpenRef = useRef(isOpen)
 
   const closePopover = (event: MouseEvent) => {
-    const content = contentRef.current as HTMLButtonElement | null;
+    const content = contentRef.current as HTMLElement
     if (!content) return
+    if (!isOpen) return
 
     if (event.target !== content && !content.contains(event.target as Node)) {
       onClose?.(event)
@@ -34,19 +34,17 @@ const Popover: React.FC<PopoverProps> = ({
   }
 
   const escapePopover = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      onClose?.(event)
-    }
+    if (event.key !== 'Escape') return
+
+    onClose?.(event)
   }
 
   useEffect(() => {
-    isOpenRef.current = isOpen
-
     if (contentRef.current) {
       if (isOpen) {
-        contentRef.current.removeAttribute('inert');
+        contentRef.current.removeAttribute('inert')
       } else {
-        contentRef.current.setAttribute('inert', '');
+        contentRef.current.setAttribute('inert', '')
       }
     }
   }, [isOpen])
@@ -100,21 +98,33 @@ const Popover: React.FC<PopoverProps> = ({
   }, [isOpen])
 
   useEffect(() => {
-    document.addEventListener('click', closePopover)
-    document.addEventListener('mousedown', closePopover)
-    document.addEventListener('keydown', escapePopover)
+    if (!isOpen) return
+
+    const firstItem = contentRef.current?.children[0]
+    firstItem && (firstItem as HTMLElement).focus()
+
+    const raf = requestAnimationFrame(() => {
+      document.addEventListener('click', closePopover)
+      document.addEventListener('keydown', escapePopover)
+    })
+
     
     return () => {
       document.removeEventListener('click', closePopover)
-      document.removeEventListener('mousedown', closePopover)
       document.removeEventListener('keydown', escapePopover)
+      cancelAnimationFrame(raf)
     }
-  }, [])
+  }, [isOpen])
 
   return (
     <div
       ref={contentRef}
       style={insetStyles}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          onClose?.()
+        }
+      }}
       className={`
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}

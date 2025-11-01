@@ -1,24 +1,15 @@
 import styles from './ContextMenu.module.css'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Typography } from '../Typography'
 import { Popover, type PopoverProps } from '../Popover'
-import { Button, type ButtonProps } from '../Button'
+import { Menu, type MenuProps } from '../Menu'
 
-interface ItemInterface {
-  label: string
-  action?: string | Function
-  disabled?: boolean
-}
-
-interface ContextMenuProps {
+interface ContextMenuProps extends MenuProps {
   children: React.ReactElement | React.ReactElement[]
-  items: ItemInterface[]
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    content?: PopoverProps
-    trigger?: ButtonProps
+    display?: PopoverProps
+    content?: MenuProps
   }
 }
 
@@ -54,86 +45,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     isOpen && contextRef.current?.focus()
   }, [isOpen])
 
-  const handleKeyboard = (e: React.KeyboardEvent) => {
-    if (!contextRef.current?.children) return
-    const content = contextRef.current.querySelector('div')!
-
-    const keys = [
-      'ArrowUp',
-      'ArrowDown',
-      'Home',
-      'End',
-      'PageUp',
-      'PageDown',
-    ]
-
-    if (!keys.includes(e.key)) return
-    e.preventDefault()
-
-    const children = Array.from(content.children).filter((child) => {
-      return !(child as HTMLButtonElement).disabled
-    }) as HTMLElement[]
-
-    let loop = false
-
-    switch (e.key) {
-      case 'ArrowDown':
-        loop = true
-      case 'PageDown':
-        if (!content.contains(document.activeElement)) {
-          children[0].focus()
-
-          break
-        }
-
-        for (let i = 0; i < children.length; i++) {
-          if (children[i] === document.activeElement) {
-            const current = children[i === children.length-1 && loop ? 0 : i+1]
-            if (current !== undefined) current.focus()
-
-            break
-          }
-        }
-
-        break
-
-      case 'ArrowUp':
-        loop = true
-      case 'PageUp':
-        if (!content.contains(document.activeElement)) {
-          children[children.length - 1].focus()
-
-          break
-        }
-
-        for (let i = children.length-1; i > -1; i--) {
-          if (children[i] === document.activeElement) {
-            const current = children[i === 0 && loop ? children.length-1 : i-1]
-            if (current !== undefined) current.focus()
-    
-            break
-          }
-        }
-
-        break
-
-      case 'End':
-        const lastTab = children[children.length - 1]
-        lastTab.focus()
-
-        break
-
-      case 'Home':
-        const firstTab = children[0]
-        firstTab.focus()
-
-        break
-
-      default:
-        break
-    }
-  }
-
   return (
     <div
       className={styles['context-container']}
@@ -148,7 +59,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             ref={contextRef}
             className={styles['context-menu']}
             style={{ top: pos.y, left: pos.x, }}
-            onKeyDown={handleKeyboard}
             tabIndex={-1}
             {...internal?.display}
           >
@@ -157,22 +67,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               onClose={closeContextMenu}
               {...internal?.content}
             >
-              {items.map((item, index) => {
-                return (
-                  <Button
-                    key={index}
-                    action={item.action}
-                    surface='hollow'
-                    width='full'
-                    disabled={item.disabled}
-                    {...internal?.trigger}
-                  >
-                    <Typography>
-                      {item.label}
-                    </Typography>
-                  </Button>
-                )
-              })}
+              <Menu items={items} />
             </Popover>
           </div>,
 
