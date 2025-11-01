@@ -16,9 +16,10 @@
   &:focus {
     outline: none;
 
-    /* .thumb-display {
-      background-color: var(--gray-3);
-    } */
+    .thumb-display {
+      background-color: var(--foreground);
+      transform: translate(-50%, -50%) scale(1.2);
+    }
   }
 }
 
@@ -52,12 +53,11 @@
   border: none;
   
   .thumb-display {
-    width: 15px; height: 15px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--background);
-    border: 2px solid var(--gray-9);
-    outline: 4px solid var(--background);
+    background-color: var(--gray-9);
+    outline: 3px solid var(--background);
     transition: all var(--ease-out-t) var(--ease-out-c);
   }
 }
