@@ -41,6 +41,7 @@ const Calendar: React.FC<CalendarProps> = ({
   const daysRef = useRef<HTMLDivElement>(null)
   const navOffsetRef = useRef<number>(null)
   const navDirectionRef = useRef<'prev' | 'next'>(null)
+  const keyboardNavRef= useRef<boolean>(false)
 
   const updateSelectedDates = (newDate: Date[]) => {
     value === undefined && setSelectedDates(newDate)
@@ -48,6 +49,8 @@ const Calendar: React.FC<CalendarProps> = ({
   }
 
   useEffect(() => {
+    if (!keyboardNavRef.current) return
+
     if (
       navOffsetRef.current === null ||
       navDirectionRef.current === null
@@ -62,6 +65,7 @@ const Calendar: React.FC<CalendarProps> = ({
     const current = children[offset]
 
     current !== undefined && current.focus()
+    keyboardNavRef.current = false
   }, [displayDate])
 
   const getChildren = () => {
@@ -102,6 +106,7 @@ const Calendar: React.FC<CalendarProps> = ({
     }
 
     const index = getFocusedIndex()!
+    keyboardNavRef.current = true
 
     const updateFocus = (count: number) => {
       let current = children[index + count]
@@ -122,6 +127,8 @@ const Calendar: React.FC<CalendarProps> = ({
     const offset = 5 - currentMonthStart
     const offsetIndex = index + 13 - offset
 
+    const modifier = e.getModifierState('Shift') ? 12 : 1
+
     switch (e.key) {
       case 'ArrowLeft':
         updateFocus(-1)
@@ -141,15 +148,16 @@ const Calendar: React.FC<CalendarProps> = ({
 
       case 'PageDown':
         navDirectionRef.current = 'next'
-        const nextMonthDays = new Date(displayYear, displayMonth + 2, 0).getDate()
+        const nextMonthDays = new Date(displayYear, displayMonth + modifier + 1, 0).getDate()
         navOffsetRef.current = Math.min(index, nextMonthDays - 1)
-        updateDisplayMonth(displayMonth + 1)
+        updateDisplayMonth(displayMonth + modifier)
         break
 
       case 'PageUp':
         navDirectionRef.current = 'next'
-        navOffsetRef.current = index
-        updateDisplayMonth(displayMonth - 1)
+        const prevMonthDays = new Date(displayYear, displayMonth - modifier + 1, 0).getDate()
+        navOffsetRef.current = Math.min(index, prevMonthDays - 1)
+        updateDisplayMonth(displayMonth - modifier)
         break
 
       case 'Home':
