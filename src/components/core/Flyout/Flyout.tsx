@@ -8,7 +8,7 @@ import { Popover, type PopoverProps } from '../Popover'
 interface FlyoutProps {
   children: React.ReactElement | React.ReactElement[]
   isOpen?: boolean
-  onClose?: Function
+  onOpenChange?: (isOpen: boolean) => void
   label: string
   size?: 's' | 'm' | 'l'
   arrangement?: 'vertical' | 'horizontal'
@@ -25,7 +25,7 @@ const FlyoutContext = createContext<true | undefined>(undefined)
 const Flyout: React.FC<FlyoutProps> = ({
   children,
   isOpen,
-  onClose,
+  onOpenChange,
   label,
   size='m',
   arrangement,
@@ -39,7 +39,7 @@ const Flyout: React.FC<FlyoutProps> = ({
 
   const updateIsOpen = (value: boolean) => {
     isOpen ?? setInternalIsOpen(value)
-    activeIsOpen && onClose?.()
+    onOpenChange?.(value)
   }
 
   const ctx = useContext(FlyoutContext)

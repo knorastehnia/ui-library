@@ -2,7 +2,7 @@ import styles from './Menu.module.css'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { Typography } from '../Typography'
 import { Button } from '../Button'
-import { Flyout } from '../Flyout'
+import { Flyout, type FlyoutProps } from '../Flyout'
 
 interface ItemInterface {
   icon?: React.ReactElement
@@ -18,18 +18,18 @@ interface MenuProps {
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     item?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
+    sub?: SubmenuInterface
   }
 }
 
-interface MenuItemInterface {
+interface SubmenuInterface {
   menuItem: ItemInterface
   index: number
   activeItem: number
   setActiveItem: Function
   size: 's' | 'm' | 'l'
   internal?: {
-    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    item?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
+    root?: FlyoutProps
   }
 }
 
@@ -47,7 +47,7 @@ const getChildren = (content: HTMLDivElement) => {
   }) as HTMLElement[]
 }
 
-const Submenu: React.FC<MenuItemInterface> = ({
+const Submenu: React.FC<SubmenuInterface> = ({
   menuItem,
   index,
   activeItem,
@@ -96,7 +96,7 @@ const Submenu: React.FC<MenuItemInterface> = ({
   return (
     <Flyout
       isOpen={isOpen}
-      onClose={closeSubmenu}
+      onOpenChange={(isOpen) => !isOpen && closeSubmenu()}
       size={size}
       arrangement='horizontal'
       label={menuItem.label}
@@ -114,10 +114,10 @@ const Submenu: React.FC<MenuItemInterface> = ({
           },
         } as any),
       }}
-      {...internal?.item}
+      {...internal?.root}
     >
       <MenuContext.Provider value={{ closeParent: closeSubmenu }}>
-        <Menu items={menuItem.items!} />
+        <Menu size={size} items={menuItem.items!} />
       </MenuContext.Provider>
     </Flyout>
   )
@@ -150,6 +150,7 @@ const Menu: React.FC<MenuProps> = ({
     ]
 
     if (!keys.includes(e.key)) return
+    if (e.key === 'Tab' && ctx === null) return
     e.preventDefault()
 
     const children = getChildren(content)
@@ -276,7 +277,7 @@ const Menu: React.FC<MenuProps> = ({
           menuItem={menuItem}
           index={index}
           size={size}
-          internal={internal}
+          {...internal?.sub}
         />
       )
     }

@@ -1,5 +1,5 @@
 import { Alert, Checkmark, Visibility, Spinner } from './components/icons'
-import { Button } from './components/core'
+import { Button, DropdownMenu } from './components/core'
 import { Field } from './components/core'
 import { Select } from './components/core'
 import { Checkbox } from './components/core'
@@ -142,14 +142,35 @@ const Page = () => {
               <Button action={() => null}><T>Flyout Item</T></Button>
             </Flyout>
 
-            <Flyout label='Dropdown'>
-              <Menu items={[
-                { label: 'Item 1' },
-                { label: 'Item 2' },
-                { label: 'Item 3' },
-                { label: 'Item 4' },
-              ]} />
-            </Flyout>
+            <DropdownMenu
+              label='Dropdown'
+              items={[
+                { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
+                { icon: <Alert color='dimmed' />, label: 'Item 2' },
+                { label: 'Item 3', items: [
+                  { label: 'Item 3.1' },
+                  { label: 'Item 3.2', items: [
+                    { label: 'Item 3.2.1' },
+                    { label: 'Item 3.2.2' },
+                    { label: 'Item 3.2.3' },
+                  ] },
+                  { label: 'Item 3.3' },
+                ] },
+                { label: 'Item 4', items: [
+                  { label: 'Item 4.1' },
+                  { label: 'Item 4.2', items: [
+                    { label: 'Item 4.2.1' },
+                    { label: 'Item 4.2.2' },
+                    { label: 'Item 4.2.3', items: [
+                      { label: 'Item 4.2.3.1' },
+                      { label: 'Item 4.2.3.2' },
+                      { label: 'Item 4.2.3.3' },
+                    ] },
+                  ] },
+                  { label: 'Item 4.3' },
+                ]}
+              ]}
+            />
 
             <Slider name='slider1'
               minValue={0}
@@ -323,7 +344,7 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection>
-          <Menu items={[
+          <Menu size='l' items={[
             { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
             { icon: <Alert color='dimmed' />, label: 'Item 2' },
             { label: 'Item 3', items: [
