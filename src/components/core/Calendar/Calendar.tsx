@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Button } from '../Button'
 import { Typography } from '../Typography'
@@ -38,9 +38,137 @@ const Calendar: React.FC<CalendarProps> = ({
   const activeDates = value ?? selectedDates
   const [displayDate, setDisplayDate] = useState(activeDates[0])
 
+  const daysRef = useRef<HTMLDivElement>(null)
+  const navOffsetRef = useRef<number>(null)
+  const navDirectionRef = useRef<'prev' | 'next'>(null)
+
   const updateSelectedDates = (newDate: Date[]) => {
     value === undefined && setSelectedDates(newDate)
     onChange?.(newDate)
+  }
+
+  useEffect(() => {
+    if (
+      navOffsetRef.current === null ||
+      navDirectionRef.current === null
+    ) return
+
+    const children = getChildren()!
+    const offset =
+      navDirectionRef.current === 'next' ?
+        navOffsetRef.current :
+        currentMonthDays + navOffsetRef.current - 1
+
+    const current = children[offset]
+
+    current !== undefined && current.focus()
+  }, [displayDate])
+
+  const getChildren = () => {
+    if (!daysRef.current?.children) return
+    const content = daysRef.current
+
+    return Array.from(content.children).flatMap((child) => {
+      const button = child.querySelector('button')
+      if (!button || button.disabled) return []
+
+      return button
+    })
+  }
+
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    const keys = [
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowUp',
+      'ArrowDown',
+      'PageUp',
+      'PageDown',
+      'Home',
+      'End',
+    ]
+
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
+
+    const children = getChildren()!
+
+    const getFocusedIndex = () => {
+      for (let i = 0; i < children.length; i++) {
+        if (children[i] === document.activeElement) {
+          return i
+        }
+      }
+    }
+
+    const index = getFocusedIndex()!
+
+    const updateFocus = (count: number) => {
+      let current = children[index + count]
+
+      if (count > 0 && current === undefined) {
+        navDirectionRef.current = 'next'
+        navOffsetRef.current = index + count - currentMonthDays
+        updateDisplayMonth(displayMonth + 1)
+      } else if (count < 0 && current === undefined) {
+        navDirectionRef.current = 'prev'
+        navOffsetRef.current = index + count + 1
+        updateDisplayMonth(displayMonth - 1)
+      } else if (current !== undefined) {
+        current.focus()
+      }
+    }
+
+    const offset = 5 - currentMonthStart
+    const offsetIndex = index + 13 - offset
+
+    switch (e.key) {
+      case 'ArrowLeft':
+        updateFocus(-1)
+        break
+
+      case 'ArrowRight':
+        updateFocus(1)
+        break
+
+      case 'ArrowDown':
+        updateFocus(7)
+        break
+
+      case 'ArrowUp':
+        updateFocus(-7)
+        break
+
+      case 'PageDown':
+        navDirectionRef.current = 'next'
+        const nextMonthDays = new Date(displayYear, displayMonth + 2, 0).getDate()
+        navOffsetRef.current = Math.min(index, nextMonthDays - 1)
+        updateDisplayMonth(displayMonth + 1)
+        break
+
+      case 'PageUp':
+        navDirectionRef.current = 'next'
+        navOffsetRef.current = index
+        updateDisplayMonth(displayMonth - 1)
+        break
+
+      case 'Home':
+        const weekStartIndex = Math.max(offsetIndex - (offsetIndex % 7) + offset - 13, 0)
+        const weekStartItem = children[weekStartIndex]
+        weekStartItem !== undefined && weekStartItem.focus()
+
+        break
+
+      case 'End':
+        const weekEndIndex = Math.min(offsetIndex - (offsetIndex % 7) + offset - 7, children.length - 1)
+        const weekEndItem = children[weekEndIndex]
+        weekEndItem !== undefined && weekEndItem.focus()
+
+        break
+
+      default:
+        break
+    }
   }
 
   const displayYear = displayDate.getFullYear()
@@ -89,6 +217,10 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   }
 
+  const updateDisplayMonth = (newMonth: number) => {
+    setDisplayDate(new Date(displayYear, newMonth, displayDay))
+  }
+
   return (
     <div
       className={styles['calendar']}
@@ -101,7 +233,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
         <div className={styles['chevrons']}>
           <Button
-            action={() => setDisplayDate(new Date(displayYear, displayMonth - 1, displayDay))}
+            action={() => updateDisplayMonth(displayMonth - 1)}
             surface='hollow'
             internal={{
               root: {
@@ -122,7 +254,7 @@ const Calendar: React.FC<CalendarProps> = ({
           </Button>
 
           <Button
-            action={() => setDisplayDate(new Date(displayYear, displayMonth + 1, displayDay))}
+            action={() => updateDisplayMonth(displayMonth + 1)}
             surface='hollow'
             internal={{
               root: {
@@ -158,7 +290,11 @@ const Calendar: React.FC<CalendarProps> = ({
         }
       </div>
 
-      <div className={styles['days']}>
+      <div
+        ref={daysRef}
+        className={styles['days']}
+        onKeyDown={handleKeyboard}
+      >
         {
           [...Array(6*7)].map((_, index) => {
             const dayIndex = index - currentMonthStart
@@ -194,6 +330,8 @@ const Calendar: React.FC<CalendarProps> = ({
                           justifyContent: 'center',
                           alignItems: 'center',
                         },
+
+                        tabIndex: dayIndex === 1 ? 0 : -1,
                       }
                     }}
                   >
