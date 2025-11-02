@@ -5,12 +5,12 @@ import { Typography } from '../Typography'
 import styles from './Calendar.module.css'
 
 interface CalendarProps {
-  type?: 'single' | 'multiple' | 'range'
+  type?: 'single' | 'multiple'
   minValue?: Date
   maxValue?: Date
-  value?: Date
-  defaultValue?: Date
-  onChange?: (value: Date) => void
+  value?: Date[]
+  defaultValue?: Date[]
+  onChange?: (value: Date[]) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
@@ -26,40 +26,68 @@ const weekDays = [
 ]
 
 const Calendar: React.FC<CalendarProps> = ({
+  type='single',
   minValue,
   maxValue,
   value,
-  defaultValue: defaultDate=new Date(),
+  defaultValue: defaultDate=[new Date()],
   onChange,
   internal,
 }) => {
-  const [selectedDate, setSelectedDate] = useState(defaultDate)
-  const activeDate = value ?? selectedDate
-  const [displayDate, setDisplayDate] = useState(activeDate)
+  const [selectedDates, setSelectedDates] = useState(defaultDate)
+  const activeDates = value ?? selectedDates
+  const [displayDate, setDisplayDate] = useState(activeDates[0])
 
-  const updateSelectedDate = (newDate: Date) => {
-    value === undefined && setSelectedDate(newDate)
+  const updateSelectedDates = (newDate: Date[]) => {
+    value === undefined && setSelectedDates(newDate)
     onChange?.(newDate)
   }
 
-  const currentYear = activeDate.getFullYear()
   const displayYear = displayDate.getFullYear()
   
-  const currentMonth = activeDate.getMonth()
   const displayMonth = displayDate.getMonth()
   const monthName = months[displayMonth]
   
-  const currentDay = activeDate.getDate()
   const displayDay = displayDate.getDate()
-
-  const activeDisplay =
-    currentYear === displayYear &&
-    currentMonth === displayMonth
 
   const now = new Date()
 
   const currentMonthStart = new Date(displayYear, displayMonth, 1).getDay() - 1
   const currentMonthDays = new Date(displayYear, displayMonth + 1, 0).getDate()
+
+  const isDateSelected = (dateValue: Date) => {
+    return activeDates.find((date) => {
+      return (
+        date.getDate() === dateValue.getDate() &&
+        date.getMonth() === dateValue.getMonth() &&
+        date.getFullYear() === dateValue.getFullYear()
+      )
+    })
+  }
+
+  const toggleSelectedDay = (dateValue: Date) => {
+    const dateIndex = isDateSelected(dateValue)
+
+    if (dateIndex === undefined) {
+      if (type === 'multiple') {
+        updateSelectedDates([...activeDates, dateValue])
+      } else if (type === 'single') {
+        updateSelectedDates([dateValue])
+      }
+    } else {
+      const updatedDates = activeDates.flatMap((date) => {
+        if (
+          date.getDate() === dateValue.getDate() &&
+          date.getMonth() === dateValue.getMonth() &&
+          date.getFullYear() === dateValue.getFullYear()
+        ) {
+          return []
+        } else return date
+      })
+
+      updateSelectedDates(updatedDates)
+    }
+  }
 
   return (
     <div
@@ -118,9 +146,11 @@ const Calendar: React.FC<CalendarProps> = ({
 
       <div className={styles['week']}>
         {
-          weekDays.map((weekDay) => {
+          weekDays.map((weekDay, index) => {
             return (
-              <div className={styles['weekday']}>
+              <div
+                key={`weekday-${index}`}
+                className={styles['weekday']}>
                 <Typography color='dimmed' size='s' weight='300'>{weekDay.at(0)}</Typography>
               </div>
             )
@@ -132,15 +162,18 @@ const Calendar: React.FC<CalendarProps> = ({
         {
           [...Array(6*7)].map((_, index) => {
             const dayIndex = index - currentMonthStart
-            const thisDate = new Date(displayYear, displayMonth, dayIndex)
+            const dateValue = new Date(displayYear, displayMonth, dayIndex)
 
             return (
-              <div className={styles['day']}>
+              <div
+                key={`day-${index}`}
+                className={styles['day']}
+              >
                 {index > currentMonthStart && dayIndex < currentMonthDays + 1 &&
                   <Button
-                    action={() => updateSelectedDate(new Date(displayYear, displayMonth, dayIndex))}
+                    action={() => toggleSelectedDay(dateValue)}
                     surface={
-                      currentDay === dayIndex && activeDisplay ? 'fill' :
+                      isDateSelected(dateValue) ? 'fill' :
 
                       displayDay === dayIndex && now.getFullYear() === displayYear &&
                         now.getMonth() === displayMonth ? 'outline' :
@@ -148,8 +181,8 @@ const Calendar: React.FC<CalendarProps> = ({
                       'hollow'
                     }
                     disabled={
-                      (minValue && thisDate < minValue) ||
-                      (maxValue && thisDate > maxValue)
+                      (minValue && dateValue < minValue) ||
+                      (maxValue && dateValue > maxValue)
                     }
                     internal={{
                       root: {

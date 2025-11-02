@@ -31,7 +31,7 @@ const Page = () => {
   const [radioValue, setRadioValue] = useState('r2')
   const [tabValue, setTabValue] = useState('t1')
   const [pageValue, setPageValue] = useState(1)
-  const [dateValue, setDateValue] = useState(new Date())
+  const [dateValue, setDateValue] = useState([new Date()])
 
   return (
     <>
@@ -357,12 +357,19 @@ const Page = () => {
             gap: '40px',
           }}>
             <Calendar
+              type='single'
               minValue={new Date(2025, 5, 12)}
               maxValue={new Date(2026, 1, 20)}
               value={dateValue}
               onChange={setDateValue}
             />
-            <Typography>Selected date: {dateValue.toDateString()}</Typography>
+            <Typography>
+              Selected date: {
+                dateValue.map((val) => {
+                  return val.toDateString()
+                })
+              }
+            </Typography>
           </div>
         </Layout.Subsection>
 
