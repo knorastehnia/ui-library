@@ -114,6 +114,7 @@ const Page = () => {
 
             <Flyout label='Flyout' arrangement='vertical'>
               <Button action='#'><T>Flyout Item</T></Button>
+
               <Flyout label='Nested Flyout 1'>
                 <Button><T>Flyout Item</T></Button>
                 <Button><T>Flyout Item</T></Button>

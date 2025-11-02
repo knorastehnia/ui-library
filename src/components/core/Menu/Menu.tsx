@@ -146,6 +146,7 @@ const Menu: React.FC<MenuProps> = ({
       'End',
       'PageUp',
       'PageDown',
+      'Tab',
     ]
 
     if (!keys.includes(e.key)) return
@@ -222,6 +223,11 @@ const Menu: React.FC<MenuProps> = ({
       case 'Home':
         const firstTab = children[0]
         firstTab.focus()
+
+        break
+
+      case 'Tab':
+        if (ctx) ctx.closeParent()
 
         break
 

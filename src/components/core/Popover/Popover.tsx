@@ -34,9 +34,7 @@ const Popover: React.FC<PopoverProps> = ({
   }
 
   const escapePopover = (event: KeyboardEvent) => {
-    if (event.key !== 'Escape') return
-
-    onClose?.(event)
+    if (event.key === 'Escape') onClose?.(event)
   }
 
   useEffect(() => {
@@ -77,7 +75,7 @@ const Popover: React.FC<PopoverProps> = ({
 
     const parentElement = contentRef.current.parentElement
     if (!parentElement) return
-  
+
     const rect = contentRef.current.getBoundingClientRect()
     const parentRect = parentElement.getBoundingClientRect()
 
@@ -100,15 +98,12 @@ const Popover: React.FC<PopoverProps> = ({
   useEffect(() => {
     if (!isOpen) return
 
-    const firstItem = contentRef.current?.children[0]
-    firstItem && (firstItem as HTMLElement).focus()
-
     const raf = requestAnimationFrame(() => {
       document.addEventListener('click', closePopover)
       document.addEventListener('keydown', escapePopover)
     })
 
-    
+
     return () => {
       document.removeEventListener('click', closePopover)
       document.removeEventListener('keydown', escapePopover)
@@ -120,11 +115,6 @@ const Popover: React.FC<PopoverProps> = ({
     <div
       ref={contentRef}
       style={insetStyles}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) {
-          onClose?.()
-        }
-      }}
       className={`
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}

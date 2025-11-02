@@ -68,9 +68,9 @@ const Select: React.FC<SelectProps> = ({
 
   const closeSelect = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
-      const btn = buttonRef.current as HTMLButtonElement | null;
+      const btn = buttonRef.current as HTMLButtonElement | null
       if (!btn) return
-  
+
       if (event.target !== btn && !btn.contains(event.target as Node)) {
         setIsOpen(prev => {
           if (prev) return false

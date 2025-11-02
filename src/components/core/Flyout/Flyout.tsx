@@ -1,5 +1,5 @@
 import styles from './Flyout.module.css'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Button, ButtonDefaultsProvider, type ButtonProps } from '../Button'
 import { Typography } from '../Typography'
@@ -33,8 +33,9 @@ const Flyout: React.FC<FlyoutProps> = ({
   internal,
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false)
-
   const activeIsOpen = isOpen ?? internalIsOpen
+
+  const triggerRef = useRef<HTMLDivElement>(null)
 
   const updateIsOpen = (value: boolean) => {
     isOpen ?? setInternalIsOpen(value)
@@ -68,7 +69,10 @@ const Flyout: React.FC<FlyoutProps> = ({
         internal={{ root: { 'aria-expanded': activeIsOpen } }}
         {...internal?.trigger}
       >
-        <div className={styles['button-content']}>
+        <div
+          ref={triggerRef}
+          className={styles['button-content']}
+        >
           <Typography>{label}</Typography>
           <div style={{
             transform: activeArrangement === 'horizontal' ? 'rotate(-90deg)' : '',
