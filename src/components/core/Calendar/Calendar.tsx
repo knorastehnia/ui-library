@@ -307,13 +307,14 @@ const Calendar: React.FC<CalendarProps> = ({
           [...Array(6*7)].map((_, index) => {
             const dayIndex = index - currentMonthStart
             const dateValue = new Date(displayYear, displayMonth, dayIndex)
+            const fillSlot = index > currentMonthStart && dayIndex < currentMonthDays + 1
 
             return (
               <div
                 key={`day-${index}`}
-                className={styles['day']}
+                className={fillSlot ? styles['day'] : styles['empty-slot']}
               >
-                {index > currentMonthStart && dayIndex < currentMonthDays + 1 &&
+                {fillSlot &&
                   <Button
                     action={() => toggleSelectedDay(dateValue)}
                     surface={

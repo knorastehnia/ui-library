@@ -19,6 +19,7 @@ import { Pagination } from './components/core'
 import { Breadcrumbs } from './components/core'
 import { Menu } from './components/core'
 import { Calendar } from './components/core'
+import { DatePicker } from './components/core'
 
 import { useState } from 'react'
 
@@ -372,7 +373,7 @@ const Page = () => {
           ]} />
         </Layout.Subsection>
 
-        <Layout.Subsection>
+        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'column',
@@ -393,6 +394,12 @@ const Page = () => {
               }
             </Typography>
           </div>
+        </Layout.Subsection>
+
+        <Layout.Subsection span={2}>
+          <DatePicker
+            label='Select date'
+          />
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>

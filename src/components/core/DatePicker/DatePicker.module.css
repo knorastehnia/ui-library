@@ -1,0 +1,57 @@
+.datepicker {
+  position: relative;
+  width: fit-content;
+}
+
+.calendar-container {
+  padding: 20px;
+}
+
+.display-select {
+  position: relative;
+}
+
+.label {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  padding: 0;
+  top: 0; left: 0;
+  transform: translate(10px, 10px);
+  background-color: var(--background);
+  border-radius: 999px;
+  transition: all var(--ease-out-t) var(--ease-out-c);
+
+  &.label-active {
+    padding: 0 5px;
+    transform: translate(5px, -13px);
+  }
+}
+
+.button {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  background-color: var(--background);
+  border: 1px solid var(--gray-2);
+  border-radius: var(--radius);
+  padding: 0 10px;
+  height: calc(1.4rem + 20px);
+
+  span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  transform: translate(5px 5px);
+  transition: all var(--ease-out-t) var(--ease-out-c);
+  
+  &:hover, &:focus-visible, &.button-active {
+    outline: none;
+    border-color: var(--gray-6);
+  }
+}

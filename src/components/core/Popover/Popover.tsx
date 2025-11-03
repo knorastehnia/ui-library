@@ -115,6 +115,7 @@ const Popover: React.FC<PopoverProps> = ({
     <div
       ref={contentRef}
       style={insetStyles}
+      tabIndex={-1}
       className={`
         ${styles['popover']} 
         ${isOpen && styles['popover-visible']}
