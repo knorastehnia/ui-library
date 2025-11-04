@@ -12,18 +12,6 @@ interface ContextMenuProps extends MenuProps {
   }
 }
 
-const getChildren = (content: HTMLDivElement) => {
-  return Array.from(content.children).flatMap((child) => {
-    if ((child as HTMLButtonElement).disabled) return []
-
-    if (child.tagName === 'BUTTON' || child.tagName === 'A') {
-      return child
-    } else if (child.tagName === 'DIV') {
-      return child.querySelector('button')
-    }
-  }) as HTMLElement[]
-}
-
 const ContextMenu: React.FC<ContextMenuProps> = ({
   children,
   items,
@@ -32,6 +20,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const [isOpen, setIsOpen] = useState(false)
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const contextRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const openContextMenu = (event: React.MouseEvent) => {
     event.preventDefault()
@@ -59,14 +48,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   }, [isOpen])
 
   useEffect(() => {
-    if (!isOpen || !contextRef.current) return
+    if (!isOpen || !menuRef.current) return
 
-    const content = contextRef.current.querySelector(':scope > div > div') as HTMLDivElement
-
-    const children = getChildren(content)
-    const firstChild = children[0]
-
-    firstChild?.focus()
+    menuRef.current.focus()
   }, [isOpen])
 
   return (
@@ -94,7 +78,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
           onClose={closeContextMenu}
           {...internal?.content}
         >
-          <Menu items={items} />
+          <Menu
+            items={items}
+            internal={{
+              root: {ref: menuRef}
+            }}
+          />
         </Popover>
       </div>
     </div>

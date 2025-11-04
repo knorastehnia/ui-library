@@ -12,18 +12,6 @@ interface DropdownMenuProps extends MenuProps {
   }
 }
 
-const getChildren = (content: HTMLDivElement) => {
-  return Array.from(content.children).flatMap((child) => {
-    if ((child as HTMLButtonElement).disabled) return []
-
-    if (child.tagName === 'BUTTON' || child.tagName === 'A') {
-      return child
-    } else if (child.tagName === 'DIV') {
-      return child.querySelector('button')
-    }
-  }) as HTMLElement[]
-}
-
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   label,
   arrangement='vertical',
@@ -33,17 +21,12 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const flyoverRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!isOpen || !flyoverRef.current) return
+    if (!isOpen || !menuRef.current) return
 
-    const content = flyoverRef.current.querySelector(':scope > div > div') as HTMLDivElement
-
-    const children = getChildren(content)
-    const firstChild = children[0]
-
-    firstChild?.focus()
+    menuRef.current.focus()
   }, [isOpen])
 
   return (
@@ -61,14 +44,14 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         size={size}
         arrangement={arrangement}
         disabled={disabled}
-        internal={{
-          root: {ref: flyoverRef}
-        }}
         {...internal?.root}
       >
         <Menu
           items={items}
           size={size}
+          internal={{
+            root: {ref: menuRef}
+          }}
           {...internal?.content}
         />
       </Flyout>

@@ -136,6 +136,7 @@ const Menu: React.FC<MenuProps> = ({
   const handleKeyboard = (e: React.KeyboardEvent) => {
     if (!menuRef.current?.children) return
     const content = menuRef.current
+    const menu = content.parentElement as HTMLDivElement
 
     const keys = [
       'ArrowLeft',
@@ -159,7 +160,7 @@ const Menu: React.FC<MenuProps> = ({
       return item === document.activeElement
     })
 
-    if (!isActiveLevel) return
+    if (!isActiveLevel && menu !== document.activeElement) return
 
     let loop = false
 
@@ -178,7 +179,7 @@ const Menu: React.FC<MenuProps> = ({
       case 'ArrowDown':
         loop = true
       case 'PageDown':
-        if (content === document.activeElement) {
+        if (menu === document.activeElement) {
           children[0].focus()
 
           break
@@ -198,7 +199,7 @@ const Menu: React.FC<MenuProps> = ({
       case 'ArrowUp':
         loop = true
       case 'PageUp':
-        if (content === document.activeElement) {
+        if (menu === document.activeElement) {
           children[children.length - 1].focus()
 
           break
@@ -289,12 +290,14 @@ const Menu: React.FC<MenuProps> = ({
 
   return (
     <div
-      ref={menuRef}
       className={styles['menu']}
       onKeyDown={handleKeyboard}
+      tabIndex={-1}
       {...internal?.root}
     >
-      {renderedItems}
+      <div ref={menuRef}>
+        {renderedItems}
+      </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { vi, type Mock } from 'vitest'
-import { screen, render, type RenderResult } from '@testing-library/react'
+import { render, type RenderResult } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { axe } from 'vitest-axe'
 import { ContextMenu } from './ContextMenu'
@@ -24,7 +24,7 @@ describe('ContextMenu', () => {
   })
 
   it('should open on content Right Click', async () => {
-    const popover = screen.getByRole('dialog', { hidden: true })
+    const popover = component.getByRole('dialog', { hidden: true })
     const content = component.getByText('Content')
 
     expect(popover).toHaveAttribute('aria-hidden', 'true')
@@ -36,9 +36,9 @@ describe('ContextMenu', () => {
     const content = component.getByText('Content')
     await user.pointer({ keys: '[MouseRight>]', target: content })
 
-    const item1 = screen.getByRole('button', { name: 'Item 1' })
-    const item2 = screen.getByRole('button', { name: 'Item 2' })
-    const item3 = screen.getByRole('button', { name: 'Item 3' })
+    const item1 = component.getByRole('button', { name: 'Item 1' })
+    const item2 = component.getByRole('button', { name: 'Item 2' })
+    const item3 = component.getByRole('button', { name: 'Item 3' })
 
     await user.click(item1)
     await user.click(item2)
@@ -51,9 +51,9 @@ describe('ContextMenu', () => {
     const content = component.getByText('Content')
     await user.pointer({ keys: '[MouseRight>]', target: content })
 
-    const item1 = screen.getByRole('button', { name: 'Item 1' })
-    const item3 = screen.getByRole('button', { name: 'Item 3' })
-    const item4 = screen.getByRole('button', { name: 'Item 4' })
+    const item1 = component.getByRole('button', { name: 'Item 1' })
+    const item3 = component.getByRole('button', { name: 'Item 3' })
+    const item4 = component.getByRole('button', { name: 'Item 4' })
 
     // When no item is in focus, ArrowDown should focus first item
     await user.keyboard('[ArrowDown]')

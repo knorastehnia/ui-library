@@ -3,6 +3,10 @@
   max-width: 200px;
   border-radius: var(--radius);
   transition: all var(--ease-out-t) var(--ease-out-c);
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .item-content {
