@@ -1,6 +1,5 @@
 import styles from './ContextMenu.module.css'
-import { useLayoutEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Popover, type PopoverProps } from '../Popover'
 import { Menu, type MenuProps } from '../Menu'
 
@@ -11,6 +10,18 @@ interface ContextMenuProps extends MenuProps {
     display?: PopoverProps
     content?: MenuProps
   }
+}
+
+const getChildren = (content: HTMLDivElement) => {
+  return Array.from(content.children).flatMap((child) => {
+    if ((child as HTMLButtonElement).disabled) return []
+
+    if (child.tagName === 'BUTTON' || child.tagName === 'A') {
+      return child
+    } else if (child.tagName === 'DIV') {
+      return child.querySelector('button')
+    }
+  }) as HTMLElement[]
 }
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
@@ -26,9 +37,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     event.preventDefault()
     if (contextRef?.current?.contains(event.target as HTMLElement)) return
 
+    console.log(event.clientY)
+
     setPos({
-      x: event.clientX + window.scrollX,
-      y: event.clientY + window.scrollY,
+      x: event.clientX,
+      y: event.clientY,
     })
     setIsOpen(true)
 
@@ -45,35 +58,45 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     isOpen && contextRef.current?.focus()
   }, [isOpen])
 
+  useEffect(() => {
+    if (!isOpen || !contextRef.current) return
+
+    const content = contextRef.current.querySelector(':scope > div > div') as HTMLDivElement
+
+    const children = getChildren(content)
+    const firstChild = children[0]
+
+    firstChild?.focus()
+  }, [isOpen])
+
   return (
     <div
       className={styles['context-container']}
       onContextMenu={openContextMenu}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          closeContextMenu()
+        }
+      }}
       {...internal?.root}
     >
       {children}
 
-      {
-        createPortal(
-          <div
-            ref={contextRef}
-            className={styles['context-menu']}
-            style={{ top: pos.y, left: pos.x, }}
-            tabIndex={-1}
-            {...internal?.display}
-          >
-            <Popover
-              isOpen={isOpen}
-              onClose={closeContextMenu}
-              {...internal?.content}
-            >
-              <Menu items={items} />
-            </Popover>
-          </div>,
-
-          document.querySelector('#root')!
-        )
-      }
+      <div
+        ref={contextRef}
+        className={styles['context-menu']}
+        style={{ top: pos.y, left: pos.x, }}
+        tabIndex={-1}
+        {...internal?.display}
+      >
+        <Popover
+          isOpen={isOpen}
+          onClose={closeContextMenu}
+          {...internal?.content}
+        >
+          <Menu items={items} />
+        </Popover>
+      </div>
     </div>
   )
 }
