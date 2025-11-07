@@ -1,10 +1,11 @@
 import styles from './DatePicker.module.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Calendar, type CalendarProps } from '../Calendar'
 import { Typography } from '../Typography'
 import { Popover } from '../Popover'
 
 interface DatePickerProps extends CalendarProps {
+  type?: never
   label: string
   disabled?: boolean
   internal?: {
@@ -32,6 +33,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const displayValue = activeValue?.at(0)?.toDateString() || ''
 
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const id = useId()
   
   const updateInternalValue = (val: Date[]) => {
     value === undefined && setInternalValue(val)
@@ -68,6 +71,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             ${styles['label']} 
             ${(displayValue.length || isOpen) && styles['label-active']}
           `}
+          id={`label-${id}`}
         >
           <Typography
             weight='400'
@@ -89,6 +93,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             type='text'
             role='combobox'
             aria-expanded={isOpen}
+            aria-labelledby={`label-${id}`}
             disabled={disabled}
             {...internal?.trigger}
           />

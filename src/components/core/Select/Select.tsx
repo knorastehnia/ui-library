@@ -325,7 +325,6 @@ const Select: React.FC<SelectProps> = ({
             ${styles['label']} 
             ${(selected.length || isOpen) && styles['label-active']}
           `}
-          htmlFor={id}
           id={`label-${id}`}
         >
           <Typography
