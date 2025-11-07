@@ -54,9 +54,14 @@ const Select: React.FC<SelectProps> = ({
 
   const [isOpen, setIsOpen] = useState(false)
   const [isInteractive, setIsInteractive] = useState(true)
-  const [currentValue, setCurrentValue] = useState('')
+  const [searchValue, setSearchValue] = useState('')
   const [visibleItems, setVisibleItems] = useState(items)
   const [internalSelected, setInternalSelected] = useState<ItemInterface[]>(deriveInterface(defaultValue))
+
+  const updateSelected = (items: ItemInterface[]) => {
+    value === undefined && setInternalSelected(items)
+    onChange?.(items.map((item) => item.value))
+  }
 
   const selected = value !== undefined ? deriveInterface(value) : internalSelected
 
@@ -97,13 +102,11 @@ const Select: React.FC<SelectProps> = ({
     if (item.disabled) return
 
     if (selected.length && selected[0].value === item.value) {
-      onChange?.([])
-      setInternalSelected([])
-      setCurrentValue('')
+      updateSelected([])
+      setSearchValue('')
     } else {
-      onChange?.([item.value])
-      setInternalSelected([item])
-      setCurrentValue(generatePreview())
+      updateSelected([item])
+      setSearchValue(generatePreview())
     }
 
     setIsInteractive(false)
@@ -116,11 +119,10 @@ const Select: React.FC<SelectProps> = ({
 
   const updateSearch = (searchString: string) => {
     if (!contentRef.current?.children) return
-    setCurrentValue(searchString)
+    setSearchValue(searchString)
 
     if (searchString !== selected.at(0)?.label) {
-      onChange?.([])
-      setInternalSelected([])
+      updateSelected([])
     }
 
     if (searchString.length === 0) {
@@ -150,13 +152,11 @@ const Select: React.FC<SelectProps> = ({
         return selectedItem.value !== item.value
       })
 
-      setInternalSelected(filtered)
-      onChange?.(filtered.map((item) => item.value))
+      updateSelected(filtered)
     } else {
       const selectedItem = selected.length ? [...selected, item] : [item]
 
-      setInternalSelected(selectedItem)
-      onChange?.(selectedItem.map((item) => item.value))
+      updateSelected(selectedItem)
     }
   }
 
@@ -259,7 +259,7 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     if (selected.length === 0) return
 
-    setCurrentValue(generatePreview())
+    setSearchValue(generatePreview())
   }, [value])
 
   useEffect(() => {
@@ -269,7 +269,7 @@ const Select: React.FC<SelectProps> = ({
 
     if (!selected.length) {
       setVisibleItems(items)
-      setCurrentValue('')
+      setSearchValue('')
     }
   }, [isOpen])
 
@@ -325,7 +325,8 @@ const Select: React.FC<SelectProps> = ({
             ${styles['label']} 
             ${(selected.length || isOpen) && styles['label-active']}
           `}
-          htmlFor={name}
+          htmlFor={id}
+          id={`label-${id}`}
         >
           <Typography
             weight='400'
@@ -348,6 +349,7 @@ const Select: React.FC<SelectProps> = ({
             onKeyDown={handleKeyboard}
             role='combobox'
             aria-expanded={isOpen}
+            aria-labelledby={`label-${id}`}
             {...internal?.trigger as React.HTMLAttributes<HTMLButtonElement>}
           >
             <Typography>
@@ -373,11 +375,12 @@ const Select: React.FC<SelectProps> = ({
               setVisibleItems(items)
             }}
             onKeyDown={handleKeyboard}
-            value={currentValue}
+            value={searchValue}
             onChange={(e) => updateSearch(e.target.value)}
             type='text'
             role='combobox'
             aria-expanded={isOpen}
+            aria-labelledby={`label-${id}`}
             {...internal?.trigger as React.HTMLAttributes<HTMLInputElement>}
           />
         }
