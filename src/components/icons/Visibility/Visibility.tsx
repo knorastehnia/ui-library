@@ -1,4 +1,5 @@
 import styles from './Visibility.module.css'
+import { useId } from 'react'
 
 interface VisibilityProps {
   state: boolean
@@ -15,6 +16,7 @@ const Visibility: React.FC<VisibilityProps> = ({
   state,
   color='dimmed',
 }) => {
+  const id = useId()
 
   return (
     <svg
@@ -32,7 +34,7 @@ const Visibility: React.FC<VisibilityProps> = ({
     >
 
       <mask
-        id='strike-mask'
+        id={id}
         maskUnits='userSpaceOnUse'
         x='0' y='0' width='20' height='12'
       >
@@ -65,7 +67,7 @@ const Visibility: React.FC<VisibilityProps> = ({
         pathLength='1'
       />
 
-      <g mask='url(#strike-mask)'>
+      <g mask={`url(#${id})`}>
         <path
           d={
             `M9.65783 4C10.6577 4.00028 11.6578 5.00014 11.6578 6C11.6578 6.99986 10.6577 
