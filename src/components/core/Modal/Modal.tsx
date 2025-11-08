@@ -1,11 +1,12 @@
 import styles from './Modal.module.css'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { useFocusTrap } from '../../../hooks/useFocusTrap'
 
 interface ModalProps {
   children: React.ReactElement | React.ReactElement[]
   isOpen: boolean
-  setIsOpen: Function
+  onOpenChange: (isOpen: boolean) => void
   width?: string
   height?: string
   internal?: {
@@ -18,14 +19,18 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   children,
   isOpen,
-  setIsOpen,
+  onOpenChange,
   width='auto',
   height='auto',
   internal,
 }) => {
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useFocusTrap(modalRef, isOpen)
+
   const escapeModal = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setIsOpen(false)
+      onOpenChange(false)
     }
   }
 
@@ -36,6 +41,7 @@ const Modal: React.FC<ModalProps> = ({
 
   return createPortal(
     <div
+      ref={modalRef}
       className={`
         ${styles['modal']} 
         ${isOpen && styles['open']}
@@ -44,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={styles['modal-bg']}
-        onClick={() => setIsOpen(false)}
+        onClick={() => onOpenChange(false)}
         {...internal?.background}
       />
 

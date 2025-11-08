@@ -36,15 +36,17 @@ const Page = () => {
 
   return (
     <>
-      <Modal isOpen={showModal} setIsOpen={setShowModal} width='500px'>
-        <T type='h3' size='xs'>Modal component</T>
+      <Modal isOpen={showModal} onOpenChange={setShowModal} width='300px'>
+        {/* <T type='h3' size='xs'>Modal component</T>
 
         <T type='p'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
           Facilis quaerat similique maxime atque consequatur alias est, autem 
           obcaecati laboriosam mollitia harum, ad quia officia tempore 
           doloremque saepe explicabo!
-        </T>
+        </T> */}
+
+        <Calendar />
 
         <div style={{
           marginLeft: 'auto',
