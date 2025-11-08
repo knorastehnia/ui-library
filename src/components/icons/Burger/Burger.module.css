@@ -1,0 +1,20 @@
+.svg {
+  pointer-events: none;
+  overflow: visible;
+  display: block;
+
+  path {
+    transition: all calc(var(--ease-out-t) / 2) var(--ease-out-c);
+  }
+
+  .active {
+    d: path('M0.5 3.5H9.5M0.5 3.5H9.5M0.5 3.5H9.5');
+  }
+
+  &.color-primary > path { stroke: var(--foreground) }
+  &.color-dimmed > path { stroke: var(--gray-9) }
+  &.color-inverted > path { stroke: var(--background) }
+  &.color-disabled > path { stroke: var(--gray-6) }
+  &.color-error > path { stroke: var(--error) }
+  &.color-success > path { stroke: var(--success) }
+}

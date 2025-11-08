@@ -1,7 +1,7 @@
 import styles from './Layout.module.css'
 import { useState } from 'react'
 import { Button, type ButtonProps } from '../Button'
-import { T } from '../Typography'
+import { Burger } from '../../icons'
 
 interface LayoutProps {
   children: React.ReactElement | React.ReactElement[]
@@ -115,7 +115,7 @@ const SideNav: React.FC<SideNavProps> = ({
   children,
   internal,
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   return (
     <div
@@ -129,13 +129,15 @@ const SideNav: React.FC<SideNavProps> = ({
         `}
       >
         <div className={styles['sidenav-header']}>
-          <Button
-            surface='hollow'
-            action={() => setIsCollapsed(!isCollapsed)}
-            {...internal?.trigger}
-          >
-            <T>_</T>
-          </Button>
+          <div className={styles['burger']}>
+            <Button
+              surface='hollow'
+              action={() => setIsCollapsed(!isCollapsed)}
+              {...internal?.trigger}
+            >
+              <Burger state={!isCollapsed} />
+            </Button>
+          </div>
         </div>
 
         <div

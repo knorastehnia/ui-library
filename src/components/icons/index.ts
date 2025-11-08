@@ -1,5 +1,6 @@
 export * from './Alert'
 export * from './Arrow'
+export * from './Burger'
 export * from './Checkmark'
 export * from './Ellipsis'
 export * from './Spinner'
