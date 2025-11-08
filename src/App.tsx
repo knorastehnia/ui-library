@@ -1,6 +1,5 @@
-import './App.css'
-
 import Page from './Page'
+import { ThemeProvider } from './components/core'
 import { Layout, TypographyDefaultsProvider } from './components/core'
 import { Typography, T } from './components/core'
 import { Button, ButtonDefaultsProvider } from './components/core'
@@ -8,7 +7,7 @@ import { Collapsible } from './components/core'
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme='light'>
       <Layout>
         <Layout.TopNav>
           <Typography color='dimmed'>Top Nav Bar</Typography>
@@ -60,7 +59,7 @@ const App = () => {
         </Layout.Content>
       </Layout>
 
-    </>
+    </ThemeProvider>
   )
 }
 

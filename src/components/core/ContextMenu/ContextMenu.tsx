@@ -24,8 +24,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const menuRef = useRef<HTMLDivElement>(null)
 
   const openContextMenu = useCallback((event: MouseEvent) => {
-    console.log('test')
-
     event.preventDefault()
     if (contextRef?.current?.contains(event.target as HTMLElement)) return
 

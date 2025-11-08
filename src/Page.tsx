@@ -312,7 +312,7 @@ const Page = () => {
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection>
+        <Layout.Subsection span={1}>
           <Menu size='l' items={[
             { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
             { icon: <Alert color='dimmed' />, label: 'Item 2' },
@@ -364,13 +364,13 @@ const Page = () => {
           </div>
         </Layout.Subsection>
 
-        <Layout.Subsection span={2}>
+        <Layout.Subsection span={1}>
           <DatePicker
             label='Select date'
           />
         </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
+        <Layout.Subsection span={2}>
           <div ref={targetRef}>
             <Collapsible size='m' label='Collapsible 1' arrangement='trailing'>
               <Typography type='p'>
@@ -395,10 +395,8 @@ const Page = () => {
             </Collapsible>
           </div>
         </Layout.Subsection>
-      </Layout.Section>
 
-      <Layout.Section>
-        <Layout.Subsection>
+        <Layout.Subsection span={1}>
           <Tabs value={tabValue} onChange={setTabValue} navigation='select'>
             <Tabs.Tab label='Tab 1' value='t1'>
               <T>Lorem ipsum dolor sit amet 1</T>

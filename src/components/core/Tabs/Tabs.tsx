@@ -104,9 +104,7 @@ const Tabs: TabsComponent = ({
   const tabListRef = useRef<HTMLDivElement>(null)
 
   const handleKeyboard = (e: React.KeyboardEvent) => {
-    console.log('key down')
     if (!tabListRef.current?.children) return
-    // if (!tabListRef.current.contains(document.activeElement)) return
 
     const keys = [
       'ArrowLeft',
