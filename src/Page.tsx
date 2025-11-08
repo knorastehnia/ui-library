@@ -7,8 +7,6 @@ import { Radio } from './components/core'
 import { Flyout } from './components/core'
 import { Typography, T } from './components/core'
 import { Modal } from './components/core'
-import { List } from './components/core'
-import { Table } from './components/core'
 import { ContextMenu } from './components/core'
 import { Tabs } from './components/core'
 import { Slider } from './components/core'
@@ -311,42 +309,6 @@ const Page = () => {
 
       <Layout.Section>
         <Layout.Subsection>
-          <Table>
-            <Table.Row>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell>
-                <Field label='Field' type='textarea' resizable name='field1' />
-              </Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell rowSpan={2} colSpan={1}>
-                <Typography type='p'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, 
-                  porro doloribus. Ad ratione expedita, quae neque fugit, ea 
-                  laboriosam facere quas exercitationem sint doloribus. 
-                  Excepturi dolorum nobis ratione vel facilis?
-                </Typography>
-              </Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell><T>Cell</T></Table.Cell>
-              <Table.Cell><T>Cell</T></Table.Cell>
-            </Table.Row>
-          </Table>
-        </Layout.Subsection>
-
-        <Layout.Subsection>
           <Menu size='l' items={[
             { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
             { icon: <Alert color='dimmed' />, label: 'Item 2' },
@@ -402,50 +364,6 @@ const Page = () => {
           <DatePicker
             label='Select date'
           />
-        </Layout.Subsection>
-
-        <Layout.Subsection span={1}>
-          <ContextMenu items={[
-            { icon: <Alert />,  label: 'Context Menu Item' },
-            { label: 'Refresh Page' },
-            { label: 'Inspect Item', disabled: true },
-            { label: 'Loop Up Definition', disabled: false, items: [
-              { label: 'Item 1' },
-              { label: 'Item 2' },
-              { label: 'Item 3' },
-              { label: 'Item 4' },
-            ] },
-            { label: 'Save As...' },
-          ]}>
-            <List>
-              <List.Item>
-                <T>Dolor sit amet consectetur adipisicing elit.</T>
-              </List.Item>
-
-              <List.Item>
-                <Typography type='span'>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                </Typography>
-              </List.Item>
-
-              <List.Item>
-                <Typography type='p'>
-                  Sit amet consectetur adipisicing elit. Ipsam atque 
-                  dolores aliquam explicabo veniam, hic dolore dicta. 
-                  Adipisci animi sit exercitationem.
-                </Typography>
-              </List.Item>
-
-              <List.Item>
-                <Typography type='p'>
-                  Adipisicing elit. Ipsam atque dolores aliquam 
-                  explicabo veniam, hic dolore dicta. Adipisci 
-                  animi sit exercitationem. Dolores omnis impedit sed 
-                  facilis saepe.
-                </Typography>
-              </List.Item>
-            </List>
-          </ContextMenu>
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
