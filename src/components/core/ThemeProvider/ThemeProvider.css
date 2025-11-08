@@ -1,6 +1,15 @@
+:root {
+  --ease-out-c: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-t: 0.5s;
+}
+
 @font-face {
   font-family: 'IBMPlexSans';
   src: url('../../../assets/fonts/IBMPlexSans-Variable.ttf')
+}
+
+.no-transition * {
+  transition: none !important;
 }
 
 html {

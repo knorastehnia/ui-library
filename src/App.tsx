@@ -1,16 +1,38 @@
+import { useContext } from 'react'
 import Page from './Page'
-import { ThemeProvider } from './components/core'
+import { ThemeContext, ThemeProvider } from './components/core'
 import { Layout, TypographyDefaultsProvider } from './components/core'
 import { Typography, T } from './components/core'
 import { Button, ButtonDefaultsProvider } from './components/core'
 import { Collapsible } from './components/core'
 
+const ThemeSwitch = () => {
+  const ctx = useContext(ThemeContext)
+
+  return (
+    <Button
+      action={() => ctx?.setTheme(ctx.theme === 'light' ? 'dark' : 'light')}
+      surface='hollow'
+    >
+      <T color='dimmed'>/</T>
+    </Button>
+  )
+}
+
 const App = () => {
   return (
-    <ThemeProvider theme='light'>
+    <ThemeProvider defaultTheme='light'>
       <Layout>
         <Layout.TopNav>
-          <Typography color='dimmed'>Top Nav Bar</Typography>
+          <div style={{
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            alignItems: 'center',
+            gap: '10px',
+          }}>
+            <Typography color='dimmed'>Top Nav Bar</Typography>
+            <ThemeSwitch />
+          </div>
         </Layout.TopNav>
 
         <Layout.SideNav>
