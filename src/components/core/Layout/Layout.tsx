@@ -133,6 +133,11 @@ const SideNav: React.FC<SideNavProps> = ({
             <Button
               surface='hollow'
               action={() => setIsCollapsed(!isCollapsed)}
+              internal={{
+                root: {
+                  'aria-label': isCollapsed ? 'Open sidebar' : 'Close sidebar'
+                }
+              }}
               {...internal?.trigger}
             >
               <Burger state={!isCollapsed} />

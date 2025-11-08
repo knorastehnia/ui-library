@@ -17,8 +17,12 @@
       width: 0 !important;
 
       .burger { margin-left: 20px !important }
-      .sidenav-main { padding: 20px 0 !important }
       .sidenav-header { padding: 0 !important }
+
+      .sidenav-main {
+        padding: 20px 0 !important;
+        visibility: hidden;
+      }
     }
   }
 }
