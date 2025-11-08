@@ -26,8 +26,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     event.preventDefault()
     if (contextRef?.current?.contains(event.target as HTMLElement)) return
 
-    console.log(event.clientY)
-
     setPos({
       x: event.clientX,
       y: event.clientY,

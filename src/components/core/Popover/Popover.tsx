@@ -1,5 +1,5 @@
 import styles from './Popover.module.css'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 interface PopoverProps {
   children: React.ReactElement | React.ReactElement[]
@@ -23,7 +23,7 @@ const Popover: React.FC<PopoverProps> = ({
   const [insetStyles, setInsetStyles] = useState<React.CSSProperties>({})
   const contentRef = useRef<HTMLDivElement>(null)
 
-  const closePopover = (event: MouseEvent) => {
+  const closePopover = useCallback((event: MouseEvent) => {
     const content = contentRef.current as HTMLElement
     if (!content) return
     if (!isOpen) return
@@ -31,11 +31,11 @@ const Popover: React.FC<PopoverProps> = ({
     if (event.target !== content && !content.contains(event.target as Node)) {
       onClose?.(event)
     }
-  }
+  }, [isOpen, onClose])
 
-  const escapePopover = (event: KeyboardEvent) => {
+  const escapePopover = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') onClose?.(event)
-  }
+  }, [onClose])
 
   useEffect(() => {
     if (contentRef.current) {
@@ -70,7 +70,7 @@ const Popover: React.FC<PopoverProps> = ({
     setInsetStyles({ left, right, top, bottom, margin })
   }, [invertVertical, invertHorizontal, arrangement])
 
-  const updatePositioning = () => {
+  const updatePositioning = useCallback(() => {
     if (!contentRef.current) return
 
     const parentElement = contentRef.current.parentElement
@@ -81,7 +81,7 @@ const Popover: React.FC<PopoverProps> = ({
 
     setInvertHorizontal(parentRect.right + rect.width >= window.innerWidth)
     setInvertVertical(parentRect.bottom + rect.height >= window.innerHeight)
-  }
+  }, [])
 
   useLayoutEffect(() => {
     updatePositioning()
@@ -89,11 +89,13 @@ const Popover: React.FC<PopoverProps> = ({
     if (isOpen) {
       document.addEventListener('scroll', updatePositioning)
       window.addEventListener('resize', updatePositioning)
-    } else {
+    }
+
+    return () => {
       document.removeEventListener('scroll', updatePositioning)
       window.removeEventListener('resize', updatePositioning)
     }
-  }, [isOpen])
+  }, [isOpen, updatePositioning])
 
   useEffect(() => {
     if (!isOpen) return
@@ -109,7 +111,7 @@ const Popover: React.FC<PopoverProps> = ({
       document.removeEventListener('keydown', escapePopover)
       cancelAnimationFrame(raf)
     }
-  }, [isOpen])
+  }, [isOpen, closePopover, escapePopover])
 
   return (
     <div

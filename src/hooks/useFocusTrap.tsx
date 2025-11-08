@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from 'react'
 
 const useFocusTrap = (
   ref: React.RefObject<HTMLDivElement | null>,
@@ -11,7 +11,7 @@ const useFocusTrap = (
 
     if (children.length > 0) {
       const tabbableItemsFound = children.flatMap((child) => {
-        if (child.tabIndex === 0) {
+        if (child.tabIndex >= 0 && !child.hasAttribute('disabled')) {
           return child
         } else {
           return []
@@ -27,7 +27,9 @@ const useFocusTrap = (
   }
 
   const checkFocusLocation = useCallback((e: KeyboardEvent) => {
-    if (e.key !== 'Tab') return
+    if (e.key !== 'Tab' || !ref.current) return
+
+    getDescendants(ref.current)
 
     const items = tabbableItems.current
     const active = document.activeElement
@@ -51,15 +53,13 @@ const useFocusTrap = (
 
   useEffect(() => {
     if (state) {
-      if (!ref.current) return
-      getDescendants(ref.current)
       document.addEventListener('keydown', checkFocusLocation)
     }
 
     return () => {
       document.removeEventListener('keydown', checkFocusLocation)
     }
-  }, [state])
+  }, [state, checkFocusLocation])
 }
 
 export { useFocusTrap }

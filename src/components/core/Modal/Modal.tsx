@@ -1,5 +1,5 @@
 import styles from './Modal.module.css'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../../hooks/useFocusTrap'
 
@@ -28,16 +28,16 @@ const Modal: React.FC<ModalProps> = ({
 
   useFocusTrap(modalRef, isOpen)
 
-  const escapeModal = (event: KeyboardEvent) => {
+  const escapeModal = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       onOpenChange(false)
     }
-  }
+  }, [onOpenChange])
 
   useEffect(() => {
     document.addEventListener('keydown', escapeModal)
     return () => document.removeEventListener('keydown', escapeModal)
-  }, [])
+  }, [escapeModal])
 
   return createPortal(
     <div

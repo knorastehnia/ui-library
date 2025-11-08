@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useId } from 'react'
+import { useEffect, useRef, useState, useId, useCallback } from 'react'
 import styles from './Slider.module.css'
 
 interface SliderProps {
@@ -45,13 +45,13 @@ const Slider: React.FC<SliderProps> = ({
     return Math.max(Math.min(rawVal, maxValue), minValue)
   }
 
-  const updateInternalValue = (val: number) => {
+  const updateInternalValue = useCallback((val: number) => {
     const normalized = getNormalizedValue(val)
 
     onChange?.(normalized)
     setInternalValue(normalized)
     valueRef.current = normalized
-  }
+  }, [onChange, minValue, maxValue])
 
   const handleKeyboard = (e: React.KeyboardEvent) => {
     const keys = [
@@ -107,7 +107,7 @@ const Slider: React.FC<SliderProps> = ({
     }
   }
 
-  const handlePointer = (e: MouseEvent | React.MouseEvent) => {
+  const handlePointer = useCallback((e: MouseEvent | React.MouseEvent) => {
     if (!sliderRef.current) return
 
     e.preventDefault()
@@ -118,14 +118,14 @@ const Slider: React.FC<SliderProps> = ({
     const rawValue = (valuePercentage / 100 * maxValue) + (step / 2)
     const steppedValue = minValue + rawValue - (rawValue % step)
     updateInternalValue(steppedValue)
-  }
+  }, [minValue, maxValue, step, updateInternalValue])
 
-  const pointerMove = (e: MouseEvent) => {
+  const pointerMove = useCallback((e: MouseEvent) => {
     if (!isPointerDownRef.current) return
 
     setIsDragging(true)
     handlePointer(e)
-  }
+  }, [handlePointer])
 
   const pointerDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return
@@ -138,10 +138,10 @@ const Slider: React.FC<SliderProps> = ({
     }
   }
 
-  const pointerUp = () => {
+  const pointerUp = useCallback(() => {
     setIsDragging(false)
     isPointerDownRef.current = false
-  }
+  }, [])
 
   useEffect(() => {
     document.addEventListener('pointerup', pointerUp)
@@ -151,7 +151,7 @@ const Slider: React.FC<SliderProps> = ({
       document.removeEventListener('pointerup', pointerUp)
       document.removeEventListener('pointermove', pointerMove)
     }
-  }, [])
+  }, [pointerUp, pointerMove])
 
   return (
     <div

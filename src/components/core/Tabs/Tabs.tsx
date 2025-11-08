@@ -36,6 +36,7 @@ const TabsContext = createContext<{
   tabListRef: React.RefObject<HTMLDivElement | null>,
   currentTab: string,
   setCurrentTab: Function,
+  handleKeyboard: React.KeyboardEventHandler
   size: 's' | 'm' | 'l'
 } | null>(null)
 
@@ -50,7 +51,7 @@ const Tab: React.FC<TabProps> = ({
   if (!ctx) throw new Error('<Tabs.Tab> must be a descendant of <Tabs>')
 
   return (
-    <>
+    <div onKeyDown={ctx.handleKeyboard}>
       {
         createPortal(
           <Button
@@ -77,7 +78,7 @@ const Tab: React.FC<TabProps> = ({
       }
 
       {ctx.currentTab === value && children}
-    </>
+    </div>
   )
 }
 
@@ -102,9 +103,10 @@ const Tabs: TabsComponent = ({
 
   const tabListRef = useRef<HTMLDivElement>(null)
 
-  const handleKeyboard = (e: KeyboardEvent) => {
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    console.log('key down')
     if (!tabListRef.current?.children) return
-    if (!tabListRef.current.contains(document.activeElement)) return
+    // if (!tabListRef.current.contains(document.activeElement)) return
 
     const keys = [
       'ArrowLeft',
@@ -180,8 +182,6 @@ const Tabs: TabsComponent = ({
 
   useEffect(() => {
     if (tabListRef.current) setRender(true)
-
-    document.addEventListener('keydown', handleKeyboard)
   }, [])
 
   return (
@@ -203,6 +203,7 @@ const Tabs: TabsComponent = ({
           tabListRef,
           currentTab: activeTab,
           setCurrentTab: updateCurrentTab,
+          handleKeyboard,
           size: size,
         }}>
           {render && children}
