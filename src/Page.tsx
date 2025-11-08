@@ -19,7 +19,7 @@ import { Menu } from './components/core'
 import { Calendar } from './components/core'
 import { DatePicker } from './components/core'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 const Page = () => {
   const [someState, setSomeState] = useState(false)
@@ -32,18 +32,22 @@ const Page = () => {
   const [pageValue, setPageValue] = useState(1)
   const [dateValue, setDateValue] = useState([new Date()])
 
+  const targetRef = useRef<HTMLDivElement>(null)
+
   return (
     <>
+      <ContextMenu
+        target={targetRef}
+        items={[
+          { label: 'Context Menu Item' },
+          { label: 'Refresh Page' },
+          { label: 'Inspect Item', disabled: true },
+          { label: 'Loop Up Definition', disabled: false },
+          { label: 'Save As...' },
+        ]}
+      />
+
       <Modal isOpen={showModal} onOpenChange={setShowModal} width='300px'>
-        {/* <T type='h3' size='xs'>Modal component</T>
-
-        <T type='p'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, cumque? 
-          Facilis quaerat similique maxime atque consequatur alias est, autem 
-          obcaecati laboriosam mollitia harum, ad quia officia tempore 
-          doloremque saepe explicabo!
-        </T> */}
-
         <Calendar />
 
         <div style={{
@@ -367,13 +371,7 @@ const Page = () => {
         </Layout.Subsection>
 
         <Layout.Subsection span={1}>
-          <ContextMenu items={[
-            { label: 'Context Menu Item' },
-            { label: 'Refresh Page' },
-            { label: 'Inspect Item', disabled: true },
-            { label: 'Loop Up Definition', disabled: false },
-            { label: 'Save As...' },
-          ]}>
+          <div ref={targetRef}>
             <Collapsible size='m' label='Collapsible 1' arrangement='trailing'>
               <Typography type='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. A, 
@@ -395,7 +393,7 @@ const Page = () => {
                 Lorem, ipsum dolor sit amet.
               </Typography>
             </Collapsible>
-          </ContextMenu>
+          </div>
         </Layout.Subsection>
       </Layout.Section>
 

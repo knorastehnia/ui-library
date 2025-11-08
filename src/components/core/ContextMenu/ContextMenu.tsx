@@ -1,20 +1,21 @@
 import styles from './ContextMenu.module.css'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Popover, type PopoverProps } from '../Popover'
 import { Menu, type MenuProps } from '../Menu'
 
 interface ContextMenuProps extends MenuProps {
-  children: React.ReactElement | React.ReactElement[]
+  target: React.RefObject<HTMLElement | null>
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: PopoverProps
-    content?: MenuProps
+    popover?: PopoverProps
+    menu?: MenuProps
   }
 }
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
-  children,
   items,
+  size,
+  target,
   internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,7 +23,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const contextRef = useRef<HTMLDivElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  const openContextMenu = (event: React.MouseEvent) => {
+  const openContextMenu = useCallback((event: MouseEvent) => {
+    console.log('test')
+
     event.preventDefault()
     if (contextRef?.current?.contains(event.target as HTMLElement)) return
 
@@ -30,10 +33,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       x: event.clientX,
       y: event.clientY,
     })
+
     setIsOpen(true)
 
     document.body.style.overflow = 'hidden'
-  }
+  }, [])
 
   const closeContextMenu = () => {
     setIsOpen(false)
@@ -51,39 +55,41 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     menuRef.current.focus()
   }, [isOpen])
 
+  useEffect(() => {
+    const trigger = target.current
+    if (!trigger) return
+
+    trigger.addEventListener('contextmenu', openContextMenu)
+
+    return () => trigger.removeEventListener('contextmenu', openContextMenu)
+  }, [openContextMenu])
+
   return (
     <div
-      className={styles['context-container']}
-      onContextMenu={openContextMenu}
+      ref={contextRef}
+      className={styles['context-menu']}
+      style={{ top: pos.y, left: pos.x, }}
+      tabIndex={-1}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
           closeContextMenu()
         }
       }}
-      {...internal?.root}
+      {...internal?.popover}
     >
-      {children}
-
-      <div
-        ref={contextRef}
-        className={styles['context-menu']}
-        style={{ top: pos.y, left: pos.x, }}
-        tabIndex={-1}
-        {...internal?.display}
+      <Popover
+        isOpen={isOpen}
+        onClose={closeContextMenu}
+        {...internal?.menu}
       >
-        <Popover
-          isOpen={isOpen}
-          onClose={closeContextMenu}
-          {...internal?.content}
-        >
-          <Menu
-            items={items}
-            internal={{
-              root: {ref: menuRef}
-            }}
-          />
-        </Popover>
-      </div>
+        <Menu
+          items={items}
+          size={size}
+          internal={{
+            root: {ref: menuRef}
+          }}
+        />
+      </Popover>
     </div>
   )
 }

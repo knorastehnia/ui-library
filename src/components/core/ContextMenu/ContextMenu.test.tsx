@@ -3,6 +3,7 @@ import { render, type RenderResult } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { axe } from 'vitest-axe'
 import { ContextMenu } from './ContextMenu'
+import { useRef } from 'react'
 
 describe('ContextMenu', () => {
   let user: UserEvent
@@ -81,14 +82,21 @@ describe('ContextMenu', () => {
 })
 
 const ContextMenuTest: React.FC<{ action: Function }> = ({ action }) => {
+  const targetRef = useRef<HTMLDivElement>(null)
+
   return (
-    <ContextMenu items={[
-      { label: 'Item 1', action },
-      { label: 'Item 2', action, disabled: true },
-      { label: 'Item 3', action, disabled: false },
-      { label: 'Item 4', action, disabled: false },
-    ]}>
-      <div>Content</div>
-    </ContextMenu>
+    <>
+      <ContextMenu
+        target={targetRef}
+        items={[
+          { label: 'Item 1', action },
+          { label: 'Item 2', action, disabled: true },
+          { label: 'Item 3', action, disabled: false },
+          { label: 'Item 4', action, disabled: false },
+        ]}
+      />
+
+      <div ref={targetRef}>Content</div>
+    </>
   )
 }
