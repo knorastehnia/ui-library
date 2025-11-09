@@ -38,7 +38,7 @@ const Flyout: React.FC<FlyoutProps> = ({
   const triggerRef = useRef<HTMLDivElement>(null)
 
   const updateIsOpen = (value: boolean) => {
-    isOpen ?? setInternalIsOpen(value)
+    isOpen === undefined && setInternalIsOpen(value)
     onOpenChange?.(value)
   }
 

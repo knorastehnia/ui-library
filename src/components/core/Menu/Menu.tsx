@@ -96,14 +96,12 @@ const Submenu: React.FC<SubmenuInterface> = ({
   return (
     <Flyout
       isOpen={isOpen}
-      onOpenChange={(isOpen) => !isOpen && closeSubmenu()}
+      onOpenChange={(isOpen) => !isOpen ? closeSubmenu() : openSubmenu()}
       size={size}
       arrangement='horizontal'
       label={menuItem.label}
       internal={{
         trigger: ({
-          action: openSubmenu,
-
           internal: {
             root: {
               ref: triggerRef,
@@ -292,6 +290,11 @@ const Menu: React.FC<MenuProps> = ({
     <div
       className={styles['menu']}
       onKeyDown={handleKeyboard}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          ctx && ctx.closeParent()
+        }
+      }}
       tabIndex={-1}
       {...internal?.root}
     >

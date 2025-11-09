@@ -22,11 +22,14 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (!isOpen || !menuRef.current) return
-
-    menuRef.current.focus()
+    if (isOpen) {
+      menuRef.current?.focus()
+    } else {
+      triggerRef.current?.focus()
+    }
   }, [isOpen])
 
   return (
@@ -44,6 +47,16 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         size={size}
         arrangement={arrangement}
         disabled={disabled}
+        internal={{
+          trigger: {
+            internal: {
+              root: {
+                ref: triggerRef,
+                'aria-expanded': isOpen,
+              }
+            }
+          } as any
+        }}
         {...internal?.root}
       >
         <Menu
