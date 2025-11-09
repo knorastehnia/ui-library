@@ -66,14 +66,15 @@ const Select: React.FC<SelectProps> = ({
   const selected = value !== undefined ? deriveInterface(value) : internalSelected
 
   const visibleItemCountRef = useRef(0)
-  const buttonRef = useRef<HTMLDivElement>(null)
+  const selectRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const firstItemRef= useRef<HTMLButtonElement>(null)
+  const firstItemRef = useRef<HTMLButtonElement>(null)
 
   const closeSelect = (event: MouseEvent | KeyboardEvent) => {
     if (event instanceof MouseEvent) {
-      const btn = buttonRef.current as HTMLButtonElement | null
+      const btn = selectRef.current as HTMLButtonElement | null
       if (!btn) return
 
       if (event.target !== btn && !btn.contains(event.target as Node)) {
@@ -265,6 +266,8 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     if (!isOpen && type === 'search') {
       inputRef.current?.blur()
+    } else if (!isOpen) {
+      buttonRef.current?.focus()
     }
 
     if (!selected.length) {
@@ -279,7 +282,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <div
-      ref={buttonRef}
+      ref={selectRef}
       className={styles[`width-${width}`]}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
@@ -340,6 +343,7 @@ const Select: React.FC<SelectProps> = ({
 
         ?
           <button
+            ref={buttonRef}
             className={`
               ${styles['button']} 
               ${isOpen && styles['button-active']}
