@@ -27,22 +27,24 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   useEffect(() => {
     if (isOpen) {
       menuRef.current?.focus()
-    } else {
-      triggerRef.current?.focus()
+    // } else {
+    //   triggerRef.current?.focus()
     }
   }, [isOpen])
 
+  const updateIsOpen = (value: boolean) => {
+    setIsOpen(value)
+
+    if (!isOpen && triggerRef.current) {
+      triggerRef.current?.focus()
+    }
+  }
+
   return (
-    <div
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) {
-          setIsOpen(false)
-        }
-      }}
-    >
+    <div>
       <Flyout
         isOpen={isOpen}
-        onOpenChange={setIsOpen}
+        onOpenChange={updateIsOpen}
         label={label}
         size={size}
         arrangement={arrangement}
@@ -59,14 +61,22 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         }}
         {...internal?.root}
       >
-        <Menu
-          items={items}
-          size={size}
-          internal={{
-            root: {ref: menuRef}
+        <div
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              updateIsOpen(false)
+            }
           }}
-          {...internal?.content}
-        />
+        >
+          <Menu
+            items={items}
+            size={size}
+            internal={{
+              root: {ref: menuRef}
+            }}
+            {...internal?.content}
+          />
+        </div>
       </Flyout>
     </div>
   )
