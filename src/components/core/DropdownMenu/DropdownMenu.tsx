@@ -1,6 +1,6 @@
 import { Menu, type MenuProps } from '../Menu'
 import { Flyout } from '../Flyout'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface DropdownMenuProps extends MenuProps {
   label: string
@@ -8,7 +8,20 @@ interface DropdownMenuProps extends MenuProps {
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    menu?: MenuProps
   }
+}
+
+const getChildren = (content: HTMLDivElement) => {
+  return Array.from(content.children).flatMap((child) => {
+    if ((child as HTMLButtonElement).disabled) return []
+
+    if (child.tagName === 'BUTTON' || child.tagName === 'A') {
+      return child
+    } else if (child.tagName === 'DIV') {
+      return child.querySelector('button')
+    }
+  }) as HTMLElement[]
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -20,14 +33,52 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const menuContainerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
 
-  useEffect(() => {
-    if (!isOpen) return
+  const handleKeyboard = (e: React.KeyboardEvent) => {
+    const content = menuContainerRef.current?.querySelector(':scope > div > div') as HTMLDivElement
+    if (!content || document.activeElement !== triggerRef.current) return
 
-    menuRef.current?.focus()
-  }, [isOpen])
+    const keys = [
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End',
+      'PageUp',
+      'PageDown',
+    ]
+
+    if (!keys.includes(e.key)) return
+    e.preventDefault()
+
+    const children = getChildren(content)
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'PageDown':
+        children[0].focus()
+        break
+
+      case 'ArrowUp':
+      case 'PageUp':
+        children[children.length - 1].focus()
+        break
+
+      case 'End':
+        const lastTab = children[children.length - 1]
+        lastTab.focus()
+        break
+
+      case 'Home':
+        const firstTab = children[0]
+        firstTab.focus()
+        break
+
+      default:
+        break
+    }
+  }
 
   const updateIsOpen = (value: boolean) => {
     setIsOpen(value)
@@ -38,7 +89,15 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }
 
   return (
-    <div {...internal?.root}>
+    <div
+      {...internal?.root}
+      onKeyDown={handleKeyboard}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          setIsOpen(false)
+        }
+      }}
+    >
       <Flyout
         isOpen={isOpen}
         onOpenChange={updateIsOpen}
@@ -58,6 +117,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         }}
       >
         <div
+          ref={menuContainerRef}
           onBlur={(e) => {
             if (!e.currentTarget.contains(e.relatedTarget)) {
               updateIsOpen(false)
@@ -67,9 +127,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           <Menu
             items={items}
             size={size}
-            internal={{
-              root: {ref: menuRef}
-            }}
+            {...internal?.menu}
           />
         </div>
       </Flyout>

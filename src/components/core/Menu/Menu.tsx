@@ -287,7 +287,6 @@ const Menu: React.FC<MenuProps> = ({
           ctx && ctx.closeParent()
         }
       }}
-      tabIndex={-1}
       {...internal?.root}
     >
       <div ref={menuRef}>
