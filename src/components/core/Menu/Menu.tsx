@@ -1,8 +1,8 @@
 import styles from './Menu.module.css'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { Typography } from '../Typography'
+import { Typography, type TypographyProps } from '../Typography'
 import { Button } from '../Button'
-import { Flyout, type FlyoutProps } from '../Flyout'
+import { Flyout } from '../Flyout'
 
 interface ItemInterface {
   icon?: React.ReactElement
@@ -17,8 +17,7 @@ interface MenuProps {
   size?: 's' | 'm' | 'l'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    item?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
-    sub?: SubmenuInterface
+    typography?: TypographyProps
   }
 }
 
@@ -28,9 +27,6 @@ interface SubmenuInterface {
   activeItem: number
   setActiveItem: Function
   size: 's' | 'm' | 'l'
-  internal?: {
-    root?: FlyoutProps
-  }
 }
 
 const MenuContext = createContext<{ closeParent: () => void } | null>(null)
@@ -53,7 +49,6 @@ const Submenu: React.FC<SubmenuInterface> = ({
   activeItem,
   setActiveItem,
   size,
-  internal,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -101,7 +96,7 @@ const Submenu: React.FC<SubmenuInterface> = ({
       arrangement='horizontal'
       label={menuItem.label}
       internal={{
-        trigger: ({
+        button: ({
           internal: {
             root: {
               ref: triggerRef,
@@ -112,7 +107,6 @@ const Submenu: React.FC<SubmenuInterface> = ({
           },
         } as any),
       }}
-      {...internal?.root}
     >
       <MenuContext.Provider value={{ closeParent: closeSubmenu }}>
         <Menu size={size} items={menuItem.items!} />
@@ -252,7 +246,6 @@ const Menu: React.FC<MenuProps> = ({
               onFocus: () => setActiveItem(index),
             }
           }}
-          {...internal?.item}
         >
           <div className={styles['item-content']}>
             {menuItem.icon !== undefined &&
@@ -261,7 +254,7 @@ const Menu: React.FC<MenuProps> = ({
               </div>
             }
 
-            <Typography>
+            <Typography {...internal?.typography}>
               {menuItem.label}
             </Typography>
           </div>
@@ -276,7 +269,6 @@ const Menu: React.FC<MenuProps> = ({
           menuItem={menuItem}
           index={index}
           size={size}
-          {...internal?.sub}
         />
       )
     }

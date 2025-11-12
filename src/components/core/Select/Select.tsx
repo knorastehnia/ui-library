@@ -23,9 +23,8 @@ interface SelectProps {
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
-    content?: PopoverProps
+    trigger?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    popover?: PopoverProps
   }
 }
 
@@ -266,8 +265,6 @@ const Select: React.FC<SelectProps> = ({
   useEffect(() => {
     if (!isOpen && type === 'search') {
       inputRef.current?.blur()
-    } else if (!isOpen) {
-      buttonRef.current?.focus()
     }
 
     if (!selected.length) {
@@ -321,7 +318,7 @@ const Select: React.FC<SelectProps> = ({
 
       <div
         className={styles['display-select']}
-        {...internal?.display}
+        {...internal?.trigger}
       >
         <label
           className={`
@@ -353,7 +350,6 @@ const Select: React.FC<SelectProps> = ({
             role='combobox'
             aria-expanded={isOpen}
             aria-labelledby={`label-${id}`}
-            {...internal?.trigger as React.HTMLAttributes<HTMLButtonElement>}
           >
             <Typography>
               {
@@ -384,7 +380,6 @@ const Select: React.FC<SelectProps> = ({
             role='combobox'
             aria-expanded={isOpen}
             aria-labelledby={`label-${id}`}
-            {...internal?.trigger as React.HTMLAttributes<HTMLInputElement>}
           />
         }
       </div>
@@ -393,9 +388,16 @@ const Select: React.FC<SelectProps> = ({
         isOpen={isOpen}
         onClose={closeSelect}
         arrangement='vertical'
-        {...internal?.content}
+        {...internal?.popover}
       >
-        <div ref={contentRef}>
+        <div
+          ref={contentRef}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              buttonRef.current?.focus()
+            }
+          }}
+        >
           {
             visibleItems.map((item, index) => {
               return (

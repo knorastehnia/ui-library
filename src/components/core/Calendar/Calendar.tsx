@@ -13,6 +13,9 @@ interface CalendarProps {
   onChange?: (value: Date[]) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    date?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    week?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    days?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -234,7 +237,10 @@ const Calendar: React.FC<CalendarProps> = ({
       className={styles['calendar']}
       {...internal?.root}
     >
-      <div className={styles['date']}>
+      <div
+        className={styles['date']}
+        {...internal?.date}
+      >
         <Typography size='l'>
           {monthName} {displayYear}
         </Typography>
@@ -284,14 +290,23 @@ const Calendar: React.FC<CalendarProps> = ({
         </div>
       </div>
 
-      <div className={styles['week']}>
+      <div
+        className={styles['week']}
+        {...internal?.week}
+      >
         {
           weekDays.map((weekDay, index) => {
             return (
               <div
                 key={`weekday-${index}`}
                 className={styles['weekday']}>
-                <Typography color='dimmed' size='s' weight='300'>{weekDay.at(0)}</Typography>
+                <Typography
+                  color='dimmed'
+                  size='s'
+                  weight='300'
+                >
+                  {weekDay.at(0)}
+                </Typography>
               </div>
             )
           })
@@ -301,6 +316,7 @@ const Calendar: React.FC<CalendarProps> = ({
       <div
         ref={daysRef}
         className={styles['days']}
+        {...internal?.days}
         onKeyDown={handleKeyboard}
       >
         {
@@ -344,7 +360,12 @@ const Calendar: React.FC<CalendarProps> = ({
                       }
                     }}
                   >
-                    <Typography size='s' weight='300'>{dayIndex}</Typography>
+                    <Typography
+                      size='s'
+                      weight={isDateSelected(dateValue) ? '400' : '300'}
+                    >
+                      {dayIndex}
+                    </Typography>
                   </Button>
                 }
               </div>

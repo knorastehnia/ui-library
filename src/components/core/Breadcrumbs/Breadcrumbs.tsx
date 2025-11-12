@@ -1,7 +1,7 @@
 import styles from './Breadcrumbs.module.css'
 import { Fragment } from 'react/jsx-runtime'
-import { Button } from '../Button'
-import { Typography } from '../Typography'
+import { Button, type ButtonProps } from '../Button'
+import { Typography, type TypographyProps } from '../Typography'
 import { Arrow } from '../../icons'
 
 interface BreadcrumbItem {
@@ -11,26 +11,42 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[]
+  internal?: {
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    button?: ButtonProps
+    typography?: TypographyProps
+  }
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   items,
+  internal,
 }) => {
   return (
-    <div className={styles['breadcrumbs']}>
+    <div
+      className={styles['breadcrumbs']}
+      {...internal?.root}
+    >
       {
         items.map((item, index) => {
           return (
             <Fragment key={index}>
               {item.action !== undefined ?
-                <Button surface='text' action={item.action}>
-                  <Typography>
+                <Button
+                  surface='text'
+                  action={item.action}
+                  {...internal?.button}
+                >
+                  <Typography {...internal?.typography}>
                     {item.label}
                   </Typography>
                 </Button>
                 
                 :
-                <Typography color='dimmed'>
+                <Typography
+                  color='dimmed'
+                  {...internal?.typography}
+                >
                   {item.label}
                 </Typography>
               }

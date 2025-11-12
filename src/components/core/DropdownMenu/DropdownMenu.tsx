@@ -1,5 +1,5 @@
 import { Menu, type MenuProps } from '../Menu'
-import { Flyout, type FlyoutProps } from '../Flyout'
+import { Flyout } from '../Flyout'
 import { useEffect, useRef, useState } from 'react'
 
 interface DropdownMenuProps extends MenuProps {
@@ -7,8 +7,7 @@ interface DropdownMenuProps extends MenuProps {
   arrangement?: 'vertical' | 'horizontal'
   disabled?: boolean
   internal?: {
-    root?: FlyoutProps
-    content?: MenuProps
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -25,23 +24,21 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const triggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (isOpen) {
-      menuRef.current?.focus()
-    // } else {
-    //   triggerRef.current?.focus()
-    }
+    if (!isOpen) return
+
+    menuRef.current?.focus()
   }, [isOpen])
 
   const updateIsOpen = (value: boolean) => {
     setIsOpen(value)
 
     if (!isOpen && triggerRef.current) {
-      triggerRef.current?.focus()
+      triggerRef.current.focus()
     }
   }
 
   return (
-    <div>
+    <div {...internal?.root}>
       <Flyout
         isOpen={isOpen}
         onOpenChange={updateIsOpen}
@@ -50,7 +47,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         arrangement={arrangement}
         disabled={disabled}
         internal={{
-          trigger: {
+          button: {
             internal: {
               root: {
                 ref: triggerRef,
@@ -59,7 +56,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             }
           } as any
         }}
-        {...internal?.root}
       >
         <div
           onBlur={(e) => {
@@ -74,7 +70,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             internal={{
               root: {ref: menuRef}
             }}
-            {...internal?.content}
           />
         </div>
       </Flyout>

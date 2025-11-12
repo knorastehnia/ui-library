@@ -14,6 +14,7 @@ interface TopNavProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -21,7 +22,7 @@ interface SideNavProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: ButtonProps
+    button?: ButtonProps
     content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
@@ -45,6 +46,7 @@ interface SectionProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
     root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
+    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -80,8 +82,14 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   return (
     <>
-      <section className={styles['section']} {...internal?.root}>
-        <div className={styles['section-content']}>
+      <section
+        className={styles['section']}
+        {...internal?.root}
+      >
+        <div
+          className={styles['section-content']}
+          {...internal?.content}
+        >
           {children}
         </div>
       </section>
@@ -94,7 +102,12 @@ const Content: React.FC<ContentProps> = ({
   internal,
 }) => {
   return (
-    <main className={styles['content']} {...internal?.root}>{children}</main>
+    <main
+      className={styles['content']}
+      {...internal?.root}
+    >
+      {children}
+    </main>
   )
 }
 
@@ -103,8 +116,14 @@ const TopNav: React.FC<TopNavProps> = ({
   internal,
 }) => {
   return (
-    <div className={styles['topnav']} {...internal?.root}>
-      <div className={styles['topnav-content']}>
+    <div
+      className={styles['topnav']}
+      {...internal?.root}
+    >
+      <div
+        className={styles['topnav-content']}
+        {...internal?.content}
+      >
         {children}
       </div>
     </div>
@@ -138,7 +157,7 @@ const SideNav: React.FC<SideNavProps> = ({
                   'aria-label': isCollapsed ? 'Open sidebar' : 'Close sidebar'
                 }
               }}
-              {...internal?.trigger}
+              {...internal?.button}
             >
               <Burger state={!isCollapsed} />
             </Button>

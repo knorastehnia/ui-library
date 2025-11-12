@@ -8,7 +8,6 @@ interface ContextMenuProps extends MenuProps {
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     popover?: PopoverProps
-    menu?: MenuProps
   }
 }
 
@@ -73,12 +72,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
           closeContextMenu()
         }
       }}
-      {...internal?.popover}
+      {...internal?.root}
     >
       <Popover
         isOpen={isOpen}
         onClose={closeContextMenu}
-        {...internal?.menu}
+        {...internal?.popover}
       >
         <Menu
           items={items}

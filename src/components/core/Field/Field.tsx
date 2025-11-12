@@ -1,7 +1,7 @@
 import styles from './Field.module.css'
 import { useEffect, useState, useId } from 'react'
 import { Visibility } from '../../icons'
-import { Typography } from '../Typography'
+import { Typography, type TypographyProps } from '../Typography'
 import { ErrorMessage } from '../ErrorMessage'
 import { Button } from '../Button'
 
@@ -31,7 +31,10 @@ interface FieldProps {
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
+    typography?: TypographyProps
+    input?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
+    counter?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    errors?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -125,6 +128,7 @@ const Field: React.FC<FieldProps> = ({
           <Typography
             size={(focus || currentValue) ? 's' : 'm'}
             color={disabled ? 'disabled' : 'dimmed'}
+            {...internal?.typography}
           >
             {label}
           </Typography>
@@ -147,7 +151,7 @@ const Field: React.FC<FieldProps> = ({
             name={name}
             id={id}
             disabled={disabled}
-            {...internal?.display as React.HTMLAttributes<HTMLTextAreaElement>}
+            {...internal?.input as React.HTMLAttributes<HTMLTextAreaElement>}
           />
 
           :
@@ -161,7 +165,7 @@ const Field: React.FC<FieldProps> = ({
             name={name}
             id={id}
             disabled={disabled}
-            {...internal?.display as React.HTMLAttributes<HTMLInputElement>}
+            {...internal?.input as React.HTMLAttributes<HTMLInputElement>}
           />
         }
 
@@ -187,7 +191,10 @@ const Field: React.FC<FieldProps> = ({
 
         {
           limit > 0 &&
-            <div className={styles['counter']}>
+            <div
+              className={styles['counter']}
+              {...internal?.counter}
+            >
               <span>
                 <Typography
                   weight='400'
@@ -211,7 +218,10 @@ const Field: React.FC<FieldProps> = ({
         }
       </div>
 
-      <div className={styles['error-container']}>
+      <div
+        className={styles['error-container']}
+        {...internal?.errors}
+      >
         {
           allErrors?.map((error, index) => (
               <div key={index}>

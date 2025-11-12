@@ -21,7 +21,7 @@ const ThemeSwitch = () => {
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme='light'>
+    <ThemeProvider defaultTheme='dark'>
       <Layout>
         <Layout.TopNav>
           <div style={{

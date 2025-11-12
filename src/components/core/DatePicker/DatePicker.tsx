@@ -1,8 +1,8 @@
 import styles from './DatePicker.module.css'
 import { useEffect, useId, useRef, useState } from 'react'
 import { Calendar, type CalendarProps } from '../Calendar'
-import { Typography } from '../Typography'
-import { Popover } from '../Popover'
+import { Typography, type TypographyProps } from '../Typography'
+import { Popover, type PopoverProps } from '../Popover'
 
 interface DatePickerProps extends CalendarProps {
   type?: never
@@ -10,9 +10,11 @@ interface DatePickerProps extends CalendarProps {
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: React.HTMLAttributes<HTMLInputElement> & { ref?: React.Ref<HTMLInputElement> }
-    content?: CalendarProps
+    trigger?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    input?: React.HTMLAttributes<HTMLInputElement> & { ref?: React.Ref<HTMLInputElement> }
+    typography?: TypographyProps
+    popover?: PopoverProps
+    calendar?: CalendarProps
   }
 }
 
@@ -61,10 +63,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
           setIsOpen(false)
         }
       }}
+      {...internal?.root}
     >
       <div
         className={styles['display-select']}
-        {...internal?.display}
+        {...internal?.trigger}
       >
         <label
           className={`
@@ -77,33 +80,35 @@ const DatePicker: React.FC<DatePickerProps> = ({
             weight='400'
             size={(displayValue.length || isOpen) ? 's' : 'm'}
             color='dimmed'
+            {...internal?.typography}
           >
             {label}
           </Typography>
         </label>
-          <input
-            ref={inputRef}
-            className={`
-              ${styles['button']} 
-              ${isOpen && styles['button-active']}
-            `}
-            onFocus={() => setIsOpen(true)}
-            value={displayValue}
-            onChange={() => null}
-            type='text'
-            role='combobox'
-            aria-expanded={isOpen}
-            aria-labelledby={`label-${id}`}
-            disabled={disabled}
-            {...internal?.trigger}
-          />
+
+        <input
+          ref={inputRef}
+          className={`
+            ${styles['button']} 
+            ${isOpen && styles['button-active']}
+          `}
+          onFocus={() => setIsOpen(true)}
+          value={displayValue}
+          onChange={() => null}
+          type='text'
+          role='combobox'
+          aria-expanded={isOpen}
+          aria-labelledby={`label-${id}`}
+          disabled={disabled}
+          {...internal?.input}
+        />
       </div>
 
       <Popover
         isOpen={isOpen}
         onClose={closeDropdown}
         arrangement='vertical'
-        {...internal?.content}
+        {...internal?.popover}
       >
         <div className={styles['calendar-container']}>
           <Calendar
@@ -113,6 +118,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             value={internalValue}
             onChange={updateInternalValue}
             type='single'
+            {...internal?.calendar}
           />
         </div>
       </Popover>

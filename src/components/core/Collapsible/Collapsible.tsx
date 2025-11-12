@@ -1,7 +1,7 @@
 import styles from './Collapsible.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
-import { Typography, TypographyDefaultsProvider } from '../Typography'
+import { Typography, TypographyDefaultsProvider, type TypographyProps } from '../Typography'
 import { Button, ButtonDefaultsProvider, type ButtonProps } from '../Button'
 import { useCollapseEffect } from '../../../hooks/useCollapseEffect'
 
@@ -12,7 +12,8 @@ interface CollapsibleProps {
   arrangement?: 'leading' | 'trailing'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: ButtonProps
+    button?: ButtonProps
+    typography?: TypographyProps
     content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
@@ -51,13 +52,20 @@ const Collapsible: React.FC<CollapsibleProps> = ({
             "aria-expanded": isOpen
           }
         }}
-        {...internal?.trigger}
+        {...internal?.button}
       >
         <div className={`
           ${styles['trigger-content']} 
           ${styles[`arrangement-${arrangement}`]}
         `}>
-          <Typography size='m' weight='400' color='primary'>{label}</Typography>
+          <Typography
+            size='m'
+            weight='400'
+            color='primary'
+            {...internal?.typography}
+          >
+            {label}
+          </Typography>
           <Arrow state={isOpen} />
         </div>
       </Button>

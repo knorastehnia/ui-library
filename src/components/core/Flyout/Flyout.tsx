@@ -2,7 +2,7 @@ import styles from './Flyout.module.css'
 import { createContext, useContext, useRef, useState } from 'react'
 import { Arrow } from '../../icons'
 import { Button, ButtonDefaultsProvider, type ButtonProps } from '../Button'
-import { Typography } from '../Typography'
+import { Typography, type TypographyProps } from '../Typography'
 import { Popover, type PopoverProps } from '../Popover'
 
 interface FlyoutProps {
@@ -15,8 +15,9 @@ interface FlyoutProps {
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: ButtonProps
-    content?: PopoverProps
+    button?: ButtonProps
+    typography?: TypographyProps
+    popover?: PopoverProps
   }
 }
 
@@ -67,13 +68,13 @@ const Flyout: React.FC<FlyoutProps> = ({
         width='full'
         disabled={disabled}
         internal={{ root: { 'aria-expanded': activeIsOpen } }}
-        {...internal?.trigger}
+        {...internal?.button}
       >
         <div
           ref={triggerRef}
           className={styles['button-content']}
         >
-          <Typography>{label}</Typography>
+          <Typography {...internal?.typography}>{label}</Typography>
           <div style={{
             transform: activeArrangement === 'horizontal' ? 'rotate(-90deg)' : '',
           }}>
@@ -86,7 +87,7 @@ const Flyout: React.FC<FlyoutProps> = ({
         isOpen={activeIsOpen}
         onClose={closeFlyout}
         arrangement={activeArrangement}
-        {...internal?.content}
+        {...internal?.popover}
       >
         <FlyoutContext.Provider value={true}>
           <ButtonDefaultsProvider surface='hollow' width='full'>

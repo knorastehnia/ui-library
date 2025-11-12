@@ -1,7 +1,7 @@
 import styles from './Tabs.module.css'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Typography } from '../Typography'
+import { Typography, type TypographyProps } from '../Typography'
 import { Button } from '../Button'
 
 interface TabProps {
@@ -10,7 +10,8 @@ interface TabProps {
   value: string
   disabled?: boolean
   internal?: {
-    root?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
+    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    typography?: TypographyProps
   }
 }
 
@@ -23,7 +24,7 @@ interface TabsProps {
   onChange?: (value: string) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    list?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    header?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
@@ -51,7 +52,10 @@ const Tab: React.FC<TabProps> = ({
   if (!ctx) throw new Error('<Tabs.Tab> must be a descendant of <Tabs>')
 
   return (
-    <div onKeyDown={ctx.handleKeyboard}>
+    <div
+      onKeyDown={ctx.handleKeyboard}
+      {...internal?.root}
+    >
       {
         createPortal(
           <Button
@@ -64,11 +68,11 @@ const Tab: React.FC<TabProps> = ({
                 tabIndex: ctx.currentTab === value ? 0 : -1,
               }
             }}
-            {...internal?.root}
           >
             <Typography
               color={ctx.currentTab === value ? 'primary' : disabled ? 'disabled' : 'dimmed'}
               weight={ctx.currentTab === value ? '500' : '300'}
+              {...internal?.typography}
             >
               {label}
             </Typography>
@@ -190,7 +194,7 @@ const Tabs: TabsComponent = ({
       <div
         ref={tabListRef}
         className={styles['tab-list']}
-        {...internal?.list}
+        {...internal?.header}
       />
 
       <div

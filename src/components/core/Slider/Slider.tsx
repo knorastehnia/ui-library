@@ -14,7 +14,7 @@ interface SliderProps {
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    display?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    clickbox?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -191,11 +191,9 @@ const Slider: React.FC<SliderProps> = ({
           `}
           onKeyDown={(e) => disabled || handleKeyboard(e)}
           onPointerDown={(e) => disabled || pointerDown(e)}
+          {...internal?.clickbox}
         >
-          <div
-            className={styles['display-slider']}
-            {...internal?.display}
-          >
+          <div className={styles['display-slider']}>
             <div
               className={`
                 ${styles['slider-track']} 

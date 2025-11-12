@@ -1,7 +1,7 @@
 import styles from './Pagination.module.css'
 import { useState } from 'react'
 import { Button } from '../Button'
-import { Typography } from '../Typography'
+import { Typography, type TypographyProps } from '../Typography'
 import { Arrow, Ellipsis } from '../../icons'
 
 interface PaginationProps {
@@ -12,7 +12,9 @@ interface PaginationProps {
   onChange?: (value: number) => void
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-    trigger?: React.HTMLAttributes<HTMLButtonElement> & { ref?: React.Ref<HTMLButtonElement> }
+    typography?: TypographyProps
+    previous?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
+    next?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -76,9 +78,11 @@ const Pagination: React.FC<PaginationProps> = ({
             }
           }
         }}
-        {...internal?.trigger}
       >
-        <Typography>
+        <Typography
+          weight={activePage === page ? '400' : '300'}
+          {...internal?.typography}
+        >
           {page}
         </Typography>
       </Button>
@@ -129,7 +133,10 @@ const Pagination: React.FC<PaginationProps> = ({
           }
         }}
       >
-        <div className={styles['prev']}>
+        <div
+          className={styles['prev']}
+          {...internal?.previous}
+        >
           <Arrow color={activePage === 1 ? 'disabled' : 'dimmed'} />
         </div>
       </Button>
@@ -155,7 +162,10 @@ const Pagination: React.FC<PaginationProps> = ({
           }
         }}
       >
-        <div className={styles['next']}>
+        <div
+          className={styles['next']}
+          {...internal?.next}
+        >
           <Arrow color={activePage === count ? 'disabled' : 'dimmed'} />
         </div>
       </Button>
