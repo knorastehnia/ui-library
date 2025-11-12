@@ -29,6 +29,7 @@ const useFocusTrap = (
   const checkFocusLocation = useCallback((e: KeyboardEvent) => {
     if (e.key !== 'Tab' || !ref.current) return
 
+    tabbableItems.current = []
     getDescendants(ref.current)
 
     const items = tabbableItems.current

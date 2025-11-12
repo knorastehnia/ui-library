@@ -24,6 +24,7 @@ import { useRef, useState } from 'react'
 const Page = () => {
   const [someState, setSomeState] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showNestedModal, setShowNestedModal] = useState(false)
   const [isSpinning, setIsSpinning] = useState(true)
   const [selectOptions, setSelectOptions] = useState(['windows'])
   const [scalarValue, setScalarValue] = useState(20)
@@ -47,24 +48,28 @@ const Page = () => {
         ]}
       />
 
-      <Modal isOpen={showModal} onOpenChange={setShowModal} width='300px'>
-        <Calendar />
+      <Modal isOpen={showModal} onOpenChange={setShowModal}>
+        <Button action={() => setShowNestedModal(true)}><T>Open nested modal</T></Button>
 
-        <div style={{
-          marginLeft: 'auto',
-          marginTop: '2rem',
-          display: 'flex',
-          flexFlow: 'row nowrap',
-          justifyContent: 'right',
-          gap: '10px',
-        }}>
-          <Button action={() => setShowModal(false)} surface='fill'>
-            <T>Confirm</T>
-          </Button>
-          <Button action={() => setShowModal(false)}>
-            <T>Cancel</T>
-          </Button>
-        </div>
+        <Modal isOpen={showNestedModal} onOpenChange={setShowNestedModal}>
+          <Calendar />
+
+          <div style={{
+            marginLeft: 'auto',
+            marginTop: '2rem',
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            justifyContent: 'right',
+            gap: '10px',
+          }}>
+            <Button action={() => setShowModal(false)} surface='fill'>
+              <T>Confirm</T>
+            </Button>
+            <Button action={() => setShowModal(false)}>
+              <T>Cancel</T>
+            </Button>
+          </div>
+        </Modal>
       </Modal>
 
       <Layout.Section>

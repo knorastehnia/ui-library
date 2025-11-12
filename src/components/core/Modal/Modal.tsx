@@ -1,5 +1,5 @@
 import styles from './Modal.module.css'
-import { useCallback, useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../../hooks/useFocusTrap'
 
@@ -7,8 +7,6 @@ interface ModalProps {
   children: React.ReactElement | React.ReactElement[]
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
-  width?: string
-  height?: string
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
     background?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
@@ -16,28 +14,64 @@ interface ModalProps {
   }
 }
 
+const ModalContext = createContext<{ setHasNestedModal: Function } | null>(null)
+
 const Modal: React.FC<ModalProps> = ({
   children,
   isOpen,
   onOpenChange,
-  width='auto',
-  height='auto',
   internal,
 }) => {
+  const [hasNestedModal, setHasNestedModal] = useState(false)
+
+  const ctx = useContext(ModalContext)
+
   const modalRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const nonModalContentRef = useRef<HTMLElement[]>(null)
 
-  useFocusTrap(modalRef, isOpen)
+  const trapFocus = isOpen && !hasNestedModal
 
-  const escapeModal = useCallback((event: KeyboardEvent) => {
+  useFocusTrap(modalRef, trapFocus)
+
+  const escapeModal = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
+      event.preventDefault()
+      event.stopPropagation()
       onOpenChange(false)
     }
-  }, [onOpenChange])
+  }
 
   useEffect(() => {
-    document.addEventListener('keydown', escapeModal)
-    return () => document.removeEventListener('keydown', escapeModal)
-  }, [escapeModal])
+    if (!isOpen) return
+
+    if (ctx && modalRef.current !== null) {
+      ctx.setHasNestedModal(true)
+
+      const zIndexNumeric = Number(window.getComputedStyle(modalRef.current).zIndex)
+      modalRef.current.style.zIndex = String(zIndexNumeric + 1)
+    }
+
+    nonModalContentRef.current = Array.from(document.body.children).filter(
+      (child): child is HTMLElement =>
+        child.getAttribute('aria-modal') !== 'true' &&
+        child.getAttribute('aria-hidden') === null &&
+        child instanceof HTMLElement &&
+        !(child instanceof HTMLScriptElement)
+    )
+
+    nonModalContentRef.current.forEach(el => el.setAttribute('aria-hidden', 'true'))
+
+    const raf = requestAnimationFrame(() => contentRef.current?.focus())
+
+    return () => {
+      nonModalContentRef.current?.forEach(el => el.removeAttribute('aria-hidden'))
+
+      ctx && ctx.setHasNestedModal(false)
+
+      cancelAnimationFrame(raf)
+    }
+  }, [isOpen])
 
   return createPortal(
     <div
@@ -46,6 +80,9 @@ const Modal: React.FC<ModalProps> = ({
         ${styles['modal']} 
         ${isOpen && styles['open']}
       `}
+      role='dialog'
+      aria-modal='true'
+      onKeyDown={escapeModal}
       {...internal?.root}
     >
       <div
@@ -55,18 +92,18 @@ const Modal: React.FC<ModalProps> = ({
       />
 
       <div
+        ref={contentRef}
         className={styles['content']}
-        style={{
-          width,
-          height,
-        }}
+        tabIndex={-1}
         {...internal?.content}
       >
-        {children}
+        <ModalContext.Provider value={{ setHasNestedModal }}>
+          {children}
+        </ModalContext.Provider>
       </div>
     </div>,
 
-    document.querySelector('#root')!
+    document.body
   )
 }
 

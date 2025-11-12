@@ -6,7 +6,7 @@
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: 2000;
-  transition: all var(--ease-out-t) var(--ease-out-c);
+  transition: all var(--ease-out-t) var(--ease-out-c), visibility 0s;
   
   visibility: hidden;
   user-select: none;
@@ -30,13 +30,17 @@
     background-color: var(--background);
     padding: 20px;
     z-index: 2002;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &.open {
     visibility: visible;
     user-select: auto;
     pointer-events: all;
-    background-color: #000000cc;
+    background-color: #000000aa;
 
     .content {
       opacity: 1;
