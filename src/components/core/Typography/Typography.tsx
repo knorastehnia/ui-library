@@ -1,3 +1,4 @@
+import { ButtonDefaultsProvider } from '../Button'
 import styles from './Typography.module.css'
 import { createElement, createContext, useContext } from 'react'
 
@@ -66,6 +67,14 @@ const Typography: React.FC<TypographyProps> = ({
 
   const trimmedRole = type.at(0) === 'h' ? 'h' : type
 
+  const extendedChildren = (
+    <ButtonDefaultsProvider surface='text'>
+      <>
+        {children}
+      </>
+    </ButtonDefaultsProvider>
+  )
+
   return (
     createElement(
       type,
@@ -77,7 +86,7 @@ const Typography: React.FC<TypographyProps> = ({
         `,
         ...(internal?.root ?? {})
       },
-      children,
+      extendedChildren,
     )
   )
 }

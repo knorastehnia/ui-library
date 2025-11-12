@@ -437,7 +437,7 @@ const Page = () => {
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi pariatur consectetur dolorum adipisicing
-            cupiditate <Button surface='text' action='#'><T>tempore tenetur</T></Button> a
+            cupiditate <Button action='#'><T>tempore tenetur</T></Button> a
             natus soluta. Voluptatem pariatur aperiam aliquid minus 
             inventore similique quam!</Typography>
           <hr style={{margin: '1rem 0', opacity: '0'}} />
