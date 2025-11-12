@@ -29,6 +29,7 @@ const Modal: React.FC<ModalProps> = ({
   const modalRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const nonModalContentRef = useRef<HTMLElement[]>(null)
+  const restoreFocusRef = useRef<HTMLElement>(null)
 
   const trapFocus = isOpen && !hasNestedModal
 
@@ -62,6 +63,10 @@ const Modal: React.FC<ModalProps> = ({
 
     nonModalContentRef.current.forEach(el => el.setAttribute('aria-hidden', 'true'))
 
+    if (document.activeElement) {
+      restoreFocusRef.current = document.activeElement as HTMLElement
+    }
+
     const raf = requestAnimationFrame(() => contentRef.current?.focus())
 
     return () => {
@@ -70,6 +75,7 @@ const Modal: React.FC<ModalProps> = ({
       ctx && ctx.setHasNestedModal(false)
 
       cancelAnimationFrame(raf)
+      restoreFocusRef.current?.focus()
     }
   }, [isOpen])
 
