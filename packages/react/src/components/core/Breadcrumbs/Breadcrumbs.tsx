@@ -6,7 +6,7 @@ import { Arrow } from '../../icons'
 
 interface BreadcrumbItem {
   label: string,
-  action?: string | Function,
+  action?: string | ((e: React.MouseEvent) => void),
 }
 
 interface BreadcrumbsProps {

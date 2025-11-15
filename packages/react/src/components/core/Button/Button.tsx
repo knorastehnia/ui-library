@@ -10,7 +10,7 @@ interface ButtonDefaultsContextInterface {
 
 interface ButtonProps extends ButtonDefaultsContextInterface {
   children: React.ReactElement | React.ReactElement[]
-  action?: string | Function
+  action?: string | ((e: React.MouseEvent) => void)
   disabled?: boolean
   internal?: {
     root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }

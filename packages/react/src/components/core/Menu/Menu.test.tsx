@@ -74,7 +74,7 @@ describe('Menu', () => {
   })
 })
 
-const MenuTest: React.FC<{ action: Function }> = ({ action }) => {
+const MenuTest: React.FC<{ action: ((e: React.MouseEvent) => void) }> = ({ action }) => {
   return (
     <Menu
       items={[

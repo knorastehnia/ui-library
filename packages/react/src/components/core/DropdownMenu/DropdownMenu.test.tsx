@@ -80,7 +80,7 @@ describe('DropdownMenu', () => {
   })
 })
 
-const DropdownMenuTest: React.FC<{ action: Function }> = ({ action }) => {
+const DropdownMenuTest: React.FC<{ action: (e: React.MouseEvent) => void }> = ({ action }) => {
   return (
     <DropdownMenu
       label='Trigger'

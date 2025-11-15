@@ -10,7 +10,7 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext<{
   theme: ValidThemes
-  setTheme: Function
+  setTheme: (theme: ValidThemes) => void
 } | null>(null)
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({

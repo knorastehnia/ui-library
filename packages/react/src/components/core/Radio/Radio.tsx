@@ -33,8 +33,8 @@ type RadioComponent = React.FC<RadioProps> & {
 const RadioContext = createContext<{
   name: string,
   selected: string,
-  setSelected: Function,
-  handleKeyboard: Function,
+  setSelected: (value: string) => void,
+  handleKeyboard: (e: React.KeyboardEvent) => void,
   contentRef: React.RefObject<HTMLDivElement | null>,
 } | null>(null)
 

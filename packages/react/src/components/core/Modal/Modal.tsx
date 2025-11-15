@@ -14,7 +14,7 @@ interface ModalProps {
   }
 }
 
-const ModalContext = createContext<{ setHasNestedModal: Function } | null>(null)
+const ModalContext = createContext<{ setHasNestedModal: (value: boolean) => void } | null>(null)
 
 const Modal: React.FC<ModalProps> = ({
   children,

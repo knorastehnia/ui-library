@@ -8,7 +8,7 @@ interface ItemInterface {
   icon?: React.ReactElement
   label: string
   items?: ItemInterface[]
-  action?: string | Function
+  action?: string | ((e: React.MouseEvent) => void)
   disabled?: boolean
 }
 
@@ -25,7 +25,7 @@ interface SubmenuInterface {
   menuItem: ItemInterface
   index: number
   activeItem: number
-  setActiveItem: Function
+  setActiveItem: (value: number) => void
   size: 's' | 'm' | 'l'
 }
 

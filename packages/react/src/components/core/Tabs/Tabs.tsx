@@ -36,7 +36,7 @@ type TabsComponent = React.FC<TabsProps> & {
 const TabsContext = createContext<{
   tabListRef: React.RefObject<HTMLDivElement | null>,
   currentTab: string,
-  setCurrentTab: Function,
+  setCurrentTab: (tab: string) => void,
   handleKeyboard: React.KeyboardEventHandler
   size: 's' | 'm' | 'l'
 } | null>(null)

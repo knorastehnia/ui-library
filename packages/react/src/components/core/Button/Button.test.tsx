@@ -73,7 +73,7 @@ describe('Button', () => {
   })
 })
 
-const ButtonTest: React.FC<{action?: string | Function, disabled?: boolean}> = ({
+const ButtonTest: React.FC<{action?: string | ((e: React.MouseEvent) => void), disabled?: boolean}> = ({
   action,
   disabled=false,
 }) => {

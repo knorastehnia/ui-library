@@ -56,7 +56,7 @@ describe('Breadcrumbs', () => {
   })
 })
 
-const BreadcrumbsTest: React.FC<{action?: string | Function}> = ({ action }) => {
+const BreadcrumbsTest: React.FC<{action?: string | ((e: React.MouseEvent) => void)}> = ({ action }) => {
   return (
     <Breadcrumbs items={[
       { label: 'Item 1', action },

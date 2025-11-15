@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 interface PopoverProps {
   children: React.ReactElement | React.ReactElement[]
   isOpen: boolean
-  onClose?: Function
+  onClose?: (e: MouseEvent | KeyboardEvent) => void
   arrangement?: 'vertical' | 'horizontal'
   internal?: {
     root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }

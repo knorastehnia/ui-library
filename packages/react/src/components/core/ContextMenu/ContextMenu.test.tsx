@@ -81,7 +81,7 @@ describe('ContextMenu', () => {
   })
 })
 
-const ContextMenuTest: React.FC<{ action: Function }> = ({ action }) => {
+const ContextMenuTest: React.FC<{ action: (e: React.MouseEvent) => void }> = ({ action }) => {
   const targetRef = useRef<HTMLDivElement>(null)
 
   return (
