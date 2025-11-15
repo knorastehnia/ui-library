@@ -35,10 +35,9 @@ const useCollapseEffect = (
   }, [state])
 
   useEffect(() => {
-    let raf: number
     let transitionEnd: NodeJS.Timeout
 
-    raf = requestAnimationFrame(() => {
+    const raf = requestAnimationFrame(() => {
       if (state) {
         open()
       } else {

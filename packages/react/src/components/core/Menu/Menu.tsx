@@ -105,7 +105,7 @@ const Submenu: React.FC<SubmenuInterface> = ({
               'aria-expanded': isOpen,
             }
           },
-        } as any),
+        } as any), // eslint-disable-line
       }}
     >
       <MenuContext.Provider value={{ closeParent: closeSubmenu }}>

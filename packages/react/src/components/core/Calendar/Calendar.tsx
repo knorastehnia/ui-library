@@ -112,7 +112,7 @@ const Calendar: React.FC<CalendarProps> = ({
     keyboardNavRef.current = true
 
     const updateFocus = (count: number) => {
-      let current = children[index + count]
+      const current = children[index + count]
 
       if (count > 0 && current === undefined) {
         navDirectionRef.current = 'next'

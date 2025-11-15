@@ -409,9 +409,11 @@ const Select: React.FC<SelectProps> = ({
                   disabled={item.disabled}
                   onKeyDown={handleKeyboard}
                   onClick={() => {
-                    type === 'multiple'
-                      ? updateSelectMultiple(item)
-                      : (isInteractive ? updateSelect(item) : null)
+                    if (type === 'multiple') {
+                      updateSelectMultiple(item)
+                    } else if (isInteractive) {
+                      updateSelect(item)
+                    }
                   }}
                   className={`
                     ${styles['item']} 

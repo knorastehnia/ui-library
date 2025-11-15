@@ -116,7 +116,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 'aria-expanded': isOpen,
               }
             }
-          } as any
+          } as any // eslint-disable-line
         }}
       >
         <div
