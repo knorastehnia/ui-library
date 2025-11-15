@@ -49,7 +49,7 @@
   
   &:hover, &:focus-visible, &.button-active {
     outline: none;
-    border-color: var(--gray-6);
+    border-color: var(--gray-4);
   }
 }
 

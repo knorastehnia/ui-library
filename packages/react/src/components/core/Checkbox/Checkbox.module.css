@@ -41,5 +41,5 @@
 .input:hover + .display-checkbox {
   outline: none;
   background-color: var(--gray-2);
-  border-color: var(--gray-6);
+  border-color: var(--gray-4);
 }

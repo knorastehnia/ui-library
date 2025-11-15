@@ -9,9 +9,9 @@
   }
 
   &.color-primary > path { stroke: var(--foreground) }
-  &.color-dimmed > path { stroke: var(--gray-9) }
+  &.color-dimmed > path { stroke: var(--gray-5) }
   &.color-inverted > path { stroke: var(--background) }
-  &.color-disabled > path { stroke: var(--gray-6) }
+  &.color-disabled > path { stroke: var(--gray-4) }
   &.color-error > path { stroke: var(--error) }
   &.color-success > path { stroke: var(--success) }
 

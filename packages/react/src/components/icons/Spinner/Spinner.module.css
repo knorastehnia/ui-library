@@ -13,9 +13,9 @@
   }
 
   &.color-primary > circle { stroke: var(--foreground) }
-  &.color-dimmed > circle { stroke: var(--gray-9) }
+  &.color-dimmed > circle { stroke: var(--gray-5) }
   &.color-inverted > circle { stroke: var(--background) }
-  &.color-disabled > circle { stroke: var(--gray-6) }
+  &.color-disabled > circle { stroke: var(--gray-4) }
   &.color-error > circle { stroke: var(--error) }
   &.color-success > circle { stroke: var(--success) }
 

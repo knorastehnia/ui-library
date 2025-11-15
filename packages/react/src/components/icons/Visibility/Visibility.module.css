@@ -4,16 +4,16 @@
   display: block;
 
   &.color-primary path { fill: var(--foreground) }
-  &.color-dimmed path { fill: var(--gray-9) }
+  &.color-dimmed path { fill: var(--gray-5) }
   &.color-inverted path { fill: var(--background) }
-  &.color-disabled path { fill: var(--gray-6) }
+  &.color-disabled path { fill: var(--gray-4) }
   &.color-error path { fill: var(--error) }
   &.color-success path { fill: var(--success) }
 
   .strike-through {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    stroke: var(--gray-9);
+    stroke: var(--gray-5);
   }
 
   .cut-through {

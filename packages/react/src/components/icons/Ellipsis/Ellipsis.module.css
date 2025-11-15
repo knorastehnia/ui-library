@@ -4,9 +4,9 @@
   display: block;
 
   &.color-primary > circle { fill: var(--foreground) }
-  &.color-dimmed > circle { fill: var(--gray-9) }
+  &.color-dimmed > circle { fill: var(--gray-5) }
   &.color-inverted > circle { fill: var(--background) }
-  &.color-disabled > circle { fill: var(--gray-6) }
+  &.color-disabled > circle { fill: var(--gray-4) }
   &.color-error > circle { fill: var(--error) }
   &.color-success > circle { fill: var(--success) }
 }
