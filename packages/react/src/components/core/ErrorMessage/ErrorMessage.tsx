@@ -21,11 +21,11 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   const errorRef = useRef<HTMLDivElement>(null)
 
   const showMessage = (state: boolean) => {
-    state && setIsVisible(true)
+    if (state) setIsVisible(true)
   }
 
   const hideMessage = (state: boolean) => {
-    state || setIsVisible(false)
+    if (!state) setIsVisible(false)
   }
 
   useCollapseEffect(errorRef, state, 500, showMessage, hideMessage)

@@ -47,7 +47,7 @@ const Calendar: React.FC<CalendarProps> = ({
   const keyboardNavRef= useRef<boolean>(false)
 
   const updateSelectedDates = (newDate: Date[]) => {
-    value === undefined && setSelectedDates(newDate)
+    if (value === undefined) setSelectedDates(newDate)
     onChange?.(newDate)
   }
 
@@ -67,7 +67,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
     const current = children[offset]
 
-    current !== undefined && current.focus()
+    if (current !== undefined) current.focus()
     keyboardNavRef.current = false
   }, [displayDate])
 
@@ -166,14 +166,14 @@ const Calendar: React.FC<CalendarProps> = ({
       case 'Home':
         const weekStartIndex = Math.max(offsetIndex - (offsetIndex % 7) + offset - 13, 0)
         const weekStartItem = children[weekStartIndex]
-        weekStartItem !== undefined && weekStartItem.focus()
+        if (weekStartItem !== undefined) weekStartItem.focus()
 
         break
 
       case 'End':
         const weekEndIndex = Math.min(offsetIndex - (offsetIndex % 7) + offset - 7, children.length - 1)
         const weekEndItem = children[weekEndIndex]
-        weekEndItem !== undefined && weekEndItem.focus()
+        if (weekEndItem !== undefined) weekEndItem.focus()
 
         break
 

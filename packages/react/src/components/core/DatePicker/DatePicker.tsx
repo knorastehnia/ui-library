@@ -39,7 +39,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const id = useId()
   
   const updateInternalValue = (val: Date[]) => {
-    value === undefined && setInternalValue(val)
+    if (value === undefined) setInternalValue(val)
     onChange?.(val)
   }
 

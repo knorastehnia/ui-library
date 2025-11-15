@@ -89,7 +89,7 @@ const Pagination: React.FC<PaginationProps> = ({
     )
   })
 
-  pages[1] ||
+  if (pages[1] === false) {
     renderedPages.splice(
       1,
       0,
@@ -98,8 +98,9 @@ const Pagination: React.FC<PaginationProps> = ({
         <Ellipsis />
       </div>
     )
+  }
 
-  pages[count - 2] ||
+  if (pages[count - 2] === false) {
     renderedPages.splice(
       count - 1,
       0,
@@ -108,6 +109,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <Ellipsis />
       </div>
     )
+  }
 
   return (
     <div

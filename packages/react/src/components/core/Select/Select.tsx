@@ -58,7 +58,7 @@ const Select: React.FC<SelectProps> = ({
   const [internalSelected, setInternalSelected] = useState<ItemInterface[]>(deriveInterface(defaultValue))
 
   const updateSelected = (items: ItemInterface[]) => {
-    value === undefined && setInternalSelected(items)
+    if (value === undefined) setInternalSelected(items)
     onChange?.(items.map((item) => item.value))
   }
 
@@ -145,9 +145,9 @@ const Select: React.FC<SelectProps> = ({
   const updateSelectMultiple = (item: ItemInterface) => {
     if (item.disabled) return
 
-    if (!!selected.find((selectedItem) => {
+    if (selected.find((selectedItem) => {
       return selectedItem.value === item.value
-    })) {
+    }) !== undefined) {
       const filtered = selected.filter((selectedItem) => {
         return selectedItem.value !== item.value
       })

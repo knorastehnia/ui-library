@@ -285,7 +285,7 @@ const Menu: React.FC<MenuProps> = ({
       tabIndex={-1}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
-          ctx && ctx.closeParent()
+          if (ctx) ctx.closeParent()
         }
       }}
       {...internal?.root}

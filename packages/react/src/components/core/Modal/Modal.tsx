@@ -72,7 +72,7 @@ const Modal: React.FC<ModalProps> = ({
     return () => {
       nonModalContentRef.current?.forEach(el => el.removeAttribute('aria-hidden'))
 
-      ctx && ctx.setHasNestedModal(false)
+      if (ctx) ctx.setHasNestedModal(false)
 
       cancelAnimationFrame(raf)
       restoreFocusRef.current?.focus()

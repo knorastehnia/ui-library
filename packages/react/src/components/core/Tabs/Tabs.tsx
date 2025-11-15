@@ -137,7 +137,7 @@ const Tabs: TabsComponent = ({
             const current = children[i === children.length-1 && loop ? 0 : i+1]
             if (current !== undefined) {
               current.focus()
-              navigation === 'select' && current.click()
+              if (navigation === 'select') current.click()
             }
 
             break
@@ -154,7 +154,7 @@ const Tabs: TabsComponent = ({
             const current = children[i === 0 && loop ? children.length-1 : i-1]
             if (current !== undefined) {
               current.focus()
-              navigation === 'select' && current.click()
+              if (navigation === 'select') current.click()
             }
     
             break
@@ -166,14 +166,14 @@ const Tabs: TabsComponent = ({
       case 'End':
         const lastTab = children[children.length - 1]
         lastTab.focus()
-        navigation === 'select' && lastTab.click()
+        if (navigation === 'select') lastTab.click()
 
         break
 
       case 'Home':
         const firstTab = children[0]
         firstTab.focus()
-        navigation === 'select' && firstTab.click()
+        if (navigation === 'select') firstTab.click()
 
         break
 

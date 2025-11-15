@@ -43,7 +43,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   }
 
   useLayoutEffect(() => {
-    isOpen && contextRef.current?.focus()
+    if (isOpen) contextRef.current?.focus()
   }, [isOpen])
 
   useEffect(() => {
