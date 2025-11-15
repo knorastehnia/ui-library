@@ -39,7 +39,11 @@ const useCollapseEffect = (
     let transitionEnd: NodeJS.Timeout
 
     raf = requestAnimationFrame(() => {
-      state ? open() : close()
+      if (state) {
+        open()
+      } else {
+        close()
+      }
 
       transitionEnd = setTimeout(() => {
         setHeightAuto()

@@ -260,7 +260,7 @@ const Select: React.FC<SelectProps> = ({
     if (selected.length === 0) return
 
     setSearchValue(generatePreview())
-  }, [value])
+  }, [selected])
 
   useEffect(() => {
     if (!isOpen && type === 'search') {

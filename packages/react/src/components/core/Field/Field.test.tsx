@@ -1,4 +1,3 @@
-import { vi, type Mock } from 'vitest'
 import { render, type RenderResult } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
 import { axe } from 'vitest-axe'
@@ -7,11 +6,9 @@ import { Field, type FieldProps } from './Field'
 describe('Field', () => {
   let user: UserEvent
   let component: RenderResult
-  let onChange: Mock
 
   describe('with type=text', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
       component = render(
         <FieldTest
@@ -43,7 +40,6 @@ describe('Field', () => {
 
   describe('with type=textarea', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
       component = render(
         <FieldTest
@@ -61,7 +57,6 @@ describe('Field', () => {
 
   describe('with type=password', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
       component = render(
         <FieldTest
@@ -79,7 +74,6 @@ describe('Field', () => {
 
   describe('with type=email', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
     })
 
@@ -140,7 +134,6 @@ describe('Field', () => {
 
   describe('with type=number', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
     })
 
@@ -201,7 +194,6 @@ describe('Field', () => {
 
   describe('with disabled=true', () => {
     beforeEach(() => {
-      onChange = vi.fn()
       user = userEvent.setup()
       component = render(
         <FieldTest

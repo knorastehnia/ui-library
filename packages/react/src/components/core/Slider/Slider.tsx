@@ -41,12 +41,8 @@ const Slider: React.FC<SliderProps> = ({
 
   const sliderRef = useRef<HTMLDivElement>(null)
 
-  const getNormalizedValue = (rawVal: number) => {
-    return Math.max(Math.min(rawVal, maxValue), minValue)
-  }
-
   const updateInternalValue = useCallback((val: number) => {
-    const normalized = getNormalizedValue(val)
+    const normalized = Math.max(Math.min(val, maxValue), minValue)
 
     onChange?.(normalized)
     setInternalValue(normalized)

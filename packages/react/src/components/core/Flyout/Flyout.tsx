@@ -44,7 +44,7 @@ const Flyout: React.FC<FlyoutProps> = ({
   }
 
   const ctx = useContext(FlyoutContext)
-  const activeArrangement = arrangement ?? (!!ctx ? 'horizontal' : 'vertical')
+  const activeArrangement = arrangement ?? (ctx ? 'horizontal' : 'vertical')
 
   const closeFlyout = () => {
     updateIsOpen(false)
