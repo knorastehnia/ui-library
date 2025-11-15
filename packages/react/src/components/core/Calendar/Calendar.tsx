@@ -133,52 +133,59 @@ const Calendar: React.FC<CalendarProps> = ({
     const modifier = e.getModifierState('Shift') ? 12 : 1
 
     switch (e.key) {
-      case 'ArrowLeft':
+      case 'ArrowLeft': {
         updateFocus(-1)
         break
+      }
 
-      case 'ArrowRight':
+      case 'ArrowRight': {
         updateFocus(1)
         break
+      }
 
-      case 'ArrowDown':
+      case 'ArrowDown': {
         updateFocus(7)
         break
+      }
 
-      case 'ArrowUp':
+      case 'ArrowUp': {
         updateFocus(-7)
         break
+      }
 
-      case 'PageDown':
+      case 'PageDown': {
         navDirectionRef.current = 'next'
         const nextMonthDays = new Date(displayYear, displayMonth + modifier + 1, 0).getDate()
         navOffsetRef.current = Math.min(index, nextMonthDays - 1)
         updateDisplayMonth(displayMonth + modifier)
         break
+      }
 
-      case 'PageUp':
+      case 'PageUp': {
         navDirectionRef.current = 'next'
         const prevMonthDays = new Date(displayYear, displayMonth - modifier + 1, 0).getDate()
         navOffsetRef.current = Math.min(index, prevMonthDays - 1)
         updateDisplayMonth(displayMonth - modifier)
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const weekStartIndex = Math.max(offsetIndex - (offsetIndex % 7) + offset - 13, 0)
         const weekStartItem = children[weekStartIndex]
         if (weekStartItem !== undefined) weekStartItem.focus()
 
         break
+      }
 
-      case 'End':
+      case 'End': {
         const weekEndIndex = Math.min(offsetIndex - (offsetIndex % 7) + offset - 7, children.length - 1)
         const weekEndItem = children[weekEndIndex]
         if (weekEndItem !== undefined) weekEndItem.focus()
 
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 

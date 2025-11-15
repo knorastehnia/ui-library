@@ -199,9 +199,8 @@ const Select: React.FC<SelectProps> = ({
     let loop = false
 
     switch (e.key) {
-      case 'ArrowDown':
-        loop = true
-      case 'PageDown':
+      case 'ArrowDown': loop = true
+      case 'PageDown': {
         if (!contentRef.current.contains(document.activeElement)) {
           children[0].focus()
 
@@ -218,10 +217,10 @@ const Select: React.FC<SelectProps> = ({
         }
 
         break
+      }
 
-      case 'ArrowUp':
-        loop = true
-      case 'PageUp':
+      case 'ArrowUp': loop = true
+      case 'PageUp': {
         if (!contentRef.current.contains(document.activeElement)) {
           children[children.length - 1].focus()
 
@@ -238,21 +237,23 @@ const Select: React.FC<SelectProps> = ({
         }
 
         break
+      }
 
-      case 'End':
+      case 'End': {
         const lastTab = children[children.length - 1]
         lastTab.focus()
 
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const firstTab = children[0]
         firstTab.focus()
 
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 

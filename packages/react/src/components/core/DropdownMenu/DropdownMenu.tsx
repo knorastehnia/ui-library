@@ -56,27 +56,30 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
     switch (e.key) {
       case 'ArrowDown':
-      case 'PageDown':
+      case 'PageDown': {
         children[0].focus()
         break
+      }
 
       case 'ArrowUp':
-      case 'PageUp':
+      case 'PageUp': {
         children[children.length - 1].focus()
         break
+      }
 
-      case 'End':
+      case 'End': {
         const lastTab = children[children.length - 1]
         lastTab.focus()
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const firstTab = children[0]
         firstTab.focus()
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 

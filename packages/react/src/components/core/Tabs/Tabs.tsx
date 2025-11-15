@@ -129,9 +129,8 @@ const Tabs: TabsComponent = ({
     let loop = false
 
     switch (e.key) {
-      case 'ArrowRight':
-        loop = true
-      case 'PageDown':
+      case 'ArrowRight': loop = true
+      case 'PageDown': {
         for (let i = 0; i < children.length; i++) {
           if (children[i] === document.activeElement) {
             const current = children[i === children.length-1 && loop ? 0 : i+1]
@@ -145,10 +144,10 @@ const Tabs: TabsComponent = ({
         }
 
         break
+      }
 
-      case 'ArrowLeft':
-        loop = true
-      case 'PageUp':
+      case 'ArrowLeft': loop = true
+      case 'PageUp': {
         for (let i = children.length-1; i > -1; i--) {
           if (children[i] === document.activeElement) {
             const current = children[i === 0 && loop ? children.length-1 : i-1]
@@ -162,23 +161,25 @@ const Tabs: TabsComponent = ({
         }
 
         break
+      }
 
-      case 'End':
+      case 'End': {
         const lastTab = children[children.length - 1]
         lastTab.focus()
         if (navigation === 'select') lastTab.click()
 
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const firstTab = children[0]
         firstTab.focus()
         if (navigation === 'select') firstTab.click()
 
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 

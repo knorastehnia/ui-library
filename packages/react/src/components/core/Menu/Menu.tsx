@@ -157,20 +157,21 @@ const Menu: React.FC<MenuProps> = ({
     let loop = false
 
     switch (e.key) {
-      case 'ArrowLeft':
+      case 'ArrowLeft': {
         if (ctx) ctx.closeParent()
 
         break
+      }
 
-      case 'ArrowRight':
+      case 'ArrowRight': {
         const active = document.activeElement as HTMLElement
         if (active.getAttribute('aria-expanded') === 'false') active.click()
 
         break
+      }
 
-      case 'ArrowDown':
-        loop = true
-      case 'PageDown':
+      case 'ArrowDown': loop = true
+      case 'PageDown': {
         if (menu === document.activeElement) {
           children[0].focus()
 
@@ -187,10 +188,10 @@ const Menu: React.FC<MenuProps> = ({
         }
 
         break
+      }
 
-      case 'ArrowUp':
-        loop = true
-      case 'PageUp':
+      case 'ArrowUp': loop = true
+      case 'PageUp': {
         if (menu === document.activeElement) {
           children[children.length - 1].focus()
 
@@ -207,26 +208,29 @@ const Menu: React.FC<MenuProps> = ({
         }
 
         break
+      }
 
-      case 'End':
+      case 'End': {
         const lastTab = children[children.length - 1]
         lastTab.focus()
 
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const firstTab = children[0]
         firstTab.focus()
 
         break
+      }
 
-      case 'Tab':
+      case 'Tab': {
         if (ctx) ctx.closeParent()
 
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 

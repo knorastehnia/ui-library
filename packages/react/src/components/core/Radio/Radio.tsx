@@ -87,9 +87,8 @@ const Radio: RadioComponent = ({
 
     switch (e.key) {
       case 'ArrowDown':
-      case 'ArrowRight':
-        loop = true
-      case 'PageDown':
+      case 'ArrowRight': loop = true
+      case 'PageDown': {
         if (!children.some(item => item.checked)) {
           children[0].click()
 
@@ -106,11 +105,11 @@ const Radio: RadioComponent = ({
         }
 
         break
+      }
 
       case 'ArrowUp':
-      case 'ArrowLeft':
-        loop = true
-      case 'PageUp':
+      case 'ArrowLeft': loop = true
+      case 'PageUp': {
         if (!children.some(item => item.checked)) {
           children[children.length - 1].click()
 
@@ -127,21 +126,23 @@ const Radio: RadioComponent = ({
         }
 
         break
+      }
 
-      case 'End':
+      case 'End': {
         const lastTab = children[children.length - 1]
         lastTab.click()
 
         break
+      }
 
-      case 'Home':
+      case 'Home': {
         const firstTab = children[0]
         firstTab.click()
 
         break
+      }
 
-      default:
-        break
+      default: break
     }
   }
 
