@@ -282,6 +282,7 @@ const Menu: React.FC<MenuProps> = ({
     <div
       className={styles['menu']}
       onKeyDown={handleKeyboard}
+      tabIndex={-1}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget)) {
           ctx && ctx.closeParent()
