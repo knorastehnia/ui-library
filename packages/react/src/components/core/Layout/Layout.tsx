@@ -34,19 +34,10 @@ interface ContentProps {
   }
 }
 
-interface SubsectionProps {
-  children: React.ReactElement | React.ReactElement[]
-  span?: 1 | 2 | 3
-  internal?: {
-    root?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
-  }
-}
-
 interface SectionProps {
   children: React.ReactElement | React.ReactElement[]
   internal?: {
     root?: React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement> }
-    content?: React.HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> }
   }
 }
 
@@ -55,25 +46,6 @@ type LayoutComponent = React.FC<LayoutProps> & {
   SideNav: React.FC<SideNavProps>
   Content: React.FC<ContentProps>
   Section: React.FC<SectionProps>
-  Subsection: React.FC<SubsectionProps>
-}
-
-const Subsection: React.FC<SubsectionProps> = ({
-  children,
-  span=3,
-  internal,
-}) => {
-  return (
-    <div
-      className={styles['subsection']}
-      style={{
-        flex: `1 0 ${span * 100 / 3}%`,
-      }}
-      {...internal?.root}
-    >
-      {children}
-    </div>
-  )
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -86,12 +58,7 @@ const Section: React.FC<SectionProps> = ({
         className={styles['section']}
         {...internal?.root}
       >
-        <div
-          className={styles['section-content']}
-          {...internal?.content}
-        >
-          {children}
-        </div>
+        {children}
       </section>
     </>
   )
@@ -193,7 +160,6 @@ Layout.TopNav = TopNav
 Layout.SideNav = SideNav
 Layout.Content = Content
 Layout.Section = Section
-Layout.Subsection = Subsection
 
 export { Layout }
 
@@ -202,6 +168,5 @@ export type {
   TopNavProps,
   SideNavProps,
   ContentProps,
-  SubsectionProps,
   SectionProps,
 }

@@ -30,8 +30,9 @@
 .content {
   flex: 1 1 0;
   position: relative;
+  min-height: calc(100vh - 50px);
   max-width: 1600px;
-  min-width: 0;
+  width: 100%;
   margin: auto;
   overflow: hidden;
 
@@ -111,17 +112,5 @@
   position: relative;
   background-color: var(--background);
   border-bottom: 1px solid var(--gray-1);
-
-  .section-content {
-    display: flex;
-    flex-flow: row wrap;
-    background-color: var(--background);
-  }
-}
-
-.subsection {
-  background-color: var(--background);
   padding: 80px min(5vw, 80px);
-  width: 0;
-  min-width: 300px;
 }

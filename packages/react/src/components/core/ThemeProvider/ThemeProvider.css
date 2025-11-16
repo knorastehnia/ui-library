@@ -72,7 +72,8 @@ body {
   background-color: var(--accent);
 }
 
-input, button, textarea, select {
+a, input, button, textarea, select {
+  text-decoration: none;
   background-color: inherit;
   color: inherit;
   font: inherit;

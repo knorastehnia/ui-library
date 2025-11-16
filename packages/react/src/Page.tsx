@@ -73,7 +73,6 @@ const Page = () => {
       </Modal>
 
       <Layout.Section>
-        <Layout.Subsection span={2}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -197,9 +196,7 @@ const Page = () => {
               </div>
             </Slider>
           </div>
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'row wrap',
@@ -232,9 +229,7 @@ const Page = () => {
               </div>
             </Button>
           </div>
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'column',
@@ -271,9 +266,7 @@ const Page = () => {
               <T>Submit</T>
             </Button>
           </div>
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'column',
@@ -313,11 +306,9 @@ const Page = () => {
               <Radio.Item value='r4'><T>D</T></Radio.Item>
             </Radio>
           </div>
-        </Layout.Subsection>
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>
           <Menu size='l' items={[
             { icon: <Checkmark state={true} color='dimmed' />, label: 'Item 1' },
             { icon: <Alert color='dimmed' />, label: 'Item 2' },
@@ -344,9 +335,7 @@ const Page = () => {
               { label: 'Item 4.3' },
             ] },
           ]} />
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <div style={{
             display: 'flex',
             flexFlow: 'column',
@@ -367,15 +356,11 @@ const Page = () => {
               }
             </Typography>
           </div>
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <DatePicker
             label='Select date'
           />
-        </Layout.Subsection>
 
-        <Layout.Subsection span={2}>
           <div ref={targetRef}>
             <Collapsible size='m' label='Collapsible 1' arrangement='trailing'>
               <Typography type='p'>
@@ -399,9 +384,7 @@ const Page = () => {
               </Typography>
             </Collapsible>
           </div>
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <Tabs value={tabValue} onChange={setTabValue} navigation='select'>
             <Tabs.Tab label='Tab 1' value='t1'>
               <T>Lorem ipsum dolor sit amet 1</T>
@@ -419,25 +402,19 @@ const Page = () => {
               <T>Lorem ipsum dolor sit amet 4</T>
             </Tabs.Tab>
           </Tabs>
-        </Layout.Subsection>
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection span={1}>
           <Breadcrumbs items={[
             { label: 'Home', action: '#' },
             { label: 'Movies', action: '#' },
             { label: 'Mulholland Drive' },
           ]} />
-        </Layout.Subsection>
 
-        <Layout.Subsection span={1}>
           <Pagination siblingCount={1} value={pageValue} onChange={setPageValue} count={20} />
-        </Layout.Subsection>
       </Layout.Section>
 
       <Layout.Section>
-        <Layout.Subsection>
           <Typography type='h2'>Header H2</Typography>
           <Typography type='p'>Lorem ipsum dolor sit amet consectetur adipisicing 
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
@@ -479,19 +456,6 @@ const Page = () => {
             elit. Repellendus placeat sapiente itaque dolorum cupiditate maiores 
             doloremque? Molestias quasi tempore tenetur natus soluta. Voluptatem 
             pariatur aperiam aliquid minus inventore similique quam!</Typography>
-        </Layout.Subsection>
-      </Layout.Section>
-
-      <Layout.Section>
-        <Layout.Subsection span={1}><T>1</T></Layout.Subsection>
-        <Layout.Subsection span={2}><T>2</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>3</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>4</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>5</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>6</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>7</T></Layout.Subsection>
-        <Layout.Subsection span={2}><T>8</T></Layout.Subsection>
-        <Layout.Subsection span={1}><T>9</T></Layout.Subsection>
       </Layout.Section>
     </>
   )
