@@ -4,11 +4,28 @@ import { Typography, Button } from '@kaynora/ui'
 import Link from 'next/link'
 
 const H1 = ({ children }: { children: React.ReactNode }) => (
-  <Typography type='h1'>{children}</Typography>
+  <Typography
+    type='h1'
+    weight='500'
+    internal={{
+      root: {
+        style: { marginBottom: '20px' }
+      }
+    }}
+  >{children}</Typography>
 )
 
 const H2 = ({ children }: { children: React.ReactNode }) => (
-  <Typography type='h2'>{children}</Typography>
+  <Typography
+    type='h2'
+    size='s'
+    weight='400'
+    internal={{
+      root: {
+        style: { marginBottom: '10px', marginTop: '40px' }
+      }
+    }}
+  >{children}</Typography>
 )
 
 const H3 = ({ children }: { children: React.ReactNode }) => (
@@ -19,8 +36,8 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
   <Typography type='h4'>{children}</Typography>
 )
 
-const P = ({ children }: { children: React.ReactNode }) => (
-  <Typography type='p'>{children}</Typography>
+const Span = ({ children }: { children: React.ReactNode }) => (
+  <Typography>{children}</Typography>
 )
 
 const Strong = ({ children }: { children: React.ReactNode }) => (
@@ -40,7 +57,7 @@ export {
   H2,
   H3,
   H4,
-  P,
+  Span,
   Strong,
   A,
 }
